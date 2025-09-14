@@ -58,12 +58,6 @@
   )
 ]
 
-// Custom commands for number sets
-#let NN = $bold(N)$
-#let ZZ = $bold(Z)$
-#let QQ = $bold(Q)$
-#let RR = $bold(R)$
-
 // Title page
 #align(center)[
   #text(size: 18pt, weight: "bold")[Discrete Mathematics\ Bachelor in Computer Science and Engineering]
