@@ -2,7 +2,7 @@
 
 #show: base
 
-Discrete Mathematics Course Mapssss
+Discrete Mathematics Course Map
 - Binary relations
 - Set theory
 - Combinatorics
@@ -1750,7 +1750,7 @@ The directed graph associated to an order relation $prec.eq$ can be simplified b
     + k = 1
     + while $V != emptyset$
       + $v_k = "a minimal element of" (V, prec.eq_P)$
-      + $V <- V \ {v_k}$
+      + $V <- V \\ {v_k}$
       + $k <- k + 1$
     + $v_1 prec.eq_T v_2 prec.eq_T ... prec.eq_T v_n "is a total order compatible with" (V, prec.eq_P)$.
   ],
