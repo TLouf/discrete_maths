@@ -1864,11 +1864,16 @@ The directed graph associated to an order relation $prec.eq$ can be simplified b
 
 #table(
   columns: 6,
-  [*Relation*], [*Reflexive*], [*Symmetric*], [*Antisymmetric*], [*Transitive*], [*Additional Properties*],
-  [Equivalence], [YES], [YES], [NO], [YES], [],
-  [Order], [YES], [NO], [YES], [YES], [],
-  [Total order], [YES], [NO], [YES], [YES], [Every pair is comparable],
-  [Well-ordered set], [YES], [NO], [YES], [YES], [Every nonempty subset has a minimum],
+  align: center,
+  toprule(),
+  table.header(
+    [*Relation*], [*Reflexive*], [*Symmetric*], [*Antisymmetric*], [*Transitive*], [*Additional Properties*]
+  ),
+  midrule(), [Equivalence], [✅], [✅], [❌], [✅],
+  [], [Order], [✅], [❌], [✅], [✅],
+  [], [Total order], [✅], [❌], [✅], [✅],
+  [Every pair is comparable], [Well-ordered set], [✅], [❌], [✅], [✅],
+  [Every nonempty subset has a minimum], bottomrule(),
 )
 
 = Lattices and Boolean Algebras
