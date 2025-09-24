@@ -1,0 +1,173 @@
+#import "@preview/pinit:0.2.2": *
+#import "@preview/pavemat:0.2.0": pavemat
+#import "@preview/fontawesome:0.5.0": *
+#import "@preview/codly:1.3.0": *
+#import "@preview/lovelace:0.3.0": *
+#import "@preview/equate:0.3.2": equate
+#import "@preview/quick-maths:0.2.1": shorthands
+#import "@preview/cetz:0.4.1"
+#import "@preview/itemize:0.1.2" as el
+#import "@preview/booktabs:0.0.3": *
+
+#import "@preview/theorion:0.4.0": *
+#import "@preview/thmbox:0.3.0": proof
+#import cosmos.rainbow: *
+
+// Issues:
+// - pause in enum inside a theorion env like definition doesn't work
+
+#let transp = white.transparentize(100%)
+
+#let implies() = box(rotate(fa-reply(solid: true), 180deg))
+
+#let mhide(fill: transp, it) = {
+  set text(fill: fill)
+  it
+}
+#let rank = math.op("rank")
+#let Col = math.op("Col")
+#let Span = math.op("Span")
+#let proj = math.op("proj")
+#let sign = math.op("sign")
+#let argmin = math.op("argmin", limits: true)
+#let argmax = math.op("argmax", limits: true)
+#let rmat = math.mat.with(align: right)
+
+#let important = important-box
+#let (properties-counter, properties-box, properties, show-properties) = make-frame(
+  "properties",
+  (en: (us: "Properties", gb: "Properties")),
+  counter: theorem-counter,
+  render: render-fn.with(fill: eastern.darken(10%)),
+)
+
+#let upper_tri = cetz.canvas({
+  import cetz.draw: *
+  merge-path(
+    {
+      line(
+        (3, 3),
+        (0, 3),
+        (3, 0),
+      )
+    },
+    fill: white.darken(20%),
+    stroke: none,
+  )
+  rect((0, 0), (3, 3))
+})
+
+#let lower_tri = cetz.canvas({
+  import cetz.draw: *
+  merge-path(
+    {
+      line(
+        (0, 0),
+        (0, 3),
+        (3, 0),
+      )
+    },
+    fill: white.darken(20%),
+    stroke: none,
+  )
+  rect((0, 0), (3, 3))
+})
+
+#let pinit-annot(
+  dx: 0em,
+  dy: -1em,
+  alignment: horizon + center,
+  start,
+  end,
+  body,
+  ..args,
+) = {
+  pinit(
+    start,
+    end,
+    callback: (..positions) => {
+      positions = positions.pos()
+      let min-x = calc.min(..positions.map(loc => loc.x))
+      let max-x = calc.max(..positions.map(loc => loc.x))
+      let min-y = calc.min(..positions.map(loc => loc.y))
+      let max-y = calc.max(..positions.map(loc => loc.y))
+      absolute-place(
+        dx: min-x + dx,
+        dy: min-y + dy,
+        rect(
+          stroke: none,
+          align(alignment, text(0.6em, body, ..args.named())),
+        ),
+      )
+    },
+  )
+}
+
+#let iif-list-markers = level => {
+  if level == 1 {
+    (
+      ellipse(inset: 0pt, stroke: none, fill: white.darken(20%).transparentize(50%))[
+        #set align(center + horizon)
+        $=>$
+      ],
+      ellipse(inset: 0pt, stroke: none, fill: white.darken(20%).transparentize(50%))[
+        #set align(center + horizon)
+        $=<$
+      ],
+    )
+  } else {
+    [#sym.bullet]
+  }
+}
+
+#let iif-proof-list = list.with(marker: iif-list-markers)
+
+#let algorithm = figure.with(
+  kind: "algorithm",
+  supplement: [Algorithm],
+)
+#let comment(body, gap_to_right: 1fr, fill: white.darken(40%), size: 0.8em) = {
+  h(gap_to_right)
+  text(fill: fill, size: size, sym.triangle.stroked.r + sym.space + body)
+}
+
+#let base(doc) = {
+  set heading(numbering: "1.1")
+  show heading.where(level: 1): it => {
+    counter(math.equation).update(0)
+    counter(figure.where(kind: image)).update(0)
+    counter(figure.where(kind: table)).update(0)
+    counter(figure.where(kind: raw)).update(0)
+    it
+  }
+  set math.equation(numbering: (..num) => numbering("(1.1)", counter(heading).get().first(), num.pos().first()))
+  set figure(numbering: (..num) => numbering("1.1", counter(heading).get().first(), num.pos().first()))
+  set enum(numbering: "(i)")
+
+  set page(paper: "a4", margin: 1in)
+  set text(size: 12pt)
+  set par(justify: true)
+
+  show: equate.with(breakable: true, sub-numbering: false)
+  show: shorthands.with(
+    ($+-$, $plus.minus$),
+    ($|-$, math.tack),
+    ($=<$, math.arrow.l.double),
+  )
+
+  show ref: el.ref-enum
+  show: el.default-enum-list
+
+  set table(stroke: none)
+
+  show: show-theorion
+  set-inherited-levels(1)
+  set-zero-fill(true)
+  set-leading-zero(true)
+  set-theorion-numbering("1.1")
+  show: show-properties
+  set math.mat(delim: "[", column-gap: 0.7em)
+  set math.vec(delim: "[")
+
+  doc
+}

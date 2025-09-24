@@ -1,78 +1,8 @@
-#set page(paper: "a4", margin: 1in)
-#set text(size: 12pt)
-#set par(justify: true)
-#set math.equation(numbering: "(1)")
+#import "assets/base_template.typ": *
 
-// Define theorem environments
-#let definition(title: "", body) = [
-  #block(
-    fill: rgb("f0f0f0"),
-    inset: 8pt,
-    radius: 4pt,
-    [*Definition#if title != "" [ (#title)] .* #body],
-  )
-]
+#show: base
 
-#let theorem(title: "", body) = [
-  #block(
-    fill: rgb("e8f4fd"),
-    inset: 8pt,
-    radius: 4pt,
-    [*Theorem#if title != "" [ (#title)] .* #body],
-  )
-]
-
-#let proposition(title: "", body) = [
-  #block(
-    fill: rgb("f0f8e8"),
-    inset: 8pt,
-    radius: 4pt,
-    [*Proposition#if title != "" [ (#title)] .* #body],
-  )
-]
-
-#let lemma(title: "", body) = [
-  #block(
-    fill: rgb("fff8e8"),
-    inset: 8pt,
-    radius: 4pt,
-    [*Lemma#if title != "" [ (#title)] .* #body],
-  )
-]
-
-#let corollary(title: "", body) = [
-  #block(
-    fill: rgb("f8e8ff"),
-    inset: 8pt,
-    radius: 4pt,
-    [*Corollary#if title != "" [ (#title)] .* #body],
-  )
-]
-
-#let algorithm(title: "", body) = [
-  #block(
-    fill: rgb("e8f8f0"),
-    inset: 8pt,
-    radius: 4pt,
-    [*Algorithm#if title != "" [ (#title)] .* #body],
-  )
-]
-
-// Title page
-#align(center)[
-  #text(size: 18pt, weight: "bold")[Discrete Mathematics\ Bachelor in Computer Science and Engineering]
-
-  #v(1em)
-
-  Department of Mathematics\
-  Universidad Carlos III de Madrid\
-  Avda. de la Universidad, 30\
-  28911 Leganés
-]
-
-#pagebreak()
-
-= Discrete Mathematics Course Map
+Discrete Mathematics Course Mapssss
 - Binary relations
 - Set theory
 - Combinatorics
@@ -716,13 +646,15 @@ $ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
 
 == Prim's Algorithm, 1957
 
-#algorithm(title: "Prim's algorithm")[
-  *procedure* Prim($G$: connected weighted graph with $n$ vertices)
-  1. $T_1 = (V_1, E_1)$ where $E_1 = {e_1}$, $e_1 = {x_0, x_1}$ is one edge with minimum weight $omega_"min"$, and $V_1 = {x_0, x_1}$.
-  2. *for* $i = 1$ *to* $n - 2$
-    1. $e_(i+1) = {x_i, x_(i+1)}$ edge of minimum weight that is incident with a vertex $x_j$ of $T_i = (V_i, E_i)$, and such that it does not form a cycle when added to $T_i$
-    2. $T_(i+1) = (V_i union {x_(i+1)}, E_i union {e_(i+1)}) = (V_(i+1), E_(i+1))$
-]
+#algorithm(
+  pseudocode-list(numbered-title: [Prim's algorithm], booktabs: true)[
+    // *procedure* Prim($G$: connected weighted graph with $n$ vertices)
+    + $T_1 = (V_1, E_1)$ where $E_1 = {e_1}$, $e_1 = {x_0, x_1}$ is one edge with minimum weight $omega_"min"$, and $V_1 = {x_0, x_1}$.
+    + *for* $i = 1$ *to* $n - 2$
+      + $e_(i+1) = {x_i, x_(i+1)}$ edge of minimum weight that is incident with a vertex $x_j$ of $T_i = (V_i, E_i)$, and such that it does not form a cycle when added to $T_i$
+      + $T_(i+1) = (V_i union {x_(i+1)}, E_i union {e_(i+1)}) = (V_(i+1), E_(i+1))$
+  ],
+)
 
 *Remarks.*
 - The edge $e_i$ ($i = 1, ..., n-1$) might not be unique.
@@ -735,13 +667,15 @@ $ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
 
 == Kruskal's Algorithm, 1957
 
-#algorithm(title: "Kruskal's algorithm")[
-  *procedure* Kruskal($G$: connected weighted graph with $n$ vertices)
-  1. $T_0 = (V, E_0)$ with $E_0 = emptyset$
-  2. *for* $i = 1$ *to* $n - 1$
-    1. $e_i =$ edge of minimum weight such that it does not form a cycle when added to $T_(i-1) = (V, E_(i-1))$
-    2. $T_i = (V, E_(i-1) union {e_i}) = (V, E_i)$
-]
+#algorithm(
+  pseudocode-list(numbered-title: [Kruskal's algorithm], booktabs: true)[
+    // *procedure* Kruskal($G$: connected weighted graph with $n$ vertices)
+    + $T_0 = (V, E_0)$ with $E_0 = emptyset$
+    + *for* $i = 1$ *to* $n - 1$
+      + $e_i =$ edge of minimum weight such that it does not form a cycle when added to $T_(i-1) = (V, E_(i-1))$
+      + $T_i = (V, E_(i-1) union {e_i}) = (V, E_i)$
+  ],
+)
 
 *Remarks.*
 - The edge $e_i$ ($i = 1, ..., n-1$) might not be unique.
@@ -847,14 +781,17 @@ We will denote the weight of the edge ${i, j} in E$ as $omega({i, j}) = omega_(i
 
 == Greedy Algorithm for Coloring a Graph
 
-#algorithm(title: "Greedy algorithm")[
-  *procedure* ($G$: simple and connected graph with $n$ vertices)
-  1. We order the vertices of $V$: $(v_1, v_2, ..., v_n)$
-  2. $c(v_1) = 1$
-  3. *for* $i = 2$ *to* $n$
-    1. $S_i = {q : c(v_k) = q, "for every" v_k "that is adjacent to" v_i "with" k < i}$
-    2. $c(v_i) = min(overline(S_i) inter NN) =$ the smallest color not in $S_i$
-]
+#algorithm(
+  pseudocode-list(numbered-title: [Greedy algorithm], booktabs: true)[
+    // *procedure* ($G$: simple and connected graph with $n$ vertices)
+    + We order the vertices of $V$: $(v_1, v_2, ..., v_n)$
+    + $c(v_1) = 1$
+    + *for* $i = 2$ *to* $n$
+      + $S_i = {q : c(v_k) = q, "for every" v_k "that is adjacent to" v_i "with" k < i}$
+      + $c(v_i) = min(overline(S_i) inter NN) =$ the smallest color not in $S_i$
+  ],
+)
+
 
 *Remarks.*
 - This algorithm does not compute $chi(G)$, but an upper bound of $chi(G)$ which depends (strongly) on the chosen vertex ordering.
@@ -1808,19 +1745,17 @@ The directed graph associated to an order relation $prec.eq$ can be simplified b
   A total order $(V, prec.eq_T)$ is compatible with the partial order $(V, prec.eq_P)$ if for all $v, w in V$, $v prec.eq_P w$ implies that $v prec.eq_T w$.
 ]
 
-#algorithm(title: "Topological Sort")[
-  ```
-  procedure TotalOrder((V, ≼_P) : finite partially ordered set)
-      k = 1
-      while V ≠ ∅
-      begin
-          v_k = a minimal element of (V, ≼_P)
-          V ← V \ {v_k}
-          k ← k + 1
-      end
-      v_1 ≼_T v_2 ≼_T ... ≼_T v_n is a total order compatible with (V, ≼_P).
-  ```
-]
+#algorithm(
+  pseudocode-list(numbered-title: [Topological Sort], booktabs: true)[
+    + k = 1
+    + while $V != emptyset$
+      + $v_k = "a minimal element of" (V, prec.eq_P)$
+      + $V <- V \ {v_k}$
+      + $k <- k + 1$
+    + $v_1 prec.eq_T v_2 prec.eq_T ... prec.eq_T v_n "is a total order compatible with" (V, prec.eq_P)$.
+  ],
+)
+
 
 == Well-Ordered Sets
 
