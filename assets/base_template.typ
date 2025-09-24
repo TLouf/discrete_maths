@@ -168,6 +168,7 @@
   show: show-properties
   set math.mat(delim: "[", column-gap: 0.7em)
   set math.vec(delim: "[")
+  show math.prec.eq: math.scripts(math.prec.eq)
 
   doc
 }
