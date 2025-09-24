@@ -9,7 +9,7 @@
     fill: rgb("f0f0f0"),
     inset: 8pt,
     radius: 4pt,
-    [*Definition#if title != "" [ (#title)] .* #body]
+    [*Definition#if title != "" [ (#title)] .* #body],
   )
 ]
 
@@ -18,7 +18,7 @@
     fill: rgb("e8f4fd"),
     inset: 8pt,
     radius: 4pt,
-    [*Theorem#if title != "" [ (#title)] .* #body]
+    [*Theorem#if title != "" [ (#title)] .* #body],
   )
 ]
 
@@ -27,7 +27,7 @@
     fill: rgb("f0f8e8"),
     inset: 8pt,
     radius: 4pt,
-    [*Proposition#if title != "" [ (#title)] .* #body]
+    [*Proposition#if title != "" [ (#title)] .* #body],
   )
 ]
 
@@ -36,7 +36,7 @@
     fill: rgb("fff8e8"),
     inset: 8pt,
     radius: 4pt,
-    [*Lemma#if title != "" [ (#title)] .* #body]
+    [*Lemma#if title != "" [ (#title)] .* #body],
   )
 ]
 
@@ -45,7 +45,7 @@
     fill: rgb("f8e8ff"),
     inset: 8pt,
     radius: 4pt,
-    [*Corollary#if title != "" [ (#title)] .* #body]
+    [*Corollary#if title != "" [ (#title)] .* #body],
   )
 ]
 
@@ -54,7 +54,7 @@
     fill: rgb("e8f8f0"),
     inset: 8pt,
     radius: 4pt,
-    [*Algorithm#if title != "" [ (#title)] .* #body]
+    [*Algorithm#if title != "" [ (#title)] .* #body],
   )
 ]
 
@@ -86,22 +86,22 @@
 == Elementary Set Theory
 
 #definition[
-A *set* $X$ is a well-defined collection of objects, each of which is called an element of the set:
-$ X = {x_1, x_2, x_3, ...} $
+  A *set* $X$ is a well-defined collection of objects, each of which is called an element of the set:
+  $ X = {x_1, x_2, x_3, ...} $
 
-Given a set $X$ and a certain object $x$, one (and only one) of the following statements is true:
-- the object $x$ belongs to the set $X$: $x in X$, or
-- the object $x$ does not belong to $X$: $x in.not X$.
+  Given a set $X$ and a certain object $x$, one (and only one) of the following statements is true:
+  - the object $x$ belongs to the set $X$: $x in X$, or
+  - the object $x$ does not belong to $X$: $x in.not X$.
 
-The order of the elements in a set is irrelevant, as well as the number of occurrences of an element in the list.
+  The order of the elements in a set is irrelevant, as well as the number of occurrences of an element in the list.
 ]
 
 #definition[
-Two sets are equal if and only if they have the same elements.
+  Two sets are equal if and only if they have the same elements.
 ]
 
 #definition[
-The *empty set* $emptyset$ is the set with no elements: $emptyset = {}$. The *universal set* $S$ is the set containing all objects under consideration.
+  The *empty set* $emptyset$ is the set with no elements: $emptyset = {}$. The *universal set* $S$ is the set containing all objects under consideration.
 ]
 
 === How to Describe a Set
@@ -122,7 +122,7 @@ The *empty set* $emptyset$ is the set with no elements: $emptyset = {}$. The *un
 == Subsets
 
 #definition[
-The set $A$ is a *subset* of the set $B$ ($A subset.eq B$) if and only if every element of $A$ is also an element of $B$. The set $A$ is a *proper subset* of $B$ ($A subset B$) if $A$ is a subset of $B$, and $B$ contains at least an element not in $A$.
+  The set $A$ is a *subset* of the set $B$ ($A subset.eq B$) if and only if every element of $A$ is also an element of $B$. The set $A$ is a *proper subset* of $B$ ($A subset B$) if $A$ is a subset of $B$, and $B$ contains at least an element not in $A$.
 ]
 
 Properties:
@@ -130,8 +130,8 @@ Properties:
 - The empty set $emptyset$ is a subset of every set $A$: $emptyset subset.eq A$.
 
 #definition[
-The *power set* of the set $A$, denoted as $cal(P)(A)$, is the set of all subsets of $A$:
-$ cal(P)(A) = {B : B subset.eq A} $
+  The *power set* of the set $A$, denoted as $cal(P)(A)$, is the set of all subsets of $A$:
+  $ cal(P)(A) = {B : B subset.eq A} $
 ]
 
 == Set Operations
@@ -156,24 +156,24 @@ Given two sets $A$ and $B$ we can define the following operations:
 == Cartesian Product
 
 #definition[
-Given two sets $X$ and $Y$, the *Cartesian product* $X times Y$ is the set of all ordered pairs of the form:
-$ X times Y = {(x, y) : (x in X) and (y in Y)} $
+  Given two sets $X$ and $Y$, the *Cartesian product* $X times Y$ is the set of all ordered pairs of the form:
+  $ X times Y = {(x, y) : (x in X) and (y in Y)} $
 ]
 
 *Remark.* ${a, b}$ is not the same as $(a, b)$. In particular, ${1, 2}$ is a set and therefore, ${1, 2} = {2, 1}$. However, $(1, 2)$ is an ordered pair and therefore, $(1, 2) != (2, 1)$.
 
 #definition[
-Two sets $A$ and $B$ are *disjoint* if $A inter B = emptyset$.
+  Two sets $A$ and $B$ are *disjoint* if $A inter B = emptyset$.
 ]
 
 == Natural Numbers
 
 #definition[
-The set of natural numbers $NN$ is defined by the following conditions:
-1. $1 in NN$.
-2. If $n in NN$, then the successor of $n$ (i.e., the number $n + 1$) belongs to $NN$.
-3. Every $n in NN$ except 1 is the successor of some number in $NN$.
-4. Every non-empty subset of $NN$ has a minimum element (well-ordering property).
+  The set of natural numbers $NN$ is defined by the following conditions:
+  1. $1 in NN$.
+  2. If $n in NN$, then the successor of $n$ (i.e., the number $n + 1$) belongs to $NN$.
+  3. Every $n in NN$ except 1 is the successor of some number in $NN$.
+  4. Every non-empty subset of $NN$ has a minimum element (well-ordering property).
 ]
 
 Notes:
@@ -186,8 +186,8 @@ Notes:
 == Functions
 
 #definition(title: "Spivak")[
-A *function* $f subset X times Y$ from a set $X$ onto a set $Y$ is a subset of the Cartesian product $X times Y$ such that for every $x in X$, $f$ contains exactly one pair of the form $(x, y)$. The set $X$ is called the *domain* of $f$ and it is denoted as $"Dom"(f)$. The set $Y$ is called the *codomain* of $f$. The *image* of $f$ is the set
-$ "Im"(f) = {y : exists x in X "such that" (x, y) in f} $
+  A *function* $f subset X times Y$ from a set $X$ onto a set $Y$ is a subset of the Cartesian product $X times Y$ such that for every $x in X$, $f$ contains exactly one pair of the form $(x, y)$. The set $X$ is called the *domain* of $f$ and it is denoted as $"Dom"(f)$. The set $Y$ is called the *codomain* of $f$. The *image* of $f$ is the set
+  $ "Im"(f) = {y : exists x in X "such that" (x, y) in f} $
 ]
 
 Given two sets $X$ and $Y$, a function is an object that assigns to each element $x in X$ a unique element $y in Y$, which is denoted as $y = f(x)$. Usually, functions are denoted as $f : X -> Y$.
@@ -195,10 +195,10 @@ Given two sets $X$ and $Y$, a function is an object that assigns to each element
 == Function Types
 
 #definition[
-Given a function $f : X -> Y$, we say that
-- $f$ is *injective* if $x_1 != x_2$ implies $f(x_1) != f(x_2)$.
-- $f$ is *surjective* if for every $y in Y$, there exists at least an element $x in X$ such that $y = f(x)$.
-- $f$ is *bijective* if it is injective and surjective.
+  Given a function $f : X -> Y$, we say that
+  - $f$ is *injective* if $x_1 != x_2$ implies $f(x_1) != f(x_2)$.
+  - $f$ is *surjective* if for every $y in Y$, there exists at least an element $x in X$ such that $y = f(x)$.
+  - $f$ is *bijective* if it is injective and surjective.
 ]
 
 If $f : X -> Y$ is bijective, we can define its *inverse function* $f^(-1) : Y -> X$ by the well-defined rule:
@@ -211,15 +211,15 @@ The function $g compose f$ is the *composition* of $f$ and $g$.
 = Elementary Combinatorics I
 
 #definition[
-Let $S$ be a set. If there are exactly $n in NN$ distinct elements in $S$, we say that $S$ is a *finite set*, and that $n$ is the *cardinality* of $S$. The cardinality of $S$ is denoted by $|S|$.
+  Let $S$ be a set. If there are exactly $n in NN$ distinct elements in $S$, we say that $S$ is a *finite set*, and that $n$ is the *cardinality* of $S$. The cardinality of $S$ is denoted by $|S|$.
 ]
 
 #definition[
-Two sets $A$ and $B$ have the same cardinality if and only if there exists a *bijective function* $f : A -> B$.
+  Two sets $A$ and $B$ have the same cardinality if and only if there exists a *bijective function* $f : A -> B$.
 ]
 
 #definition[
-A set that is either finite or has the same cardinality as the set $NN$ is called *countable*.
+  A set that is either finite or has the same cardinality as the set $NN$ is called *countable*.
 ]
 
 The *goal of combinatorics* is to compute the cardinality of certain finite sets.
@@ -234,78 +234,78 @@ The *goal of combinatorics* is to compute the cardinality of certain finite sets
 == The Sum Principle
 
 #proposition(title: "The sum principle v1")[
-If $A$ and $B$ are two finite and disjoint sets $A inter B = emptyset$, then
-$ |A union B| = |A| + |B| $
+  If $A$ and $B$ are two finite and disjoint sets $A inter B = emptyset$, then
+  $ |A union B| = |A| + |B| $
 ]
 
 #proposition(title: "The sum principle v2")[
-If $A_1, A_2, ..., A_m$ are a sequence of finite and pairwise disjoint sets $A_i inter A_j = emptyset$ for all $i != j$, then
-$ |A_1 union A_2 union ... union A_m| = |A_1| + |A_2| + ... + |A_m| = sum_(j=1)^m |A_j| $
+  If $A_1, A_2, ..., A_m$ are a sequence of finite and pairwise disjoint sets $A_i inter A_j = emptyset$ for all $i != j$, then
+  $ |A_1 union A_2 union ... union A_m| = |A_1| + |A_2| + ... + |A_m| = sum_(j=1)^m |A_j| $
 ]
 
 #proposition(title: "The sum principle v3")[
-If a first task can be done in $n_1$ ways, and a second task in $n_2$ ways, and if these tasks cannot be done at the same time, then there are $n_1 + n_2$ ways to do either task.
+  If a first task can be done in $n_1$ ways, and a second task in $n_2$ ways, and if these tasks cannot be done at the same time, then there are $n_1 + n_2$ ways to do either task.
 ]
 
 == The Product Principle
 
 #proposition(title: "The product principle v1")[
-If $A$ and $B$ are two finite sets, then
-$ |A times B| = |A| dot |B| $
+  If $A$ and $B$ are two finite sets, then
+  $ |A times B| = |A| dot |B| $
 ]
 
 #proposition(title: "The product principle v2")[
-If $A_1, A_2, ..., A_m$ are finite sets, then
-$ |A_1 times A_2 times ... times A_m| = |A_1| dot |A_2| dots |A_m| = product_(k=1)^m |A_k| $
+  If $A_1, A_2, ..., A_m$ are finite sets, then
+  $ |A_1 times A_2 times ... times A_m| = |A_1| dot |A_2| dots |A_m| = product_(k=1)^m |A_k| $
 ]
 
 #proposition(title: "The product principle v3")[
-Suppose that a procedure can be broken down into two tasks. If there are $n_1$ ways to perform the first task, and $n_2$ ways to perform the second task after the first task has been done, then there are $n_1 dot n_2$ ways to do the procedure.
+  Suppose that a procedure can be broken down into two tasks. If there are $n_1$ ways to perform the first task, and $n_2$ ways to perform the second task after the first task has been done, then there are $n_1 dot n_2$ ways to do the procedure.
 ]
 
 == Permutations
 
 #definition[
-For each positive integer $n in NN$, we define the *factorial* of $n$ as
-$ n! = n dot (n-1) dot (n-2) dots 2 dot 1 $
+  For each positive integer $n in NN$, we define the *factorial* of $n$ as
+  $ n! = n dot (n-1) dot (n-2) dots 2 dot 1 $
 ]
 
 #proposition(title: "Permutations of $n$ distinct objects")[
-Given $n$ distinct objects, there are $n!$ distinct ordered arrangements (= permutations) of these objects.
+  Given $n$ distinct objects, there are $n!$ distinct ordered arrangements (= permutations) of these objects.
 ]
 
 #proposition(title: "Permutations with repetition")[
-Given $n$ objects that can classified into $k$ groups of identical objects, and such that the first group contains $n_1$ identical elements, the second group contains $n_2$ identical elements, etc., then the number of distinct ordered arrangements of these objects is
-$ binom(n, n_1, n_2, ..., n_k) equiv frac(n!, n_1! n_2! dots n_k!) $
-with $sum_(i=1)^k n_i = n$.
+  Given $n$ objects that can classified into $k$ groups of identical objects, and such that the first group contains $n_1$ identical elements, the second group contains $n_2$ identical elements, etc., then the number of distinct ordered arrangements of these objects is
+  $ binom(n, n_1, n_2, ..., n_k) equiv frac(n!, n_1! n_2! dots n_k!) $
+  with $sum_(i=1)^k n_i = n$.
 ]
 
 == Ordered Subsets
 
 #proposition[
-Given a set of $n$ distinct elements, we can form
-$ n(n-1)(n-2)...(n-r+1) = frac(n!, (n-r)!) $
-ordered subsets containing $r$ elements.
+  Given a set of $n$ distinct elements, we can form
+  $ n(n-1)(n-2)...(n-r+1) = frac(n!, (n-r)!) $
+  ordered subsets containing $r$ elements.
 ]
 
 *Remark.* If $r = n$, the first formula implies that there are $n!$ permutations of a set of $n$ distinct elements. The second formula only makes sense if we define $0! = 1$.
 
 #proposition[
-The number of ordered subsets of $r$ elements taken from a set of $n$ distinct objects with repetition allowed is $n^r$.
+  The number of ordered subsets of $r$ elements taken from a set of $n$ distinct objects with repetition allowed is $n^r$.
 ]
 
 == Subsets
 
 #proposition[
-The number of distinct subsets with $r$ elements that can be extracted from a set of $n$ distinct elements is given by:
-$ binom(n, r) = frac(n!, r!(n-r)!) $
-The symbol $binom(n, r)$ is read "$n$ choose $r$".
+  The number of distinct subsets with $r$ elements that can be extracted from a set of $n$ distinct elements is given by:
+  $ binom(n, r) = frac(n!, r!(n-r)!) $
+  The symbol $binom(n, r)$ is read "$n$ choose $r$".
 ]
 
 #definition(title: "Binomial coefficients")[
-For all non-negative integers $n, r in ZZ^+$ such that $0 <= r <= n$, we define the *binomial coefficient* $binom(n, r)$ as follows:
-$ binom(n, r) = frac(n!, r!(n-r)!) $
-where we define $0! = 1$.
+  For all non-negative integers $n, r in ZZ^+$ such that $0 <= r <= n$, we define the *binomial coefficient* $binom(n, r)$ as follows:
+  $ binom(n, r) = frac(n!, r!(n-r)!) $
+  where we define $0! = 1$.
 ]
 
 *Remark.* $binom(n, k) = 0$ whenever $k < 0$, or $k > n$.
@@ -321,61 +321,65 @@ where we define $0! = 1$.
     [], [], [], [1], [], [1], [], [], [],
     [], [], [1], [], [2], [], [1], [], [],
     [], [1], [], [3], [], [3], [], [1], [],
-    [1], [], [4], [], [6], [], [4], [], [1]
+    [1], [], [4], [], [6], [], [4], [], [1],
   )
 ]
 
 $ binom(n, r) equiv binom("row", "column") $
 
 #theorem(title: "Symmetry")[
-$ binom(n, r) = binom(n, n-r) = frac(n!, r!(n-r)!), quad n >= 0, 0 <= r <= n $
+  $ binom(n, r) = binom(n, n-r) = frac(n!, r!(n-r)!), quad n >= 0, 0 <= r <= n $
 ]
 
 #theorem(title: "Pascal's identity")[
-$ binom(n+1, r) = binom(n, r) + binom(n, r-1), quad n >= 0, 0 < r <= n $
+  $ binom(n+1, r) = binom(n, r) + binom(n, r-1), quad n >= 0, 0 < r <= n $
 ]
 
 == Newton's Binomial Theorem
 
 #theorem(title: "Newton's binomial theorem")[
-$ (x + y)^n = sum_(k=0)^n binom(n, k) x^k y^(n-k), quad n >= 0 $
+  $ (x + y)^n = sum_(k=0)^n binom(n, k) x^k y^(n-k), quad n >= 0 $
 ]
 
 #corollary[
-$ (1 + x)^n = sum_(k=0)^n binom(n, k) x^k, quad n >= 0 $
+  $ (1 + x)^n = sum_(k=0)^n binom(n, k) x^k, quad n >= 0 $
 ]
 
 #corollary[
-For every $n >= 0$,
-$ sum_(k=0)^n binom(n, k) = 2^n, quad sum_(k=0)^n (-1)^k binom(n, k) = 0 $
+  For every $n >= 0$,
+  $ sum_(k=0)^n binom(n, k) = 2^n, quad sum_(k=0)^n (-1)^k binom(n, k) = 0 $
 ]
 
 == Cardinality of the Power Set
 
 #corollary[
-Given a finite set $A$, then
-$ |cal(P)(A)| = 2^(|A|) $
+  Given a finite set $A$, then
+  $ |cal(P)(A)| = 2^(|A|) $
 ]
 
 == The Inclusion-Exclusion Principle
 
 #proposition(title: "The inclusion-exclusion principle v1")[
-$ |A union B| = |A| + |B| - |A inter B| $
+  $ |A union B| = |A| + |B| - |A inter B| $
 ]
 
 #proposition(title: "The inclusion-exclusion principle v2")[
-$ |A union B union C| = |A| + |B| + |C| - |A inter B| - |A inter C| - |B inter C| + |A inter B inter C| $
+  $ |A union B union C| = |A| + |B| + |C| - |A inter B| - |A inter C| - |B inter C| + |A inter B inter C| $
 ]
 
 #proposition(title: "The inclusion-exclusion principle v3")[
-$ |A_1 union A_2 union ... union A_n| &= sum_(1 <= i <= n) |A_i| - sum_(1 <= i < j <= n) |A_i inter A_j| \
-&quad + sum_(1 <= i < j < k <= n) |A_i inter A_j inter A_k| - ... \
-&quad + (-1)^(n+1) |A_1 inter A_2 inter ... inter A_n| $
+  $
+    |A_1 union A_2 union ... union A_n| & = sum_(1 <= i <= n) |A_i| - sum_(1 <= i < j <= n) |A_i inter A_j| \
+                                        & quad + sum_(1 <= i < j < k <= n) |A_i inter A_j inter A_k| - ... \
+                                        & quad + (-1)^(n+1) |A_1 inter A_2 inter ... inter A_n|
+  $
 ]
 
 #proposition(title: "The inclusion-exclusion principle v4")[
-Given sets $A_i subset S$ with $1 <= i <= n$, then
-$ |overline(A_1 union A_2 union ... union A_n)| = |overline(A_1) inter overline(A_2) inter ... inter overline(A_n)| = |S| - |A_1 union A_2 union ... union A_n| $
+  Given sets $A_i subset S$ with $1 <= i <= n$, then
+  $
+    |overline(A_1 union A_2 union ... union A_n)| = |overline(A_1) inter overline(A_2) inter ... inter overline(A_n)| = |S| - |A_1 union A_2 union ... union A_n|
+  $
 ]
 
 *Remarks.*
@@ -390,35 +394,35 @@ $ |overline(A_1 union A_2 union ... union A_n)| = |overline(A_1) inter overline(
 3. *The inclusion-exclusion principle*: $|A union B| = |A| + |B| - |A inter B|$.
 4. *The pigeonhole principle*.
 5. *Other standard counting problems*:
-   - Distributions.
-   - Partitions.
+  - Distributions.
+  - Partitions.
 
 == Distributions
 
 #proposition(title: "Distributions")[
-The number of distributions of a given set of identical $r$ objects into $n$ (distinct) groups, and such that each group contains at least one object, is given by $binom(r-1, n-1)$.
+  The number of distributions of a given set of identical $r$ objects into $n$ (distinct) groups, and such that each group contains at least one object, is given by $binom(r-1, n-1)$.
 ]
 
 #proposition[
-The number of distributions of a given set of identical $r$ objects into $n$ (distinct) groups is given by $binom(n+r-1, r)$.
+  The number of distributions of a given set of identical $r$ objects into $n$ (distinct) groups is given by $binom(n+r-1, r)$.
 ]
 
 == Set Partitions
 
 #definition[
-Let $S$ be a finite set of cardinality $n$. A *partition* of $S$ of type $(n_1, n_2, ..., n_k)$ with $n_i in NN$ is the set ${S_i}_(i=1)^k$, where the subsets $S_i$ satisfy: (1) $|S_i| = n_i$ for all $1 <= i <= k$, (2) are pairwise disjoint: $S_i inter S_j = emptyset$ for all $i != j$; and (3) their union is $S$ (therefore, $sum_(i=1)^k n_i = n$).
+  Let $S$ be a finite set of cardinality $n$. A *partition* of $S$ of type $(n_1, n_2, ..., n_k)$ with $n_i in NN$ is the set ${S_i}_(i=1)^k$, where the subsets $S_i$ satisfy: (1) $|S_i| = n_i$ for all $1 <= i <= k$, (2) are pairwise disjoint: $S_i inter S_j = emptyset$ for all $i != j$; and (3) their union is $S$ (therefore, $sum_(i=1)^k n_i = n$).
 ]
 
 #proposition[
-Let $S$ be a set of cardinality $m dot n$. Then, there exist
-$ frac((m dot n)!, (m!)^n n!) $
-distinct partitions of $S$ into $n$ subsets $S_i$ of type $(m, m, ..., m)$.
+  Let $S$ be a set of cardinality $m dot n$. Then, there exist
+  $ frac((m dot n)!, (m!)^n n!) $
+  distinct partitions of $S$ into $n$ subsets $S_i$ of type $(m, m, ..., m)$.
 ]
 
 #proposition[
-The number of distinct partitions of a set of cardinality $m$ of type $(m_1, m_2, ..., m_n)$ is given by
-$ binom(m, m_1, m_2, ..., m_n) product_(k >= 1) frac(1, r_k!) $
-where $r_k$ if the number of subsets of cardinality $k$.
+  The number of distinct partitions of a set of cardinality $m$ of type $(m_1, m_2, ..., m_n)$ is given by
+  $ binom(m, m_1, m_2, ..., m_n) product_(k >= 1) frac(1, r_k!) $
+  where $r_k$ if the number of subsets of cardinality $k$.
 ]
 
 = Graph Theory I
@@ -426,69 +430,69 @@ where $r_k$ if the number of subsets of cardinality $k$.
 == Undirected Graphs
 
 1. *Undirected graphs*:
-   - Basic notation and definitions.
-   - Graph representation.
-   - Graph isomorphism.
-   - Walks in a graph.
-   - Trees.
-   - Planar graphs.
+  - Basic notation and definitions.
+  - Graph representation.
+  - Graph isomorphism.
+  - Walks in a graph.
+  - Trees.
+  - Planar graphs.
 2. *Algorithms in graph theory*.
 3. *Combinatorial problems on graphs*.
 
 #definition[
-A *pseudograph* $G = (V, E, gamma)$ consists of a nonempty vertex set $V$, an edge set $E$, and a function $gamma : E -> {{u, v} : u, v in V}$
+  A *pseudograph* $G = (V, E, gamma)$ consists of a nonempty vertex set $V$, an edge set $E$, and a function $gamma : E -> {{u, v} : u, v in V}$
 
-- The function $gamma$ encodes the graph connectivities.
-- If $e in E$ satisfies $gamma(e) = {u, v}$ with $u != v$, we say that $u$ and $v$ are *adjacent*, and that $e$ is *incident* with $u$ and $v$.
-- If there two distinct edges $e_1, e_2 in E$ such that $gamma(e_1) = gamma(e_2) = {a, b}$, then we say that $e_1$ and $e_2$ are *multiple edges*.
-- If there exists $e in E$ such that $gamma(e) = {v, v} = {v}$, then $e$ is a *loop* incident with $v$.
-- Hereafter, if we do not say it explicitly, we will assume that $G = (V, E)$ is undirected.
+  - The function $gamma$ encodes the graph connectivities.
+  - If $e in E$ satisfies $gamma(e) = {u, v}$ with $u != v$, we say that $u$ and $v$ are *adjacent*, and that $e$ is *incident* with $u$ and $v$.
+  - If there two distinct edges $e_1, e_2 in E$ such that $gamma(e_1) = gamma(e_2) = {a, b}$, then we say that $e_1$ and $e_2$ are *multiple edges*.
+  - If there exists $e in E$ such that $gamma(e) = {v, v} = {v}$, then $e$ is a *loop* incident with $v$.
+  - Hereafter, if we do not say it explicitly, we will assume that $G = (V, E)$ is undirected.
 ]
 
 #definition[
-A *multigraph* $G = (V, E)$ is a pseudograph in which multiple edges are allowed, but loops are not allowed. A *simple graph* $G = (V, E)$ is a pseudograph in which loops and multiple edges are not allowed.
+  A *multigraph* $G = (V, E)$ is a pseudograph in which multiple edges are allowed, but loops are not allowed. A *simple graph* $G = (V, E)$ is a pseudograph in which loops and multiple edges are not allowed.
 ]
 
 == More Definitions
 
 #definition[
-The *degree* (or valence) of a vertex $v in V$ in a graph $G = (V, E)$ is the number of edges incident with it, except that a loop contributes twice to the degree of that vertex. The degree of a vertex $v$ is denoted by $d(v)$.
+  The *degree* (or valence) of a vertex $v in V$ in a graph $G = (V, E)$ is the number of edges incident with it, except that a loop contributes twice to the degree of that vertex. The degree of a vertex $v$ is denoted by $d(v)$.
 ]
 
 *Remark.* Given a vertex $v in V$, its degree $d(v)$ is equal to
 $ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
 
 #definition[
-A vertex of degree 1 is called a *terminal* (or a *pendant vertex*). A vertex of degree 0 is called an *isolated vertex*. A graph with no edges is called *trivial*.
+  A vertex of degree 1 is called a *terminal* (or a *pendant vertex*). A vertex of degree 0 is called an *isolated vertex*. A graph with no edges is called *trivial*.
 ]
 
 #definition[
-A *regular graph* is a graph such that all vertices have the same degree.
+  A *regular graph* is a graph such that all vertices have the same degree.
 ]
 
 == The Handshaking Theorem
 
 #theorem(title: "The Handshaking Theorem")[
-In any undirected graph $G = (V, E)$, we have that
-$ sum_(v in V) d(v) = 2|E| $
+  In any undirected graph $G = (V, E)$, we have that
+  $ sum_(v in V) d(v) = 2|E| $
 ]
 
 #corollary[
-For any graph $G$, the sum of all vertex degrees is an even number.
+  For any graph $G$, the sum of all vertex degrees is an even number.
 ]
 
 #theorem[
-Any graph has an even number of vertices of odd degree.
+  Any graph has an even number of vertices of odd degree.
 ]
 
 #corollary[
-For any graph $G$ with an odd number of vertices, there is an odd number of vertices of even degree.
+  For any graph $G$ with an odd number of vertices, there is an odd number of vertices of even degree.
 ]
 
 == More Definitions
 
 #definition[
-A graph $G = (V, E)$ is *bipartite* if its vertex set $V$ can be partitioned into two disjoint subsets $V_1$ and $V_2$ such that every edge in the graph connects a vertex in $V_1$ with a vertex in $V_2$.
+  A graph $G = (V, E)$ is *bipartite* if its vertex set $V$ can be partitioned into two disjoint subsets $V_1$ and $V_2$ such that every edge in the graph connects a vertex in $V_1$ with a vertex in $V_2$.
 ]
 
 *Simple graph families:*
@@ -502,19 +506,19 @@ A graph $G = (V, E)$ is *bipartite* if its vertex set $V$ can be partitioned int
 == Complementary Graph and Subgraphs
 
 #definition[
-The *complementary graph* $overline(G) = (V, overline(E))$ of a simple graph $G = (V, E)$ has the same vertex set as $G$, and two vertices are adjacent in $overline(G)$ if and only if they are not adjacent in $G$.
+  The *complementary graph* $overline(G) = (V, overline(E))$ of a simple graph $G = (V, E)$ has the same vertex set as $G$, and two vertices are adjacent in $overline(G)$ if and only if they are not adjacent in $G$.
 ]
 
 #definition[
-The graph $H = (W, F)$ is a *subgraph* of $G = (V, E)$ if $W subset.eq V$ and $F subset.eq E$.
+  The graph $H = (W, F)$ is a *subgraph* of $G = (V, E)$ if $W subset.eq V$ and $F subset.eq E$.
 ]
 
 #definition[
-Given a graph $G = (V, E)$, a *spanning subgraph* of $G$ is any subgraph $H = (V, F)$ of $G$ (hence, $F subset.eq E$).
+  Given a graph $G = (V, E)$, a *spanning subgraph* of $G$ is any subgraph $H = (V, F)$ of $G$ (hence, $F subset.eq E$).
 ]
 
 #definition[
-Let $G = (V, E)$ be a graph, and $v_1, v_2, ..., v_(|V|)$ be a fixed ordering of its vertex set $V$. The *adjacency matrix* of $G$ associated to that particular vertex ordering is the matrix of dimensions $|V| times |V|$ such that its entry $A_(i j)$ counts the number of edges joining the vertices $v_i$ and $v_j$.
+  Let $G = (V, E)$ be a graph, and $v_1, v_2, ..., v_(|V|)$ be a fixed ordering of its vertex set $V$. The *adjacency matrix* of $G$ associated to that particular vertex ordering is the matrix of dimensions $|V| times |V|$ such that its entry $A_(i j)$ counts the number of edges joining the vertices $v_i$ and $v_j$.
 ]
 
 == Isomorphism of Graphs
@@ -522,7 +526,7 @@ Let $G = (V, E)$ be a graph, and $v_1, v_2, ..., v_(|V|)$ be a fixed ordering of
 *Remark.* Do not confuse a graph with its graphical representation!
 
 #definition[
-The simple graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ are *isomorphic* if and only if there exist a bijective function $f : V_1 -> V_2$ with the following property: $a$ and $b$ are adjacent in $G_1$ if and only if $f(a)$ and $f(b)$ are adjacent in $G_2$. The function $f$ is called an *isomorphism*.
+  The simple graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ are *isomorphic* if and only if there exist a bijective function $f : V_1 -> V_2$ with the following property: $a$ and $b$ are adjacent in $G_1$ if and only if $f(a)$ and $f(b)$ are adjacent in $G_2$. The function $f$ is called an *isomorphism*.
 ]
 
 *Remark.* Given two simple graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$, then
@@ -536,11 +540,11 @@ The simple graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ are *isomorphic* if 
 == Walks in a Graph
 
 #definition[
-A *walk* in a graph $G = (V, E)$ is an alternating sequence of vertices and edges of the form $v_0, {v_0, v_1}, v_1, {v_1, v_2}, v_2, ..., v_(ell-1), {v_(ell-1), v_ell}, v_ell$. The length of the walk is equal to the number of edges in the walk. There is an implicit direction in every walk: $v_0$ is the initial vertex, and $v_ell$ is the final vertex.
+  A *walk* in a graph $G = (V, E)$ is an alternating sequence of vertices and edges of the form $v_0, {v_0, v_1}, v_1, {v_1, v_2}, v_2, ..., v_(ell-1), {v_(ell-1), v_ell}, v_ell$. The length of the walk is equal to the number of edges in the walk. There is an implicit direction in every walk: $v_0$ is the initial vertex, and $v_ell$ is the final vertex.
 ]
 
 #definition[
-A *trail* is a walk in which no edge occurs more than once. A closed trail is called a *circuit*. A *path* is a trail in which all of its vertices are different. A *cycle* is a closed path of positive length.
+  A *trail* is a walk in which no edge occurs more than once. A closed trail is called a *circuit*. A *path* is a trail in which all of its vertices are different. A *cycle* is a closed path of positive length.
 ]
 
 *Remark.* Circuit can be also used as a synonym of closed walk, or closed path (cycle).
@@ -548,26 +552,26 @@ A *trail* is a walk in which no edge occurs more than once. A closed trail is ca
 == Number of Walks Between Two Vertices
 
 #theorem[
-Let $G$ be a graph with adjacency matrix $A$ with respect to the ordering ${v_1, v_2, ..., v_(|V|)}$ of its vertex set. The number of distinct oriented walks of length $n >= 1$ that start at $v_i$ and end at $v_j$ is given by the entry $(i, j)$ of the matrix $A^n$.
+  Let $G$ be a graph with adjacency matrix $A$ with respect to the ordering ${v_1, v_2, ..., v_(|V|)}$ of its vertex set. The number of distinct oriented walks of length $n >= 1$ that start at $v_i$ and end at $v_j$ is given by the entry $(i, j)$ of the matrix $A^n$.
 ]
 
 #corollary[
-Let $G$ be a simple graph with adjacency matrix $A$, then
-- $A^2_(i i) = d(i)$ for every $1 <= i <= |V|$.
-- $"tr" A^2 = 2|E|$.
-- $"tr" A^3 = 6 times$ number of unoriented triangles in $G$.
+  Let $G$ be a simple graph with adjacency matrix $A$, then
+  - $A^2_(i i) = d(i)$ for every $1 <= i <= |V|$.
+  - $"tr" A^2 = 2|E|$.
+  - $"tr" A^3 = 6 times$ number of unoriented triangles in $G$.
 ]
 
 == Connected Graphs
 
 #definition[
-An undirected graph is *connected* if there is a path between every pair of distinct vertices of $G$. A *disconnected* graph is formed by the disjoint union of several connected subgraphs called the *connected components* of the graph.
+  An undirected graph is *connected* if there is a path between every pair of distinct vertices of $G$. A *disconnected* graph is formed by the disjoint union of several connected subgraphs called the *connected components* of the graph.
 ]
 
 *Remark.* If two vertices of a graph can be connected by a walk, then there is at least one path connecting them. These paths correspond to the walks of minimum length connecting these two vertices.
 
 #definition[
-An *articulation point* or *cut vertex* of a graph $G$ is a vertex whose removal (together with those edges incident with it) produces a graph with more connected components than in $G$. A *cut edge* or *bridge* of a graph $G$ is an edge whose removal produces a graph with more connected components than in $G$.
+  An *articulation point* or *cut vertex* of a graph $G$ is a vertex whose removal (together with those edges incident with it) produces a graph with more connected components than in $G$. A *cut edge* or *bridge* of a graph $G$ is an edge whose removal produces a graph with more connected components than in $G$.
 ]
 
 = Graph Theory II
@@ -575,82 +579,82 @@ An *articulation point* or *cut vertex* of a graph $G$ is a vertex whose removal
 == Trees
 
 1. *Undirected graphs*:
-   - Basic notation and definitions.
-   - Graph representation.
-   - Graph isomorphism.
-   - Walks in a graph.
-   - *Trees*.
-   - Planar graphs.
+  - Basic notation and definitions.
+  - Graph representation.
+  - Graph isomorphism.
+  - Walks in a graph.
+  - *Trees*.
+  - Planar graphs.
 2. *Algorithms in graph theory*.
 3. *Combinatorial problems on graphs*.
 
 #definition[
-A *tree* is a simple connected graph with no cycles. A *forest* is a simple graph with no cycles. Each connected component of a forest is a tree.
+  A *tree* is a simple connected graph with no cycles. A *forest* is a simple graph with no cycles. Each connected component of a forest is a tree.
 ]
 
 *Remark.* Trees may be rooted trees. A rooted tree is a tree with one distinguished vertex (the root). Hereafter, we will assume that all trees are rootless, unless specified.
 
 #theorem[
-1. The simple graph $G$ is a tree if and only if it is connected and, if we remove any edge, we obtain a disconnected graph.
-2. The simple graph $G$ is a tree if and only if it does not contain any cycles and, if we add any edge, we create a cycle.
+  1. The simple graph $G$ is a tree if and only if it is connected and, if we remove any edge, we obtain a disconnected graph.
+  2. The simple graph $G$ is a tree if and only if it does not contain any cycles and, if we add any edge, we create a cycle.
 ]
 
 #theorem[
-A graph $G = (V, E)$ is a tree if and only if there exists a unique path between any pair of vertices.
+  A graph $G = (V, E)$ is a tree if and only if there exists a unique path between any pair of vertices.
 ]
 
 #theorem[
-Any tree with at least two vertices contains at least two vertices of degree one.
+  Any tree with at least two vertices contains at least two vertices of degree one.
 ]
 
 == Properties of Trees
 
 #definition[
-How to grow a tree?
-1. Start from the trivial tree $T = ({r}, emptyset)$, where $r$ is the root vertex.
-2. Given $T = (V, E)$, add a new vertex $u$ and a new edge ${u, v}$ where $v in V$.
+  How to grow a tree?
+  1. Start from the trivial tree $T = ({r}, emptyset)$, where $r$ is the root vertex.
+  2. Given $T = (V, E)$, add a new vertex $u$ and a new edge ${u, v}$ where $v in V$.
 ]
 
 #theorem[
-Any graph obtained by using the preceding procedure is a tree, and any tree can be obtained in this way.
+  Any graph obtained by using the preceding procedure is a tree, and any tree can be obtained in this way.
 ]
 
 #theorem[
-Any tree with $n$ vertices has $n - 1$ edges.
+  Any tree with $n$ vertices has $n - 1$ edges.
 ]
 
 #theorem[
-If $G$ is a graph with $n$ vertices, then the following statements are equivalent:
-1. $G$ is a tree.
-2. $G$ is connected and has $n - 1$ edges.
-3. $G$ has $n - 1$ edges and does not contain any cycle.
+  If $G$ is a graph with $n$ vertices, then the following statements are equivalent:
+  1. $G$ is a tree.
+  2. $G$ is connected and has $n - 1$ edges.
+  3. $G$ has $n - 1$ edges and does not contain any cycle.
 ]
 
 == Planar Graphs
 
 #definition[
-A *planar graph* is a graph that can be embedded in the plane: i.e., it can be drawn on the plane in such a way that their edges do not cross each other. A *plane graph* is a graphical representation of a planar graph such that their edges do not cross each other.
+  A *planar graph* is a graph that can be embedded in the plane: i.e., it can be drawn on the plane in such a way that their edges do not cross each other. A *plane graph* is a graphical representation of a planar graph such that their edges do not cross each other.
 ]
 
 #definition[
-A *subdivision* of an edge results from inserting a new vertex into that edge. The subdivision of a graph $G$ is obtained by subdividing one or more edges in $G$.
+  A *subdivision* of an edge results from inserting a new vertex into that edge. The subdivision of a graph $G$ is obtained by subdividing one or more edges in $G$.
 ]
 
 #theorem(title: "Kuratowski, 1930")[
-A graph is planar if and only if it does not contain a subgraph that is a subdivision of $K_5$ or $K_(3,3)$.
+  A graph is planar if and only if it does not contain a subgraph that is a subdivision of $K_5$ or $K_(3,3)$.
 ]
 
 == Planar and Dual Graphs
 
 #theorem(title: "Euler's formula, 1752")[
-A plane and connected graph $G = (V, E)$ divides the plane into $R$ regions (or faces), such that
-$ |V| - |E| + R = 2 $
-A plane graph (not necessarily connected) divides the plane into $R$ regions, such that
-$ |V| - |E| + R = 1 + "number of connected components of" G $
+  A plane and connected graph $G = (V, E)$ divides the plane into $R$ regions (or faces), such that
+  $ |V| - |E| + R = 2 $
+  A plane graph (not necessarily connected) divides the plane into $R$ regions, such that
+  $ |V| - |E| + R = 1 + "number of connected components of" G $
 ]
 
 #definition[
-Given a plane connected graph $G = (V, E)$, we can define its *dual graph* $G^* = (V^*, E^*)$ in the following way: To each region $f$ of $G$ we associate a dual vertex $f^* in V^*$, and to each edge $e in E$, there corresponds a unique dual edge $e^* in E^*$. If the original edge $e$ is the intersection of two faces $f, h$ (possibly, $f = h$), then the corresponding dual edge $e^*$ is incident with the dual vertices $f^*, g^* in V^*$.
+  Given a plane connected graph $G = (V, E)$, we can define its *dual graph* $G^* = (V^*, E^*)$ in the following way: To each region $f$ of $G$ we associate a dual vertex $f^* in V^*$, and to each edge $e in E$, there corresponds a unique dual edge $e^* in E^*$. If the original edge $e$ is the intersection of two faces $f, h$ (possibly, $f = h$), then the corresponding dual edge $e^*$ is incident with the dual vertices $f^*, g^* in V^*$.
 ]
 
 - $G^*$ can be drawn in such a way that any dual edge $e^*$ only crosses $e$.
@@ -659,21 +663,21 @@ Given a plane connected graph $G = (V, E)$, we can define its *dual graph* $G^* 
 == Some Corollaries About Graph Planarity
 
 #definition[
-Given a plane graph, the *degree of a region* $r$ is the degree of the dual vertex $r in V^*$ associated with it in the dual graph $G^*$. We denote the degree of the region $r$ as $d_r$ (or $d(r)$).
+  Given a plane graph, the *degree of a region* $r$ is the degree of the dual vertex $r in V^*$ associated with it in the dual graph $G^*$. We denote the degree of the region $r$ as $d_r$ (or $d(r)$).
 ]
 
 #theorem(title: "Handshake Theorem for the dual graph")[
-Given a plane connected graph $G$, then
-$ 2|E| = sum_(r in R) d_r $
-where $R$ is the set of regions defined on the plane by $G$.
+  Given a plane connected graph $G$, then
+  $ 2|E| = sum_(r in R) d_r $
+  where $R$ is the set of regions defined on the plane by $G$.
 ]
 
 #corollary[
-If $G$ is a simple, connected, and planar graph with $|V| >= 3$, then $|E| <= 3|V| - 6$.
+  If $G$ is a simple, connected, and planar graph with $|V| >= 3$, then $|E| <= 3|V| - 6$.
 ]
 
 #corollary[
-If $G$ is a simple, connected, and planar graph with $|V| >= 3$ and without cycles of length 3, then $|E| <= 2|V| - 4$.
+  If $G$ is a simple, connected, and planar graph with $|V| >= 3$ and without cycles of length 3, then $|E| <= 2|V| - 4$.
 ]
 
 = Graph Theory III
@@ -682,24 +686,24 @@ If $G$ is a simple, connected, and planar graph with $|V| >= 3$ and without cycl
 
 1. *Undirected graphs*.
 2. *Algorithms in graph theory*:
-   - *Minimum-weight spanning tree*: Prim's and Kruskal's algorithms.
-   - *Shortest path*: Dijkstra's algorithm.
-   - *Graph colorings*.
-   - *Eulerian and Hamiltonian graphs*. Fleury's algorithm.
+  - *Minimum-weight spanning tree*: Prim's and Kruskal's algorithms.
+  - *Shortest path*: Dijkstra's algorithm.
+  - *Graph colorings*.
+  - *Eulerian and Hamiltonian graphs*. Fleury's algorithm.
 3. *Combinatorial problems on graphs*.
 
 == Minimum-Weight Spanning Tree
 
 #definition[
-A *spanning tree* of a connected graph $G$ is a subgraph of $G$ that is a tree and contains all vertices of $G$.
+  A *spanning tree* of a connected graph $G$ is a subgraph of $G$ that is a tree and contains all vertices of $G$.
 ]
 
 #definition[
-A *weighted graph* $G = (V, E, omega)$ is a graph such that every edge $e in E$ is associated to a weight $omega(e) in RR$.
+  A *weighted graph* $G = (V, E, omega)$ is a graph such that every edge $e in E$ is associated to a weight $omega(e) in RR$.
 ]
 
 #definition[
-A *minimum-weight spanning tree* of a connected weighted graph $G = (V, E, omega)$ is a spanning tree $T = (V, A)$ of $G$ such that $omega(A) = sum_(e in A) omega(e)$ takes the minimum possible value.
+  A *minimum-weight spanning tree* of a connected weighted graph $G = (V, E, omega)$ is a spanning tree $T = (V, A)$ of $G$ such that $omega(A) = sum_(e in A) omega(e)$ takes the minimum possible value.
 ]
 
 *Problem 1*: Find a minimum-weight spanning tree of a connected weighted graph $G = (V, E, omega)$.
@@ -707,17 +711,17 @@ A *minimum-weight spanning tree* of a connected weighted graph $G = (V, E, omega
 *Remark.* The number of trees on $n$ vertices grows very rapidly with $n$.
 
 #definition[
-A *greedy algorithm* to solve a given problem is an algorithm such that at every step, it always takes, among all the choices allowed by the problem, the optimum one.
+  A *greedy algorithm* to solve a given problem is an algorithm such that at every step, it always takes, among all the choices allowed by the problem, the optimum one.
 ]
 
 == Prim's Algorithm, 1957
 
 #algorithm(title: "Prim's algorithm")[
-*procedure* Prim($G$: connected weighted graph with $n$ vertices)
-1. $T_1 = (V_1, E_1)$ where $E_1 = {e_1}$, $e_1 = {x_0, x_1}$ is one edge with minimum weight $omega_"min"$, and $V_1 = {x_0, x_1}$.
-2. *for* $i = 1$ *to* $n - 2$
-   1. $e_(i+1) = {x_i, x_(i+1)}$ edge of minimum weight that is incident with a vertex $x_j$ of $T_i = (V_i, E_i)$, and such that it does not form a cycle when added to $T_i$
-   2. $T_(i+1) = (V_i union {x_(i+1)}, E_i union {e_(i+1)}) = (V_(i+1), E_(i+1))$
+  *procedure* Prim($G$: connected weighted graph with $n$ vertices)
+  1. $T_1 = (V_1, E_1)$ where $E_1 = {e_1}$, $e_1 = {x_0, x_1}$ is one edge with minimum weight $omega_"min"$, and $V_1 = {x_0, x_1}$.
+  2. *for* $i = 1$ *to* $n - 2$
+    1. $e_(i+1) = {x_i, x_(i+1)}$ edge of minimum weight that is incident with a vertex $x_j$ of $T_i = (V_i, E_i)$, and such that it does not form a cycle when added to $T_i$
+    2. $T_(i+1) = (V_i union {x_(i+1)}, E_i union {e_(i+1)}) = (V_(i+1), E_(i+1))$
 ]
 
 *Remarks.*
@@ -726,17 +730,17 @@ A *greedy algorithm* to solve a given problem is an algorithm such that at every
 - At each step, $T_i$ is a tree ($1 <= i <= n-1$).
 
 #theorem[
-Given a connected weighted graph $G = (V, E, omega)$, Prim's algorithm produces a minimum-weight spanning tree of $G$.
+  Given a connected weighted graph $G = (V, E, omega)$, Prim's algorithm produces a minimum-weight spanning tree of $G$.
 ]
 
 == Kruskal's Algorithm, 1957
 
 #algorithm(title: "Kruskal's algorithm")[
-*procedure* Kruskal($G$: connected weighted graph with $n$ vertices)
-1. $T_0 = (V, E_0)$ with $E_0 = emptyset$
-2. *for* $i = 1$ *to* $n - 1$
-   1. $e_i =$ edge of minimum weight such that it does not form a cycle when added to $T_(i-1) = (V, E_(i-1))$
-   2. $T_i = (V, E_(i-1) union {e_i}) = (V, E_i)$
+  *procedure* Kruskal($G$: connected weighted graph with $n$ vertices)
+  1. $T_0 = (V, E_0)$ with $E_0 = emptyset$
+  2. *for* $i = 1$ *to* $n - 1$
+    1. $e_i =$ edge of minimum weight such that it does not form a cycle when added to $T_(i-1) = (V, E_(i-1))$
+    2. $T_i = (V, E_(i-1) union {e_i}) = (V, E_i)$
 ]
 
 *Remarks.*
@@ -744,7 +748,7 @@ Given a connected weighted graph $G = (V, E, omega)$, Prim's algorithm produces 
 - At each step, $T_i$ is a forest ($1 <= i <= n-1$).
 
 #theorem[
-Given a connected weighted graph $G = (V, E, omega)$, Kruskal's algorithm produces a minimum-weight spanning tree of $G$.
+  Given a connected weighted graph $G = (V, E, omega)$, Kruskal's algorithm produces a minimum-weight spanning tree of $G$.
 ]
 
 == Shortest Path Between Two Vertices: Dijkstra's Algorithm, 1959
@@ -752,7 +756,7 @@ Given a connected weighted graph $G = (V, E, omega)$, Kruskal's algorithm produc
 *Problem 2*: Find the shortest path that joins an initial vertex $s$ to a final vertex $t$ belonging to a simple, connected, and weighted graph $G = (V, E, omega)$ such that all weights are positive ($omega_e > 0$ for every edge $e in E$).
 
 #theorem[
-Dijkstra's algorithm finds the length of the shortest path between two vertices of a simple, connected, and weighted graph $G = (V, E, omega)$ with all its weights being positive.
+  Dijkstra's algorithm finds the length of the shortest path between two vertices of a simple, connected, and weighted graph $G = (V, E, omega)$ with all its weights being positive.
 ]
 
 *The basic idea:*
@@ -764,18 +768,18 @@ We will denote the weight of the edge ${i, j} in E$ as $omega({i, j}) = omega_(i
 == Dijkstra's Algorithm
 
 1. *Initial Step*: We mark the origin $s$ with the permanent label $underline((0, s))$.
-   All the other vertices $j in V$ ($j != s$) are marked with temporary labels:
-   - If ${j, s} in E$, we assign the label $(omega_(s,j), s)$ to $j$.
-   - If ${j, s} in.not E$, we assign to $j$ the label $(infinity, -)$.
+  All the other vertices $j in V$ ($j != s$) are marked with temporary labels:
+  - If ${j, s} in E$, we assign the label $(omega_(s,j), s)$ to $j$.
+  - If ${j, s} in.not E$, we assign to $j$ the label $(infinity, -)$.
 
 2. Let $v in V$ be the last vertex that has become permanent. For each temporary vertex $j$, we compare the temporary label $delta_j$ to the new value $delta_v + omega_(v,j)$:
-   - If $delta_v + omega_(v,j) < delta_j$, the old label $(delta_j, P_j)$ is replaced by $(delta_v + omega_(v,j), v)$.
-   - If $delta_v + omega_(v,j) > delta_j$, the label $(delta_j, P_j)$ remains the same.
+  - If $delta_v + omega_(v,j) < delta_j$, the old label $(delta_j, P_j)$ is replaced by $(delta_v + omega_(v,j), v)$.
+  - If $delta_v + omega_(v,j) > delta_j$, the label $(delta_j, P_j)$ remains the same.
 
 3. Among all temporary vertices $j$, we choose one $j_0$ with the minimum label
-   $ delta_(j_0) = min(delta_j : j "is temporary") = delta_"min" $
-   - If $delta_"min" = infinity$, the algorithm ends: there is no path between $s$ and $t$.
-   - If $delta_"min" < infinity$, we mark such vertex with the permanent label $underline((delta_"min", P_(j_0)))$.
+  $ delta_(j_0) = min(delta_j : j "is temporary") = delta_"min" $
+  - If $delta_"min" = infinity$, the algorithm ends: there is no path between $s$ and $t$.
+  - If $delta_"min" < infinity$, we mark such vertex with the permanent label $underline((delta_"min", P_(j_0)))$.
 
 4. If $t$ is the vertex whose label has become permanent, the algorithm ends. The length of the shortest path between $s$ and $t$ is $delta_t$, and such a path is obtained by following the permanent labels in reverse order $t -> P_t -> ... -> s$. Otherwise, go back to Step (2).
 
@@ -787,28 +791,28 @@ We will denote the weight of the edge ${i, j} in E$ as $omega({i, j}) = omega_(i
 == Directed Graphs or Digraphs
 
 #definition[
-A *directed graph* $G = (V, E)$ consists in a nonempty set of vertices $V$ and an edge set $E$, such that each edge $e in E$ is an ordered pair of vertices $e = (x, y)$ with $x, y in V$.
+  A *directed graph* $G = (V, E)$ consists in a nonempty set of vertices $V$ and an edge set $E$, such that each edge $e in E$ is an ordered pair of vertices $e = (x, y)$ with $x, y in V$.
 ]
 
 #definition[
-Let $G$ be a directed graph $G = (V, E)$, and let $v in V$ be a vertex of $G$. The *indegree* $d_i (v)$ of $v$ is the number of edges whose second entry is $v$. The *outdegree* $d_o (v)$ of $v$ is the number of edges whose first entry is $v$.
+  Let $G$ be a directed graph $G = (V, E)$, and let $v in V$ be a vertex of $G$. The *indegree* $d_i (v)$ of $v$ is the number of edges whose second entry is $v$. The *outdegree* $d_o (v)$ of $v$ is the number of edges whose first entry is $v$.
 ]
 
 #proposition[
-In any directed graph $G = (V, E)$:
-$ sum_(v in V) d_i (v) = sum_(v in V) d_o (v) = |E| $
+  In any directed graph $G = (V, E)$:
+  $ sum_(v in V) d_i (v) = sum_(v in V) d_o (v) = |E| $
 ]
 
 #definition[
-Let $G = (V, E)$ be a directed graph, and we consider the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set $V$. The *adjacency matrix* of $G$ associated to that ordering is the $|V| times |V|$ matrix whose entries $A_(i j)$ count the number of edges $(v_i, v_j)$ that start at $v_i$ and end at $v_j$.
+  Let $G = (V, E)$ be a directed graph, and we consider the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set $V$. The *adjacency matrix* of $G$ associated to that ordering is the $|V| times |V|$ matrix whose entries $A_(i j)$ count the number of edges $(v_i, v_j)$ that start at $v_i$ and end at $v_j$.
 ]
 
 #definition[
-A *walk* of length $ell$ in a directed graph $G = (V, E)$ is a sequence of $ell$ edges of the form $(v_0, v_1), (v_1, v_2), ..., (v_(ell-1), v_ell)$.
+  A *walk* of length $ell$ in a directed graph $G = (V, E)$ is a sequence of $ell$ edges of the form $(v_0, v_1), (v_1, v_2), ..., (v_(ell-1), v_ell)$.
 
-The definitions of trail, path, closed walk, circuit, and cycle are the natural generalization of those given for undirected graphs in Chapter 4.
+  The definitions of trail, path, closed walk, circuit, and cycle are the natural generalization of those given for undirected graphs in Chapter 4.
 
-We can also define weighted directed graphs $G = (V, E, omega)$ in an analogous way.
+  We can also define weighted directed graphs $G = (V, E, omega)$ in an analogous way.
 ]
 
 = Graph Theory IV
@@ -817,16 +821,16 @@ We can also define weighted directed graphs $G = (V, E, omega)$ in an analogous 
 
 1. *Undirected graphs*.
 2. *Algorithms in graph theory*:
-   - Minimum-weight spanning tree: Prim's and Kruskal's algorithms.
-   - Shortest path: Dijkstra's algorithm.
-   - *Graph colorings*.
-   - Eulerian and Hamiltonian graphs. Fleury's algorithm.
+  - Minimum-weight spanning tree: Prim's and Kruskal's algorithms.
+  - Shortest path: Dijkstra's algorithm.
+  - *Graph colorings*.
+  - Eulerian and Hamiltonian graphs. Fleury's algorithm.
 3. *Combinatorial problems on graphs*.
 
 == Proper Colorings of a Graph
 
 #definition[
-A *proper coloring* (with $q$ colors) of a simple graph $G = (V, E)$ is a function $c : V -> {1, 2, ..., q}$ such that $c(u) != c(w)$ whenever $u$ and $w$ are adjacent.
+  A *proper coloring* (with $q$ colors) of a simple graph $G = (V, E)$ is a function $c : V -> {1, 2, ..., q}$ such that $c(u) != c(w)$ whenever $u$ and $w$ are adjacent.
 ]
 
 - Given a graph $G = (V, E)$, the total number of vertex colorings (including both proper and improper colorings) with $q$ colors is $q^(|V|)$.
@@ -836,7 +840,7 @@ A *proper coloring* (with $q$ colors) of a simple graph $G = (V, E)$ is a functi
   2. Which is the minimum number of colors $q$ needed to color a given graph $G$?
 
 #definition[
-The *chromatic number* $chi(G)$ of a graph $G$ is the minimum positive integer $q$ such that there is at least one coloring of $G$ with $q$ colors; i.e., $P_G (q) > 0$ for every $q >= chi(G) in NN$.
+  The *chromatic number* $chi(G)$ of a graph $G$ is the minimum positive integer $q$ such that there is at least one coloring of $G$ with $q$ colors; i.e., $P_G (q) > 0$ for every $q >= chi(G) in NN$.
 ]
 
 *Remark.* Deciding whether an arbitrary graph $G$ can be colored or not with $k >= 3$ colors is a hard problem.
@@ -844,12 +848,12 @@ The *chromatic number* $chi(G)$ of a graph $G$ is the minimum positive integer $
 == Greedy Algorithm for Coloring a Graph
 
 #algorithm(title: "Greedy algorithm")[
-*procedure* ($G$: simple and connected graph with $n$ vertices)
-1. We order the vertices of $V$: $(v_1, v_2, ..., v_n)$
-2. $c(v_1) = 1$
-3. *for* $i = 2$ *to* $n$
-   1. $S_i = {q : c(v_k) = q, "for every" v_k "that is adjacent to" v_i "with" k < i}$
-   2. $c(v_i) = min(overline(S_i) inter NN) =$ the smallest color not in $S_i$
+  *procedure* ($G$: simple and connected graph with $n$ vertices)
+  1. We order the vertices of $V$: $(v_1, v_2, ..., v_n)$
+  2. $c(v_1) = 1$
+  3. *for* $i = 2$ *to* $n$
+    1. $S_i = {q : c(v_k) = q, "for every" v_k "that is adjacent to" v_i "with" k < i}$
+    2. $c(v_i) = min(overline(S_i) inter NN) =$ the smallest color not in $S_i$
 ]
 
 *Remarks.*
@@ -859,27 +863,27 @@ The *chromatic number* $chi(G)$ of a graph $G$ is the minimum positive integer $
 == Some Theorems
 
 #theorem[
-If $G$ is a graph with maximum degree $k$, then $chi(G) <= k + 1$.
+  If $G$ is a graph with maximum degree $k$, then $chi(G) <= k + 1$.
 ]
 
 #theorem(title: "Brooks, 1941")[
-If $G$ is a connected non-complete graph with maximum degree $k >= 3$, then $chi(G) <= k$.
+  If $G$ is a connected non-complete graph with maximum degree $k >= 3$, then $chi(G) <= k$.
 ]
 
 #proposition[
-A graph $G$ is bipartite if and only if $chi(G) = 2$.
+  A graph $G$ is bipartite if and only if $chi(G) = 2$.
 ]
 
 #theorem[
-A graph is bipartite if and only if it does not contain any cycle of odd length.
+  A graph is bipartite if and only if it does not contain any cycle of odd length.
 ]
 
 #corollary[
-Any tree is bipartite.
+  Any tree is bipartite.
 ]
 
 #theorem(title: "The four-color theorem, Appel and Haken, 1976")[
-For any planar graph $G$, $P_G (4) > 0$.
+  For any planar graph $G$, $P_G (4) > 0$.
 ]
 
 - The original proof was computer assisted.
@@ -892,15 +896,15 @@ For any planar graph $G$, $P_G (4) > 0$.
 *Problem 5*: Given a graph $G = (V, E)$, is there any circuit containing every edge $e in E$? (If it is a circuit, then each edge is visited exactly once).
 
 #definition[
-An *Euler tour* is a circuit containing every edge of the graph. A graph admitting an Euler tour is an *Eulerian graph*.
+  An *Euler tour* is a circuit containing every edge of the graph. A graph admitting an Euler tour is an *Eulerian graph*.
 
-An *Euler trail* is an open trail that contains all the edges of the graph.
+  An *Euler trail* is an open trail that contains all the edges of the graph.
 ]
 
 #theorem[
-A connected graph is Eulerian if and only if the degree of all its vertices is even.
-A connected graph contains an Euler trail if and only if it contains exactly two vertices of odd degree.
-A connected and directed graph is Eulerian if and only if for every vertex $v in V$, $d_i (v) = d_o (v)$.
+  A connected graph is Eulerian if and only if the degree of all its vertices is even.
+  A connected graph contains an Euler trail if and only if it contains exactly two vertices of odd degree.
+  A connected and directed graph is Eulerian if and only if for every vertex $v in V$, $d_i (v) = d_o (v)$.
 ]
 
 Therefore, the *problem of the bridges of Königsberg* does not have any solution: the corresponding graph does not admit any Euler tour/trail.
@@ -911,12 +915,12 @@ Let $G = (V, E)$ be a connected graph with all its vertices of even degree:
 1. *Initial step*: We choose any vertex $v_0$ as the initial vertex of the Euler tour $C_0 = (v_0)$ and we define $G_0 = (V_0, E_0) = G$. The algorithm sequentially increases the tour $C_0$, while it sequentially deletes elements from $G$.
 
 2. *How to extend the trail?*: Let $C_i = (v_0, e_1, v_1, ..., e_i, v_i)$ be the trail corresponding to the graph $G_i = (V_i, E_i) subset.eq G_0$.
-   - If there exits a unique edge incident with $v_i$, $e_(i+1) = {v_i, w} in E_i = E without {e_1, e_2, ..., e_i}$:
-     - $C_(i+1) = (v_0, e_1, v_1, ..., e_i, v_i, e_(i+1), w)$.
-     - $G_(i+1) = (V_i without {v_i}, E_i without {e_(i+1)}) = (V_(i+1), E_(i+1))$.
-   - If there are several edges in $E_i$ incident with $v_i$, we can choose any of these edges as long as the chosen one is not a bridge of $G_i$. If we choose $e_(i+1) = {v_i, w} in E_i$:
-     - $C_(i+1) = (v_0, e_1, v_1, ..., e_i, v_i, e_(i+1), w)$.
-     - $G_(i+1) = (V_i, E_i without {e_(i+1)}) = (V_(i+1), E_(i+1))$.
+  - If there exits a unique edge incident with $v_i$, $e_(i+1) = {v_i, w} in E_i = E without {e_1, e_2, ..., e_i}$:
+    - $C_(i+1) = (v_0, e_1, v_1, ..., e_i, v_i, e_(i+1), w)$.
+    - $G_(i+1) = (V_i without {v_i}, E_i without {e_(i+1)}) = (V_(i+1), E_(i+1))$.
+  - If there are several edges in $E_i$ incident with $v_i$, we can choose any of these edges as long as the chosen one is not a bridge of $G_i$. If we choose $e_(i+1) = {v_i, w} in E_i$:
+    - $C_(i+1) = (v_0, e_1, v_1, ..., e_i, v_i, e_(i+1), w)$.
+    - $G_(i+1) = (V_i, E_i without {e_(i+1)}) = (V_(i+1), E_(i+1))$.
 
 3. We repeat Step (2) $|E|$ times until $G_(|E|) = (emptyset, emptyset)$. Then $C_(|E|)$ is the Euler tour we were looking for.
 
@@ -925,15 +929,15 @@ Let $G = (V, E)$ be a connected graph with all its vertices of even degree:
 *Problem 6*: Is it possible to find a cycle on a graph $G$ such that it contains all vertices of $G$ exactly once?
 
 #definition[
-A *Hamilton cycle* of a graph $G$ is a cycle that contains all the vertices of $G$. A graph admitting one Hamilton graph is a *Hamiltonian graph*.
+  A *Hamilton cycle* of a graph $G$ is a cycle that contains all the vertices of $G$. A graph admitting one Hamilton graph is a *Hamiltonian graph*.
 
-A *Hamilton path* of a graph $G$ is an open path that contains all vertices of $G$.
+  A *Hamilton path* of a graph $G$ is an open path that contains all vertices of $G$.
 ]
 
 The problem of deciding that a given graph is Hamiltonian or not is hard.
 
 #theorem(title: "Dirac, 1950")[
-If $G$ is a simple graph with $n >= 3$ vertices and each vertex has a degree $>= n\/2$, then $G$ is a Hamiltonian graph.
+  If $G$ is a simple graph with $n >= 3$ vertices and each vertex has a degree $>= n\/2$, then $G$ is a Hamiltonian graph.
 ]
 
 *Remark.* Not every Hamiltonian graph satisfies the above condition: e.g. $C_n$ with $n >= 5$.
@@ -943,45 +947,47 @@ If $G$ is a simple graph with $n >= 3$ vertices and each vertex has a degree $>=
 == Recurrence Relations
 
 1. *Recurrence relations*:
-   - Definitions.
-   - Solution of a linear homogeneous recurrence relation.
-   - Solution of a linear nonhomogeneous recurrence relation.
+  - Definitions.
+  - Solution of a linear homogeneous recurrence relation.
+  - Solution of a linear nonhomogeneous recurrence relation.
 2. *Generating functions*.
 
 #definition[
-A *recurrence relation* for the sequence $(a_n)_(n in NN)$ is an equation that expresses $a_n$ in terms of one or more terms $a_(n-1), a_(n-2), ..., a_(n-k)$, and possibly $n$. In other words, it is, for any fixed $k >= 1$, an equation of the type
-$ F(n; a_n, a_(n-1), a_(n-2), ..., a_(n-k)) = 0 $
-which is valid for all $n >= k + 1$. The *initial conditions* are the first $k$ terms in the sequence: i.e., $(a_1, ..., a_k)$.
+  A *recurrence relation* for the sequence $(a_n)_(n in NN)$ is an equation that expresses $a_n$ in terms of one or more terms $a_(n-1), a_(n-2), ..., a_(n-k)$, and possibly $n$. In other words, it is, for any fixed $k >= 1$, an equation of the type
+  $ F(n; a_n, a_(n-1), a_(n-2), ..., a_(n-k)) = 0 $
+  which is valid for all $n >= k + 1$. The *initial conditions* are the first $k$ terms in the sequence: i.e., $(a_1, ..., a_k)$.
 ]
 
 #definition[
-- A recurrence relation is of *$k$-th order* if $a_n$ can be expressed in terms of $k$ terms $a_(n-1), a_(n-2), ..., a_(n-k)$.
-- A recurrence relation is *linear* if it expresses $a_n$ as a linear function of $a_(n-1), a_(n-2), ..., a_(n-k)$. Otherwise, the relation is *nonlinear*.
-- A recurrence relation is *homogeneous* if the zero sequence $a_n = a_(n-1) = ... = a_(n-k) = 0$ satisfies the relation. Otherwise, it is *nonhomogeneous*.
+  - A recurrence relation is of *$k$-th order* if $a_n$ can be expressed in terms of $k$ terms $a_(n-1), a_(n-2), ..., a_(n-k)$.
+  - A recurrence relation is *linear* if it expresses $a_n$ as a linear function of $a_(n-1), a_(n-2), ..., a_(n-k)$. Otherwise, the relation is *nonlinear*.
+  - A recurrence relation is *homogeneous* if the zero sequence $a_n = a_(n-1) = ... = a_(n-k) = 0$ satisfies the relation. Otherwise, it is *nonhomogeneous*.
 ]
 
 == Solution of a Linear Homogeneous Recurrence Relation
 
 #theorem(title: "Solution of a homogeneous first-order recurrence relation")[
-Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
-$ a_n = A a_(n-1), quad n >= 2 $
-where $A in RR$, and we know the initial condition $a_1$. Then, the solution of this relation is given by
-$ a_n = a_1 A^(n-1), quad n >= 1 $
+  Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
+  $ a_n = A a_(n-1), quad n >= 2 $
+  where $A in RR$, and we know the initial condition $a_1$. Then, the solution of this relation is given by
+  $ a_n = a_1 A^(n-1), quad n >= 1 $
 ]
 
 *Remark.* In this course, we will only consider linear recurrence relations with constant coefficients ($A$ in the previous theorem).
 
 #theorem(title: "Solution of a homogeneous Fibonacci-type recurrence relation")[
-Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
-$ a_n = A a_(n-1) + B a_(n-2), quad n >= 3 $
-with $A, B in RR$, and known initial conditions $a_1, a_2$. If the *characteristic equation* associated to this relation
-$ x^2 = A x + B $
-has characteristic roots $alpha$ and $beta$, then the solution of the recurrence relation is given for all $n >= 1$ by
-$ a_n = cases(
-K_1 alpha^n + K_2 beta^n & "if" alpha != beta,
-(K_1 + n K_2) alpha^n & "if" alpha = beta
-) $
-where the constants $K_1$ and $K_2$ can be obtained using the initial conditions $a_1, a_2$.
+  Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
+  $ a_n = A a_(n-1) + B a_(n-2), quad n >= 3 $
+  with $A, B in RR$, and known initial conditions $a_1, a_2$. If the *characteristic equation* associated to this relation
+  $ x^2 = A x + B $
+  has characteristic roots $alpha$ and $beta$, then the solution of the recurrence relation is given for all $n >= 1$ by
+  $
+    a_n = cases(
+      K_1 alpha^n + K_2 beta^n & "if" alpha != beta,
+      (K_1 + n K_2) alpha^n & "if" alpha = beta
+    )
+  $
+  where the constants $K_1$ and $K_2$ can be obtained using the initial conditions $a_1, a_2$.
 ]
 
 === General Case
@@ -1011,22 +1017,22 @@ where the $k$ constants $K_i^((j))$ are determined using the $k$ initial conditi
 == Solution of a Linear Nonhomogeneous Recurrence Relation
 
 #theorem(title: "Solution of a linear nonhomogeneous recurrence relation")[
-Let us assume that the sequence $(a_n)_(n in NN)$ satisfies the linear nonhomogeneous recurrence relation with constant coefficients:
-$ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + t_n, quad n >= k + 1 $
-where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, ..., a_k$ are known. The function $t_n : NN -> RR$ is a given *known function* of $n$. Then, the general solution of this linear nonhomogeneous recurrence is equal to the sum of the general solution for the linear homogeneous recurrence relation
-$ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k), quad n >= k + 1 $
-plus any particular solution of the full recurrence.
+  Let us assume that the sequence $(a_n)_(n in NN)$ satisfies the linear nonhomogeneous recurrence relation with constant coefficients:
+  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + t_n, quad n >= k + 1 $
+  where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, ..., a_k$ are known. The function $t_n : NN -> RR$ is a given *known function* of $n$. Then, the general solution of this linear nonhomogeneous recurrence is equal to the sum of the general solution for the linear homogeneous recurrence relation
+  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k), quad n >= k + 1 $
+  plus any particular solution of the full recurrence.
 ]
 
 #theorem(title: "Solution of a linear nonhomogeneous recurrence relation")[
-Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the linear nonhomogeneous recurrence
-$ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + t_n, quad n >= k + 1 $
-where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, a_2, ..., a_k$ are known. Let us further assume that the function $t_n : NN -> RR$ is of the form
-$ t_n = s^n [b_0 + b_1 n + ... + b_t n^t] $
-with real numbers $b_0, b_1, ..., b_t$. If $s$ is not a characteristic root of the associated linear homogeneous recurrence, then there exists a particular solution of the form
-$ a_n^p = s^n [p_0 + p_1 n + ... + p_t n^t] $
-If $s$ is a characteristic root with multiplicity $m$ of the associated linear homogeneous recurrence, then there exists a particular solution of the form
-$ a_n^p = n^m s^n [p_0 + p_1 n + ... + p_t n^t] $
+  Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the linear nonhomogeneous recurrence
+  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + t_n, quad n >= k + 1 $
+  where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, a_2, ..., a_k$ are known. Let us further assume that the function $t_n : NN -> RR$ is of the form
+  $ t_n = s^n [b_0 + b_1 n + ... + b_t n^t] $
+  with real numbers $b_0, b_1, ..., b_t$. If $s$ is not a characteristic root of the associated linear homogeneous recurrence, then there exists a particular solution of the form
+  $ a_n^p = s^n [p_0 + p_1 n + ... + p_t n^t] $
+  If $s$ is a characteristic root with multiplicity $m$ of the associated linear homogeneous recurrence, then there exists a particular solution of the form
+  $ a_n^p = n^m s^n [p_0 + p_1 n + ... + p_t n^t] $
 ]
 
 The particular solution $a_n^p$ has no free parameters: there is only a unique choice for the coefficients ${p_k}_(k=1)^t$ such that $a_n^p$ is actually a solution.
@@ -1035,13 +1041,13 @@ The particular solution $a_n^p$ has no free parameters: there is only a unique c
 
 1. *Recurrence relations*.
 2. *Generating functions*:
-   - Definitions.
-   - How to efficiently encode combinatorial problems?
-   - Solution of recurrence relations.
+  - Definitions.
+  - How to efficiently encode combinatorial problems?
+  - Solution of recurrence relations.
 
 #definition[
-The *generating function* (GF) associated to the sequence $(a_k)_(k=0)^infinity$ is the following formal power series:
-$ F(x) = a_0 + a_1 x + a_2 x^2 + ... + a_n x^n + ... = sum_(n=0)^infinity a_n x^n $
+  The *generating function* (GF) associated to the sequence $(a_k)_(k=0)^infinity$ is the following formal power series:
+  $ F(x) = a_0 + a_1 x + a_2 x^2 + ... + a_n x^n + ... = sum_(n=0)^infinity a_n x^n $
 ]
 
 Examples:
@@ -1053,7 +1059,9 @@ Examples:
 == Basic Operations with Generating Functions
 
 The GF for the sequence $(1, 2, 3, ...)$ is given by
-$ sum_(n=0)^infinity (n + 1) x^n = frac(d, d x) sum_(n=0)^infinity x^(n+1) = frac(d, d x) frac(x, 1 - x) = frac(1, (1 - x)^2) $
+$
+  sum_(n=0)^infinity (n + 1) x^n = frac(d, d x) sum_(n=0)^infinity x^(n+1) = frac(d, d x) frac(x, 1 - x) = frac(1, (1 - x)^2)
+$
 
 If $F(x) = sum_(n=0)^infinity a_n x^n$, and $G(x) = sum_(n=0)^infinity b_n x^n$, then
 $ (F + G)(x) = sum_(n=0)^infinity (a_n + b_n) x^n $
@@ -1065,12 +1073,14 @@ If $F$ is the GF of the sequence ${a_n}_(n=0)^infinity$, then the GF of the sequ
 *Problem 7*: Count the number of distinct partitions of the positive integer $N$. For example, if $N = 4$, there are 5 partitions: $4 = 3 + 1 = 2 + 2 = 2 + 1 + 1 = 1 + 1 + 1 + 1$.
 
 1. The sum principle allows us to compute the generating function associated to use the positive integer $k$ in the partition:
-   - The generating function for using 1 in the partition is $f_1 = 1 + x + x^2 + x^3 + ... = frac(1, 1-x)$.
-   - The generating function for using $2 = 1 + 1$ in the partition is $f_2 = 1 + x^2 + x^4 + x^6 + ... = frac(1, 1-x^2)$.
-   - The generating function for using $p >= 1$ in the partition is $f_p = 1 + x^p + x^(2p) + x^(3p) + ... = frac(1, 1-x^p)$.
+  - The generating function for using 1 in the partition is $f_1 = 1 + x + x^2 + x^3 + ... = frac(1, 1-x)$.
+  - The generating function for using $2 = 1 + 1$ in the partition is $f_2 = 1 + x^2 + x^4 + x^6 + ... = frac(1, 1-x^2)$.
+  - The generating function for using $p >= 1$ in the partition is $f_p = 1 + x^p + x^(2p) + x^(3p) + ... = frac(1, 1-x^p)$.
 
 2. Because writing up a partition is a sequential process, the generating function that encodes Problem 7 is given by the product principle:
-   $ f(x) = product_(k=1)^infinity f_k (x) = product_(k=1)^infinity frac(1, 1 - x^k) = 1 + x + 2x^2 + 3x^3 + 5x^4 + 7x^5 + ... $
+  $
+    f(x) = product_(k=1)^infinity f_k (x) = product_(k=1)^infinity frac(1, 1 - x^k) = 1 + x + 2x^2 + 3x^3 + 5x^4 + 7x^5 + ...
+  $
 
 == Practical Procedure
 
@@ -1092,36 +1102,38 @@ $ F(x) = sum_(n=0)^infinity f_n x^n = f_0 + f_1 x + sum_(n=2)^infinity f_n x^n $
 
 Algorithm:
 1. Multiply the recurrence relation by $x^n$, and sum over all values of $n$ for which this recursion is valid (in our case, $n >= 2$):
-   $ sum_(n=2)^infinity f_n x^n = sum_(n=2)^infinity f_(n-1) x^n + sum_(n=2)^infinity f_(n-2) x^n $
+  $ sum_(n=2)^infinity f_n x^n = sum_(n=2)^infinity f_(n-1) x^n + sum_(n=2)^infinity f_(n-2) x^n $
 
 2. Manipulate the sums so that they can be expressed in terms of $F$ and the initial conditions $f_0 = 0, f_1 = 1$:
-   - $sum_(n=2)^infinity f_n x^n = F - f_0 - f_1 x = F - x$.
-   - $sum_(n=2)^infinity f_(n-1) x^n = x sum_(n=2)^infinity f_(n-1) x^(n-1) = x sum_(m=1)^infinity f_m x^m = x(F - f_0) = x F$.
-   - $sum_(n=2)^infinity f_(n-2) x^n = x^2 sum_(n=2)^infinity f_(n-2) x^(n-2) = x^2 sum_(m=0)^infinity f_m x^m = x^2 F$.
+  - $sum_(n=2)^infinity f_n x^n = F - f_0 - f_1 x = F - x$.
+  - $sum_(n=2)^infinity f_(n-1) x^n = x sum_(n=2)^infinity f_(n-1) x^(n-1) = x sum_(m=1)^infinity f_m x^m = x(F - f_0) = x F$.
+  - $sum_(n=2)^infinity f_(n-2) x^n = x^2 sum_(n=2)^infinity f_(n-2) x^(n-2) = x^2 sum_(m=0)^infinity f_m x^m = x^2 F$.
 
-   The Fibonacci recursion now becomes the equation
-   $ F - x = x F + x^2 F $
+  The Fibonacci recursion now becomes the equation
+  $ F - x = x F + x^2 F $
 
 3. We solve this equation for $F$:
-   $ F(x) = frac(x, 1 - x - x^2) = sum_(n=0)^infinity f_n x^n $
+  $ F(x) = frac(x, 1 - x - x^2) = sum_(n=0)^infinity f_n x^n $
 
 4. We compute the Taylor power-series expansion of $F$ and we read the coefficient of $x^n$:
-   $ F(x) = frac(x, 1 - x - x^2) = x + x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + 13x^7 + ... $
+  $ F(x) = frac(x, 1 - x - x^2) = x + x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + 13x^7 + ... $
 
-   We can obtain all coefficients with a little algebra:
-   $ F(x) = frac(alpha, x + (1 + sqrt(5))\/2) + frac(beta, x + (1 - sqrt(5))\/2) = frac(1, sqrt(5)) [frac(1, 1 - x(1 + sqrt(5))\/2) - frac(1, 1 - x(1 - sqrt(5))\/2)] $
-   $ = sum_(n=0)^infinity frac(x^n, sqrt(5)) [(frac(1 + sqrt(5), 2))^n - (frac(1 - sqrt(5), 2))^n] $
+  We can obtain all coefficients with a little algebra:
+  $
+    F(x) = frac(alpha, x + (1 + sqrt(5))\/2) + frac(beta, x + (1 - sqrt(5))\/2) = frac(1, sqrt(5)) [frac(1, 1 - x(1 + sqrt(5))\/2) - frac(1, 1 - x(1 - sqrt(5))\/2)]
+  $
+  $ = sum_(n=0)^infinity frac(x^n, sqrt(5)) [(frac(1 + sqrt(5), 2))^n - (frac(1 - sqrt(5), 2))^n] $
 
-   Therefore,
-   $ f_n = frac(1, sqrt(5)) [(frac(1 + sqrt(5), 2))^n - (frac(1 - sqrt(5), 2))^n] $
+  Therefore,
+  $ f_n = frac(1, sqrt(5)) [(frac(1 + sqrt(5), 2))^n - (frac(1 - sqrt(5), 2))^n] $
 
 == Generalized Binomial Theorem
 
 #theorem[
-Let $k$ be a fixed positive integer, then we have formally that
-$ frac(1, (1 + x)^k) = sum_(n=0)^infinity binom(-k, n) x^n $
-where for all $n >= 0$ the above binomial coefficient is defined as
-$ binom(-k, n) = frac(-k(-k - 1)(-k - 2) ... (-k - n + 1), n!) = (-1)^n binom(n + k - 1, n) $
+  Let $k$ be a fixed positive integer, then we have formally that
+  $ frac(1, (1 + x)^k) = sum_(n=0)^infinity binom(-k, n) x^n $
+  where for all $n >= 0$ the above binomial coefficient is defined as
+  $ binom(-k, n) = frac(-k(-k - 1)(-k - 2) ... (-k - n + 1), n!) = (-1)^n binom(n + k - 1, n) $
 ]
 
 
@@ -1132,13 +1144,13 @@ $ binom(-k, n) = frac(-k(-k - 1)(-k - 2) ... (-k - n + 1), n!) = (-1)^n binom(n 
 1. *Undirected graphs*.
 2. *Algorithms in graph theory*.
 3. *Combinatorial problems on graphs*:
-   - *Perfect matchings*.
-   - *Proper colorings*.
+  - *Perfect matchings*.
+  - *Proper colorings*.
 
 == Perfect Matchings
 
 #definition[
-A *perfect matching* of a simple graph with $2n$ vertices is a spanning subgraph composed by $n$ disjoint edges.
+  A *perfect matching* of a simple graph with $2n$ vertices is a spanning subgraph composed by $n$ disjoint edges.
 ]
 
 *Remarks.*
@@ -1147,17 +1159,17 @@ A *perfect matching* of a simple graph with $2n$ vertices is a spanning subgraph
 - If $G$ is *bipartite*, then we can prove more theorems.
 
 #theorem[
-If $G$ is a bipartite and regular graph with degree $d >= 1$, then $G$ contains a perfect matching.
+  If $G$ is a bipartite and regular graph with degree $d >= 1$, then $G$ contains a perfect matching.
 ]
 
 == Proper Colorings: Chromatic Polynomial
 
 #definition[
-Let $G = (V, E)$ be a simple graph and let $q >= 2$ be a natural number. The *chromatic polynomial* $P_G$ is a polynomial such that $P_G (q)$ gives the number of distinct proper colorings of $G$ with $q in NN$ colors.
+  Let $G = (V, E)$ be a simple graph and let $q >= 2$ be a natural number. The *chromatic polynomial* $P_G$ is a polynomial such that $P_G (q)$ gives the number of distinct proper colorings of $G$ with $q in NN$ colors.
 ]
 
 #theorem[
-If $G = (V, E)$ is a simple graph, $P_G (q)$ is a polynomial in $q$.
+  If $G = (V, E)$ is a simple graph, $P_G (q)$ is a polynomial in $q$.
 ]
 
 The proof is based on these two facts:
@@ -1165,19 +1177,19 @@ The proof is based on these two facts:
 - The contraction-deletion theorem.
 
 #theorem(title: "The contraction-deletion theorem")[
-If $G = (V, E)$ is a simple graph, and $e = {x, y} in E$ with $x, y in V$, then
-$ P_G (q) = P_(G-e) (q) - P_(G\/e) (q) $
-where $G - e$ is the graph obtained from $G$ by deleting the edge $e$, and $G\/e$ is the graph obtained from $G$ by contracting the edge $e$ (i.e., by identifying vertices $x$ and $y$, and eliminating possible multiple edges).
+  If $G = (V, E)$ is a simple graph, and $e = {x, y} in E$ with $x, y in V$, then
+  $ P_G (q) = P_(G-e) (q) - P_(G\/e) (q) $
+  where $G - e$ is the graph obtained from $G$ by deleting the edge $e$, and $G\/e$ is the graph obtained from $G$ by contracting the edge $e$ (i.e., by identifying vertices $x$ and $y$, and eliminating possible multiple edges).
 ]
 
 #theorem[
-If $G$ is a disconnected graph with $k >= 1$ connected components $G_j$, then
-$ P_G (q) = product_(j=1)^k P_(G_j) (q) $
+  If $G$ is a disconnected graph with $k >= 1$ connected components $G_j$, then
+  $ P_G (q) = product_(j=1)^k P_(G_j) (q) $
 ]
 
 #theorem[
-If $G$ is a graph that can be split into two parts $G_1$ and $G_2$ such that $G_1 inter G_2 = K_n$ for some $n >= 1$, then
-$ P_G (q) = (P_(G_1) (q) times P_(G_2) (q))/(P_(K_n) (q)) $
+  If $G$ is a graph that can be split into two parts $G_1$ and $G_2$ such that $G_1 inter G_2 = K_n$ for some $n >= 1$, then
+  $ P_G (q) = (P_(G_1) (q) times P_(G_2) (q))/(P_(K_n) (q)) $
 ]
 
 1. If $G = K_n$, then $P_(K_n) (q) = q(q - 1) ... (q - n + 1)$.
@@ -1188,25 +1200,25 @@ $ P_G (q) = (P_(G_1) (q) times P_(G_2) (q))/(P_(K_n) (q)) $
 == Binary Relations
 
 1. *Binary relations*:
-   - Definitions.
-   - Graphical representation of a relation.
-   - Operations with relations.
-   - Properties.
+  - Definitions.
+  - Graphical representation of a relation.
+  - Operations with relations.
+  - Properties.
 2. *Equivalence relations*:
-   - Equivalence classes.
-   - Quotient set.
+  - Equivalence classes.
+  - Quotient set.
 3. *Order relations*.
 4. *Lattices and Boolean algebras*.
 
 == Binary Relations Between Two Sets
 
 #definition[
-A *binary relation* $R$ between the sets $V$ and $W$ is a subset of the Cartesian product $V times W$:
-$ V times W = {(v, w) : (v in V) and (w in W)} $
-Therefore, $R subset.eq V times W$. The *domain* of $R$ is the set:
-$ "Dom" R = {v in V : (v, w) in R "for some" w in W} $
-and the *image* of $R$ is the set:
-$ "Im" R = {w in W : (v, w) in R "for some" v in V} $
+  A *binary relation* $R$ between the sets $V$ and $W$ is a subset of the Cartesian product $V times W$:
+  $ V times W = {(v, w) : (v in V) and (w in W)} $
+  Therefore, $R subset.eq V times W$. The *domain* of $R$ is the set:
+  $ "Dom" R = {v in V : (v, w) in R "for some" w in W} $
+  and the *image* of $R$ is the set:
+  $ "Im" R = {w in W : (v, w) in R "for some" v in V} $
 ]
 
 *Notation*: If $(v, w) in R$, we denote it as $v R w$.
@@ -1214,10 +1226,10 @@ $ "Im" R = {w in W : (v, w) in R "for some" v in V} $
 == Binary Relations on a Set
 
 #definition[
-A *binary relation* $R$ on the set $V$ is a subset of the Cartesian product $V times V$. Hence, $R subset.eq V times V$. The *domain* of $R$ is the set:
-$ "Dom" R = {v in V : (v, w) in R "for some" w in V} $
-and the *image* of $R$ is the set:
-$ "Im" R = {w in V : (v, w) in R "for some" v in V} $
+  A *binary relation* $R$ on the set $V$ is a subset of the Cartesian product $V times V$. Hence, $R subset.eq V times V$. The *domain* of $R$ is the set:
+  $ "Dom" R = {v in V : (v, w) in R "for some" w in V} $
+  and the *image* of $R$ is the set:
+  $ "Im" R = {w in V : (v, w) in R "for some" v in V} $
 ]
 
 *Important remark*: A function $f : A -> B$ is a relation between the sets $A$ and $B$ and such that to each element $x in "Dom"(f)$ there corresponds a unique element of $B$ (i.e., $f(x)$).
@@ -1235,13 +1247,13 @@ $ "Im" R = {w in V : (v, w) in R "for some" v in V} $
 == Operations with Relations
 
 #definition[
-Given the relation $R$ on $V$, we define its *inverse relation* $R^(-1)$ as the relation on $V$ defined as $(v_1, v_2) in R^(-1) <==> (v_2, v_1) in R$, or in other words, $v_1 R^(-1) v_2 <==> v_2 R v_1$.
+  Given the relation $R$ on $V$, we define its *inverse relation* $R^(-1)$ as the relation on $V$ defined as $(v_1, v_2) in R^(-1) <==> (v_2, v_1) in R$, or in other words, $v_1 R^(-1) v_2 <==> v_2 R v_1$.
 ]
 
 Given any relation $R$, there always exists its inverse relation $R^(-1)$. On the other hand, the inverse function $f^(-1)$ exists if and only if $f$ is bijective.
 
 #definition[
-Given a relation $R$ on $V$, we define its *complementary relation* $overline(R)$ as the relation on $V$ such that $(v_1, v_2) in overline(R) <==> (v_1, v_2) in.not R$.
+  Given a relation $R$ on $V$, we define its *complementary relation* $overline(R)$ as the relation on $V$ such that $(v_1, v_2) in overline(R) <==> (v_1, v_2) in.not R$.
 ]
 
 Binary relations are subsets of $V times W$, therefore, set operations can be interpreted as operations with relations.
@@ -1249,13 +1261,13 @@ Binary relations are subsets of $V times W$, therefore, set operations can be in
 == Composition of Relations
 
 #definition[
-Let $R$ be a relation between the sets $V$ and $W$, and let $S$ be a relation between the sets $W$ and $Y$. The composition of the relation $S$ and $R$ is a relation between the sets $V$ and $Y$ denoted as $S circle R$. In particular, $S circle R$ is a subset of the Cartesian product $V times Y$ such that, given any $v in V$ and $y in Y$, $v(S circle R)y$ if and only if there exists some $w in W$ satisfying $v R w$ and $w S y$.
+  Let $R$ be a relation between the sets $V$ and $W$, and let $S$ be a relation between the sets $W$ and $Y$. The composition of the relation $S$ and $R$ is a relation between the sets $V$ and $Y$ denoted as $S circle R$. In particular, $S circle R$ is a subset of the Cartesian product $V times Y$ such that, given any $v in V$ and $y in Y$, $v(S circle R)y$ if and only if there exists some $w in W$ satisfying $v R w$ and $w S y$.
 ]
 
 #proposition[
-Let $A_R$ be the adjacency matrix of the relation $R$ between $V$ and $W$, and let $A_S$ be the adjacency matrix of the relation $S$ between $W$ and $Y$. Then, the adjacency matrix $A_(S circle R)$ of the composition of the relations $S circle R$ between $V$ and $Y$ is given by:
-$ A_(S circle R) = A_R circle.small A_S $
-where the product $circle.small$ is the Boolean product of matrices.
+  Let $A_R$ be the adjacency matrix of the relation $R$ between $V$ and $W$, and let $A_S$ be the adjacency matrix of the relation $S$ between $W$ and $Y$. Then, the adjacency matrix $A_(S circle R)$ of the composition of the relations $S circle R$ between $V$ and $Y$ is given by:
+  $ A_(S circle R) = A_R circle.small A_S $
+  where the product $circle.small$ is the Boolean product of matrices.
 ]
 
 Using Boolean operations (instead of regular ones) guarantees that $A_(S circle R)$ is an adjacency matrix associated to a binary relation.
@@ -1263,80 +1275,80 @@ Using Boolean operations (instead of regular ones) guarantees that $A_(S circle 
 == Properties of Relations on a Set $V$
 
 #definition[
-A relation $R$ is reflexive if for every $v in V$, $v R v$.
+  A relation $R$ is reflexive if for every $v in V$, $v R v$.
 ]
 
 #definition[
-A relation $R$ is irreflexive if for every $v in V$, $v R v$ does not hold.
+  A relation $R$ is irreflexive if for every $v in V$, $v R v$ does not hold.
 ]
 
 #definition[
-A relation $R$ is symmetric if $R = R^(-1)$, i.e., if $v R w ==> w R v$.
+  A relation $R$ is symmetric if $R = R^(-1)$, i.e., if $v R w ==> w R v$.
 ]
 
 #definition[
-A relation $R$ is antisymmetric if $(v_1 R v_2) and (v_2 R v_1) ==> v_1 = v_2$.
+  A relation $R$ is antisymmetric if $(v_1 R v_2) and (v_2 R v_1) ==> v_1 = v_2$.
 ]
 
 == Transitive Relations
 
 #definition[
-A relation $R$ is transitive if $(v_1 R v_2) and (v_2 R v_3) ==> v_1 R v_3$.
+  A relation $R$ is transitive if $(v_1 R v_2) and (v_2 R v_3) ==> v_1 R v_3$.
 ]
 
 #proposition[
-A relation $R$ is transitive if and only if $R^n subset.eq R$ for all $n in NN$. The $n$-th power $R^n$ of the relation $R$ is recursively defined as follows:
-$ R^1 = R, quad R^n = R circle R^(n-1) $
+  A relation $R$ is transitive if and only if $R^n subset.eq R$ for all $n in NN$. The $n$-th power $R^n$ of the relation $R$ is recursively defined as follows:
+  $ R^1 = R, quad R^n = R circle R^(n-1) $
 ]
 
 #corollary[
-A relation $R$ is transitive if and only if $R^2 subset.eq R$. In other words, $R$ is transitive if and only if for each nonzero entry $(A_(R^2))_(i,j) = 1$ of the adjacency matrix of $R^2$, the corresponding entry of the adjacency matrix of $R$ is also nonzero $(A_R)_(i,j) = 1$.
+  A relation $R$ is transitive if and only if $R^2 subset.eq R$. In other words, $R$ is transitive if and only if for each nonzero entry $(A_(R^2))_(i,j) = 1$ of the adjacency matrix of $R^2$, the corresponding entry of the adjacency matrix of $R$ is also nonzero $(A_R)_(i,j) = 1$.
 ]
 
 == Equivalence Relations
 
 #definition[
-A relation $R$ on a set $V$ is an equivalence relation if it is reflexive, symmetric and transitive.
+  A relation $R$ on a set $V$ is an equivalence relation if it is reflexive, symmetric and transitive.
 ]
 
 *Notation:* If $R$ is an equivalence relation, $a R b$ is usually denoted as $a equiv b (mod R)$.
 
 #definition[
-Let $R$ be an equivalence relation on a set $V$. The set of all the elements of $V$ related to a certain element $v in V$ is called the equivalence class determined by $v$, and it is denoted as $[v]_R$, or simply as $[v]$. Therefore,
-$ [v]_R = {w in V : v R w} $
-Any element $w in [v]_R$ (in particular, $v$) is a representative of the equivalence class $[v]_R$.
+  Let $R$ be an equivalence relation on a set $V$. The set of all the elements of $V$ related to a certain element $v in V$ is called the equivalence class determined by $v$, and it is denoted as $[v]_R$, or simply as $[v]$. Therefore,
+  $ [v]_R = {w in V : v R w} $
+  Any element $w in [v]_R$ (in particular, $v$) is a representative of the equivalence class $[v]_R$.
 ]
 
 == Quotient Set
 
 #theorem[
-Let $R$ be an equivalence relation on $V$. Then,
-1. $[a]_R$ is non-empty for all $a in V$.
-2. For any two elements $a, b in V$, either $[a]_R = [b]_R$ (and $a R b$), or $[a]_R inter [b]_R = emptyset$.
-3. The equivalence classes determine the relation uniquely.
+  Let $R$ be an equivalence relation on $V$. Then,
+  1. $[a]_R$ is non-empty for all $a in V$.
+  2. For any two elements $a, b in V$, either $[a]_R = [b]_R$ (and $a R b$), or $[a]_R inter [b]_R = emptyset$.
+  3. The equivalence classes determine the relation uniquely.
 ]
 
 #theorem[
-Let $R$ be an equivalence relation on $V$. Then the set of all equivalence classes of $R$ form a partition of $V$. Conversely, given a partition ${V_1, V_2, ...}$ of $V$, there exists an equivalence relation $R$ such that its equivalence classes are the sets $V_i$.
+  Let $R$ be an equivalence relation on $V$. Then the set of all equivalence classes of $R$ form a partition of $V$. Conversely, given a partition ${V_1, V_2, ...}$ of $V$, there exists an equivalence relation $R$ such that its equivalence classes are the sets $V_i$.
 ]
 
 #definition[
-Let $R$ be an equivalence relation on $V$. The set of all the equivalence classes of $R$ is called the quotient set of $V$ by $R$, and it is denoted by $V\/R$:
-$ V\/R = {[v]_R : v in V} $
+  Let $R$ be an equivalence relation on $V$. The set of all the equivalence classes of $R$ is called the quotient set of $V$ by $R$, and it is denoted by $V\/R$:
+  $ V\/R = {[v]_R : v in V} $
 ]
 
 = Integer and Modular Arithmetic
 
 This chapter covers:
 1. Integer arithmetic:
-   - Integer divisibility
-   - Euclid's algorithm
-   - Bézout's identity
-   - Linear Diophantine equations
+  - Integer divisibility
+  - Euclid's algorithm
+  - Bézout's identity
+  - Linear Diophantine equations
 2. Modular arithmetic:
-   - Linear congruences
-   - Arithmetic on $ZZ_p$
-   - Euler's $phi$ function. Euler's theorem
+  - Linear congruences
+  - Arithmetic on $ZZ_p$
+  - Euler's $phi$ function. Euler's theorem
 
 == Integer Divisibility
 
@@ -1348,7 +1360,7 @@ The set of integers $ZZ$ is closed with respect to the operations of sum, subtra
 However, the result of dividing two integers might not be an integer.
 
 #definition[
-Given two integers $a != 0$ and $b$, we say that $a$ divides $b$ if there is an integer $q in ZZ$ such that $b = a dot q$. If $a$ divides $b$, we say that $a$ is a factor of $b$ and that $b$ is a multiple of $a$. We denote $a | b$ when $a$ divides $b$, and we write $a parallel.not b$ when $a$ does not divide $b$.
+  Given two integers $a != 0$ and $b$, we say that $a$ divides $b$ if there is an integer $q in ZZ$ such that $b = a dot q$. If $a$ divides $b$, we say that $a$ is a factor of $b$ and that $b$ is a multiple of $a$. We denote $a | b$ when $a$ divides $b$, and we write $a parallel.not b$ when $a$ does not divide $b$.
 ]
 
 *Remarks:*
@@ -1359,33 +1371,33 @@ Given two integers $a != 0$ and $b$, we say that $a$ divides $b$ if there is an 
 == The Division Algorithm
 
 #theorem(title: "The Division Algorithm")[
-Let $a$ and $b != 0$ be two integers. Then there exists a unique pair of integers $q$ and $r$ such that
-$ a = q dot b + r quad "with" 0 <= r < |b| $
-- The numbers $a$ and $b$ are called dividend and divisor, respectively.
-- The number $r$ is the remainder: $r = a mod b$.
-- The number $q$ is the quotient: $q = a "div" b = cases(floor(a\/b) & "if" b > 0, ceil(a\/b) & "if" b < 0)$
+  Let $a$ and $b != 0$ be two integers. Then there exists a unique pair of integers $q$ and $r$ such that
+  $ a = q dot b + r quad "with" 0 <= r < |b| $
+  - The numbers $a$ and $b$ are called dividend and divisor, respectively.
+  - The number $r$ is the remainder: $r = a mod b$.
+  - The number $q$ is the quotient: $q = a "div" b = cases(floor(a\/b) & "if" b > 0, ceil(a\/b) & "if" b < 0)$
 ]
 
 == Properties of Integer Division
 
 #theorem[
-Let $a, b, c$ be integers. Then:
-1. If $a | b$ and $a | c$, then $a | (b + c)$.
-2. If $a | b$, then $a | (b dot c)$ for every $c in ZZ$.
-3. If $a | b$ and $b | c$, then $a | c$.
-4. If $c != 0$, then $a | b$ if and only if $(c dot a) | (c dot b)$.
-5. If $a | b$ and $b != 0$, then $|a| <= |b|$.
-6. If $a | b$ and $b | a$, then $a = plus.minus b$.
+  Let $a, b, c$ be integers. Then:
+  1. If $a | b$ and $a | c$, then $a | (b + c)$.
+  2. If $a | b$, then $a | (b dot c)$ for every $c in ZZ$.
+  3. If $a | b$ and $b | c$, then $a | c$.
+  4. If $c != 0$, then $a | b$ if and only if $(c dot a) | (c dot b)$.
+  5. If $a | b$ and $b != 0$, then $|a| <= |b|$.
+  6. If $a | b$ and $b | a$, then $a = plus.minus b$.
 ]
 
 #theorem[
-If $a | b_i$ for $i = 1, ..., N$, then $a | sum_(i=1)^N u_i dot b_i$ for every $u_i in ZZ$.
+  If $a | b_i$ for $i = 1, ..., N$, then $a | sum_(i=1)^N u_i dot b_i$ for every $u_i in ZZ$.
 ]
 
 == Greatest Common Divisor. Euclid's Lemma (IIIrd century BC)
 
 #definition[
-Let $a, b$ be integers, not both simultaneously zero. The largest integer $d$ such that $d | a$ and $d | b$ is called the greatest common divisor of $a$ and $b$. It is denoted by $gcd(a, b)$.
+  Let $a, b$ be integers, not both simultaneously zero. The largest integer $d$ such that $d | a$ and $d | b$ is called the greatest common divisor of $a$ and $b$. It is denoted by $gcd(a, b)$.
 ]
 
 *Remarks:*
@@ -1393,15 +1405,15 @@ Let $a, b$ be integers, not both simultaneously zero. The largest integer $d$ su
 - $gcd(0, a) = |a|$ for every nonzero integer $a$.
 
 #theorem[
-The greatest common divisor of two numbers is unique.
+  The greatest common divisor of two numbers is unique.
 ]
 
 #definition[
-Two integers $a$ and $b$ are relatively prime if $gcd(a, b) = 1$. The integers $a_1, a_2, ..., a_n$ are pairwise relatively prime if $gcd(a_i, a_j) = 1$ for any $1 <= i < j <= n$.
+  Two integers $a$ and $b$ are relatively prime if $gcd(a, b) = 1$. The integers $a_1, a_2, ..., a_n$ are pairwise relatively prime if $gcd(a_i, a_j) = 1$ for any $1 <= i < j <= n$.
 ]
 
 #lemma(title: "Euclid")[
-Given the integers $a$, $b != 0$, $q$ and $r$, such that $a = q dot b + r$ with $0 <= r < |b|$, then $gcd(a, b) = gcd(b, r)$.
+  Given the integers $a$, $b != 0$, $q$ and $r$, such that $a = q dot b + r$ with $0 <= r < |b|$, then $gcd(a, b) = gcd(b, r)$.
 ]
 
 == Euclid's Algorithm
@@ -1409,12 +1421,12 @@ Given the integers $a$, $b != 0$, $q$ and $r$, such that $a = q dot b + r$ with 
 *Problem 9:* Apply recursively Euclid's lemma to compute $gcd(662, 414)$.
 
 $
-a &= b dot q + r \
-662 &= 414 dot 1 + 248 \
-414 &= 248 dot 1 + 166 \
-248 &= 166 dot 1 + 82 \
-166 &= 82 dot 2 + 2 \
-82 &= 2 dot 41 + 0
+    a & = b dot q + r \
+  662 & = 414 dot 1 + 248 \
+  414 & = 248 dot 1 + 166 \
+  248 & = 166 dot 1 + 82 \
+  166 & = 82 dot 2 + 2 \
+   82 & = 2 dot 41 + 0
 $
 
 $gcd(662, 414) = gcd(414, 248) = gcd(248, 166) = gcd(166, 82) = gcd(82, 2) = 2$.
@@ -1424,131 +1436,131 @@ $ r_(n-2) = q_n dot r_(n-1) ==> r_(n-1) | r_(n-2) $
 Therefore, $gcd(r_(n-2), r_(n-1)) = r_(n-1)$.
 
 #theorem[
-In Euclid's algorithm, $gcd(a, b) = r_(n-1)$ (= the last nonzero remainder).
+  In Euclid's algorithm, $gcd(a, b) = r_(n-1)$ (= the last nonzero remainder).
 ]
 
 == Bézout's Identity
 
 #theorem(title: "Bézout's Identity, 1730-1783")[
-If $a$ and $b$ are two integers not simultaneously zero, then there exist integers $u, w$ such that
-$ gcd(a, b) = a dot u + b dot w $
+  If $a$ and $b$ are two integers not simultaneously zero, then there exist integers $u, w$ such that
+  $ gcd(a, b) = a dot u + b dot w $
 ]
 
 *Proof:* We write the steps of Euclid's algorithm, and "unroll them":
 $
-a &= q_1 dot b + r_1 ==> r_1 = a - q_1 dot b \
-b &= q_2 dot r_1 + r_2 ==> r_2 = b - q_2 dot r_1 \
-r_1 &= q_3 dot r_2 + r_3 ==> r_3 = r_1 - q_3 dot r_2 \
-&dots.v \
-r_(n-4) &= q_(n-2) dot r_(n-3) + r_(n-2) ==> r_(n-2) = r_(n-4) - q_(n-2) dot r_(n-3) \
-r_(n-3) &= q_(n-1) dot r_(n-2) + r_(n-1) ==> r_(n-1) = r_(n-3) - q_(n-1) dot r_(n-2) \
-r_(n-2) &= q_n dot r_(n-1) + (r_n = 0) ==> r_(n-1) = gcd(a, b)
+        a & = q_1 dot b + r_1 ==> r_1 = a - q_1 dot b \
+        b & = q_2 dot r_1 + r_2 ==> r_2 = b - q_2 dot r_1 \
+      r_1 & = q_3 dot r_2 + r_3 ==> r_3 = r_1 - q_3 dot r_2 \
+          & dots.v \
+  r_(n-4) & = q_(n-2) dot r_(n-3) + r_(n-2) ==> r_(n-2) = r_(n-4) - q_(n-2) dot r_(n-3) \
+  r_(n-3) & = q_(n-1) dot r_(n-2) + r_(n-1) ==> r_(n-1) = r_(n-3) - q_(n-1) dot r_(n-2) \
+  r_(n-2) & = q_n dot r_(n-1) + (r_n = 0) ==> r_(n-1) = gcd(a, b)
 $
 
 Then,
 $
-gcd(a, b) = r_(n-1) &= alpha_(n-1) r_(n-3) + beta_(n-1) r_(n-2) \
-&= alpha_(n-2) r_(n-4) + beta_(n-2) r_(n-3) \
-&= ... \
-&= alpha_3 r_1 + beta_3 r_2 \
-&= alpha_2 b + beta_2 r_1 \
-&= alpha_1 a + beta_1 b
+  gcd(a, b) = r_(n-1) & = alpha_(n-1) r_(n-3) + beta_(n-1) r_(n-2) \
+                      & = alpha_(n-2) r_(n-4) + beta_(n-2) r_(n-3) \
+                      & = ... \
+                      & = alpha_3 r_1 + beta_3 r_2 \
+                      & = alpha_2 b + beta_2 r_1 \
+                      & = alpha_1 a + beta_1 b
 $
 
 *Important remark:* Bézout's identity does not imply that the integers $u, v$ are unique.
 
 #theorem[
-Let $a$ and $b$ be two integers not simultaneously zero with $gcd(a, b) = d$. An integer $c$ can be written in the form $a dot x + b dot y$ for some integers $x, y$ if and only if $c$ is a multiple of $d$. In particular, $d$ is the smallest positive integer of the form $a dot x + b dot y$ with $x, y in ZZ$.
+  Let $a$ and $b$ be two integers not simultaneously zero with $gcd(a, b) = d$. An integer $c$ can be written in the form $a dot x + b dot y$ for some integers $x, y$ if and only if $c$ is a multiple of $d$. In particular, $d$ is the smallest positive integer of the form $a dot x + b dot y$ with $x, y in ZZ$.
 ]
 
 #corollary[
-Two integers are relatively prime if and only if there exist integers $x, y$ such that $a dot x + b dot y = 1$.
+  Two integers are relatively prime if and only if there exist integers $x, y$ such that $a dot x + b dot y = 1$.
 ]
 
 #corollary[
-If $gcd(a, b) = d$, then
-1. $gcd(m dot a, m dot b) = m dot d$ for every $m in NN$.
-2. $gcd(a\/d, b\/d) = 1$.
+  If $gcd(a, b) = d$, then
+  1. $gcd(m dot a, m dot b) = m dot d$ for every $m in NN$.
+  2. $gcd(a\/d, b\/d) = 1$.
 ]
 
 #corollary[
-If $a, b$ are two relatively-prime integers, then:
-1. If $a | c$ and $b | c$, then $(a dot b) | c$.
-2. If $a | (b dot c)$, then $a | c$.
+  If $a, b$ are two relatively-prime integers, then:
+  1. If $a | c$ and $b | c$, then $(a dot b) | c$.
+  2. If $a | (b dot c)$, then $a | c$.
 ]
 
 == Least Common Multiple
 
 #definition[
-The least common multiple of two natural numbers $a, b$ is the least natural number $m$ such that $a | m$ and $b | m$. It is denoted by $"lcm"(a, b)$.
+  The least common multiple of two natural numbers $a, b$ is the least natural number $m$ such that $a | m$ and $b | m$. It is denoted by $"lcm"(a, b)$.
 ]
 
 *Remark:* This number exists because the set of natural numbers $NN$ is a well-ordered set (see next chapter).
 
 #theorem[
-If $a, b$ are two natural numbers, then
-$ gcd(a, b) dot "lcm"(a, b) = a dot b $
+  If $a, b$ are two natural numbers, then
+  $ gcd(a, b) dot "lcm"(a, b) = a dot b $
 ]
 
 == Prime Numbers
 
 #definition[
-A natural number $p > 1$ is called a prime number if the only positive factors of $p$ are $1$ and $p$. A natural number $p > 1$ that is not prime is called composite.
+  A natural number $p > 1$ is called a prime number if the only positive factors of $p$ are $1$ and $p$. A natural number $p > 1$ that is not prime is called composite.
 ]
 
 *Remark:* The natural number $1$ is not prime. The first prime number is $2$, and the other prime numbers are odd natural numbers $(3, 5, 7, 11, ...)$.
 
 #theorem(title: "Euclid")[
-There are infinitely many prime numbers.
+  There are infinitely many prime numbers.
 ]
 
 #theorem[
-The positive integer $n$ is a composite number if and only if $n$ can be divided by some prime number $p <= sqrt(n)$.
+  The positive integer $n$ is a composite number if and only if $n$ can be divided by some prime number $p <= sqrt(n)$.
 ]
 
 #lemma[
-Let $p$ be a prime number, and let $a, b$ be integers. Then:
-(a) Either $p | a$, or $p$ and $a$ are relatively prime.
-(b) If $p | (a dot b)$, then either $p | a$ or $p | b$.
+  Let $p$ be a prime number, and let $a, b$ be integers. Then:
+  (a) Either $p | a$, or $p$ and $a$ are relatively prime.
+  (b) If $p | (a dot b)$, then either $p | a$ or $p | b$.
 ]
 
 == The Fundamental Theorem of Arithmetic
 
 #theorem(title: "The Fundamental Theorem of Arithmetic")[
-Every natural number $n > 1$ can be written uniquely as a product of primes
-$ n = p_1^(n_1) dot p_2^(n_2) dot p_3^(n_3) dot ... dot p_k^(n_k) $
-where the $p_i$ are distinct prime numbers written in increasing order, and the exponents $n_i$ are natural numbers $n_i >= 1$.
+  Every natural number $n > 1$ can be written uniquely as a product of primes
+  $ n = p_1^(n_1) dot p_2^(n_2) dot p_3^(n_3) dot ... dot p_k^(n_k) $
+  where the $p_i$ are distinct prime numbers written in increasing order, and the exponents $n_i$ are natural numbers $n_i >= 1$.
 ]
 
 #proposition[
-If the integers $a, b > 1$ can be factorized in the form
-$
-a &= p_1^(n_1) dot p_2^(n_2) ... p_k^(n_k) \
-b &= p_1^(m_1) dot p_2^(m_2) ... p_k^(m_k)
-$
-with $n_i, m_i >= 0$ and all prime factors of $a$ and $b$ appear in both decompositions, then
-$
-gcd(a, b) &= p_1^(min(n_1, m_1)) dot p_2^(min(n_2, m_2)) ... p_k^(min(n_k, m_k)) \
-"lcm"(a, b) &= p_1^(max(n_1, m_1)) dot p_2^(max(n_2, m_2)) ... p_k^(max(n_k, m_k))
-$
+  If the integers $a, b > 1$ can be factorized in the form
+  $
+    a & = p_1^(n_1) dot p_2^(n_2) ... p_k^(n_k) \
+    b & = p_1^(m_1) dot p_2^(m_2) ... p_k^(m_k)
+  $
+  with $n_i, m_i >= 0$ and all prime factors of $a$ and $b$ appear in both decompositions, then
+  $
+      gcd(a, b) & = p_1^(min(n_1, m_1)) dot p_2^(min(n_2, m_2)) ... p_k^(min(n_k, m_k)) \
+    "lcm"(a, b) & = p_1^(max(n_1, m_1)) dot p_2^(max(n_2, m_2)) ... p_k^(max(n_k, m_k))
+  $
 ]
 
 == Linear Diophantine Equations [Diophantus of Alexandria, IIIrd century]
 
 #definition[
-A Diophantine equation is an equation of one or several variables such that we are only interested in their integer solutions.
+  A Diophantine equation is an equation of one or several variables such that we are only interested in their integer solutions.
 ]
 
 #theorem(title: "Brahmagupta, VIIth century")[
-The linear equation
-$ a dot x + b dot y = c $
-where $a, b, c$ are integers (and $a, b$ not simultaneously zero), admits integer solutions if and only if $d = gcd(a, b)$ divides $c$. In this case, there exist infinitely many integer solutions $(x_k, y_k)$ with $k in ZZ$ given by
-$
-x_k &= u dot p + (b dot k)\/d \
-y_k &= w dot p - (a dot k)\/d
-$
-where $p = c\/d in ZZ$ and $u, w$ are given by
-$ d = u dot a + w dot b $
+  The linear equation
+  $ a dot x + b dot y = c $
+  where $a, b, c$ are integers (and $a, b$ not simultaneously zero), admits integer solutions if and only if $d = gcd(a, b)$ divides $c$. In this case, there exist infinitely many integer solutions $(x_k, y_k)$ with $k in ZZ$ given by
+  $
+    x_k & = u dot p + (b dot k)\/d \
+    y_k & = w dot p - (a dot k)\/d
+  $
+  where $p = c\/d in ZZ$ and $u, w$ are given by
+  $ d = u dot a + w dot b $
 ]
 
 == Modular Arithmetic
@@ -1556,16 +1568,16 @@ $ d = u dot a + w dot b $
 Modular arithmetic allows us to perform algebraic operations using, instead of a given set of numbers, their respective remainders with respect to some fixed positive number called the modulus. The modulus is $12$ or $24$ when we count hours with a clock, $7$ when we count days in a week, etc.
 
 #definition[
-Let $a, b$ be integers, and let $m$ be a natural number. Then $a, b$ are congruent modulo $m$ if $m | (a - b)$. This relation is denoted as $a equiv b (mod m)$.
+  Let $a, b$ be integers, and let $m$ be a natural number. Then $a, b$ are congruent modulo $m$ if $m | (a - b)$. This relation is denoted as $a equiv b (mod m)$.
 ]
 
 #proposition[
-1. $a equiv b (mod m)$ if and only if $a mod m = b mod m$.
-2. $a equiv b (mod m)$ if and only if $a = b + k dot m$ for some $k in ZZ$.
+  1. $a equiv b (mod m)$ if and only if $a mod m = b mod m$.
+  2. $a equiv b (mod m)$ if and only if $a = b + k dot m$ for some $k in ZZ$.
 ]
 
 #theorem[
-For each positive integer $m$, the binary relation $equiv (mod m)$ is an equivalence relation.
+  For each positive integer $m$, the binary relation $equiv (mod m)$ is an equivalence relation.
 ]
 
 == The Quotient Set $ZZ_m$
@@ -1575,8 +1587,8 @@ $ [a]_m = {b in ZZ : a equiv b (mod m)} = {a + m k : k in ZZ} $
 form a partition of $ZZ$. There are $m$ distinct equivalence classes corresponding to the $m$ possible remainders obtained by dividing an integer by $m$.
 
 #theorem[
-The quotient set $ZZ_m = ZZ \/ equiv (mod m)$ is given by
-$ ZZ_m = {[a]_m : 0 <= a <= m - 1} $
+  The quotient set $ZZ_m = ZZ \/ equiv (mod m)$ is given by
+  $ ZZ_m = {[a]_m : 0 <= a <= m - 1} $
 ]
 
 *Remark:* Usually, the notation for $ZZ_m$ is a bit sloppy:
@@ -1585,17 +1597,17 @@ $ ZZ_m = {0, 1, 2, ..., m - 1} $
 == Modular Arithmetic
 
 #theorem[
-Let $m$ be a positive integer. If $a_1 equiv b_1 (mod m)$ and $a_2 equiv b_2 (mod m)$, then:
-- $a_1 plus.minus a_2 equiv b_1 plus.minus b_2 (mod m)$.
-- $a_1 dot a_2 equiv b_1 dot b_2 (mod m)$.
+  Let $m$ be a positive integer. If $a_1 equiv b_1 (mod m)$ and $a_2 equiv b_2 (mod m)$, then:
+  - $a_1 plus.minus a_2 equiv b_1 plus.minus b_2 (mod m)$.
+  - $a_1 dot a_2 equiv b_1 dot b_2 (mod m)$.
 ]
 
 #corollary[
-Let $m, k$ be positive integers, and let $a, b in ZZ$. If $a equiv b (mod m)$, then $a^k equiv b^k (mod m)$.
+  Let $m, k$ be positive integers, and let $a, b in ZZ$. If $a equiv b (mod m)$, then $a^k equiv b^k (mod m)$.
 ]
 
 #theorem[
-Let $m$ be a positive integer, and let $a, b, c$ be integers. If $a dot c equiv b dot c (mod m)$ and $gcd(c, m) = 1$, then $a equiv b (mod m)$.
+  Let $m$ be a positive integer, and let $a, b, c$ be integers. If $a dot c equiv b dot c (mod m)$ and $gcd(c, m) = 1$, then $a equiv b (mod m)$.
 ]
 
 *Remarks:*
@@ -1605,9 +1617,9 @@ Let $m$ be a positive integer, and let $a, b, c$ be integers. If $a dot c equiv 
 == Modular Division: Linear Congruence Equations
 
 #definition[
-A congruence modulo $m$ of the form
-$ a dot x equiv b (mod m) $
-where $m$ is a positive integer, $a, b$ are integers, and $x$ is a variable is called a linear congruence equation.
+  A congruence modulo $m$ of the form
+  $ a dot x equiv b (mod m) $
+  where $m$ is a positive integer, $a, b$ are integers, and $x$ is a variable is called a linear congruence equation.
 ]
 
 *Remarks:*
@@ -1618,20 +1630,20 @@ where $m$ is a positive integer, $a, b$ are integers, and $x$ is a variable is c
 == Linear Congruence Equations
 
 #theorem[
-If $d = gcd(a, m)$, then the linear congruence equation
-$ a dot x equiv b (mod m) $
-has a solution if and only if $d | b$. In this case and if $x_0$ is a particular solution of the linear congruence equation, the general solution is given by
-$ x_k = x_0 + (m dot k)\/d, quad k in ZZ $
-In particular, these solutions form $d$ congruence classes modulo $m$ with representatives:
-${x_0, x_0 + m\/d, x_0 + (2m)\/d, ..., x_0 + (m(d - 1))\/d}$
+  If $d = gcd(a, m)$, then the linear congruence equation
+  $ a dot x equiv b (mod m) $
+  has a solution if and only if $d | b$. In this case and if $x_0$ is a particular solution of the linear congruence equation, the general solution is given by
+  $ x_k = x_0 + (m dot k)\/d, quad k in ZZ $
+  In particular, these solutions form $d$ congruence classes modulo $m$ with representatives:
+  ${x_0, x_0 + m\/d, x_0 + (2m)\/d, ..., x_0 + (m(d - 1))\/d}$
 ]
 
 #corollary[
-If $gcd(a, m) = 1$, the solutions $x$ of the linear congruence equation $a dot x equiv b (mod m)$ form a unique congruence class modulo $m$.
+  If $gcd(a, m) = 1$, the solutions $x$ of the linear congruence equation $a dot x equiv b (mod m)$ form a unique congruence class modulo $m$.
 ]
 
 #corollary[
-If $gcd(a, m) = 1$ with $m > 1$, then there exists a multiplicative inverse of $a$ modulo $m$. This multiplicative inverse is unique modulo $m$.
+  If $gcd(a, m) = 1$ with $m > 1$, then there exists a multiplicative inverse of $a$ modulo $m$. This multiplicative inverse is unique modulo $m$.
 ]
 
 == Arithmetic with $ZZ_m$
@@ -1640,8 +1652,8 @@ The elements of $ZZ_m$ with $m in NN$ are equivalence classes modulo $m$. For th
 
 The sum and the multiplication on $ZZ_m$ are defined as:
 $
-x + y &= [x]_m + [y]_m = [x + y]_m \
-x dot y &= [x]_m dot [y]_m = [x dot y]_m
+    x + y & = [x]_m + [y]_m = [x + y]_m \
+  x dot y & = [x]_m dot [y]_m = [x dot y]_m
 $
 
 and they verify the usual properties: for every $x, y, z in ZZ_m$,
@@ -1662,60 +1674,60 @@ In $ZZ$ there does not exist in general the multiplicative inverse of an integer
 None of these two properties holds in general in $ZZ_m$.
 
 #definition[
-An element $x not equiv 0 (mod m)$ of $ZZ_m$ is a divisor of zero if there exists an element $y not equiv 0 (mod m)$ such that $x dot y equiv 0 (mod m)$.
+  An element $x not equiv 0 (mod m)$ of $ZZ_m$ is a divisor of zero if there exists an element $y not equiv 0 (mod m)$ such that $x dot y equiv 0 (mod m)$.
 ]
 
 *Remark:* In some books, the condition $x not equiv 0 (mod m)$ is dropped.
 
 #definition[
-An element $x in ZZ_m$ is a unit modulo $m$ if it has a multiplicative inverse modulo $m$; i.e., if there is an element $s in ZZ_m$ such that $x dot s equiv 1 (mod m)$.
+  An element $x in ZZ_m$ is a unit modulo $m$ if it has a multiplicative inverse modulo $m$; i.e., if there is an element $s in ZZ_m$ such that $x dot s equiv 1 (mod m)$.
 ]
 
 #theorem[
-The multiplicative inverse of a unit modulo $m$ is unique.
+  The multiplicative inverse of a unit modulo $m$ is unique.
 ]
 
 *Remark:* As the inverse of a unit $r$ modulo $m$ is unique, it will be denoted by $r^(-1)$.
 
 #theorem[
-An element $r in ZZ_m$ is invertible (i.e., it has a multiplicative inverse) if and only if $r$ and $m$ are relatively prime.
+  An element $r in ZZ_m$ is invertible (i.e., it has a multiplicative inverse) if and only if $r$ and $m$ are relatively prime.
 ]
 
 #corollary[
-If $p$ is a prime number, every nonzero element of $ZZ_p$ is invertible.
+  If $p$ is a prime number, every nonzero element of $ZZ_p$ is invertible.
 ]
 
 - If $p$ is prime, then $(ZZ_p, +, dot)$ is a field like $(RR, +, dot)$ or $(QQ, +, dot)$.
 - If $m = p dot q$ is composite, then there are divisors of zero in $ZZ_m$: $p dot q equiv 0 (mod m)$ with $p, q not equiv 0 (mod m)$. In this case, $(ZZ_m, +, dot)$ is a ring with divisors of zero.
 
 #definition[
-Euler's (totient) function $phi : NN -> NN$ is defined as $phi(m)$ gives the number of invertible elements of $ZZ_m$.
+  Euler's (totient) function $phi : NN -> NN$ is defined as $phi(m)$ gives the number of invertible elements of $ZZ_m$.
 ]
 
 #lemma[
-If $p$ is a prime number, then $phi(p) = p - 1$.
+  If $p$ is a prime number, then $phi(p) = p - 1$.
 ]
 
 == Euler's Theorem
 
 #theorem(title: "Euler, 1790")[
-If $y$ is invertible in $ZZ_m$ (i.e., if $gcd(y, m) = 1$), then
-$ y^(phi(m)) equiv 1 (mod m) $
+  If $y$ is invertible in $ZZ_m$ (i.e., if $gcd(y, m) = 1$), then
+  $ y^(phi(m)) equiv 1 (mod m) $
 ]
 
 #corollary(title: "Fermat's Little Theorem")[
-If $p$ is a prime number and if $y not equiv 0 (mod p)$, then
-$ y^(p-1) equiv 1 (mod p) $
+  If $p$ is a prime number and if $y not equiv 0 (mod p)$, then
+  $ y^(p-1) equiv 1 (mod p) $
 ]
 
 #corollary[
-If $p$ is a prime number, then $y^p equiv y (mod p)$ for any integer $y$.
+  If $p$ is a prime number, then $y^p equiv y (mod p)$ for any integer $y$.
 ]
 
 #theorem[
-1. If $p$ is a prime, then $phi(p^k) = p^(k-1)(p - 1)$ for every $k in NN$.
-2. If $gcd(m, n) = 1$, then $phi(m dot n) = phi(m) dot phi(n)$.
-3. If $n >= 2$ has the following decomposition in prime factors $n = product_(k=1)^r p_k^(n_k)$ with $n_k >= 1$, then $phi(n) = n dot product_(k=1)^r (1 - 1\/p_k)$.
+  1. If $p$ is a prime, then $phi(p^k) = p^(k-1)(p - 1)$ for every $k in NN$.
+  2. If $gcd(m, n) = 1$, then $phi(m dot n) = phi(m) dot phi(n)$.
+  3. If $n >= 2$ has the following decomposition in prime factors $n = product_(k=1)^r p_k^(n_k)$ with $n_k >= 1$, then $phi(n) = n dot product_(k=1)^r (1 - 1\/p_k)$.
 ]
 
 = Order Relations
@@ -1724,31 +1736,31 @@ This chapter covers:
 1. Binary relations.
 2. Equivalence relations.
 3. Order relations:
-   - Partially ordered sets.
-   - Hasse diagrams.
-   - Maximal elements.
-   - Totally ordered sets.
-   - Well-ordered sets and mathematical induction.
+  - Partially ordered sets.
+  - Hasse diagrams.
+  - Maximal elements.
+  - Totally ordered sets.
+  - Well-ordered sets and mathematical induction.
 4. Lattices and Boolean algebras.
 
 == Partial Order Relations
 
 #definition[
-A binary relation on a set $V$ is a partial order (or an order relation) if it is reflexive, antisymmetric, and transitive.
+  A binary relation on a set $V$ is a partial order (or an order relation) if it is reflexive, antisymmetric, and transitive.
 ]
 
 *Notation:* Order relations are usually denoted by the symbol $prec.eq$.
 
 #definition[
-A set $V$ equipped with an order relation $prec.eq$ is called a partially ordered set $(V, prec.eq)$ (or poset).
+  A set $V$ equipped with an order relation $prec.eq$ is called a partially ordered set $(V, prec.eq)$ (or poset).
 ]
 
 #definition[
-Let $(V, prec.eq)$ be a partially ordered set. Two elements $a, b in V$ are comparable if either $a prec.eq b$ or $b prec.eq a$. If none of these conditions holds, such elements are incomparable.
+  Let $(V, prec.eq)$ be a partially ordered set. Two elements $a, b in V$ are comparable if either $a prec.eq b$ or $b prec.eq a$. If none of these conditions holds, such elements are incomparable.
 ]
 
 #definition[
-A partially ordered set $(V, prec.eq)$ is totally ordered when any pair of elements $a, b in V$ are comparable. In this case, $(V, prec.eq)$ is a totally ordered set (or linear order or chain).
+  A partially ordered set $(V, prec.eq)$ is totally ordered when any pair of elements $a, b in V$ are comparable. In this case, $(V, prec.eq)$ is a totally ordered set (or linear order or chain).
 ]
 
 == Hasse Diagrams (1926)
@@ -1763,29 +1775,29 @@ The directed graph associated to an order relation $prec.eq$ can be simplified b
 == Extremal Elements
 
 #definition[
-Let $(V, prec.eq)$ be a partially ordered set. $M in V$ is a maximal element if for all $v in V$, $M prec.eq v$ implies that $M = v$. $m in V$ is a minimal element if for all $v in V$, $v prec.eq m$ implies that $m = v$. In other words, in the Hasse diagram associated to $(V, prec.eq)$, there is no element above $M$, and no element below $m$.
+  Let $(V, prec.eq)$ be a partially ordered set. $M in V$ is a maximal element if for all $v in V$, $M prec.eq v$ implies that $M = v$. $m in V$ is a minimal element if for all $v in V$, $v prec.eq m$ implies that $m = v$. In other words, in the Hasse diagram associated to $(V, prec.eq)$, there is no element above $M$, and no element below $m$.
 ]
 
 #definition[
-Let $(V, prec.eq)$ be a partially ordered set. $M^star in V$ is a maximum (or greatest element) if $v prec.eq M^star$ for all $v in V$. $m^star in V$ is a minimum (or least element) if $m^star prec.eq v$ for all $v in V$.
+  Let $(V, prec.eq)$ be a partially ordered set. $M^star in V$ is a maximum (or greatest element) if $v prec.eq M^star$ for all $v in V$. $m^star in V$ is a minimum (or least element) if $m^star prec.eq v$ for all $v in V$.
 
-In other words, in the Hasse diagram associated to $(V, prec.eq)$, $M^star$ is above all the elements of $V$, and $m^star$ is below all elements of $V$. The maximum and minimum of $(V, prec.eq)$ are denoted by $max(V)$ and $min(V)$, respectively.
+  In other words, in the Hasse diagram associated to $(V, prec.eq)$, $M^star$ is above all the elements of $V$, and $m^star$ is below all elements of $V$. The maximum and minimum of $(V, prec.eq)$ are denoted by $max(V)$ and $min(V)$, respectively.
 ]
 
 *Remark:* The maximal, minimal, greatest, and/or least elements of $(V, prec.eq)$ might not exist.
 
 #theorem[
-The maximum $M^star$ of a partially ordered set $(A, prec.eq)$, if it exists, is unique. In addition, the maximum of $(A, prec.eq)$ is also a maximal element of it.
+  The maximum $M^star$ of a partially ordered set $(A, prec.eq)$, if it exists, is unique. In addition, the maximum of $(A, prec.eq)$ is also a maximal element of it.
 ]
 
 #definition[
-Let $(V, prec.eq)$ be a partially ordered set, and $B subset V$. $u in V$ is an upper bound of $B$ if $b prec.eq u$ for all $b in B$. The set of the upper bounds of $B$ is denoted by $"major"(B)$.
+  Let $(V, prec.eq)$ be a partially ordered set, and $B subset V$. $u in V$ is an upper bound of $B$ if $b prec.eq u$ for all $b in B$. The set of the upper bounds of $B$ is denoted by $"major"(B)$.
 
-The supremum of $B$, $sup(B)$, is the least upper element of $B$: $sup(B) = min("major"(B))$.
+  The supremum of $B$, $sup(B)$, is the least upper element of $B$: $sup(B) = min("major"(B))$.
 
-$d in V$ is a lower bound of $B$ if $d prec.eq b$ for all $b in B$. The set of all the lower bounds of $B$ is denoted by $"minor"(B)$.
+  $d in V$ is a lower bound of $B$ if $d prec.eq b$ for all $b in B$. The set of all the lower bounds of $B$ is denoted by $"minor"(B)$.
 
-The infimum of $B$, $inf(B)$, is the greatest lower element of $B$: $inf(B) = max("minor"(B))$.
+  The infimum of $B$, $inf(B)$, is the greatest lower element of $B$: $inf(B) = max("minor"(B))$.
 ]
 
 *Remark:* It may happen that $"major"(B) = emptyset$, $"minor"(B) = emptyset$ and/or $sup(B)$ and $inf(B)$ do not exist.
@@ -1793,27 +1805,27 @@ The infimum of $B$, $inf(B)$, is the greatest lower element of $B$: $inf(B) = ma
 == Total Order Compatible with a Partial Order
 
 #definition[
-A total order $(V, prec.eq_T)$ is compatible with the partial order $(V, prec.eq_P)$ if for all $v, w in V$, $v prec.eq_P w$ implies that $v prec.eq_T w$.
+  A total order $(V, prec.eq_T)$ is compatible with the partial order $(V, prec.eq_P)$ if for all $v, w in V$, $v prec.eq_P w$ implies that $v prec.eq_T w$.
 ]
 
 #algorithm(title: "Topological Sort")[
-```
-procedure TotalOrder((V, ≼_P) : finite partially ordered set)
-    k = 1
-    while V ≠ ∅
-    begin
-        v_k = a minimal element of (V, ≼_P)
-        V ← V \ {v_k}
-        k ← k + 1
-    end
-    v_1 ≼_T v_2 ≼_T ... ≼_T v_n is a total order compatible with (V, ≼_P).
-```
+  ```
+  procedure TotalOrder((V, ≼_P) : finite partially ordered set)
+      k = 1
+      while V ≠ ∅
+      begin
+          v_k = a minimal element of (V, ≼_P)
+          V ← V \ {v_k}
+          k ← k + 1
+      end
+      v_1 ≼_T v_2 ≼_T ... ≼_T v_n is a total order compatible with (V, ≼_P).
+  ```
 ]
 
 == Well-Ordered Sets
 
 #definition[
-$(V, prec.eq)$ is a well-ordered set if $(V, prec.eq)$ is a total order and any nonempty subset of $V$ always has a minimum.
+  $(V, prec.eq)$ is a well-ordered set if $(V, prec.eq)$ is a total order and any nonempty subset of $V$ always has a minimum.
 ]
 
 *Remarks:*
@@ -1823,29 +1835,29 @@ $(V, prec.eq)$ is a well-ordered set if $(V, prec.eq)$ is a total order and any 
 == The Induction Principle for the Natural Numbers
 
 #definition(title: "Induction Principle: Weak Version")[
-Let $P$ be some property that satisfies the following conditions:
-1. Base step: $P(1)$ is true.
-2. Inductive step: If $P(k)$ is true for an arbitrary and fixed $k$, then $P(k + 1)$ is true.
+  Let $P$ be some property that satisfies the following conditions:
+  1. Base step: $P(1)$ is true.
+  2. Inductive step: If $P(k)$ is true for an arbitrary and fixed $k$, then $P(k + 1)$ is true.
 
-Then, $P(n)$ is true for every $n in NN$.
+  Then, $P(n)$ is true for every $n in NN$.
 ]
 
 *Remark:* The hypothesis in the inductive step ($P(k)$ is true) is called the induction hypothesis. To perform the inductive step, one assumes the induction hypothesis, and then uses this assumption to prove that $P(k + 1)$ is true.
 
 #definition(title: "Induction Principle: Strong Version")[
-Let $P$ be some property that satisfies the following conditions:
-1. Base step: $P(1)$ is true.
-2. Inductive step: Given an arbitrary fixed $k$, if $P(m)$ is true for any $1 <= m <= k$, then $P(k + 1)$ is true.
+  Let $P$ be some property that satisfies the following conditions:
+  1. Base step: $P(1)$ is true.
+  2. Inductive step: Given an arbitrary fixed $k$, if $P(m)$ is true for any $1 <= m <= k$, then $P(k + 1)$ is true.
 
-Then, $P(n)$ is true for every $n in NN$.
+  Then, $P(n)$ is true for every $n in NN$.
 ]
 
 #proposition(title: "Strong Induction Principle for Well-Ordered Sets")[
-Let $(V, prec.eq)$ be a well-ordered set, and $P$ be some property that satisfies the following conditions:
-1. Base step: $P(v_0)$ is true for $v_0 = min(V)$.
-2. Inductive step: Let $w$ be an arbitrary fixed element of $V$, and let $v$ be its successor. If $P(x)$ is true for all $v_0 prec.eq x prec.eq w$, then $P(v)$ is true.
+  Let $(V, prec.eq)$ be a well-ordered set, and $P$ be some property that satisfies the following conditions:
+  1. Base step: $P(v_0)$ is true for $v_0 = min(V)$.
+  2. Inductive step: Let $w$ be an arbitrary fixed element of $V$, and let $v$ be its successor. If $P(x)$ is true for all $v_0 prec.eq x prec.eq w$, then $P(v)$ is true.
 
-Then, $P(v)$ is true for every $v in V$.
+  Then, $P(v)$ is true for every $v in V$.
 ]
 
 == Summary: Types of Relations
@@ -1866,16 +1878,16 @@ This chapter covers:
 2. Equivalence relations.
 3. Order relations.
 4. Lattices and Boolean algebras:
-   - Definitions and properties.
-   - Bounded lattices.
-   - Distributive lattices.
-   - Complemented lattices.
-   - Boolean algebras.
+  - Definitions and properties.
+  - Bounded lattices.
+  - Distributive lattices.
+  - Complemented lattices.
+  - Boolean algebras.
 
 == Lattices
 
 #definition[
-A lattice is a nonempty partially ordered set $(A, prec.eq)$ in which $sup({a, b})$ and $inf({a, b})$ exist for all $a, b in A$.
+  A lattice is a nonempty partially ordered set $(A, prec.eq)$ in which $sup({a, b})$ and $inf({a, b})$ exist for all $a, b in A$.
 ]
 
 - If $sup(a, b)$ and $inf(a, b)$ exist, they are unique.
@@ -1891,7 +1903,7 @@ A lattice is a nonempty partially ordered set $(A, prec.eq)$ in which $sup({a, b
 - If $(A, prec.eq)$ is a lattice, then $(A, succ.eq)$ is also a lattice, with the interchange $sup <-> inf$.
 
 #corollary(title: "Duality Principle")[
-Any statement about a lattice $(A, prec.eq)$ is still valid if we make the interchanges $prec.eq <-> succ.eq$, $sup <-> inf$, and $or <-> and$.
+  Any statement about a lattice $(A, prec.eq)$ is still valid if we make the interchanges $prec.eq <-> succ.eq$, $sup <-> inf$, and $or <-> and$.
 ]
 
 - The lattices $(A, prec.eq)$ and $(A, succ.eq)$ are dual.
@@ -1901,40 +1913,40 @@ Any statement about a lattice $(A, prec.eq)$ is still valid if we make the inter
 == Lattice Properties
 
 #proposition[
-If $(A, prec.eq)$ is a lattice, then for any $a, b, c in A$:
-1. $sup(a, a) = a or a = a$ [idempotent law].
-2. $sup(a, b) = a or b = b or a = sup(b, a)$ [commutativity law].
-3. $sup(a, sup(b, c)) = a or (b or c) = (a or b) or c = sup(sup(a, b), c)$ [associativity law].
-4. $sup(a, inf(a, b)) = a or (a and b) = a$ [absorption law].
+  If $(A, prec.eq)$ is a lattice, then for any $a, b, c in A$:
+  1. $sup(a, a) = a or a = a$ [idempotent law].
+  2. $sup(a, b) = a or b = b or a = sup(b, a)$ [commutativity law].
+  3. $sup(a, sup(b, c)) = a or (b or c) = (a or b) or c = sup(sup(a, b), c)$ [associativity law].
+  4. $sup(a, inf(a, b)) = a or (a and b) = a$ [absorption law].
 ]
 
 By duality, one obtains
 
 #corollary[
-If $(A, prec.eq)$ is a lattice, then for any $a, b, c in A$:
-1. $inf(a, a) = a and a = a$ [idempotent law].
-2. $inf(a, b) = a and b = b and a = inf(b, a)$ [commutativity law].
-3. $inf(a, inf(b, c)) = a and (b and c) = (a and b) and c = inf(inf(a, b), c)$ [associativity law].
-4. $inf(a, sup(a, b)) = a and (a or b) = a$ [absorption law].
+  If $(A, prec.eq)$ is a lattice, then for any $a, b, c in A$:
+  1. $inf(a, a) = a and a = a$ [idempotent law].
+  2. $inf(a, b) = a and b = b and a = inf(b, a)$ [commutativity law].
+  3. $inf(a, inf(b, c)) = a and (b and c) = (a and b) and c = inf(inf(a, b), c)$ [associativity law].
+  4. $inf(a, sup(a, b)) = a and (a or b) = a$ [absorption law].
 ]
 
 #proposition[
-If $(A, prec.eq)$ is a lattice, then the following statements are equivalent for any $a, b in A$:
-1. $a prec.eq b$.
-2. $sup(a, b) = a or b = b$.
-3. $inf(a, b) = a and b = a$.
+  If $(A, prec.eq)$ is a lattice, then the following statements are equivalent for any $a, b in A$:
+  1. $a prec.eq b$.
+  2. $sup(a, b) = a or b = b$.
+  3. $inf(a, b) = a and b = a$.
 ]
 
 #proposition(title: "Distributive Inequalities")[
-If $(A, prec.eq)$ is a lattice, then for any $a, b, c in A$:
-1. $inf(a, sup(b, c)) = a and (b or c) prec.eq (a and b) or (a and c) = sup(inf(a, b), inf(a, c))$.
-2. $sup(a, inf(b, c)) = a or (b and c) succ.eq (a or b) and (a or c) = inf(sup(a, b), sup(a, c))$.
+  If $(A, prec.eq)$ is a lattice, then for any $a, b, c in A$:
+  1. $inf(a, sup(b, c)) = a and (b or c) prec.eq (a and b) or (a and c) = sup(inf(a, b), inf(a, c))$.
+  2. $sup(a, inf(b, c)) = a or (b and c) succ.eq (a or b) and (a or c) = inf(sup(a, b), sup(a, c))$.
 ]
 
 == Lattices as Algebraic Structures
 
 #definition[
-A lattice is an algebraic structure $(A, or, and)$ with two binary operations $or$ and $and$ that satisfy the commutative, associative, and absorption laws.
+  A lattice is an algebraic structure $(A, or, and)$ with two binary operations $or$ and $and$ that satisfy the commutative, associative, and absorption laws.
 ]
 
 - The absorption law implies the idempotent law.
@@ -1946,7 +1958,7 @@ A lattice is an algebraic structure $(A, or, and)$ with two binary operations $o
 - In summary, $prec.eq$ is a partial order relation and $(A, prec.eq)$ is a partially ordered set.
 
 #definition[
-Given a lattice $(A, or, and)$, a sublattice $(M, or, and)$ of $(A, or, and)$ is given by a nonempty subset $M subset.eq A$ such that $(M, or, and)$ is also a lattice using the same operations as those used in $(A, or, and)$. (In other words, $(M, or, and)$ should be closed under the binary operations $or$ and $and$.)
+  Given a lattice $(A, or, and)$, a sublattice $(M, or, and)$ of $(A, or, and)$ is given by a nonempty subset $M subset.eq A$ such that $(M, or, and)$ is also a lattice using the same operations as those used in $(A, or, and)$. (In other words, $(M, or, and)$ should be closed under the binary operations $or$ and $and$.)
 ]
 
 Any lattice is a sublattice of itself.
@@ -1954,7 +1966,7 @@ Any lattice is a sublattice of itself.
 == Bounded Lattices
 
 #definition[
-A lattice $(A, prec.eq)$ has a lower bound, denoted by $0$, if $0 prec.eq a$ for all $a in A$. A lattice has an upper bound denoted by $1$, if $a prec.eq 1$ for all $a in A$. A lattice is bounded if it contains a lower bound $0$ and an upper bound $1$.
+  A lattice $(A, prec.eq)$ has a lower bound, denoted by $0$, if $0 prec.eq a$ for all $a in A$. A lattice has an upper bound denoted by $1$, if $a prec.eq 1$ for all $a in A$. A lattice is bounded if it contains a lower bound $0$ and an upper bound $1$.
 ]
 
 The bounds $0$ and $1$ satisfy the following properties for all $a in A$:
@@ -1971,27 +1983,27 @@ The bounds $0$ and $1$ satisfy the following properties for all $a in A$:
 == Distributive Lattices
 
 #definition[
-A lattice $(A, prec.eq)$ is a distributive lattice if for all $a, b, c in A$,
-$
-inf(a, sup(b, c)) &= a and (b or c) = (a and b) or (a and c) = sup(inf(a, b), inf(a, c)) \
-sup(a, inf(b, c)) &= a or (b and c) = (a or b) and (a or c) = inf(sup(a, b), sup(a, c))
-$
+  A lattice $(A, prec.eq)$ is a distributive lattice if for all $a, b, c in A$,
+  $
+    inf(a, sup(b, c)) & = a and (b or c) = (a and b) or (a and c) = sup(inf(a, b), inf(a, c)) \
+    sup(a, inf(b, c)) & = a or (b and c) = (a or b) and (a or c) = inf(sup(a, b), sup(a, c))
+  $
 ]
 
 This property is stronger than the distributive laws:
 $
-inf(a, sup(b, c)) &= a and (b or c) prec.eq (a and b) or (a and c) = sup(inf(a, b), inf(a, c)) \
-sup(a, inf(b, c)) &= a or (b and c) succ.eq (a or b) and (a or c) = inf(sup(a, b), sup(a, c))
+  inf(a, sup(b, c)) & = a and (b or c) prec.eq (a and b) or (a and c) = sup(inf(a, b), inf(a, c)) \
+  sup(a, inf(b, c)) & = a or (b and c) succ.eq (a or b) and (a or c) = inf(sup(a, b), sup(a, c))
 $
 
 #theorem[
-A lattice is distributive if and only if it does not contain a sublattice that is isomorphic to any of the following two lattices: $N_5$ (the "pentagonal lattice") and $M_3$ (the "diamond lattice").
+  A lattice is distributive if and only if it does not contain a sublattice that is isomorphic to any of the following two lattices: $N_5$ (the "pentagonal lattice") and $M_3$ (the "diamond lattice").
 ]
 
 == Complemented Lattices
 
 #definition[
-Let $(A, or, and, 0, 1)$ be a bounded lattice. An element $a in A$ has a complement $b in A$ if $sup(a, b) = a or b = 1$ and $inf(a, b) = a and b = 0$.
+  Let $(A, or, and, 0, 1)$ be a bounded lattice. An element $a in A$ has a complement $b in A$ if $sup(a, b) = a or b = 1$ and $inf(a, b) = a and b = 0$.
 ]
 
 - The bounds $0$ and $1$ are complements of each other.
@@ -2000,11 +2012,11 @@ Let $(A, or, and, 0, 1)$ be a bounded lattice. An element $a in A$ has a complem
 - The unique complement of $1$ is $0$, and vice versa.
 
 #definition[
-A bounded lattice $(A, or, and, 0, 1)$ is complemented if for each $a in A$ there is at least one complement.
+  A bounded lattice $(A, or, and, 0, 1)$ is complemented if for each $a in A$ there is at least one complement.
 ]
 
 #proposition[
-Let $(A, or, and)$ be a distributive lattice. If an element $a in A$ has a complement, then this element is unique.
+  Let $(A, or, and)$ be a distributive lattice. If an element $a in A$ has a complement, then this element is unique.
 ]
 
 If $(A, or, and)$ is a distributive and complemented lattice, then each element $a in A$ has a unique complement. This element will be denoted by $overline(a)$.
@@ -2012,22 +2024,22 @@ If $(A, or, and)$ is a distributive and complemented lattice, then each element 
 == Boolean Algebras
 
 #definition(title: "Definition 1")[
-A Boolean algebra is a bounded, distributive and complemented lattice $(A, or, and, overline(#hide[a]), 0, 1)$.
+  A Boolean algebra is a bounded, distributive and complemented lattice $(A, or, and, overline(#hide[a]), 0, 1)$.
 ]
 
 #definition(title: "Definition 2")[
-Let $B$ be a nonempty set with at least two distinct elements $0, 1$. We define on $B$ the following operations:
-- The (binary) Boolean sum $(a, b) -> a + b in B$.
-- The (binary) Boolean multiplication $(a, b) -> a dot b in B$.
-- The (unary) complementation $a -> overline(a) in B$.
+  Let $B$ be a nonempty set with at least two distinct elements $0, 1$. We define on $B$ the following operations:
+  - The (binary) Boolean sum $(a, b) -> a + b in B$.
+  - The (binary) Boolean multiplication $(a, b) -> a dot b in B$.
+  - The (unary) complementation $a -> overline(a) in B$.
 
-Then $B$ is a Boolean algebra if the following properties hold for all $a, b, c in B$:
-1. $a + 0 = a$ [identity w.r.t. the sum].
-2. $a dot 1 = a$ [identity w.r.t. the multiplication].
-3. $a + b = b + a$, $a dot b = b dot a$ [commutativity laws].
-4. $a + (b + c) = (a + b) + c$, $a dot (b dot c) = (a dot b) dot c$ [associativity laws].
-5. $a + (b dot c) = (a + b) dot (a + c)$, $a dot (b + c) = (a dot b) + (a dot c)$ [distributive laws].
-6. $a + overline(a) = 1$, $a dot overline(a) = 0$ [complement laws].
+  Then $B$ is a Boolean algebra if the following properties hold for all $a, b, c in B$:
+  1. $a + 0 = a$ [identity w.r.t. the sum].
+  2. $a dot 1 = a$ [identity w.r.t. the multiplication].
+  3. $a + b = b + a$, $a dot b = b dot a$ [commutativity laws].
+  4. $a + (b + c) = (a + b) + c$, $a dot (b dot c) = (a dot b) dot c$ [associativity laws].
+  5. $a + (b dot c) = (a + b) dot (a + c)$, $a dot (b + c) = (a dot b) + (a dot c)$ [distributive laws].
+  6. $a + overline(a) = 1$, $a dot overline(a) = 0$ [complement laws].
 ]
 
 == Simple Boolean Algebra
@@ -2038,12 +2050,12 @@ Then $B$ is a Boolean algebra if the following properties hold for all $a, b, c 
 
 Let $(B, +, dot, overline(#hide[a]), 0, 1)$ be an algebra with $B = {0, 1}$ and the operations $+$, $dot$, and $overline(#hide[a])$ defined on $B$ as follows:
 $
-1 dot 0 &= 0 dot 1 = 0 dot 0 = 0 \
-1 dot 1 &= 1 \
-1 + 1 &= 1 + 0 = 0 + 1 = 1 \
-0 + 0 &= 0 \
-overline(1) &= 0 \
-overline(0) &= 1
+      1 dot 0 & = 0 dot 1 = 0 dot 0 = 0 \
+      1 dot 1 & = 1 \
+        1 + 1 & = 1 + 0 = 0 + 1 = 1 \
+        0 + 0 & = 0 \
+  overline(1) & = 0 \
+  overline(0) & = 1
 $
 
 Then $(B, +, dot, overline(#hide[a]), 0, 1)$ is a Boolean algebra, and it is the simplest one that exists: the Boolean algebra of two elements.
@@ -2068,23 +2080,23 @@ $ B prec.eq C <==> B subset.eq C $
 == Properties of a Boolean Algebra
 
 #proposition[
-Let $(B, +, dot, overline(#hide[a]), 0, 1)$ be a Boolean algebra. Then, for all $a, b in B$:
-1. Idempotent laws: $a + a = a$ and $a dot a = a$.
-2. Dominance laws: $a + 1 = 1$ and $a dot 0 = 0$.
-3. Absorption laws: $a dot (a + b) = a$ and $a + a dot b = a$.
-4. De Morgan laws: $overline((a + b)) = overline(a) dot overline(b)$ and $overline((a dot b)) = overline(a) + overline(b)$.
-5. Involution law: $overline(overline(a)) = a$.
-6. $overline(1) = 0$ and $overline(0) = 1$.
+  Let $(B, +, dot, overline(#hide[a]), 0, 1)$ be a Boolean algebra. Then, for all $a, b in B$:
+  1. Idempotent laws: $a + a = a$ and $a dot a = a$.
+  2. Dominance laws: $a + 1 = 1$ and $a dot 0 = 0$.
+  3. Absorption laws: $a dot (a + b) = a$ and $a + a dot b = a$.
+  4. De Morgan laws: $overline((a + b)) = overline(a) dot overline(b)$ and $overline((a dot b)) = overline(a) + overline(b)$.
+  5. Involution law: $overline(overline(a)) = a$.
+  6. $overline(1) = 0$ and $overline(0) = 1$.
 ]
 
 #definition[
-Given a statement in a Boolean algebra, its dual statement is obtained by interchanging $+ <-> dot$ and $0 <-> 1$ in the original statement.
+  Given a statement in a Boolean algebra, its dual statement is obtained by interchanging $+ <-> dot$ and $0 <-> 1$ in the original statement.
 ]
 
 #proposition[
-If a theorem is a consequence of the definitions of Boolean algebra, then the dual of the theorem is also a theorem.
+  If a theorem is a consequence of the definitions of Boolean algebra, then the dual of the theorem is also a theorem.
 ]
 
 #definition[
-Let $(B, +, dot, overline(#hide[a]), 0, 1)$ be a Boolean algebra. Then a subset $C subset.eq B$ is a Boolean subalgebra if $0, 1 in C$, and it is closed under the same operations $+$, $dot$, $overline(#hide[a])$.
+  Let $(B, +, dot, overline(#hide[a]), 0, 1)$ be a Boolean algebra. Then a subset $C subset.eq B$ is a Boolean subalgebra if $0, 1 in C$, and it is closed under the same operations $+$, $dot$, $overline(#hide[a])$.
 ]
