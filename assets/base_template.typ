@@ -34,74 +34,6 @@
 #let rmat = math.mat.with(align: right)
 
 #let important = important-box
-#let (properties-counter, properties-box, properties, show-properties) = make-frame(
-  "properties",
-  (en: (us: "Properties", gb: "Properties")),
-  counter: theorem-counter,
-  render: render-fn.with(fill: eastern.darken(10%)),
-)
-
-#let upper_tri = cetz.canvas({
-  import cetz.draw: *
-  merge-path(
-    {
-      line(
-        (3, 3),
-        (0, 3),
-        (3, 0),
-      )
-    },
-    fill: white.darken(20%),
-    stroke: none,
-  )
-  rect((0, 0), (3, 3))
-})
-
-#let lower_tri = cetz.canvas({
-  import cetz.draw: *
-  merge-path(
-    {
-      line(
-        (0, 0),
-        (0, 3),
-        (3, 0),
-      )
-    },
-    fill: white.darken(20%),
-    stroke: none,
-  )
-  rect((0, 0), (3, 3))
-})
-
-#let pinit-annot(
-  dx: 0em,
-  dy: -1em,
-  alignment: horizon + center,
-  start,
-  end,
-  body,
-  ..args,
-) = {
-  pinit(
-    start,
-    end,
-    callback: (..positions) => {
-      positions = positions.pos()
-      let min-x = calc.min(..positions.map(loc => loc.x))
-      let max-x = calc.max(..positions.map(loc => loc.x))
-      let min-y = calc.min(..positions.map(loc => loc.y))
-      let max-y = calc.max(..positions.map(loc => loc.y))
-      absolute-place(
-        dx: min-x + dx,
-        dy: min-y + dy,
-        rect(
-          stroke: none,
-          align(alignment, text(0.6em, body, ..args.named())),
-        ),
-      )
-    },
-  )
-}
 
 #let iif-list-markers = level => {
   if level == 1 {
@@ -119,7 +51,6 @@
     [#sym.bullet]
   }
 }
-
 #let iif-proof-list = list.with(marker: iif-list-markers)
 
 #let algorithm = figure.with(
