@@ -35,6 +35,13 @@
 
 #let important = important-box
 
+#let (properties-counter, properties-box, properties, show-properties) = make-frame(
+  "properties",
+  (en: (us: "Properties", gb: "Properties")),
+  counter: theorem-counter,
+  render: render-fn.with(fill: eastern.darken(10%)),
+)
+
 #let iif-list-markers = level => {
   if level == 1 {
     (
