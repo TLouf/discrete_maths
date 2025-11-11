@@ -9,6 +9,23 @@ Discrete Mathematics Course Map
 - Induction
 - Graph theory
 
+// arrange in 11 chapters taught over 13 weeks (two weeks of revision+partial)
+// https://aplicaciones.uc3m.es/cpa/generaFicha?est=350&plan=566&asig=16489&&anio=2025&idioma=2
+// https://aplicaciones.uc3m.es/cpa/generaFicha?est=506&plan=555&asig=20191&anio=2025&idioma=2
+// discrete maths: study discrete objects, so objects which are distinct and not connected. Also means they are countable. Why? Computers deal with discrete information. Even real numbers, which are theoretically continuous, are represented discretely on computers: i.e. there is a finite number of possible real numbers
+// set theory (Rosen 2.)
+// number theory (Rosen 4.) -> crypto, RNG
+// relations (Rosen 9.) -> boolean ops
+// order as particular case of relation (Rosen 9.) -> induction (Rosen 3.), sorting
+// counting (Rosen 6.) -> proba (Rosen 7.) (perspective only?)
+// advanced counting (Rosen 8.)
+// graph theory: application of everything
+
+
+// AI BSc have logic course but DS BSc don't!
+
+// boolean algebra? introduce from parallel between set relations and logical operations as in Epp?
+
 #pagebreak()
 
 = Set Theory and Functions
@@ -16,12 +33,12 @@ Discrete Mathematics Course Map
 == Elementary Set Theory
 
 #definition[
-  A *set* $X$ is a well-defined collection of objects, each of which is called an element of the set:
-  $ X = {x_1, x_2, x_3, ...} $
+  A *set* $S$ is a well-defined collection of objects, each of which is called an element of the set:
+  $ S = {s_1, s_2, s_3, ...} $
 
-  Given a set $X$ and a certain object $x$, one (and only one) of the following statements is true:
-  - the object $x$ belongs to the set $X$: $x in X$, or
-  - the object $x$ does not belong to $X$: $x in.not X$.
+  Given a set $S$ and a certain object $s$, one (and only one) of the following statements is true:
+  - the object $s$ belongs to the set $S$: $s in S$, or
+  - the object $s$ does not belong to $S$: $s in.not S$.
 
   The order of the elements in a set is irrelevant, as well as the number of occurrences of an element in the list.
 ]
@@ -31,7 +48,7 @@ Discrete Mathematics Course Map
 ]
 
 #definition[
-  The *empty set* $emptyset$ is the set with no elements: $emptyset = {}$. The *universal set* $S$ is the set containing all objects under consideration.
+  The *empty set* $emptyset$ is the set with no elements: $emptyset = {}$. The *universal set* $U$ is the set containing all objects under consideration.
 ]
 
 === How to Describe a Set
@@ -56,7 +73,7 @@ Discrete Mathematics Course Map
 ]
 
 Properties:
-- Every set $A$ satisfies $A subset.eq A subset.eq S$.
+- Every set $A$ satisfies $A subset.eq A subset.eq U$.
 - The empty set $emptyset$ is a subset of every set $A$: $emptyset subset.eq A$.
 
 #definition[
@@ -86,8 +103,8 @@ Given two sets $A$ and $B$ we can define the following operations:
 == Cartesian Product
 
 #definition[
-  Given two sets $X$ and $Y$, the *Cartesian product* $X times Y$ is the set of all ordered pairs of the form:
-  $ X times Y = {(x, y) : (x in X) and (y in Y)} $
+  Given two sets $A$ and $B$, the *Cartesian product* $A times B$ is the set of all ordered pairs of the form:
+  $ A times B = {(a, b) : (a in A) and (b in B)} $
 ]
 
 *Remark.* ${a, b}$ is not the same as $(a, b)$. In particular, ${1, 2}$ is a set and therefore, ${1, 2} = {2, 1}$. However, $(1, 2)$ is an ordered pair and therefore, $(1, 2) != (2, 1)$.
@@ -138,7 +155,688 @@ Given two functions $f : X -> Y$, $g : Y -> Z$, we can define a new function $g 
 $ (g compose f)(x) = g(f(x)) $
 The function $g compose f$ is the *composition* of $f$ and $g$.
 
-= Elementary Combinatorics I
+
+= Integer and Modular Arithmetic
+
+This chapter covers:
+1. Integer arithmetic:
+  - Integer divisibility
+  - Euclid's algorithm
+  - Bézout's identity
+  - Linear Diophantine equations
+2. Modular arithmetic:
+  - Linear congruences
+  - Arithmetic on $ZZ_p$
+  - Euler's $phi$ function. Euler's theorem
+
+== Integer Divisibility
+
+The set of integers $ZZ$ is closed with respect to the operations of sum, subtraction, and product. In other words, for every $a, b in ZZ$, $a plus.minus b in ZZ$ and $a dot b in ZZ$. They also satisfy:
+- $0$ is the identity with respect to the sum: $a + 0 = a$ for every $a in ZZ$.
+- $1$ is the identity with respect to the product: $a dot 1 = a$ for every $a in ZZ$.
+- For every $a in ZZ$, there exists a unique inverse element $-a in ZZ$ such that $a + (-a) = 0$.
+
+However, the result of dividing two integers might not be an integer.
+
+#definition[
+  Given two integers $a != 0$ and $b$, we say that $a$ divides $b$ if there is an integer $q in ZZ$ such that $b = a dot q$. If $a$ divides $b$, we say that $a$ is a factor of $b$ and that $b$ is a multiple of $a$. We denote $a | b$ when $a$ divides $b$, and we write $a parallel.not b$ when $a$ does not divide $b$.
+]
+
+*Remarks:*
+- Every non-zero integer $a in ZZ \\ {0}$ divides $0$: $0 = a dot 0$ ($q = 0$).
+- $1$ divides any $a in ZZ$: $a = 1 dot a$ ($q = a$).
+- Any nonzero integer $a in ZZ \\ {0}$ divides itself: $a = a dot 1$ ($q = 1$).
+
+== The Division Algorithm
+
+#theorem(title: "The Division Algorithm")[
+  Let $a$ and $b != 0$ be two integers. Then there exists a unique pair of integers $q$ and $r$ such that
+  $ a = q dot b + r quad "with" 0 <= r < |b| $
+  - The numbers $a$ and $b$ are called dividend and divisor, respectively.
+  - The number $r$ is the remainder: $r = a mod b$.
+  - The number $q$ is the quotient: $q = a "div" b = cases(floor(a\/b) & "if" b > 0, ceil(a\/b) & "if" b < 0)$
+]
+
+== Properties of Integer Division
+
+#theorem[
+  Let $a, b, c$ be integers. Then:
+  1. If $a | b$ and $a | c$, then $a | (b + c)$.
+  2. If $a | b$, then $a | (b dot c)$ for every $c in ZZ$.
+  3. If $a | b$ and $b | c$, then $a | c$.
+  4. If $c != 0$, then $a | b$ if and only if $(c dot a) | (c dot b)$.
+  5. If $a | b$ and $b != 0$, then $|a| <= |b|$.
+  6. If $a | b$ and $b | a$, then $a = plus.minus b$.
+]
+
+#theorem[
+  If $a | b_i$ for $i = 1, ..., N$, then $a | sum_(i=1)^N u_i dot b_i$ for every $u_i in ZZ$.
+]
+
+== Greatest Common Divisor. Euclid's Lemma (IIIrd century BC)
+
+#definition[
+  Let $a, b$ be integers, not both simultaneously zero. The largest integer $d$ such that $d | a$ and $d | b$ is called the greatest common divisor of $a$ and $b$. It is denoted by $gcd(a, b)$.
+]
+
+*Remarks:*
+- The case $a = b = 0$ is excluded because any integer divides $0$.
+- $gcd(0, a) = |a|$ for every nonzero integer $a$.
+
+#theorem[
+  The greatest common divisor of two numbers is unique.
+]
+
+#definition[
+  Two integers $a$ and $b$ are relatively prime if $gcd(a, b) = 1$. The integers $a_1, a_2, ..., a_n$ are pairwise relatively prime if $gcd(a_i, a_j) = 1$ for any $1 <= i < j <= n$.
+]
+
+#lemma(title: "Euclid")[
+  Given the integers $a$, $b != 0$, $q$ and $r$, such that $a = q dot b + r$ with $0 <= r < |b|$, then $gcd(a, b) = gcd(b, r)$.
+]
+
+== Euclid's Algorithm
+
+*Problem 9:* Apply recursively Euclid's lemma to compute $gcd(662, 414)$.
+
+$
+    a & = b dot q + r \
+  662 & = 414 dot 1 + 248 \
+  414 & = 248 dot 1 + 166 \
+  248 & = 166 dot 1 + 82 \
+  166 & = 82 dot 2 + 2 \
+   82 & = 2 dot 41 + 0
+$
+
+$gcd(662, 414) = gcd(414, 248) = gcd(248, 166) = gcd(166, 82) = gcd(82, 2) = 2$.
+
+In general, $gcd(a, b) = gcd(b, r_1) = gcd(r_1, r_2) = ... = gcd(r_(n-2), r_(n-1))$, where $r_(n-1)$ is the last nonzero remainder ($r_n = 0$). In the last step:
+$ r_(n-2) = q_n dot r_(n-1) ==> r_(n-1) | r_(n-2) $
+Therefore, $gcd(r_(n-2), r_(n-1)) = r_(n-1)$.
+
+#theorem[
+  In Euclid's algorithm, $gcd(a, b) = r_(n-1)$ (= the last nonzero remainder).
+]
+
+== Bézout's Identity
+
+#theorem(title: "Bézout's Identity, 1730-1783")[
+  If $a$ and $b$ are two integers not simultaneously zero, then there exist integers $u, w$ such that
+  $ gcd(a, b) = a dot u + b dot w $
+]
+
+*Proof:* We write the steps of Euclid's algorithm, and "unroll them":
+$
+        a & = q_1 dot b + r_1 ==> r_1 = a - q_1 dot b \
+        b & = q_2 dot r_1 + r_2 ==> r_2 = b - q_2 dot r_1 \
+      r_1 & = q_3 dot r_2 + r_3 ==> r_3 = r_1 - q_3 dot r_2 \
+          & dots.v \
+  r_(n-4) & = q_(n-2) dot r_(n-3) + r_(n-2) ==> r_(n-2) = r_(n-4) - q_(n-2) dot r_(n-3) \
+  r_(n-3) & = q_(n-1) dot r_(n-2) + r_(n-1) ==> r_(n-1) = r_(n-3) - q_(n-1) dot r_(n-2) \
+  r_(n-2) & = q_n dot r_(n-1) + (r_n = 0) ==> r_(n-1) = gcd(a, b)
+$
+
+Then,
+$
+  gcd(a, b) = r_(n-1) & = alpha_(n-1) r_(n-3) + beta_(n-1) r_(n-2) \
+                      & = alpha_(n-2) r_(n-4) + beta_(n-2) r_(n-3) \
+                      & = ... \
+                      & = alpha_3 r_1 + beta_3 r_2 \
+                      & = alpha_2 b + beta_2 r_1 \
+                      & = alpha_1 a + beta_1 b
+$
+
+*Important remark:* Bézout's identity does not imply that the integers $u, v$ are unique.
+
+#theorem[
+  Let $a$ and $b$ be two integers not simultaneously zero with $gcd(a, b) = d$. An integer $c$ can be written in the form $a dot x + b dot y$ for some integers $x, y$ if and only if $c$ is a multiple of $d$. In particular, $d$ is the smallest positive integer of the form $a dot x + b dot y$ with $x, y in ZZ$.
+]
+
+#corollary[
+  Two integers are relatively prime if and only if there exist integers $x, y$ such that $a dot x + b dot y = 1$.
+]
+
+#corollary[
+  If $gcd(a, b) = d$, then
+  1. $gcd(m dot a, m dot b) = m dot d$ for every $m in NN$.
+  2. $gcd(a\/d, b\/d) = 1$.
+]
+
+#corollary[
+  If $a, b$ are two relatively-prime integers, then:
+  1. If $a | c$ and $b | c$, then $(a dot b) | c$.
+  2. If $a | (b dot c)$, then $a | c$.
+]
+
+== Least Common Multiple
+
+#definition[
+  The least common multiple of two natural numbers $a, b$ is the least natural number $m$ such that $a | m$ and $b | m$. It is denoted by $"lcm"(a, b)$.
+]
+
+*Remark:* This number exists because the set of natural numbers $NN$ is a well-ordered set (see next chapter).
+
+#theorem[
+  If $a, b$ are two natural numbers, then
+  $ gcd(a, b) dot "lcm"(a, b) = a dot b $
+]
+
+== Prime Numbers
+
+#definition[
+  A natural number $p > 1$ is called a prime number if the only positive factors of $p$ are $1$ and $p$. A natural number $p > 1$ that is not prime is called composite.
+]
+
+*Remark:* The natural number $1$ is not prime. The first prime number is $2$, and the other prime numbers are odd natural numbers $(3, 5, 7, 11, ...)$.
+
+#theorem(title: "Euclid")[
+  There are infinitely many prime numbers.
+]
+
+#theorem[
+  The positive integer $n$ is a composite number if and only if $n$ can be divided by some prime number $p <= sqrt(n)$.
+]
+
+#lemma[
+  Let $p$ be a prime number, and let $a, b$ be integers. Then:
+  (a) Either $p | a$, or $p$ and $a$ are relatively prime.
+  (b) If $p | (a dot b)$, then either $p | a$ or $p | b$.
+]
+
+== The Fundamental Theorem of Arithmetic
+
+#theorem(title: "The Fundamental Theorem of Arithmetic")[
+  Every natural number $n > 1$ can be written uniquely as a product of primes
+  $ n = p_1^(n_1) dot p_2^(n_2) dot p_3^(n_3) dot ... dot p_k^(n_k) $
+  where the $p_i$ are distinct prime numbers written in increasing order, and the exponents $n_i$ are natural numbers $n_i >= 1$.
+]
+
+#proposition[
+  If the integers $a, b > 1$ can be factorized in the form
+  $
+    a & = p_1^(n_1) dot p_2^(n_2) ... p_k^(n_k) \
+    b & = p_1^(m_1) dot p_2^(m_2) ... p_k^(m_k)
+  $
+  with $n_i, m_i >= 0$ and all prime factors of $a$ and $b$ appear in both decompositions, then
+  $
+      gcd(a, b) & = p_1^(min(n_1, m_1)) dot p_2^(min(n_2, m_2)) ... p_k^(min(n_k, m_k)) \
+    "lcm"(a, b) & = p_1^(max(n_1, m_1)) dot p_2^(max(n_2, m_2)) ... p_k^(max(n_k, m_k))
+  $
+]
+
+== Linear Diophantine Equations [Diophantus of Alexandria, IIIrd century]
+
+#definition[
+  A Diophantine equation is an equation of one or several variables such that we are only interested in their integer solutions.
+]
+
+#theorem(title: "Brahmagupta, VIIth century")[
+  The linear equation
+  $ a dot x + b dot y = c $
+  where $a, b, c$ are integers (and $a, b$ not simultaneously zero), admits integer solutions if and only if $d = gcd(a, b)$ divides $c$. In this case, there exist infinitely many integer solutions $(x_k, y_k)$ with $k in ZZ$ given by
+  $
+    x_k & = u dot p + (b dot k)\/d \
+    y_k & = w dot p - (a dot k)\/d
+  $
+  where $p = c\/d in ZZ$ and $u, w$ are given by
+  $ d = u dot a + w dot b $
+]
+
+== Modular Arithmetic
+
+Modular arithmetic allows us to perform algebraic operations using, instead of a given set of numbers, their respective remainders with respect to some fixed positive number called the modulus. The modulus is $12$ or $24$ when we count hours with a clock, $7$ when we count days in a week, etc.
+
+#definition[
+  Let $a, b$ be integers, and let $m$ be a natural number. Then $a, b$ are congruent modulo $m$ if $m | (a - b)$. This relation is denoted as $a equiv b (mod m)$.
+]
+
+#proposition[
+  1. $a equiv b (mod m)$ if and only if $a mod m = b mod m$.
+  2. $a equiv b (mod m)$ if and only if $a = b + k dot m$ for some $k in ZZ$.
+]
+
+#theorem[
+  For each positive integer $m$, the binary relation $equiv (mod m)$ is an equivalence relation.
+]
+
+== The Quotient Set $ZZ_m$
+
+The equivalence classes (or congruence classes) modulo $m$
+$ [a]_m = {b in ZZ : a equiv b (mod m)} = {a + m k : k in ZZ} $
+form a partition of $ZZ$. There are $m$ distinct equivalence classes corresponding to the $m$ possible remainders obtained by dividing an integer by $m$.
+
+#theorem[
+  The quotient set $ZZ_m = ZZ \/ equiv (mod m)$ is given by
+  $ ZZ_m = {[a]_m : 0 <= a <= m - 1} $
+]
+
+*Remark:* Usually, the notation for $ZZ_m$ is a bit sloppy:
+$ ZZ_m = {0, 1, 2, ..., m - 1} $
+
+== Modular Arithmetic
+
+#theorem[
+  Let $m$ be a positive integer. If $a_1 equiv b_1 (mod m)$ and $a_2 equiv b_2 (mod m)$, then:
+  - $a_1 plus.minus a_2 equiv b_1 plus.minus b_2 (mod m)$.
+  - $a_1 dot a_2 equiv b_1 dot b_2 (mod m)$.
+]
+
+#corollary[
+  Let $m, k$ be positive integers, and let $a, b in ZZ$. If $a equiv b (mod m)$, then $a^k equiv b^k (mod m)$.
+]
+
+#theorem[
+  Let $m$ be a positive integer, and let $a, b, c$ be integers. If $a dot c equiv b dot c (mod m)$ and $gcd(c, m) = 1$, then $a equiv b (mod m)$.
+]
+
+*Remarks:*
+- This theorem allows us to divide by a common factor $c$ both sides of the sign $equiv$ whenever $c$ and the modulus $m$ are relatively prime.
+- If $c$ and $m$ are not relatively prime, then the correct result is: Let us write $m = p dot c$ for positive integers $p, c$, and let $a, b$ be integers. If $a dot c equiv b dot c (mod p dot c)$, then $a equiv b (mod p)$.
+
+== Modular Division: Linear Congruence Equations
+
+#definition[
+  A congruence modulo $m$ of the form
+  $ a dot x equiv b (mod m) $
+  where $m$ is a positive integer, $a, b$ are integers, and $x$ is a variable is called a linear congruence equation.
+]
+
+*Remarks:*
+- If there exists a unique solution of the linear congruence equation $a dot x equiv 1 (mod m)$, then solving this equation is equivalent to obtaining the multiplicative inverse of $a$ modulo $m$.
+- If $x$ is a solution of a linear congruence equation, and $x' equiv x (mod m)$, then $x'$ is also a solution of that equation: $a dot x' equiv a dot x (mod m) equiv b (mod m)$.
+- Therefore, the solutions of a linear congruence equation (if any) form classes of congruence modulo $m$: i.e., they are elements of $ZZ_m$.
+
+== Linear Congruence Equations
+
+#theorem[
+  If $d = gcd(a, m)$, then the linear congruence equation
+  $ a dot x equiv b (mod m) $
+  has a solution if and only if $d | b$. In this case and if $x_0$ is a particular solution of the linear congruence equation, the general solution is given by
+  $ x_k = x_0 + (m dot k)\/d, quad k in ZZ $
+  In particular, these solutions form $d$ congruence classes modulo $m$ with representatives:
+  ${x_0, x_0 + m\/d, x_0 + (2m)\/d, ..., x_0 + (m(d - 1))\/d}$
+]
+
+#corollary[
+  If $gcd(a, m) = 1$, the solutions $x$ of the linear congruence equation $a dot x equiv b (mod m)$ form a unique congruence class modulo $m$.
+]
+
+#corollary[
+  If $gcd(a, m) = 1$ with $m > 1$, then there exists a multiplicative inverse of $a$ modulo $m$. This multiplicative inverse is unique modulo $m$.
+]
+
+== Arithmetic with $ZZ_m$
+
+The elements of $ZZ_m$ with $m in NN$ are equivalence classes modulo $m$. For the sake of simplicity, $x in ZZ_m$ represents that $x in [x]_m$.
+
+The sum and the multiplication on $ZZ_m$ are defined as:
+$
+    x + y & = [x]_m + [y]_m = [x + y]_m \
+  x dot y & = [x]_m dot [y]_m = [x dot y]_m
+$
+
+and they verify the usual properties: for every $x, y, z in ZZ_m$,
+- Closure: $x + y in ZZ_m$ and $x dot y in ZZ_m$.
+- Associativity: $x + (y + z) = (x + y) + z$ and $x dot (y dot z) = (x dot y) dot z$.
+- Commutativity: $x + y = y + x$ and $x dot y = y dot x$.
+- Distributivity: $x dot (y + z) = x dot y + x dot z$.
+- Identity element (sum): $exists 0 in ZZ_m$ such that $0 + x = x$, $forall x in ZZ_m$.
+- Identity element (product): $exists 1 in ZZ_m$ such that $1 dot x = x$, $forall x in ZZ_m$.
+- Inverse element (sum): $forall x in ZZ_m$, $exists -x in ZZ_m$ such that $x + (-x) = 0$.
+
+*Remark:* These properties are those characterizing a field [like $(RR, +, dot)$], except for the existence of a multiplicative inverse.
+
+In $ZZ$ there does not exist in general the multiplicative inverse of an integer $x$: $y$ is the multiplicative inverse of $x$ if and only if $x dot y = 1$. However, two properties hold:
+1. Cancellation law: If $x != 0$ and $x dot y = x dot z$, then $y = z$.
+2. If $x dot y = 0$, then either $x = 0$ or $y = 0$.
+
+None of these two properties holds in general in $ZZ_m$.
+
+#definition[
+  An element $x not equiv 0 (mod m)$ of $ZZ_m$ is a divisor of zero if there exists an element $y not equiv 0 (mod m)$ such that $x dot y equiv 0 (mod m)$.
+]
+
+*Remark:* In some books, the condition $x not equiv 0 (mod m)$ is dropped.
+
+#definition[
+  An element $x in ZZ_m$ is a unit modulo $m$ if it has a multiplicative inverse modulo $m$; i.e., if there is an element $s in ZZ_m$ such that $x dot s equiv 1 (mod m)$.
+]
+
+#theorem[
+  The multiplicative inverse of a unit modulo $m$ is unique.
+]
+
+*Remark:* As the inverse of a unit $r$ modulo $m$ is unique, it will be denoted by $r^(-1)$.
+
+#theorem[
+  An element $r in ZZ_m$ is invertible (i.e., it has a multiplicative inverse) if and only if $r$ and $m$ are relatively prime.
+]
+
+#corollary[
+  If $p$ is a prime number, every nonzero element of $ZZ_p$ is invertible.
+]
+
+- If $p$ is prime, then $(ZZ_p, +, dot)$ is a field like $(RR, +, dot)$ or $(QQ, +, dot)$.
+- If $m = p dot q$ is composite, then there are divisors of zero in $ZZ_m$: $p dot q equiv 0 (mod m)$ with $p, q not equiv 0 (mod m)$. In this case, $(ZZ_m, +, dot)$ is a ring with divisors of zero.
+
+#definition[
+  Euler's (totient) function $phi : NN -> NN$ is defined as $phi(m)$ gives the number of invertible elements of $ZZ_m$.
+]
+
+#lemma[
+  If $p$ is a prime number, then $phi(p) = p - 1$.
+]
+
+== Euler's Theorem
+
+#theorem(title: "Euler, 1790")[
+  If $y$ is invertible in $ZZ_m$ (i.e., if $gcd(y, m) = 1$), then
+  $ y^(phi(m)) equiv 1 (mod m) $
+]
+
+#corollary(title: "Fermat's Little Theorem")[
+  If $p$ is a prime number and if $y not equiv 0 (mod p)$, then
+  $ y^(p-1) equiv 1 (mod p) $
+]
+
+#corollary[
+  If $p$ is a prime number, then $y^p equiv y (mod p)$ for any integer $y$.
+]
+
+#theorem[
+  1. If $p$ is a prime, then $phi(p^k) = p^(k-1)(p - 1)$ for every $k in NN$.
+  2. If $gcd(m, n) = 1$, then $phi(m dot n) = phi(m) dot phi(n)$.
+  3. If $n >= 2$ has the following decomposition in prime factors $n = product_(k=1)^r p_k^(n_k)$ with $n_k >= 1$, then $phi(n) = n dot product_(k=1)^r (1 - 1\/p_k)$.
+]
+
+= Relations
+
+== Binary Relations
+
+1. *Binary relations*:
+  - Definitions.
+  - Graphical representation of a relation.
+  - Operations with relations.
+  - Properties.
+2. *Equivalence relations*:
+  - Equivalence classes.
+  - Quotient set.
+3. *Order relations*.
+
+== Binary Relations Between Two Sets
+
+#definition[
+  A *binary relation* $R$ between the sets $V$ and $W$ is a subset of the Cartesian product $V times W$:
+  $ V times W = {(v, w) : (v in V) and (w in W)} $
+  Therefore, $R subset.eq V times W$. The *domain* of $R$ is the set:
+  $ "Dom" R = {v in V : (v, w) in R "for some" w in W} $
+  and the *image* of $R$ is the set:
+  $ "Im" R = {w in W : (v, w) in R "for some" v in V} $
+]
+
+*Notation*: If $(v, w) in R$, we denote it as $v R w$.
+
+== Binary Relations on a Set
+
+#definition[
+  A *binary relation* $R$ on the set $V$ is a subset of the Cartesian product $V times V$. Hence, $R subset.eq V times V$. The *domain* of $R$ is the set:
+  $ "Dom" R = {v in V : (v, w) in R "for some" w in V} $
+  and the *image* of $R$ is the set:
+  $ "Im" R = {w in V : (v, w) in R "for some" v in V} $
+]
+
+*Important remark*: A function $f : A -> B$ is a relation between the sets $A$ and $B$ and such that to each element $x in "Dom"(f)$ there corresponds a unique element of $B$ (i.e., $f(x)$).
+
+== Graphical Representation of a Relation
+
+- Cartesian representation.
+- Venn's diagrams.
+- *Adjacency matrix of $R$*:
+  Let $V$ and $W$ be the sets $V = {v_1, v_2, ..., v_(|V|)}$ and $W = {w_1, w_2, ..., w_(|W|)}$. Then entry $(i, j)$ of $A_R$ is equal to 1 if $v_i R w_j$, and it is equal to 0 otherwise.
+- *Directed graph $G_R$ associated to $R$*:
+  The vertices of $G_R$ are the elements of the set $V$ where the relation $R$ is defined. The set of (directed) edges is the set of ordered pairs:
+  $ E = {(v_i, v_j) in V times V : v_i R v_j} $
+
+== Operations with Relations
+
+#definition[
+  Given the relation $R$ on $V$, we define its *inverse relation* $R^(-1)$ as the relation on $V$ defined as $(v_1, v_2) in R^(-1) <==> (v_2, v_1) in R$, or in other words, $v_1 R^(-1) v_2 <==> v_2 R v_1$.
+]
+
+Given any relation $R$, there always exists its inverse relation $R^(-1)$. On the other hand, the inverse function $f^(-1)$ exists if and only if $f$ is bijective.
+
+#definition[
+  Given a relation $R$ on $V$, we define its *complementary relation* $overline(R)$ as the relation on $V$ such that $(v_1, v_2) in overline(R) <==> (v_1, v_2) in.not R$.
+]
+
+Binary relations are subsets of $V times W$, therefore, set operations can be interpreted as operations with relations.
+
+== Composition of Relations
+
+#definition[
+  Let $R$ be a relation between the sets $V$ and $W$, and let $S$ be a relation between the sets $W$ and $Y$. The composition of the relation $S$ and $R$ is a relation between the sets $V$ and $Y$ denoted as $S circle R$. In particular, $S circle R$ is a subset of the Cartesian product $V times Y$ such that, given any $v in V$ and $y in Y$, $v(S circle R)y$ if and only if there exists some $w in W$ satisfying $v R w$ and $w S y$.
+]
+
+#proposition[
+  Let $A_R$ be the adjacency matrix of the relation $R$ between $V$ and $W$, and let $A_S$ be the adjacency matrix of the relation $S$ between $W$ and $Y$. Then, the adjacency matrix $A_(S circle R)$ of the composition of the relations $S circle R$ between $V$ and $Y$ is given by:
+  $ A_(S circle R) = A_R circle.small A_S $
+  where the product $circle.small$ is the Boolean product of matrices.
+]
+
+Using Boolean operations (instead of regular ones) guarantees that $A_(S circle R)$ is an adjacency matrix associated to a binary relation.
+
+== Properties of Relations on a Set $V$
+
+#definition[
+  A relation $R$ is reflexive if for every $v in V$, $v R v$.
+]
+
+#definition[
+  A relation $R$ is irreflexive if for every $v in V$, $v R v$ does not hold.
+]
+
+#definition[
+  A relation $R$ is symmetric if $R = R^(-1)$, i.e., if $v R w ==> w R v$.
+]
+
+#definition[
+  A relation $R$ is antisymmetric if $(v_1 R v_2) and (v_2 R v_1) ==> v_1 = v_2$.
+]
+
+== Transitive Relations
+
+#definition[
+  A relation $R$ is transitive if $(v_1 R v_2) and (v_2 R v_3) ==> v_1 R v_3$.
+]
+
+#proposition[
+  A relation $R$ is transitive if and only if $R^n subset.eq R$ for all $n in NN$. The $n$-th power $R^n$ of the relation $R$ is recursively defined as follows:
+  $ R^1 = R, quad R^n = R circle R^(n-1) $
+]
+
+#corollary[
+  A relation $R$ is transitive if and only if $R^2 subset.eq R$. In other words, $R$ is transitive if and only if for each nonzero entry $(A_(R^2))_(i,j) = 1$ of the adjacency matrix of $R^2$, the corresponding entry of the adjacency matrix of $R$ is also nonzero $(A_R)_(i,j) = 1$.
+]
+
+== Equivalence Relations
+// One example why modulo stuff should be before relations
+#definition[
+  A relation $R$ on a set $V$ is an equivalence relation if it is reflexive, symmetric and transitive.
+]
+
+*Notation:* If $R$ is an equivalence relation, $a R b$ is usually denoted as $a equiv b (mod R)$.
+
+#definition[
+  Let $R$ be an equivalence relation on a set $V$. The set of all the elements of $V$ related to a certain element $v in V$ is called the equivalence class determined by $v$, and it is denoted as $[v]_R$, or simply as $[v]$. Therefore,
+  $ [v]_R = {w in V : v R w} $
+  Any element $w in [v]_R$ (in particular, $v$) is a representative of the equivalence class $[v]_R$.
+]
+
+== Quotient Set
+// TODO: keep?
+
+#theorem[
+  Let $R$ be an equivalence relation on $V$. Then,
+  1. $[a]_R$ is non-empty for all $a in V$.
+  2. For any two elements $a, b in V$, either $[a]_R = [b]_R$ (and $a R b$), or $[a]_R inter [b]_R = emptyset$.
+  3. The equivalence classes determine the relation uniquely.
+]
+
+#theorem[
+  Let $R$ be an equivalence relation on $V$. Then the set of all equivalence classes of $R$ form a partition of $V$. Conversely, given a partition ${V_1, V_2, ...}$ of $V$, there exists an equivalence relation $R$ such that its equivalence classes are the sets $V_i$.
+]
+
+#definition[
+  Let $R$ be an equivalence relation on $V$. The set of all the equivalence classes of $R$ is called the quotient set of $V$ by $R$, and it is denoted by $V\/R$:
+  $ V\/R = {[v]_R : v in V} $
+]
+
+
+= Order Relations
+
+1. Order relations:
+  - Partially ordered sets.
+  - Hasse diagrams.
+  - Maximal elements.
+  - Totally ordered sets.
+  - Well-ordered sets and mathematical induction.
+
+== Partial Order Relations
+
+#definition[
+  A binary relation on a set $V$ is a partial order (or an order relation) if it is reflexive, antisymmetric, and transitive.
+]
+
+*Notation:* Order relations are usually denoted by the symbol $prec.eq$.
+
+#definition[
+  A set $V$ equipped with an order relation $prec.eq$ is called a partially ordered set $(V, prec.eq)$ (or poset).
+]
+
+#definition[
+  Let $(V, prec.eq)$ be a partially ordered set. Two elements $a, b in V$ are comparable if either $a prec.eq b$ or $b prec.eq a$. If none of these conditions holds, such elements are incomparable.
+]
+
+#definition[
+  A partially ordered set $(V, prec.eq)$ is totally ordered when any pair of elements $a, b in V$ are comparable. In this case, $(V, prec.eq)$ is a totally ordered set (or linear order or chain).
+]
+
+== Hasse Diagrams (1926)
+
+// TODO: haven/t seen graphs until now
+The directed graph associated to an order relation $prec.eq$ can be simplified by eliminating redundant elements.
+
+*Algorithm to obtain the Hasse diagram for a partial order $prec.eq$:*
+1. As $prec.eq$ is reflexive, there is a loop incident with each vertex. We eliminate all these loops.
+2. The transitivity of $prec.eq$ implies the existence of subgraphs of the following type: If $a prec.eq b$ and $b prec.eq c$, we eliminate the superfluous edge associated to $a prec.eq c$.
+3. We choose that all the oriented edges point upwards. Then, we eliminate all the arrows.
+
+== Extremal Elements
+
+#definition[
+  Let $(V, prec.eq)$ be a partially ordered set. $M in V$ is a maximal element if for all $v in V$, $M prec.eq v$ implies that $M = v$. $m in V$ is a minimal element if for all $v in V$, $v prec.eq m$ implies that $m = v$. In other words, in the Hasse diagram associated to $(V, prec.eq)$, there is no element above $M$, and no element below $m$.
+]
+
+#definition[
+  Let $(V, prec.eq)$ be a partially ordered set. $M^star in V$ is a maximum (or greatest element) if $v prec.eq M^star$ for all $v in V$. $m^star in V$ is a minimum (or least element) if $m^star prec.eq v$ for all $v in V$.
+
+  In other words, in the Hasse diagram associated to $(V, prec.eq)$, $M^star$ is above all the elements of $V$, and $m^star$ is below all elements of $V$. The maximum and minimum of $(V, prec.eq)$ are denoted by $max(V)$ and $min(V)$, respectively.
+]
+
+*Remark:* The maximal, minimal, greatest, and/or least elements of $(V, prec.eq)$ might not exist.
+
+#theorem[
+  The maximum $M^star$ of a partially ordered set $(A, prec.eq)$, if it exists, is unique. In addition, the maximum of $(A, prec.eq)$ is also a maximal element of it.
+]
+
+#definition[
+  Let $(V, prec.eq)$ be a partially ordered set, and $B subset V$. $u in V$ is an upper bound of $B$ if $b prec.eq u$ for all $b in B$. The set of the upper bounds of $B$ is denoted by $"major"(B)$.
+
+  The supremum of $B$, $sup(B)$, is the least upper element of $B$: $sup(B) = min("major"(B))$.
+
+  $d in V$ is a lower bound of $B$ if $d prec.eq b$ for all $b in B$. The set of all the lower bounds of $B$ is denoted by $"minor"(B)$.
+
+  The infimum of $B$, $inf(B)$, is the greatest lower element of $B$: $inf(B) = max("minor"(B))$.
+]
+
+*Remark:* It may happen that $"major"(B) = emptyset$, $"minor"(B) = emptyset$ and/or $sup(B)$ and $inf(B)$ do not exist.
+
+== Total Order Compatible with a Partial Order
+
+#definition[
+  A total order $(V, prec.eq_T)$ is compatible with the partial order $(V, prec.eq_P)$ if for all $v, w in V$, $v prec.eq_P w$ implies that $v prec.eq_T w$.
+]
+
+#algorithm(
+  pseudocode-list(numbered-title: [Topological Sort], booktabs: true)[
+    + k = 1
+    + while $V != emptyset$
+      + $v_k = "a minimal element of" (V, prec.eq_P)$
+      + $V <- V \\ {v_k}$
+      + $k <- k + 1$
+    + $v_1 prec.eq_T v_2 prec.eq_T ... prec.eq_T v_n "is a total order compatible with" (V, prec.eq_P)$.
+  ],
+)
+
+
+== Well-Ordered Sets
+
+#definition[
+  $(V, prec.eq)$ is a well-ordered set if $(V, prec.eq)$ is a total order and any nonempty subset of $V$ always has a minimum.
+]
+
+*Remarks:*
+- The set of natural numbers with the usual order $(NN, <=)$ is a well-ordered set. This property is equivalent to the induction principle.
+- The totally-ordered set $(ZZ, <=)$ is not a well-ordered set; but as $ZZ$ is isomorphic to $NN$, we can choose another order $prec.eq$ such that $(ZZ, prec.eq)$ is a well-ordered set.
+
+== The Induction Principle for the Natural Numbers
+
+#definition(title: "Induction Principle: Weak Version")[
+  Let $P$ be some property that satisfies the following conditions:
+  1. Base step: $P(1)$ is true.
+  2. Inductive step: If $P(k)$ is true for an arbitrary and fixed $k$, then $P(k + 1)$ is true.
+
+  Then, $P(n)$ is true for every $n in NN$.
+]
+
+*Remark:* The hypothesis in the inductive step ($P(k)$ is true) is called the induction hypothesis. To perform the inductive step, one assumes the induction hypothesis, and then uses this assumption to prove that $P(k + 1)$ is true.
+
+#definition(title: "Induction Principle: Strong Version")[
+  Let $P$ be some property that satisfies the following conditions:
+  1. Base step: $P(1)$ is true.
+  2. Inductive step: Given an arbitrary fixed $k$, if $P(m)$ is true for any $1 <= m <= k$, then $P(k + 1)$ is true.
+
+  Then, $P(n)$ is true for every $n in NN$.
+]
+
+#proposition(title: "Strong Induction Principle for Well-Ordered Sets")[
+  Let $(V, prec.eq)$ be a well-ordered set, and $P$ be some property that satisfies the following conditions:
+  1. Base step: $P(v_0)$ is true for $v_0 = min(V)$.
+  2. Inductive step: Let $w$ be an arbitrary fixed element of $V$, and let $v$ be its successor. If $P(x)$ is true for all $v_0 prec.eq x prec.eq w$, then $P(v)$ is true.
+
+  Then, $P(v)$ is true for every $v in V$.
+]
+
+// TODO: recursion?
+
+== Summary: Types of Relations
+
+#table(
+  columns: 6,
+  align: center,
+  toprule(),
+  table.header(
+    [*Relation*], [*Reflexive*], [*Symmetric*], [*Antisymmetric*], [*Transitive*], [*Additional Properties*]
+  ),
+  midrule(), [Equivalence], [✅], [✅], [❌], [✅],
+  [], [Order], [✅], [❌], [✅], [✅],
+  [], [Total order], [✅], [❌], [✅], [✅],
+  [Every pair is comparable], [Well-ordered set], [✅], [❌], [✅], [✅],
+  [Every nonempty subset has a minimum], bottomrule(),
+)
+
+
+= Counting
 
 #definition[
   Let $S$ be a set. If there are exactly $n in NN$ distinct elements in $S$, we say that $S$ is a *finite set*, and that $n$ is the *cardinality* of $S$. The cardinality of $S$ is denoted by $|S|$.
@@ -193,14 +891,54 @@ The *goal of combinatorics* is to compute the cardinality of certain finite sets
   Suppose that a procedure can be broken down into two tasks. If there are $n_1$ ways to perform the first task, and $n_2$ ways to perform the second task after the first task has been done, then there are $n_1 dot n_2$ ways to do the procedure.
 ]
 
+== Cardinality of the Power Set
+
+#corollary[
+  Given a finite set $A$, then
+  $ |cal(P)(A)| = 2^(|A|) $
+]
+
+== The Inclusion-Exclusion Principle
+
+#proposition(title: "The inclusion-exclusion principle v1")[
+  $ |A union B| = |A| + |B| - |A inter B| $
+]
+
+#proposition(title: "The inclusion-exclusion principle v2")[
+  $ |A union B union C| = |A| + |B| + |C| - |A inter B| - |A inter C| - |B inter C| + |A inter B inter C| $
+]
+
+#proposition(title: "The inclusion-exclusion principle v3")[
+  $
+    |A_1 union A_2 union ... union A_n| & = sum_(1 <= i <= n) |A_i| - sum_(1 <= i < j <= n) |A_i inter A_j| \
+                                        & quad + sum_(1 <= i < j < k <= n) |A_i inter A_j inter A_k| - ... \
+                                        & quad + (-1)^(n+1) |A_1 inter A_2 inter ... inter A_n|
+  $
+]
+
+#proposition(title: "The inclusion-exclusion principle v4")[
+  Given sets $A_i subset S$ with $1 <= i <= n$, then
+  $
+    |overline(A_1 union A_2 union ... union A_n)| = |overline(A_1) inter overline(A_2) inter ... inter overline(A_n)| = |S| - |A_1 union A_2 union ... union A_n|
+  $
+]
+
+= Combinatorics
+
+*Remarks.*
+- $overline(A_1) inter overline(A_2) inter ... inter overline(A_n) = {x : x in.not A_1, x in.not A_2, ..., x in.not A_n}$
+- $overline(A) = S without A => |overline(A)| = |S| - |A|$
+
 == Permutations
 
 #definition[
   For each positive integer $n in NN$, we define the *factorial* of $n$ as
-  $ n! = n dot (n-1) dot (n-2) dots 2 dot 1 $
+  $
+    n! = n dot (n-1) dot (n-2) dots 2 dot 1 = product_(k=1)^n k
+  $
 ]
 
-#proposition(title: "Permutations of $n$ distinct objects")[
+#proposition(title: [Permutations of $n$ distinct objects])[
   Given $n$ distinct objects, there are $n!$ distinct ordered arrangements (= permutations) of these objects.
 ]
 
@@ -280,52 +1018,6 @@ $ binom(n, r) equiv binom("row", "column") $
   $ sum_(k=0)^n binom(n, k) = 2^n, quad sum_(k=0)^n (-1)^k binom(n, k) = 0 $
 ]
 
-== Cardinality of the Power Set
-
-#corollary[
-  Given a finite set $A$, then
-  $ |cal(P)(A)| = 2^(|A|) $
-]
-
-== The Inclusion-Exclusion Principle
-
-#proposition(title: "The inclusion-exclusion principle v1")[
-  $ |A union B| = |A| + |B| - |A inter B| $
-]
-
-#proposition(title: "The inclusion-exclusion principle v2")[
-  $ |A union B union C| = |A| + |B| + |C| - |A inter B| - |A inter C| - |B inter C| + |A inter B inter C| $
-]
-
-#proposition(title: "The inclusion-exclusion principle v3")[
-  $
-    |A_1 union A_2 union ... union A_n| & = sum_(1 <= i <= n) |A_i| - sum_(1 <= i < j <= n) |A_i inter A_j| \
-                                        & quad + sum_(1 <= i < j < k <= n) |A_i inter A_j inter A_k| - ... \
-                                        & quad + (-1)^(n+1) |A_1 inter A_2 inter ... inter A_n|
-  $
-]
-
-#proposition(title: "The inclusion-exclusion principle v4")[
-  Given sets $A_i subset S$ with $1 <= i <= n$, then
-  $
-    |overline(A_1 union A_2 union ... union A_n)| = |overline(A_1) inter overline(A_2) inter ... inter overline(A_n)| = |S| - |A_1 union A_2 union ... union A_n|
-  $
-]
-
-*Remarks.*
-- $overline(A_1) inter overline(A_2) inter ... inter overline(A_n) = {x : x in.not A_1, x in.not A_2, ..., x in.not A_n}$
-- $overline(A) = S without A => |overline(A)| = |S| - |A|$
-
-= Elementary Combinatorics II
-
-== Basic Counting Principles (Review)
-1. *The sum rule*: if $A inter B = emptyset$, then $|A union B| = |A| + |B|$.
-2. *The product rule*: $|A times B| = |A| dot |B|$.
-3. *The inclusion-exclusion principle*: $|A union B| = |A| + |B| - |A inter B|$.
-4. *The pigeonhole principle*.
-5. *Other standard counting problems*:
-  - Distributions.
-  - Partitions.
 
 == Distributions
 
@@ -355,7 +1047,432 @@ $ binom(n, r) equiv binom("row", "column") $
   where $r_k$ if the number of subsets of cardinality $k$.
 ]
 
+= Advanced counting
+
+== Recurrence Relations
+
+1. *Recurrence relations*:
+  - Definitions.
+  - Solution of a linear homogeneous recurrence relation.
+  - Solution of a linear nonhomogeneous recurrence relation.
+2. *Generating functions*.
+
+#definition[
+  A *recurrence relation* for the sequence $(a_n)_(n in NN)$ is an equation that expresses $a_n$ in terms of one or more terms $a_(n-1), a_(n-2), ..., a_(n-k)$, and possibly $n$. In other words, it is, for any fixed $k >= 1$, an equation of the type
+  $ F(n; a_n, a_(n-1), a_(n-2), ..., a_(n-k)) = 0 $
+  which is valid for all $n >= k + 1$. The *initial conditions* are the first $k$ terms in the sequence: i.e., $(a_1, ..., a_k)$.
+]
+
+#definition[
+  - A recurrence relation is of *$k$-th order* if $a_n$ can be expressed in terms of $k$ terms $a_(n-1), a_(n-2), ..., a_(n-k)$.
+  - A recurrence relation is *linear* if it expresses $a_n$ as a linear function of $a_(n-1), a_(n-2), ..., a_(n-k)$. Otherwise, the relation is *nonlinear*.
+  - A recurrence relation is *homogeneous* if the zero sequence $a_n = a_(n-1) = ... = a_(n-k) = 0$ satisfies the relation. Otherwise, it is *nonhomogeneous*.
+]
+
+== Solution of a Linear Homogeneous Recurrence Relation
+
+#theorem(title: "Solution of a homogeneous first-order recurrence relation")[
+  Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
+  $ a_n = A a_(n-1), quad n >= 2 $
+  where $A in RR$, and we know the initial condition $a_1$. Then, the solution of this relation is given by
+  $ a_n = a_1 A^(n-1), quad n >= 1 $
+]
+
+*Remark.* In this course, we will only consider linear recurrence relations with constant coefficients ($A$ in the previous theorem).
+
+#theorem(title: "Solution of a homogeneous Fibonacci-type recurrence relation")[
+  Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
+  $ a_n = A a_(n-1) + B a_(n-2), quad n >= 3 $
+  with $A, B in RR$, and known initial conditions $a_1, a_2$. If the *characteristic equation* associated to this relation
+  $ x^2 = A x + B $
+  has characteristic roots $alpha$ and $beta$, then the solution of the recurrence relation is given for all $n >= 1$ by
+  $
+    a_n = cases(
+      K_1 alpha^n + K_2 beta^n & "if" alpha != beta,
+      (K_1 + n K_2) alpha^n & "if" alpha = beta
+    )
+  $
+  where the constants $K_1$ and $K_2$ can be obtained using the initial conditions $a_1, a_2$.
+]
+
+=== General Case
+
+Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the linear recursion:
+$ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k), quad n >= k + 1 $
+with real numbers $c_1, c_2, ..., c_k$. We assume that the $k$ initial conditions $a_1, a_2, ..., a_k$ are known.
+
+If we look for a solution of the form
+$ a_n = K_i x^n $
+then the amplitude $K_i$ cancels out, and the indeterminate $x$ should satisfy the *characteristic equation*:
+$ x^k = c_1 x^(k-1) + c_2 x^(k-2) + ... + c_k $
+
+If $a_n$ and $b_n$ are two solutions of a given linear homogeneous recurrence relation, then any linear combination $alpha a_n + beta b_n$ will be also a solution of that recursion.
+
+The space of solutions has a vector space structure.
+
+To each distinct characteristic root $x_i$, there corresponds a solution $a_n^((i))$, whose structure depends on the multiplicity of $x_i$:
+- If the root $x_i$ is simple, then $a_n^((i)) = K_i x_i^n$.
+- If the root $x_i$ is double, then $a_n^((i)) = (K_i + K_i' n) x_i^n$.
+- If the root $x_i$ is triple, then $a_n^((i)) = (K_i + K_i' n + K_i'' n^2) x_i^n$, etc.
+
+If the characteristic equation has $r$ distinct roots $x_i$ with multiplicities $k_i$ (such that $sum_(i=1)^r k_i = k$), then the general solution for this recursion has the form:
+$ a_n = sum_(i=1)^r [sum_(j=1)^(k_i) K_i^((j)) n^(j-1)] x_i^n, quad n >= 1 $
+where the $k$ constants $K_i^((j))$ are determined using the $k$ initial conditions.
+
+== Solution of a Linear Nonhomogeneous Recurrence Relation
+
+#theorem(title: "Solution of a linear nonhomogeneous recurrence relation")[
+  Let us assume that the sequence $(a_n)_(n in NN)$ satisfies the linear nonhomogeneous recurrence relation with constant coefficients:
+  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + t_n, quad n >= k + 1 $
+  where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, ..., a_k$ are known. The function $t_n : NN -> RR$ is a given *known function* of $n$. Then, the general solution of this linear nonhomogeneous recurrence is equal to the sum of the general solution for the linear homogeneous recurrence relation
+  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k), quad n >= k + 1 $
+  plus any particular solution of the full recurrence.
+]
+
+#theorem(title: "Solution of a linear nonhomogeneous recurrence relation")[
+  Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the linear nonhomogeneous recurrence
+  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + t_n, quad n >= k + 1 $
+  where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, a_2, ..., a_k$ are known. Let us further assume that the function $t_n : NN -> RR$ is of the form
+  $ t_n = s^n [b_0 + b_1 n + ... + b_t n^t] $
+  with real numbers $b_0, b_1, ..., b_t$. If $s$ is not a characteristic root of the associated linear homogeneous recurrence, then there exists a particular solution of the form
+  $ a_n^p = s^n [p_0 + p_1 n + ... + p_t n^t] $
+  If $s$ is a characteristic root with multiplicity $m$ of the associated linear homogeneous recurrence, then there exists a particular solution of the form
+  $ a_n^p = n^m s^n [p_0 + p_1 n + ... + p_t n^t] $
+]
+
+The particular solution $a_n^p$ has no free parameters: there is only a unique choice for the coefficients ${p_k}_(k=1)^t$ such that $a_n^p$ is actually a solution.
+
+== Generating Functions
+// TODO: keep?
+
+1. *Recurrence relations*.
+2. *Generating functions*:
+  - Definitions.
+  - How to efficiently encode combinatorial problems?
+  - Solution of recurrence relations.
+
+#definition[
+  The *generating function* (GF) associated to the sequence $(a_k)_(k=0)^infinity$ is the following formal power series:
+  $ F(x) = a_0 + a_1 x + a_2 x^2 + ... + a_n x^n + ... = sum_(n=0)^infinity a_n x^n $
+]
+
+Examples:
+- $(1 + x)^k = sum_(n=0)^k binom(k, n) x^n$ is the GF of $(binom(k, 0), binom(k, 1), ..., binom(k, k), 0, 0, ...)$.
+- $1 + x + x^2 + ... + x^(k-1) = sum_(n=0)^(k-1) x^n = frac(1 - x^k, 1 - x)$ is the GF of $(1, 1, ..., 1, 0, 0, ...)$ where there are $k$ ones.
+- $frac(1, 1 - x) = 1 + x + x^2 + x^3 + ... = sum_(n=0)^infinity x^n$ is the GF of $(1, 1, 1, ...)$.
+- $e^x = 1 + x + frac(x^2, 2!) + frac(x^3, 3!) + ... = sum_(n=0)^infinity frac(x^n, n!)$ is the GF of $(1, 1, frac(1, 2!), frac(1, 3!), ...)$.
+
+== Basic Operations with Generating Functions
+
+The GF for the sequence $(1, 2, 3, ...)$ is given by
+$
+  sum_(n=0)^infinity (n + 1) x^n = frac(d, d x) sum_(n=0)^infinity x^(n+1) = frac(d, d x) frac(x, 1 - x) = frac(1, (1 - x)^2)
+$
+
+If $F(x) = sum_(n=0)^infinity a_n x^n$, and $G(x) = sum_(n=0)^infinity b_n x^n$, then
+$ (F + G)(x) = sum_(n=0)^infinity (a_n + b_n) x^n $
+
+If $F$ is the GF of the sequence ${a_n}_(n=0)^infinity$, then the GF of the sequence $(0, 0, ..., 0, a_0, a_1, ...)$ where there are $k$ zeros is $G(x) = x^k F(x)$.
+
+== Integer Partitions
+
+*Problem 7*: Count the number of distinct partitions of the positive integer $N$. For example, if $N = 4$, there are 5 partitions: $4 = 3 + 1 = 2 + 2 = 2 + 1 + 1 = 1 + 1 + 1 + 1$.
+
+1. The sum principle allows us to compute the generating function associated to use the positive integer $k$ in the partition:
+  - The generating function for using 1 in the partition is $f_1 = 1 + x + x^2 + x^3 + ... = frac(1, 1-x)$.
+  - The generating function for using $2 = 1 + 1$ in the partition is $f_2 = 1 + x^2 + x^4 + x^6 + ... = frac(1, 1-x^2)$.
+  - The generating function for using $p >= 1$ in the partition is $f_p = 1 + x^p + x^(2p) + x^(3p) + ... = frac(1, 1-x^p)$.
+
+2. Because writing up a partition is a sequential process, the generating function that encodes Problem 7 is given by the product principle:
+  $
+    f(x) = product_(k=1)^infinity f_k (x) = product_(k=1)^infinity frac(1, 1 - x^k) = 1 + x + 2x^2 + 3x^3 + 5x^4 + 7x^5 + ...
+  $
+
+== Practical Procedure
+
+*Encoding of a combinatorial problem:*
+1. Compute the generating function $F$ by using the sum/product principles and other operations.
+2. Compute the coefficients $a_n$ by performing the Taylor power-series expansion of $F$ around $x = 0$.
+
+*Solving a recurrence relation:*
+1. Rewrite the recurrence relation for $a_n$ in terms of an equation that only involves the generating function $F$.
+2. Solve this equation and obtain a closed form for $F$ in terms of $x$.
+3. Compute the coefficients $a_n$ by performing the Taylor power-series expansion of $F$ around $x = 0$.
+
+== Example: The Fibonacci Recursion
+
+We want to solve the recurrence relation
+$ f_n = f_(n-1) + f_(n-2), quad n >= 2, quad f_0 = 0, quad f_1 = 1 $
+by using the generating function
+$ F(x) = sum_(n=0)^infinity f_n x^n = f_0 + f_1 x + sum_(n=2)^infinity f_n x^n $
+
+Algorithm:
+1. Multiply the recurrence relation by $x^n$, and sum over all values of $n$ for which this recursion is valid (in our case, $n >= 2$):
+  $ sum_(n=2)^infinity f_n x^n = sum_(n=2)^infinity f_(n-1) x^n + sum_(n=2)^infinity f_(n-2) x^n $
+
+2. Manipulate the sums so that they can be expressed in terms of $F$ and the initial conditions $f_0 = 0, f_1 = 1$:
+  - $sum_(n=2)^infinity f_n x^n = F - f_0 - f_1 x = F - x$.
+  - $sum_(n=2)^infinity f_(n-1) x^n = x sum_(n=2)^infinity f_(n-1) x^(n-1) = x sum_(m=1)^infinity f_m x^m = x(F - f_0) = x F$.
+  - $sum_(n=2)^infinity f_(n-2) x^n = x^2 sum_(n=2)^infinity f_(n-2) x^(n-2) = x^2 sum_(m=0)^infinity f_m x^m = x^2 F$.
+
+  The Fibonacci recursion now becomes the equation
+  $ F - x = x F + x^2 F $
+
+3. We solve this equation for $F$:
+  $ F(x) = frac(x, 1 - x - x^2) = sum_(n=0)^infinity f_n x^n $
+
+4. We compute the Taylor power-series expansion of $F$ and we read the coefficient of $x^n$:
+  $ F(x) = frac(x, 1 - x - x^2) = x + x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + 13x^7 + ... $
+
+  We can obtain all coefficients with a little algebra:
+  $
+    F(x) = frac(alpha, x + (1 + sqrt(5))\/2) + frac(beta, x + (1 - sqrt(5))\/2) = frac(1, sqrt(5)) [frac(1, 1 - x(1 + sqrt(5))\/2) - frac(1, 1 - x(1 - sqrt(5))\/2)]
+  $
+  $ = sum_(n=0)^infinity frac(x^n, sqrt(5)) [(frac(1 + sqrt(5), 2))^n - (frac(1 - sqrt(5), 2))^n] $
+
+  Therefore,
+  $ f_n = frac(1, sqrt(5)) [(frac(1 + sqrt(5), 2))^n - (frac(1 - sqrt(5), 2))^n] $
+
+== Generalized Binomial Theorem
+
+#theorem[
+  Let $k$ be a fixed positive integer, then we have formally that
+  $ frac(1, (1 + x)^k) = sum_(n=0)^infinity binom(-k, n) x^n $
+  where for all $n >= 0$ the above binomial coefficient is defined as
+  $ binom(-k, n) = frac(-k(-k - 1)(-k - 2) ... (-k - n + 1), n!) = (-1)^n binom(n + k - 1, n) $
+]
+
+
+= Lattices and Boolean Algebras
+// TODO: remove?
+
+This chapter covers:
+1. Lattices and Boolean algebras:
+  - Definitions and properties.
+  - Bounded lattices.
+  - Distributive lattices.
+  - Complemented lattices.
+  - Boolean algebras.
+
+== Lattices
+
+#definition[
+  A lattice is a nonempty partially ordered set $(A, prec.eq)$ in which $sup({a, b})$ and $inf({a, b})$ exist for all $a, b in A$.
+]
+
+- If $sup(a, b)$ and $inf(a, b)$ exist, they are unique.
+- If $(A, prec.eq)$ is a lattice, both operations can be considered as binary operations on $A$:
+  - Their supremum is denoted by $sup(a, b) = a or b in A$.
+  - Their infimum is denoted by $inf(a, b) = a and b in A$.
+- Not every partially ordered set is a lattice.
+- A totally-ordered set is a lattice with $sup(a, b) = max(a, b)$ and $inf(a, b) = min(a, b)$.
+
+== Duality
+
+- If $(A, prec.eq)$ is a partially ordered set, then $(A, succ.eq)$ is also a partially ordered set. The Hasse diagram of $(A, succ.eq)$ is obtained by inverting the Hasse diagram of $(A, prec.eq)$.
+- If $(A, prec.eq)$ is a lattice, then $(A, succ.eq)$ is also a lattice, with the interchange $sup <-> inf$.
+
+#corollary(title: "Duality Principle")[
+  Any statement about a lattice $(A, prec.eq)$ is still valid if we make the interchanges $prec.eq <-> succ.eq$, $sup <-> inf$, and $or <-> and$.
+]
+
+- The lattices $(A, prec.eq)$ and $(A, succ.eq)$ are dual.
+- The order relations $prec.eq$ and $succ.eq$ are dual.
+- The operations $or$ and $and$ are dual.
+
+== Lattice Properties
+
+#proposition[
+  If $(A, prec.eq)$ is a lattice, then for any $a, b, c in A$:
+  1. $sup(a, a) = a or a = a$ [idempotent law].
+  2. $sup(a, b) = a or b = b or a = sup(b, a)$ [commutativity law].
+  3. $sup(a, sup(b, c)) = a or (b or c) = (a or b) or c = sup(sup(a, b), c)$ [associativity law].
+  4. $sup(a, inf(a, b)) = a or (a and b) = a$ [absorption law].
+]
+
+By duality, one obtains
+
+#corollary[
+  If $(A, prec.eq)$ is a lattice, then for any $a, b, c in A$:
+  1. $inf(a, a) = a and a = a$ [idempotent law].
+  2. $inf(a, b) = a and b = b and a = inf(b, a)$ [commutativity law].
+  3. $inf(a, inf(b, c)) = a and (b and c) = (a and b) and c = inf(inf(a, b), c)$ [associativity law].
+  4. $inf(a, sup(a, b)) = a and (a or b) = a$ [absorption law].
+]
+
+#proposition[
+  If $(A, prec.eq)$ is a lattice, then the following statements are equivalent for any $a, b in A$:
+  1. $a prec.eq b$.
+  2. $sup(a, b) = a or b = b$.
+  3. $inf(a, b) = a and b = a$.
+]
+
+#proposition(title: "Distributive Inequalities")[
+  If $(A, prec.eq)$ is a lattice, then for any $a, b, c in A$:
+  1. $inf(a, sup(b, c)) = a and (b or c) prec.eq (a and b) or (a and c) = sup(inf(a, b), inf(a, c))$.
+  2. $sup(a, inf(b, c)) = a or (b and c) succ.eq (a or b) and (a or c) = inf(sup(a, b), sup(a, c))$.
+]
+
+== Lattices as Algebraic Structures
+
+#definition[
+  A lattice is an algebraic structure $(A, or, and)$ with two binary operations $or$ and $and$ that satisfy the commutative, associative, and absorption laws.
+]
+
+- The absorption law implies the idempotent law.
+- Even though we do not assume the existence of any order relation on $A$, there is one order relation induced by the properties of the operations $or$ and $and$. In particular, for any $a, b in A$,
+  $ a prec.eq b <==> a or b = b $
+- $a prec.eq a$ because $a or a = a$ (idempotent law).
+- If $a prec.eq b <==> a or b = b$. If $b prec.eq a <==> b or a = a$. Therefore, $a = b$.
+- If $a prec.eq b <==> a or b = b$ and $b prec.eq c <==> b or c = c$, then $a or c = a or (b or c) = (a or b) or c = b or c = c$. Therefore $a prec.eq c$.
+- In summary, $prec.eq$ is a partial order relation and $(A, prec.eq)$ is a partially ordered set.
+
+#definition[
+  Given a lattice $(A, or, and)$, a sublattice $(M, or, and)$ of $(A, or, and)$ is given by a nonempty subset $M subset.eq A$ such that $(M, or, and)$ is also a lattice using the same operations as those used in $(A, or, and)$. (In other words, $(M, or, and)$ should be closed under the binary operations $or$ and $and$.)
+]
+
+Any lattice is a sublattice of itself.
+
+== Bounded Lattices
+
+#definition[
+  A lattice $(A, prec.eq)$ has a lower bound, denoted by $0$, if $0 prec.eq a$ for all $a in A$. A lattice has an upper bound denoted by $1$, if $a prec.eq 1$ for all $a in A$. A lattice is bounded if it contains a lower bound $0$ and an upper bound $1$.
+]
+
+The bounds $0$ and $1$ satisfy the following properties for all $a in A$:
+- $sup(a, 1) = a or 1 = 1$.
+- $inf(a, 1) = a and 1 = a$.
+- $sup(a, 0) = a or 0 = a$.
+- $inf(a, 0) = a and 0 = 0$.
+
+- The upper bound $1$ is the identity element for $and$: $a and 1 = a$, and it satisfies $a or 1 = 1$.
+- The lower bound $0$ is the identity element for $or$: $a or 0 = a$, and it satisfies $a and 0 = 0$.
+- In a bounded lattice, we can extend the duality principle by considering the interchange $0 <-> 1$.
+- Any finite lattice $A$ is bounded: $1 = sup(A)$ and $0 = inf(A)$.
+
+== Distributive Lattices
+
+#definition[
+  A lattice $(A, prec.eq)$ is a distributive lattice if for all $a, b, c in A$,
+  $
+    inf(a, sup(b, c)) & = a and (b or c) = (a and b) or (a and c) = sup(inf(a, b), inf(a, c)) \
+    sup(a, inf(b, c)) & = a or (b and c) = (a or b) and (a or c) = inf(sup(a, b), sup(a, c))
+  $
+]
+
+This property is stronger than the distributive laws:
+$
+  inf(a, sup(b, c)) & = a and (b or c) prec.eq (a and b) or (a and c) = sup(inf(a, b), inf(a, c)) \
+  sup(a, inf(b, c)) & = a or (b and c) succ.eq (a or b) and (a or c) = inf(sup(a, b), sup(a, c))
+$
+
+#theorem[
+  A lattice is distributive if and only if it does not contain a sublattice that is isomorphic to any of the following two lattices: $N_5$ (the "pentagonal lattice") and $M_3$ (the "diamond lattice").
+]
+
+== Complemented Lattices
+
+#definition[
+  Let $(A, or, and, 0, 1)$ be a bounded lattice. An element $a in A$ has a complement $b in A$ if $sup(a, b) = a or b = 1$ and $inf(a, b) = a and b = 0$.
+]
+
+- The bounds $0$ and $1$ are complements of each other.
+- If $a$ is a complement of $b$, then $b$ is a complement of $a$.
+- An element $a in A$ may have no complements, or it may have several ones.
+- The unique complement of $1$ is $0$, and vice versa.
+
+#definition[
+  A bounded lattice $(A, or, and, 0, 1)$ is complemented if for each $a in A$ there is at least one complement.
+]
+
+#proposition[
+  Let $(A, or, and)$ be a distributive lattice. If an element $a in A$ has a complement, then this element is unique.
+]
+
+If $(A, or, and)$ is a distributive and complemented lattice, then each element $a in A$ has a unique complement. This element will be denoted by $overline(a)$.
+
+== Boolean Algebras
+
+#definition(title: "Definition 1")[
+  A Boolean algebra is a bounded, distributive and complemented lattice $(A, or, and, overline(#hide[a]), 0, 1)$.
+]
+
+#definition(title: "Definition 2")[
+  Let $B$ be a nonempty set with at least two distinct elements $0, 1$. We define on $B$ the following operations:
+  - The (binary) Boolean sum $(a, b) -> a + b in B$.
+  - The (binary) Boolean multiplication $(a, b) -> a dot b in B$.
+  - The (unary) complementation $a -> overline(a) in B$.
+
+  Then $B$ is a Boolean algebra if the following properties hold for all $a, b, c in B$:
+  1. $a + 0 = a$ [identity w.r.t. the sum].
+  2. $a dot 1 = a$ [identity w.r.t. the multiplication].
+  3. $a + b = b + a$, $a dot b = b dot a$ [commutativity laws].
+  4. $a + (b + c) = (a + b) + c$, $a dot (b dot c) = (a dot b) dot c$ [associativity laws].
+  5. $a + (b dot c) = (a + b) dot (a + c)$, $a dot (b + c) = (a dot b) + (a dot c)$ [distributive laws].
+  6. $a + overline(a) = 1$, $a dot overline(a) = 0$ [complement laws].
+]
+
+== Simple Boolean Algebra
+
+- We can drop the symbol $dot$ in the Boolean multiplication $a dot b = a b$ whenever there is no confusion.
+- The elements $0, 1 in A$ do not have to be equal to the numbers $0, 1 in ZZ$.
+- The Boolean operations $+$ and $dot$ do not have to coincide with the sum and multiplication of real numbers.
+
+Let $(B, +, dot, overline(#hide[a]), 0, 1)$ be an algebra with $B = {0, 1}$ and the operations $+$, $dot$, and $overline(#hide[a])$ defined on $B$ as follows:
+$
+      1 dot 0 & = 0 dot 1 = 0 dot 0 = 0 \
+      1 dot 1 & = 1 \
+        1 + 1 & = 1 + 0 = 0 + 1 = 1 \
+        0 + 0 & = 0 \
+  overline(1) & = 0 \
+  overline(0) & = 1
+$
+
+Then $(B, +, dot, overline(#hide[a]), 0, 1)$ is a Boolean algebra, and it is the simplest one that exists: the Boolean algebra of two elements.
+
+== General Non-Trivial Boolean Algebras
+
+Let $A$ be a nonempty set. We now consider the power set $cal(P)(A)$ with the order relation for every pair $B, C subset.eq A$:
+$ B prec.eq C <==> B subset.eq C $
+
+- The set $(cal(P)(A), prec.eq)$ is a partially ordered set.
+- The set $(cal(P)(A), prec.eq)$ is a lattice. Given $B, C subset.eq A$, then
+  - $sup(B, C) = B union C subset.eq A$ ($or => union$).
+  - $inf(B, C) = B inter C subset.eq A$ ($and => inter$).
+- The identities are
+  - $1 = A$.
+  - $0 = emptyset$.
+- The set $(cal(P)(A), union, inter, emptyset, A)$ is a distributive lattice.
+- Each $B subset.eq A$ has a unique complement $overline(B) = A \\ B subset.eq A$.
+- The set $(cal(P)(A), union, inter, \\, emptyset, A)$ is a Boolean algebra.
+- Practical use in probability theory.
+
+== Properties of a Boolean Algebra
+
+#proposition[
+  Let $(B, +, dot, overline(#hide[a]), 0, 1)$ be a Boolean algebra. Then, for all $a, b in B$:
+  1. Idempotent laws: $a + a = a$ and $a dot a = a$.
+  2. Dominance laws: $a + 1 = 1$ and $a dot 0 = 0$.
+  3. Absorption laws: $a dot (a + b) = a$ and $a + a dot b = a$.
+  4. De Morgan laws: $overline((a + b)) = overline(a) dot overline(b)$ and $overline((a dot b)) = overline(a) + overline(b)$.
+  5. Involution law: $overline(overline(a)) = a$.
+  6. $overline(1) = 0$ and $overline(0) = 1$.
+]
+
+#definition[
+  Given a statement in a Boolean algebra, its dual statement is obtained by interchanging $+ <-> dot$ and $0 <-> 1$ in the original statement.
+]
+
+#proposition[
+  If a theorem is a consequence of the definitions of Boolean algebra, then the dual of the theorem is also a theorem.
+]
+
+#definition[
+  Let $(B, +, dot, overline(#hide[a]), 0, 1)$ be a Boolean algebra. Then a subset $C subset.eq B$ is a Boolean subalgebra if $0, 1 in C$, and it is closed under the same operations $+$, $dot$, $overline(#hide[a])$.
+]
+
 = Graph Theory I
+// TODO: rearrange chapters' content
 
 == Undirected Graphs
 
@@ -751,81 +1868,6 @@ We will denote the weight of the edge ${i, j} in E$ as $omega({i, j}) = omega_(i
 
 = Graph Theory IV
 
-== Graph Colorings
-
-1. *Undirected graphs*.
-2. *Algorithms in graph theory*:
-  - Minimum-weight spanning tree: Prim's and Kruskal's algorithms.
-  - Shortest path: Dijkstra's algorithm.
-  - *Graph colorings*.
-  - Eulerian and Hamiltonian graphs. Fleury's algorithm.
-3. *Combinatorial problems on graphs*.
-
-== Proper Colorings of a Graph
-
-#definition[
-  A *proper coloring* (with $q$ colors) of a simple graph $G = (V, E)$ is a function $c : V -> {1, 2, ..., q}$ such that $c(u) != c(w)$ whenever $u$ and $w$ are adjacent.
-]
-
-- Given a graph $G = (V, E)$, the total number of vertex colorings (including both proper and improper colorings) with $q$ colors is $q^(|V|)$.
-- Hereafter, we will consider proper colorings.
-- *Two difficult questions:*
-  1. How many distinct colorings with $q$ colors $P_G (q)$ can be obtained from a graph $G$?
-  2. Which is the minimum number of colors $q$ needed to color a given graph $G$?
-
-#definition[
-  The *chromatic number* $chi(G)$ of a graph $G$ is the minimum positive integer $q$ such that there is at least one coloring of $G$ with $q$ colors; i.e., $P_G (q) > 0$ for every $q >= chi(G) in NN$.
-]
-
-*Remark.* Deciding whether an arbitrary graph $G$ can be colored or not with $k >= 3$ colors is a hard problem.
-
-== Greedy Algorithm for Coloring a Graph
-
-#algorithm(
-  pseudocode-list(numbered-title: [Greedy algorithm], booktabs: true)[
-    // *procedure* ($G$: simple and connected graph with $n$ vertices)
-    + We order the vertices of $V$: $(v_1, v_2, ..., v_n)$
-    + $c(v_1) = 1$
-    + *for* $i = 2$ *to* $n$
-      + $S_i = {q : c(v_k) = q, "for every" v_k "that is adjacent to" v_i "with" k < i}$
-      + $c(v_i) = min(overline(S_i) inter NN) =$ the smallest color not in $S_i$
-  ],
-)
-
-
-*Remarks.*
-- This algorithm does not compute $chi(G)$, but an upper bound of $chi(G)$ which depends (strongly) on the chosen vertex ordering.
-- To compute the value of $chi(G)$, we should consider the $n!$ possible orderings of the $n$ vertices of $G$ (= exponential time!).
-
-== Some Theorems
-
-#theorem[
-  If $G$ is a graph with maximum degree $k$, then $chi(G) <= k + 1$.
-]
-
-#theorem(title: "Brooks, 1941")[
-  If $G$ is a connected non-complete graph with maximum degree $k >= 3$, then $chi(G) <= k$.
-]
-
-#proposition[
-  A graph $G$ is bipartite if and only if $chi(G) = 2$.
-]
-
-#theorem[
-  A graph is bipartite if and only if it does not contain any cycle of odd length.
-]
-
-#corollary[
-  Any tree is bipartite.
-]
-
-#theorem(title: "The four-color theorem, Appel and Haken, 1976")[
-  For any planar graph $G$, $P_G (4) > 0$.
-]
-
-- The original proof was computer assisted.
-- There is no three-color theorem: there are planar graphs $G$ with chromatic number $chi(G) = 4$: e.g. $K_4$.
-
 == Eulerian Graphs
 
 *Problem 4 (Euler)*: The old city of Königsberg was crossed by a river and there were seven bridges. Was it possible to start walking at some point of the city and get back to the same place by crossing every bridge exactly once?
@@ -878,1165 +1920,3 @@ The problem of deciding that a given graph is Hamiltonian or not is hard.
 ]
 
 *Remark.* Not every Hamiltonian graph satisfies the above condition: e.g. $C_n$ with $n >= 5$.
-
-= Advanced Methods in Combinatorics
-
-== Recurrence Relations
-
-1. *Recurrence relations*:
-  - Definitions.
-  - Solution of a linear homogeneous recurrence relation.
-  - Solution of a linear nonhomogeneous recurrence relation.
-2. *Generating functions*.
-
-#definition[
-  A *recurrence relation* for the sequence $(a_n)_(n in NN)$ is an equation that expresses $a_n$ in terms of one or more terms $a_(n-1), a_(n-2), ..., a_(n-k)$, and possibly $n$. In other words, it is, for any fixed $k >= 1$, an equation of the type
-  $ F(n; a_n, a_(n-1), a_(n-2), ..., a_(n-k)) = 0 $
-  which is valid for all $n >= k + 1$. The *initial conditions* are the first $k$ terms in the sequence: i.e., $(a_1, ..., a_k)$.
-]
-
-#definition[
-  - A recurrence relation is of *$k$-th order* if $a_n$ can be expressed in terms of $k$ terms $a_(n-1), a_(n-2), ..., a_(n-k)$.
-  - A recurrence relation is *linear* if it expresses $a_n$ as a linear function of $a_(n-1), a_(n-2), ..., a_(n-k)$. Otherwise, the relation is *nonlinear*.
-  - A recurrence relation is *homogeneous* if the zero sequence $a_n = a_(n-1) = ... = a_(n-k) = 0$ satisfies the relation. Otherwise, it is *nonhomogeneous*.
-]
-
-== Solution of a Linear Homogeneous Recurrence Relation
-
-#theorem(title: "Solution of a homogeneous first-order recurrence relation")[
-  Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
-  $ a_n = A a_(n-1), quad n >= 2 $
-  where $A in RR$, and we know the initial condition $a_1$. Then, the solution of this relation is given by
-  $ a_n = a_1 A^(n-1), quad n >= 1 $
-]
-
-*Remark.* In this course, we will only consider linear recurrence relations with constant coefficients ($A$ in the previous theorem).
-
-#theorem(title: "Solution of a homogeneous Fibonacci-type recurrence relation")[
-  Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
-  $ a_n = A a_(n-1) + B a_(n-2), quad n >= 3 $
-  with $A, B in RR$, and known initial conditions $a_1, a_2$. If the *characteristic equation* associated to this relation
-  $ x^2 = A x + B $
-  has characteristic roots $alpha$ and $beta$, then the solution of the recurrence relation is given for all $n >= 1$ by
-  $
-    a_n = cases(
-      K_1 alpha^n + K_2 beta^n & "if" alpha != beta,
-      (K_1 + n K_2) alpha^n & "if" alpha = beta
-    )
-  $
-  where the constants $K_1$ and $K_2$ can be obtained using the initial conditions $a_1, a_2$.
-]
-
-=== General Case
-
-Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the linear recursion:
-$ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k), quad n >= k + 1 $
-with real numbers $c_1, c_2, ..., c_k$. We assume that the $k$ initial conditions $a_1, a_2, ..., a_k$ are known.
-
-If we look for a solution of the form
-$ a_n = K_i x^n $
-then the amplitude $K_i$ cancels out, and the indeterminate $x$ should satisfy the *characteristic equation*:
-$ x^k = c_1 x^(k-1) + c_2 x^(k-2) + ... + c_k $
-
-If $a_n$ and $b_n$ are two solutions of a given linear homogeneous recurrence relation, then any linear combination $alpha a_n + beta b_n$ will be also a solution of that recursion.
-
-The space of solutions has a vector space structure.
-
-To each distinct characteristic root $x_i$, there corresponds a solution $a_n^((i))$, whose structure depends on the multiplicity of $x_i$:
-- If the root $x_i$ is simple, then $a_n^((i)) = K_i x_i^n$.
-- If the root $x_i$ is double, then $a_n^((i)) = (K_i + K_i' n) x_i^n$.
-- If the root $x_i$ is triple, then $a_n^((i)) = (K_i + K_i' n + K_i'' n^2) x_i^n$, etc.
-
-If the characteristic equation has $r$ distinct roots $x_i$ with multiplicities $k_i$ (such that $sum_(i=1)^r k_i = k$), then the general solution for this recursion has the form:
-$ a_n = sum_(i=1)^r [sum_(j=1)^(k_i) K_i^((j)) n^(j-1)] x_i^n, quad n >= 1 $
-where the $k$ constants $K_i^((j))$ are determined using the $k$ initial conditions.
-
-== Solution of a Linear Nonhomogeneous Recurrence Relation
-
-#theorem(title: "Solution of a linear nonhomogeneous recurrence relation")[
-  Let us assume that the sequence $(a_n)_(n in NN)$ satisfies the linear nonhomogeneous recurrence relation with constant coefficients:
-  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + t_n, quad n >= k + 1 $
-  where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, ..., a_k$ are known. The function $t_n : NN -> RR$ is a given *known function* of $n$. Then, the general solution of this linear nonhomogeneous recurrence is equal to the sum of the general solution for the linear homogeneous recurrence relation
-  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k), quad n >= k + 1 $
-  plus any particular solution of the full recurrence.
-]
-
-#theorem(title: "Solution of a linear nonhomogeneous recurrence relation")[
-  Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the linear nonhomogeneous recurrence
-  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + t_n, quad n >= k + 1 $
-  where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, a_2, ..., a_k$ are known. Let us further assume that the function $t_n : NN -> RR$ is of the form
-  $ t_n = s^n [b_0 + b_1 n + ... + b_t n^t] $
-  with real numbers $b_0, b_1, ..., b_t$. If $s$ is not a characteristic root of the associated linear homogeneous recurrence, then there exists a particular solution of the form
-  $ a_n^p = s^n [p_0 + p_1 n + ... + p_t n^t] $
-  If $s$ is a characteristic root with multiplicity $m$ of the associated linear homogeneous recurrence, then there exists a particular solution of the form
-  $ a_n^p = n^m s^n [p_0 + p_1 n + ... + p_t n^t] $
-]
-
-The particular solution $a_n^p$ has no free parameters: there is only a unique choice for the coefficients ${p_k}_(k=1)^t$ such that $a_n^p$ is actually a solution.
-
-== Generating Functions
-
-1. *Recurrence relations*.
-2. *Generating functions*:
-  - Definitions.
-  - How to efficiently encode combinatorial problems?
-  - Solution of recurrence relations.
-
-#definition[
-  The *generating function* (GF) associated to the sequence $(a_k)_(k=0)^infinity$ is the following formal power series:
-  $ F(x) = a_0 + a_1 x + a_2 x^2 + ... + a_n x^n + ... = sum_(n=0)^infinity a_n x^n $
-]
-
-Examples:
-- $(1 + x)^k = sum_(n=0)^k binom(k, n) x^n$ is the GF of $(binom(k, 0), binom(k, 1), ..., binom(k, k), 0, 0, ...)$.
-- $1 + x + x^2 + ... + x^(k-1) = sum_(n=0)^(k-1) x^n = frac(1 - x^k, 1 - x)$ is the GF of $(1, 1, ..., 1, 0, 0, ...)$ where there are $k$ ones.
-- $frac(1, 1 - x) = 1 + x + x^2 + x^3 + ... = sum_(n=0)^infinity x^n$ is the GF of $(1, 1, 1, ...)$.
-- $e^x = 1 + x + frac(x^2, 2!) + frac(x^3, 3!) + ... = sum_(n=0)^infinity frac(x^n, n!)$ is the GF of $(1, 1, frac(1, 2!), frac(1, 3!), ...)$.
-
-== Basic Operations with Generating Functions
-
-The GF for the sequence $(1, 2, 3, ...)$ is given by
-$
-  sum_(n=0)^infinity (n + 1) x^n = frac(d, d x) sum_(n=0)^infinity x^(n+1) = frac(d, d x) frac(x, 1 - x) = frac(1, (1 - x)^2)
-$
-
-If $F(x) = sum_(n=0)^infinity a_n x^n$, and $G(x) = sum_(n=0)^infinity b_n x^n$, then
-$ (F + G)(x) = sum_(n=0)^infinity (a_n + b_n) x^n $
-
-If $F$ is the GF of the sequence ${a_n}_(n=0)^infinity$, then the GF of the sequence $(0, 0, ..., 0, a_0, a_1, ...)$ where there are $k$ zeros is $G(x) = x^k F(x)$.
-
-== Integer Partitions
-
-*Problem 7*: Count the number of distinct partitions of the positive integer $N$. For example, if $N = 4$, there are 5 partitions: $4 = 3 + 1 = 2 + 2 = 2 + 1 + 1 = 1 + 1 + 1 + 1$.
-
-1. The sum principle allows us to compute the generating function associated to use the positive integer $k$ in the partition:
-  - The generating function for using 1 in the partition is $f_1 = 1 + x + x^2 + x^3 + ... = frac(1, 1-x)$.
-  - The generating function for using $2 = 1 + 1$ in the partition is $f_2 = 1 + x^2 + x^4 + x^6 + ... = frac(1, 1-x^2)$.
-  - The generating function for using $p >= 1$ in the partition is $f_p = 1 + x^p + x^(2p) + x^(3p) + ... = frac(1, 1-x^p)$.
-
-2. Because writing up a partition is a sequential process, the generating function that encodes Problem 7 is given by the product principle:
-  $
-    f(x) = product_(k=1)^infinity f_k (x) = product_(k=1)^infinity frac(1, 1 - x^k) = 1 + x + 2x^2 + 3x^3 + 5x^4 + 7x^5 + ...
-  $
-
-== Practical Procedure
-
-*Encoding of a combinatorial problem:*
-1. Compute the generating function $F$ by using the sum/product principles and other operations.
-2. Compute the coefficients $a_n$ by performing the Taylor power-series expansion of $F$ around $x = 0$.
-
-*Solving a recurrence relation:*
-1. Rewrite the recurrence relation for $a_n$ in terms of an equation that only involves the generating function $F$.
-2. Solve this equation and obtain a closed form for $F$ in terms of $x$.
-3. Compute the coefficients $a_n$ by performing the Taylor power-series expansion of $F$ around $x = 0$.
-
-== Example: The Fibonacci Recursion
-
-We want to solve the recurrence relation
-$ f_n = f_(n-1) + f_(n-2), quad n >= 2, quad f_0 = 0, quad f_1 = 1 $
-by using the generating function
-$ F(x) = sum_(n=0)^infinity f_n x^n = f_0 + f_1 x + sum_(n=2)^infinity f_n x^n $
-
-Algorithm:
-1. Multiply the recurrence relation by $x^n$, and sum over all values of $n$ for which this recursion is valid (in our case, $n >= 2$):
-  $ sum_(n=2)^infinity f_n x^n = sum_(n=2)^infinity f_(n-1) x^n + sum_(n=2)^infinity f_(n-2) x^n $
-
-2. Manipulate the sums so that they can be expressed in terms of $F$ and the initial conditions $f_0 = 0, f_1 = 1$:
-  - $sum_(n=2)^infinity f_n x^n = F - f_0 - f_1 x = F - x$.
-  - $sum_(n=2)^infinity f_(n-1) x^n = x sum_(n=2)^infinity f_(n-1) x^(n-1) = x sum_(m=1)^infinity f_m x^m = x(F - f_0) = x F$.
-  - $sum_(n=2)^infinity f_(n-2) x^n = x^2 sum_(n=2)^infinity f_(n-2) x^(n-2) = x^2 sum_(m=0)^infinity f_m x^m = x^2 F$.
-
-  The Fibonacci recursion now becomes the equation
-  $ F - x = x F + x^2 F $
-
-3. We solve this equation for $F$:
-  $ F(x) = frac(x, 1 - x - x^2) = sum_(n=0)^infinity f_n x^n $
-
-4. We compute the Taylor power-series expansion of $F$ and we read the coefficient of $x^n$:
-  $ F(x) = frac(x, 1 - x - x^2) = x + x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + 13x^7 + ... $
-
-  We can obtain all coefficients with a little algebra:
-  $
-    F(x) = frac(alpha, x + (1 + sqrt(5))\/2) + frac(beta, x + (1 - sqrt(5))\/2) = frac(1, sqrt(5)) [frac(1, 1 - x(1 + sqrt(5))\/2) - frac(1, 1 - x(1 - sqrt(5))\/2)]
-  $
-  $ = sum_(n=0)^infinity frac(x^n, sqrt(5)) [(frac(1 + sqrt(5), 2))^n - (frac(1 - sqrt(5), 2))^n] $
-
-  Therefore,
-  $ f_n = frac(1, sqrt(5)) [(frac(1 + sqrt(5), 2))^n - (frac(1 - sqrt(5), 2))^n] $
-
-== Generalized Binomial Theorem
-
-#theorem[
-  Let $k$ be a fixed positive integer, then we have formally that
-  $ frac(1, (1 + x)^k) = sum_(n=0)^infinity binom(-k, n) x^n $
-  where for all $n >= 0$ the above binomial coefficient is defined as
-  $ binom(-k, n) = frac(-k(-k - 1)(-k - 2) ... (-k - n + 1), n!) = (-1)^n binom(n + k - 1, n) $
-]
-
-
-= Graph Theory V
-
-== Combinatorial Problems on Graphs
-
-1. *Undirected graphs*.
-2. *Algorithms in graph theory*.
-3. *Combinatorial problems on graphs*:
-  - *Perfect matchings*.
-  - *Proper colorings*.
-
-== Perfect Matchings
-
-#definition[
-  A *perfect matching* of a simple graph with $2n$ vertices is a spanning subgraph composed by $n$ disjoint edges.
-]
-
-*Remarks.*
-- All the vertices of $G$ belong to the matching.
-- Each vertex of $G$ is incident with a single edge belonging to the matching.
-- If $G$ is *bipartite*, then we can prove more theorems.
-
-#theorem[
-  If $G$ is a bipartite and regular graph with degree $d >= 1$, then $G$ contains a perfect matching.
-]
-
-== Proper Colorings: Chromatic Polynomial
-
-#definition[
-  Let $G = (V, E)$ be a simple graph and let $q >= 2$ be a natural number. The *chromatic polynomial* $P_G$ is a polynomial such that $P_G (q)$ gives the number of distinct proper colorings of $G$ with $q in NN$ colors.
-]
-
-#theorem[
-  If $G = (V, E)$ is a simple graph, $P_G (q)$ is a polynomial in $q$.
-]
-
-The proof is based on these two facts:
-- If $G = ({v}, emptyset)$, $P_G (q) = q$.
-- The contraction-deletion theorem.
-
-#theorem(title: "The contraction-deletion theorem")[
-  If $G = (V, E)$ is a simple graph, and $e = {x, y} in E$ with $x, y in V$, then
-  $ P_G (q) = P_(G-e) (q) - P_(G\/e) (q) $
-  where $G - e$ is the graph obtained from $G$ by deleting the edge $e$, and $G\/e$ is the graph obtained from $G$ by contracting the edge $e$ (i.e., by identifying vertices $x$ and $y$, and eliminating possible multiple edges).
-]
-
-#theorem[
-  If $G$ is a disconnected graph with $k >= 1$ connected components $G_j$, then
-  $ P_G (q) = product_(j=1)^k P_(G_j) (q) $
-]
-
-#theorem[
-  If $G$ is a graph that can be split into two parts $G_1$ and $G_2$ such that $G_1 inter G_2 = K_n$ for some $n >= 1$, then
-  $ P_G (q) = (P_(G_1) (q) times P_(G_2) (q))/(P_(K_n) (q)) $
-]
-
-1. If $G = K_n$, then $P_(K_n) (q) = q(q - 1) ... (q - n + 1)$.
-2. If $G$ is a tree with $n$ vertices $T_n$, then $P_(T_n) (q) = q(q - 1)^(n-1)$.
-
-= Binary Relations. Equivalence Relations
-
-== Binary Relations
-
-1. *Binary relations*:
-  - Definitions.
-  - Graphical representation of a relation.
-  - Operations with relations.
-  - Properties.
-2. *Equivalence relations*:
-  - Equivalence classes.
-  - Quotient set.
-3. *Order relations*.
-4. *Lattices and Boolean algebras*.
-
-== Binary Relations Between Two Sets
-
-#definition[
-  A *binary relation* $R$ between the sets $V$ and $W$ is a subset of the Cartesian product $V times W$:
-  $ V times W = {(v, w) : (v in V) and (w in W)} $
-  Therefore, $R subset.eq V times W$. The *domain* of $R$ is the set:
-  $ "Dom" R = {v in V : (v, w) in R "for some" w in W} $
-  and the *image* of $R$ is the set:
-  $ "Im" R = {w in W : (v, w) in R "for some" v in V} $
-]
-
-*Notation*: If $(v, w) in R$, we denote it as $v R w$.
-
-== Binary Relations on a Set
-
-#definition[
-  A *binary relation* $R$ on the set $V$ is a subset of the Cartesian product $V times V$. Hence, $R subset.eq V times V$. The *domain* of $R$ is the set:
-  $ "Dom" R = {v in V : (v, w) in R "for some" w in V} $
-  and the *image* of $R$ is the set:
-  $ "Im" R = {w in V : (v, w) in R "for some" v in V} $
-]
-
-*Important remark*: A function $f : A -> B$ is a relation between the sets $A$ and $B$ and such that to each element $x in "Dom"(f)$ there corresponds a unique element of $B$ (i.e., $f(x)$).
-
-== Graphical Representation of a Relation
-
-- Cartesian representation.
-- Venn's diagrams.
-- *Adjacency matrix of $R$*:
-  Let $V$ and $W$ be the sets $V = {v_1, v_2, ..., v_(|V|)}$ and $W = {w_1, w_2, ..., w_(|W|)}$. Then entry $(i, j)$ of $A_R$ is equal to 1 if $v_i R w_j$, and it is equal to 0 otherwise.
-- *Directed graph $G_R$ associated to $R$*:
-  The vertices of $G_R$ are the elements of the set $V$ where the relation $R$ is defined. The set of (directed) edges is the set of ordered pairs:
-  $ E = {(v_i, v_j) in V times V : v_i R v_j} $
-
-== Operations with Relations
-
-#definition[
-  Given the relation $R$ on $V$, we define its *inverse relation* $R^(-1)$ as the relation on $V$ defined as $(v_1, v_2) in R^(-1) <==> (v_2, v_1) in R$, or in other words, $v_1 R^(-1) v_2 <==> v_2 R v_1$.
-]
-
-Given any relation $R$, there always exists its inverse relation $R^(-1)$. On the other hand, the inverse function $f^(-1)$ exists if and only if $f$ is bijective.
-
-#definition[
-  Given a relation $R$ on $V$, we define its *complementary relation* $overline(R)$ as the relation on $V$ such that $(v_1, v_2) in overline(R) <==> (v_1, v_2) in.not R$.
-]
-
-Binary relations are subsets of $V times W$, therefore, set operations can be interpreted as operations with relations.
-
-== Composition of Relations
-
-#definition[
-  Let $R$ be a relation between the sets $V$ and $W$, and let $S$ be a relation between the sets $W$ and $Y$. The composition of the relation $S$ and $R$ is a relation between the sets $V$ and $Y$ denoted as $S circle R$. In particular, $S circle R$ is a subset of the Cartesian product $V times Y$ such that, given any $v in V$ and $y in Y$, $v(S circle R)y$ if and only if there exists some $w in W$ satisfying $v R w$ and $w S y$.
-]
-
-#proposition[
-  Let $A_R$ be the adjacency matrix of the relation $R$ between $V$ and $W$, and let $A_S$ be the adjacency matrix of the relation $S$ between $W$ and $Y$. Then, the adjacency matrix $A_(S circle R)$ of the composition of the relations $S circle R$ between $V$ and $Y$ is given by:
-  $ A_(S circle R) = A_R circle.small A_S $
-  where the product $circle.small$ is the Boolean product of matrices.
-]
-
-Using Boolean operations (instead of regular ones) guarantees that $A_(S circle R)$ is an adjacency matrix associated to a binary relation.
-
-== Properties of Relations on a Set $V$
-
-#definition[
-  A relation $R$ is reflexive if for every $v in V$, $v R v$.
-]
-
-#definition[
-  A relation $R$ is irreflexive if for every $v in V$, $v R v$ does not hold.
-]
-
-#definition[
-  A relation $R$ is symmetric if $R = R^(-1)$, i.e., if $v R w ==> w R v$.
-]
-
-#definition[
-  A relation $R$ is antisymmetric if $(v_1 R v_2) and (v_2 R v_1) ==> v_1 = v_2$.
-]
-
-== Transitive Relations
-
-#definition[
-  A relation $R$ is transitive if $(v_1 R v_2) and (v_2 R v_3) ==> v_1 R v_3$.
-]
-
-#proposition[
-  A relation $R$ is transitive if and only if $R^n subset.eq R$ for all $n in NN$. The $n$-th power $R^n$ of the relation $R$ is recursively defined as follows:
-  $ R^1 = R, quad R^n = R circle R^(n-1) $
-]
-
-#corollary[
-  A relation $R$ is transitive if and only if $R^2 subset.eq R$. In other words, $R$ is transitive if and only if for each nonzero entry $(A_(R^2))_(i,j) = 1$ of the adjacency matrix of $R^2$, the corresponding entry of the adjacency matrix of $R$ is also nonzero $(A_R)_(i,j) = 1$.
-]
-
-== Equivalence Relations
-
-#definition[
-  A relation $R$ on a set $V$ is an equivalence relation if it is reflexive, symmetric and transitive.
-]
-
-*Notation:* If $R$ is an equivalence relation, $a R b$ is usually denoted as $a equiv b (mod R)$.
-
-#definition[
-  Let $R$ be an equivalence relation on a set $V$. The set of all the elements of $V$ related to a certain element $v in V$ is called the equivalence class determined by $v$, and it is denoted as $[v]_R$, or simply as $[v]$. Therefore,
-  $ [v]_R = {w in V : v R w} $
-  Any element $w in [v]_R$ (in particular, $v$) is a representative of the equivalence class $[v]_R$.
-]
-
-== Quotient Set
-
-#theorem[
-  Let $R$ be an equivalence relation on $V$. Then,
-  1. $[a]_R$ is non-empty for all $a in V$.
-  2. For any two elements $a, b in V$, either $[a]_R = [b]_R$ (and $a R b$), or $[a]_R inter [b]_R = emptyset$.
-  3. The equivalence classes determine the relation uniquely.
-]
-
-#theorem[
-  Let $R$ be an equivalence relation on $V$. Then the set of all equivalence classes of $R$ form a partition of $V$. Conversely, given a partition ${V_1, V_2, ...}$ of $V$, there exists an equivalence relation $R$ such that its equivalence classes are the sets $V_i$.
-]
-
-#definition[
-  Let $R$ be an equivalence relation on $V$. The set of all the equivalence classes of $R$ is called the quotient set of $V$ by $R$, and it is denoted by $V\/R$:
-  $ V\/R = {[v]_R : v in V} $
-]
-
-= Integer and Modular Arithmetic
-
-This chapter covers:
-1. Integer arithmetic:
-  - Integer divisibility
-  - Euclid's algorithm
-  - Bézout's identity
-  - Linear Diophantine equations
-2. Modular arithmetic:
-  - Linear congruences
-  - Arithmetic on $ZZ_p$
-  - Euler's $phi$ function. Euler's theorem
-
-== Integer Divisibility
-
-The set of integers $ZZ$ is closed with respect to the operations of sum, subtraction, and product. In other words, for every $a, b in ZZ$, $a plus.minus b in ZZ$ and $a dot b in ZZ$. They also satisfy:
-- $0$ is the identity with respect to the sum: $a + 0 = a$ for every $a in ZZ$.
-- $1$ is the identity with respect to the product: $a dot 1 = a$ for every $a in ZZ$.
-- For every $a in ZZ$, there exists a unique inverse element $-a in ZZ$ such that $a + (-a) = 0$.
-
-However, the result of dividing two integers might not be an integer.
-
-#definition[
-  Given two integers $a != 0$ and $b$, we say that $a$ divides $b$ if there is an integer $q in ZZ$ such that $b = a dot q$. If $a$ divides $b$, we say that $a$ is a factor of $b$ and that $b$ is a multiple of $a$. We denote $a | b$ when $a$ divides $b$, and we write $a parallel.not b$ when $a$ does not divide $b$.
-]
-
-*Remarks:*
-- Every non-zero integer $a in ZZ \\ {0}$ divides $0$: $0 = a dot 0$ ($q = 0$).
-- $1$ divides any $a in ZZ$: $a = 1 dot a$ ($q = a$).
-- Any nonzero integer $a in ZZ \\ {0}$ divides itself: $a = a dot 1$ ($q = 1$).
-
-== The Division Algorithm
-
-#theorem(title: "The Division Algorithm")[
-  Let $a$ and $b != 0$ be two integers. Then there exists a unique pair of integers $q$ and $r$ such that
-  $ a = q dot b + r quad "with" 0 <= r < |b| $
-  - The numbers $a$ and $b$ are called dividend and divisor, respectively.
-  - The number $r$ is the remainder: $r = a mod b$.
-  - The number $q$ is the quotient: $q = a "div" b = cases(floor(a\/b) & "if" b > 0, ceil(a\/b) & "if" b < 0)$
-]
-
-== Properties of Integer Division
-
-#theorem[
-  Let $a, b, c$ be integers. Then:
-  1. If $a | b$ and $a | c$, then $a | (b + c)$.
-  2. If $a | b$, then $a | (b dot c)$ for every $c in ZZ$.
-  3. If $a | b$ and $b | c$, then $a | c$.
-  4. If $c != 0$, then $a | b$ if and only if $(c dot a) | (c dot b)$.
-  5. If $a | b$ and $b != 0$, then $|a| <= |b|$.
-  6. If $a | b$ and $b | a$, then $a = plus.minus b$.
-]
-
-#theorem[
-  If $a | b_i$ for $i = 1, ..., N$, then $a | sum_(i=1)^N u_i dot b_i$ for every $u_i in ZZ$.
-]
-
-== Greatest Common Divisor. Euclid's Lemma (IIIrd century BC)
-
-#definition[
-  Let $a, b$ be integers, not both simultaneously zero. The largest integer $d$ such that $d | a$ and $d | b$ is called the greatest common divisor of $a$ and $b$. It is denoted by $gcd(a, b)$.
-]
-
-*Remarks:*
-- The case $a = b = 0$ is excluded because any integer divides $0$.
-- $gcd(0, a) = |a|$ for every nonzero integer $a$.
-
-#theorem[
-  The greatest common divisor of two numbers is unique.
-]
-
-#definition[
-  Two integers $a$ and $b$ are relatively prime if $gcd(a, b) = 1$. The integers $a_1, a_2, ..., a_n$ are pairwise relatively prime if $gcd(a_i, a_j) = 1$ for any $1 <= i < j <= n$.
-]
-
-#lemma(title: "Euclid")[
-  Given the integers $a$, $b != 0$, $q$ and $r$, such that $a = q dot b + r$ with $0 <= r < |b|$, then $gcd(a, b) = gcd(b, r)$.
-]
-
-== Euclid's Algorithm
-
-*Problem 9:* Apply recursively Euclid's lemma to compute $gcd(662, 414)$.
-
-$
-    a & = b dot q + r \
-  662 & = 414 dot 1 + 248 \
-  414 & = 248 dot 1 + 166 \
-  248 & = 166 dot 1 + 82 \
-  166 & = 82 dot 2 + 2 \
-   82 & = 2 dot 41 + 0
-$
-
-$gcd(662, 414) = gcd(414, 248) = gcd(248, 166) = gcd(166, 82) = gcd(82, 2) = 2$.
-
-In general, $gcd(a, b) = gcd(b, r_1) = gcd(r_1, r_2) = ... = gcd(r_(n-2), r_(n-1))$, where $r_(n-1)$ is the last nonzero remainder ($r_n = 0$). In the last step:
-$ r_(n-2) = q_n dot r_(n-1) ==> r_(n-1) | r_(n-2) $
-Therefore, $gcd(r_(n-2), r_(n-1)) = r_(n-1)$.
-
-#theorem[
-  In Euclid's algorithm, $gcd(a, b) = r_(n-1)$ (= the last nonzero remainder).
-]
-
-== Bézout's Identity
-
-#theorem(title: "Bézout's Identity, 1730-1783")[
-  If $a$ and $b$ are two integers not simultaneously zero, then there exist integers $u, w$ such that
-  $ gcd(a, b) = a dot u + b dot w $
-]
-
-*Proof:* We write the steps of Euclid's algorithm, and "unroll them":
-$
-        a & = q_1 dot b + r_1 ==> r_1 = a - q_1 dot b \
-        b & = q_2 dot r_1 + r_2 ==> r_2 = b - q_2 dot r_1 \
-      r_1 & = q_3 dot r_2 + r_3 ==> r_3 = r_1 - q_3 dot r_2 \
-          & dots.v \
-  r_(n-4) & = q_(n-2) dot r_(n-3) + r_(n-2) ==> r_(n-2) = r_(n-4) - q_(n-2) dot r_(n-3) \
-  r_(n-3) & = q_(n-1) dot r_(n-2) + r_(n-1) ==> r_(n-1) = r_(n-3) - q_(n-1) dot r_(n-2) \
-  r_(n-2) & = q_n dot r_(n-1) + (r_n = 0) ==> r_(n-1) = gcd(a, b)
-$
-
-Then,
-$
-  gcd(a, b) = r_(n-1) & = alpha_(n-1) r_(n-3) + beta_(n-1) r_(n-2) \
-                      & = alpha_(n-2) r_(n-4) + beta_(n-2) r_(n-3) \
-                      & = ... \
-                      & = alpha_3 r_1 + beta_3 r_2 \
-                      & = alpha_2 b + beta_2 r_1 \
-                      & = alpha_1 a + beta_1 b
-$
-
-*Important remark:* Bézout's identity does not imply that the integers $u, v$ are unique.
-
-#theorem[
-  Let $a$ and $b$ be two integers not simultaneously zero with $gcd(a, b) = d$. An integer $c$ can be written in the form $a dot x + b dot y$ for some integers $x, y$ if and only if $c$ is a multiple of $d$. In particular, $d$ is the smallest positive integer of the form $a dot x + b dot y$ with $x, y in ZZ$.
-]
-
-#corollary[
-  Two integers are relatively prime if and only if there exist integers $x, y$ such that $a dot x + b dot y = 1$.
-]
-
-#corollary[
-  If $gcd(a, b) = d$, then
-  1. $gcd(m dot a, m dot b) = m dot d$ for every $m in NN$.
-  2. $gcd(a\/d, b\/d) = 1$.
-]
-
-#corollary[
-  If $a, b$ are two relatively-prime integers, then:
-  1. If $a | c$ and $b | c$, then $(a dot b) | c$.
-  2. If $a | (b dot c)$, then $a | c$.
-]
-
-== Least Common Multiple
-
-#definition[
-  The least common multiple of two natural numbers $a, b$ is the least natural number $m$ such that $a | m$ and $b | m$. It is denoted by $"lcm"(a, b)$.
-]
-
-*Remark:* This number exists because the set of natural numbers $NN$ is a well-ordered set (see next chapter).
-
-#theorem[
-  If $a, b$ are two natural numbers, then
-  $ gcd(a, b) dot "lcm"(a, b) = a dot b $
-]
-
-== Prime Numbers
-
-#definition[
-  A natural number $p > 1$ is called a prime number if the only positive factors of $p$ are $1$ and $p$. A natural number $p > 1$ that is not prime is called composite.
-]
-
-*Remark:* The natural number $1$ is not prime. The first prime number is $2$, and the other prime numbers are odd natural numbers $(3, 5, 7, 11, ...)$.
-
-#theorem(title: "Euclid")[
-  There are infinitely many prime numbers.
-]
-
-#theorem[
-  The positive integer $n$ is a composite number if and only if $n$ can be divided by some prime number $p <= sqrt(n)$.
-]
-
-#lemma[
-  Let $p$ be a prime number, and let $a, b$ be integers. Then:
-  (a) Either $p | a$, or $p$ and $a$ are relatively prime.
-  (b) If $p | (a dot b)$, then either $p | a$ or $p | b$.
-]
-
-== The Fundamental Theorem of Arithmetic
-
-#theorem(title: "The Fundamental Theorem of Arithmetic")[
-  Every natural number $n > 1$ can be written uniquely as a product of primes
-  $ n = p_1^(n_1) dot p_2^(n_2) dot p_3^(n_3) dot ... dot p_k^(n_k) $
-  where the $p_i$ are distinct prime numbers written in increasing order, and the exponents $n_i$ are natural numbers $n_i >= 1$.
-]
-
-#proposition[
-  If the integers $a, b > 1$ can be factorized in the form
-  $
-    a & = p_1^(n_1) dot p_2^(n_2) ... p_k^(n_k) \
-    b & = p_1^(m_1) dot p_2^(m_2) ... p_k^(m_k)
-  $
-  with $n_i, m_i >= 0$ and all prime factors of $a$ and $b$ appear in both decompositions, then
-  $
-      gcd(a, b) & = p_1^(min(n_1, m_1)) dot p_2^(min(n_2, m_2)) ... p_k^(min(n_k, m_k)) \
-    "lcm"(a, b) & = p_1^(max(n_1, m_1)) dot p_2^(max(n_2, m_2)) ... p_k^(max(n_k, m_k))
-  $
-]
-
-== Linear Diophantine Equations [Diophantus of Alexandria, IIIrd century]
-
-#definition[
-  A Diophantine equation is an equation of one or several variables such that we are only interested in their integer solutions.
-]
-
-#theorem(title: "Brahmagupta, VIIth century")[
-  The linear equation
-  $ a dot x + b dot y = c $
-  where $a, b, c$ are integers (and $a, b$ not simultaneously zero), admits integer solutions if and only if $d = gcd(a, b)$ divides $c$. In this case, there exist infinitely many integer solutions $(x_k, y_k)$ with $k in ZZ$ given by
-  $
-    x_k & = u dot p + (b dot k)\/d \
-    y_k & = w dot p - (a dot k)\/d
-  $
-  where $p = c\/d in ZZ$ and $u, w$ are given by
-  $ d = u dot a + w dot b $
-]
-
-== Modular Arithmetic
-
-Modular arithmetic allows us to perform algebraic operations using, instead of a given set of numbers, their respective remainders with respect to some fixed positive number called the modulus. The modulus is $12$ or $24$ when we count hours with a clock, $7$ when we count days in a week, etc.
-
-#definition[
-  Let $a, b$ be integers, and let $m$ be a natural number. Then $a, b$ are congruent modulo $m$ if $m | (a - b)$. This relation is denoted as $a equiv b (mod m)$.
-]
-
-#proposition[
-  1. $a equiv b (mod m)$ if and only if $a mod m = b mod m$.
-  2. $a equiv b (mod m)$ if and only if $a = b + k dot m$ for some $k in ZZ$.
-]
-
-#theorem[
-  For each positive integer $m$, the binary relation $equiv (mod m)$ is an equivalence relation.
-]
-
-== The Quotient Set $ZZ_m$
-
-The equivalence classes (or congruence classes) modulo $m$
-$ [a]_m = {b in ZZ : a equiv b (mod m)} = {a + m k : k in ZZ} $
-form a partition of $ZZ$. There are $m$ distinct equivalence classes corresponding to the $m$ possible remainders obtained by dividing an integer by $m$.
-
-#theorem[
-  The quotient set $ZZ_m = ZZ \/ equiv (mod m)$ is given by
-  $ ZZ_m = {[a]_m : 0 <= a <= m - 1} $
-]
-
-*Remark:* Usually, the notation for $ZZ_m$ is a bit sloppy:
-$ ZZ_m = {0, 1, 2, ..., m - 1} $
-
-== Modular Arithmetic
-
-#theorem[
-  Let $m$ be a positive integer. If $a_1 equiv b_1 (mod m)$ and $a_2 equiv b_2 (mod m)$, then:
-  - $a_1 plus.minus a_2 equiv b_1 plus.minus b_2 (mod m)$.
-  - $a_1 dot a_2 equiv b_1 dot b_2 (mod m)$.
-]
-
-#corollary[
-  Let $m, k$ be positive integers, and let $a, b in ZZ$. If $a equiv b (mod m)$, then $a^k equiv b^k (mod m)$.
-]
-
-#theorem[
-  Let $m$ be a positive integer, and let $a, b, c$ be integers. If $a dot c equiv b dot c (mod m)$ and $gcd(c, m) = 1$, then $a equiv b (mod m)$.
-]
-
-*Remarks:*
-- This theorem allows us to divide by a common factor $c$ both sides of the sign $equiv$ whenever $c$ and the modulus $m$ are relatively prime.
-- If $c$ and $m$ are not relatively prime, then the correct result is: Let us write $m = p dot c$ for positive integers $p, c$, and let $a, b$ be integers. If $a dot c equiv b dot c (mod p dot c)$, then $a equiv b (mod p)$.
-
-== Modular Division: Linear Congruence Equations
-
-#definition[
-  A congruence modulo $m$ of the form
-  $ a dot x equiv b (mod m) $
-  where $m$ is a positive integer, $a, b$ are integers, and $x$ is a variable is called a linear congruence equation.
-]
-
-*Remarks:*
-- If there exists a unique solution of the linear congruence equation $a dot x equiv 1 (mod m)$, then solving this equation is equivalent to obtaining the multiplicative inverse of $a$ modulo $m$.
-- If $x$ is a solution of a linear congruence equation, and $x' equiv x (mod m)$, then $x'$ is also a solution of that equation: $a dot x' equiv a dot x (mod m) equiv b (mod m)$.
-- Therefore, the solutions of a linear congruence equation (if any) form classes of congruence modulo $m$: i.e., they are elements of $ZZ_m$.
-
-== Linear Congruence Equations
-
-#theorem[
-  If $d = gcd(a, m)$, then the linear congruence equation
-  $ a dot x equiv b (mod m) $
-  has a solution if and only if $d | b$. In this case and if $x_0$ is a particular solution of the linear congruence equation, the general solution is given by
-  $ x_k = x_0 + (m dot k)\/d, quad k in ZZ $
-  In particular, these solutions form $d$ congruence classes modulo $m$ with representatives:
-  ${x_0, x_0 + m\/d, x_0 + (2m)\/d, ..., x_0 + (m(d - 1))\/d}$
-]
-
-#corollary[
-  If $gcd(a, m) = 1$, the solutions $x$ of the linear congruence equation $a dot x equiv b (mod m)$ form a unique congruence class modulo $m$.
-]
-
-#corollary[
-  If $gcd(a, m) = 1$ with $m > 1$, then there exists a multiplicative inverse of $a$ modulo $m$. This multiplicative inverse is unique modulo $m$.
-]
-
-== Arithmetic with $ZZ_m$
-
-The elements of $ZZ_m$ with $m in NN$ are equivalence classes modulo $m$. For the sake of simplicity, $x in ZZ_m$ represents that $x in [x]_m$.
-
-The sum and the multiplication on $ZZ_m$ are defined as:
-$
-    x + y & = [x]_m + [y]_m = [x + y]_m \
-  x dot y & = [x]_m dot [y]_m = [x dot y]_m
-$
-
-and they verify the usual properties: for every $x, y, z in ZZ_m$,
-- Closure: $x + y in ZZ_m$ and $x dot y in ZZ_m$.
-- Associativity: $x + (y + z) = (x + y) + z$ and $x dot (y dot z) = (x dot y) dot z$.
-- Commutativity: $x + y = y + x$ and $x dot y = y dot x$.
-- Distributivity: $x dot (y + z) = x dot y + x dot z$.
-- Identity element (sum): $exists 0 in ZZ_m$ such that $0 + x = x$, $forall x in ZZ_m$.
-- Identity element (product): $exists 1 in ZZ_m$ such that $1 dot x = x$, $forall x in ZZ_m$.
-- Inverse element (sum): $forall x in ZZ_m$, $exists -x in ZZ_m$ such that $x + (-x) = 0$.
-
-*Remark:* These properties are those characterizing a field [like $(RR, +, dot)$], except for the existence of a multiplicative inverse.
-
-In $ZZ$ there does not exist in general the multiplicative inverse of an integer $x$: $y$ is the multiplicative inverse of $x$ if and only if $x dot y = 1$. However, two properties hold:
-1. Cancellation law: If $x != 0$ and $x dot y = x dot z$, then $y = z$.
-2. If $x dot y = 0$, then either $x = 0$ or $y = 0$.
-
-None of these two properties holds in general in $ZZ_m$.
-
-#definition[
-  An element $x not equiv 0 (mod m)$ of $ZZ_m$ is a divisor of zero if there exists an element $y not equiv 0 (mod m)$ such that $x dot y equiv 0 (mod m)$.
-]
-
-*Remark:* In some books, the condition $x not equiv 0 (mod m)$ is dropped.
-
-#definition[
-  An element $x in ZZ_m$ is a unit modulo $m$ if it has a multiplicative inverse modulo $m$; i.e., if there is an element $s in ZZ_m$ such that $x dot s equiv 1 (mod m)$.
-]
-
-#theorem[
-  The multiplicative inverse of a unit modulo $m$ is unique.
-]
-
-*Remark:* As the inverse of a unit $r$ modulo $m$ is unique, it will be denoted by $r^(-1)$.
-
-#theorem[
-  An element $r in ZZ_m$ is invertible (i.e., it has a multiplicative inverse) if and only if $r$ and $m$ are relatively prime.
-]
-
-#corollary[
-  If $p$ is a prime number, every nonzero element of $ZZ_p$ is invertible.
-]
-
-- If $p$ is prime, then $(ZZ_p, +, dot)$ is a field like $(RR, +, dot)$ or $(QQ, +, dot)$.
-- If $m = p dot q$ is composite, then there are divisors of zero in $ZZ_m$: $p dot q equiv 0 (mod m)$ with $p, q not equiv 0 (mod m)$. In this case, $(ZZ_m, +, dot)$ is a ring with divisors of zero.
-
-#definition[
-  Euler's (totient) function $phi : NN -> NN$ is defined as $phi(m)$ gives the number of invertible elements of $ZZ_m$.
-]
-
-#lemma[
-  If $p$ is a prime number, then $phi(p) = p - 1$.
-]
-
-== Euler's Theorem
-
-#theorem(title: "Euler, 1790")[
-  If $y$ is invertible in $ZZ_m$ (i.e., if $gcd(y, m) = 1$), then
-  $ y^(phi(m)) equiv 1 (mod m) $
-]
-
-#corollary(title: "Fermat's Little Theorem")[
-  If $p$ is a prime number and if $y not equiv 0 (mod p)$, then
-  $ y^(p-1) equiv 1 (mod p) $
-]
-
-#corollary[
-  If $p$ is a prime number, then $y^p equiv y (mod p)$ for any integer $y$.
-]
-
-#theorem[
-  1. If $p$ is a prime, then $phi(p^k) = p^(k-1)(p - 1)$ for every $k in NN$.
-  2. If $gcd(m, n) = 1$, then $phi(m dot n) = phi(m) dot phi(n)$.
-  3. If $n >= 2$ has the following decomposition in prime factors $n = product_(k=1)^r p_k^(n_k)$ with $n_k >= 1$, then $phi(n) = n dot product_(k=1)^r (1 - 1\/p_k)$.
-]
-
-= Order Relations
-
-This chapter covers:
-1. Binary relations.
-2. Equivalence relations.
-3. Order relations:
-  - Partially ordered sets.
-  - Hasse diagrams.
-  - Maximal elements.
-  - Totally ordered sets.
-  - Well-ordered sets and mathematical induction.
-4. Lattices and Boolean algebras.
-
-== Partial Order Relations
-
-#definition[
-  A binary relation on a set $V$ is a partial order (or an order relation) if it is reflexive, antisymmetric, and transitive.
-]
-
-*Notation:* Order relations are usually denoted by the symbol $prec.eq$.
-
-#definition[
-  A set $V$ equipped with an order relation $prec.eq$ is called a partially ordered set $(V, prec.eq)$ (or poset).
-]
-
-#definition[
-  Let $(V, prec.eq)$ be a partially ordered set. Two elements $a, b in V$ are comparable if either $a prec.eq b$ or $b prec.eq a$. If none of these conditions holds, such elements are incomparable.
-]
-
-#definition[
-  A partially ordered set $(V, prec.eq)$ is totally ordered when any pair of elements $a, b in V$ are comparable. In this case, $(V, prec.eq)$ is a totally ordered set (or linear order or chain).
-]
-
-== Hasse Diagrams (1926)
-
-The directed graph associated to an order relation $prec.eq$ can be simplified by eliminating redundant elements.
-
-*Algorithm to obtain the Hasse diagram for a partial order $prec.eq$:*
-1. As $prec.eq$ is reflexive, there is a loop incident with each vertex. We eliminate all these loops.
-2. The transitivity of $prec.eq$ implies the existence of subgraphs of the following type: If $a prec.eq b$ and $b prec.eq c$, we eliminate the superfluous edge associated to $a prec.eq c$.
-3. We choose that all the oriented edges point upwards. Then, we eliminate all the arrows.
-
-== Extremal Elements
-
-#definition[
-  Let $(V, prec.eq)$ be a partially ordered set. $M in V$ is a maximal element if for all $v in V$, $M prec.eq v$ implies that $M = v$. $m in V$ is a minimal element if for all $v in V$, $v prec.eq m$ implies that $m = v$. In other words, in the Hasse diagram associated to $(V, prec.eq)$, there is no element above $M$, and no element below $m$.
-]
-
-#definition[
-  Let $(V, prec.eq)$ be a partially ordered set. $M^star in V$ is a maximum (or greatest element) if $v prec.eq M^star$ for all $v in V$. $m^star in V$ is a minimum (or least element) if $m^star prec.eq v$ for all $v in V$.
-
-  In other words, in the Hasse diagram associated to $(V, prec.eq)$, $M^star$ is above all the elements of $V$, and $m^star$ is below all elements of $V$. The maximum and minimum of $(V, prec.eq)$ are denoted by $max(V)$ and $min(V)$, respectively.
-]
-
-*Remark:* The maximal, minimal, greatest, and/or least elements of $(V, prec.eq)$ might not exist.
-
-#theorem[
-  The maximum $M^star$ of a partially ordered set $(A, prec.eq)$, if it exists, is unique. In addition, the maximum of $(A, prec.eq)$ is also a maximal element of it.
-]
-
-#definition[
-  Let $(V, prec.eq)$ be a partially ordered set, and $B subset V$. $u in V$ is an upper bound of $B$ if $b prec.eq u$ for all $b in B$. The set of the upper bounds of $B$ is denoted by $"major"(B)$.
-
-  The supremum of $B$, $sup(B)$, is the least upper element of $B$: $sup(B) = min("major"(B))$.
-
-  $d in V$ is a lower bound of $B$ if $d prec.eq b$ for all $b in B$. The set of all the lower bounds of $B$ is denoted by $"minor"(B)$.
-
-  The infimum of $B$, $inf(B)$, is the greatest lower element of $B$: $inf(B) = max("minor"(B))$.
-]
-
-*Remark:* It may happen that $"major"(B) = emptyset$, $"minor"(B) = emptyset$ and/or $sup(B)$ and $inf(B)$ do not exist.
-
-== Total Order Compatible with a Partial Order
-
-#definition[
-  A total order $(V, prec.eq_T)$ is compatible with the partial order $(V, prec.eq_P)$ if for all $v, w in V$, $v prec.eq_P w$ implies that $v prec.eq_T w$.
-]
-
-#algorithm(
-  pseudocode-list(numbered-title: [Topological Sort], booktabs: true)[
-    + k = 1
-    + while $V != emptyset$
-      + $v_k = "a minimal element of" (V, prec.eq_P)$
-      + $V <- V \\ {v_k}$
-      + $k <- k + 1$
-    + $v_1 prec.eq_T v_2 prec.eq_T ... prec.eq_T v_n "is a total order compatible with" (V, prec.eq_P)$.
-  ],
-)
-
-
-== Well-Ordered Sets
-
-#definition[
-  $(V, prec.eq)$ is a well-ordered set if $(V, prec.eq)$ is a total order and any nonempty subset of $V$ always has a minimum.
-]
-
-*Remarks:*
-- The set of natural numbers with the usual order $(NN, <=)$ is a well-ordered set. This property is equivalent to the induction principle.
-- The totally-ordered set $(ZZ, <=)$ is not a well-ordered set; but as $ZZ$ is isomorphic to $NN$, we can choose another order $prec.eq$ such that $(ZZ, prec.eq)$ is a well-ordered set.
-
-== The Induction Principle for the Natural Numbers
-
-#definition(title: "Induction Principle: Weak Version")[
-  Let $P$ be some property that satisfies the following conditions:
-  1. Base step: $P(1)$ is true.
-  2. Inductive step: If $P(k)$ is true for an arbitrary and fixed $k$, then $P(k + 1)$ is true.
-
-  Then, $P(n)$ is true for every $n in NN$.
-]
-
-*Remark:* The hypothesis in the inductive step ($P(k)$ is true) is called the induction hypothesis. To perform the inductive step, one assumes the induction hypothesis, and then uses this assumption to prove that $P(k + 1)$ is true.
-
-#definition(title: "Induction Principle: Strong Version")[
-  Let $P$ be some property that satisfies the following conditions:
-  1. Base step: $P(1)$ is true.
-  2. Inductive step: Given an arbitrary fixed $k$, if $P(m)$ is true for any $1 <= m <= k$, then $P(k + 1)$ is true.
-
-  Then, $P(n)$ is true for every $n in NN$.
-]
-
-#proposition(title: "Strong Induction Principle for Well-Ordered Sets")[
-  Let $(V, prec.eq)$ be a well-ordered set, and $P$ be some property that satisfies the following conditions:
-  1. Base step: $P(v_0)$ is true for $v_0 = min(V)$.
-  2. Inductive step: Let $w$ be an arbitrary fixed element of $V$, and let $v$ be its successor. If $P(x)$ is true for all $v_0 prec.eq x prec.eq w$, then $P(v)$ is true.
-
-  Then, $P(v)$ is true for every $v in V$.
-]
-
-== Summary: Types of Relations
-
-#table(
-  columns: 6,
-  align: center,
-  toprule(),
-  table.header(
-    [*Relation*], [*Reflexive*], [*Symmetric*], [*Antisymmetric*], [*Transitive*], [*Additional Properties*]
-  ),
-  midrule(), [Equivalence], [✅], [✅], [❌], [✅],
-  [], [Order], [✅], [❌], [✅], [✅],
-  [], [Total order], [✅], [❌], [✅], [✅],
-  [Every pair is comparable], [Well-ordered set], [✅], [❌], [✅], [✅],
-  [Every nonempty subset has a minimum], bottomrule(),
-)
-
-= Lattices and Boolean Algebras
-
-This chapter covers:
-1. Binary relations.
-2. Equivalence relations.
-3. Order relations.
-4. Lattices and Boolean algebras:
-  - Definitions and properties.
-  - Bounded lattices.
-  - Distributive lattices.
-  - Complemented lattices.
-  - Boolean algebras.
-
-== Lattices
-
-#definition[
-  A lattice is a nonempty partially ordered set $(A, prec.eq)$ in which $sup({a, b})$ and $inf({a, b})$ exist for all $a, b in A$.
-]
-
-- If $sup(a, b)$ and $inf(a, b)$ exist, they are unique.
-- If $(A, prec.eq)$ is a lattice, both operations can be considered as binary operations on $A$:
-  - Their supremum is denoted by $sup(a, b) = a or b in A$.
-  - Their infimum is denoted by $inf(a, b) = a and b in A$.
-- Not every partially ordered set is a lattice.
-- A totally-ordered set is a lattice with $sup(a, b) = max(a, b)$ and $inf(a, b) = min(a, b)$.
-
-== Duality
-
-- If $(A, prec.eq)$ is a partially ordered set, then $(A, succ.eq)$ is also a partially ordered set. The Hasse diagram of $(A, succ.eq)$ is obtained by inverting the Hasse diagram of $(A, prec.eq)$.
-- If $(A, prec.eq)$ is a lattice, then $(A, succ.eq)$ is also a lattice, with the interchange $sup <-> inf$.
-
-#corollary(title: "Duality Principle")[
-  Any statement about a lattice $(A, prec.eq)$ is still valid if we make the interchanges $prec.eq <-> succ.eq$, $sup <-> inf$, and $or <-> and$.
-]
-
-- The lattices $(A, prec.eq)$ and $(A, succ.eq)$ are dual.
-- The order relations $prec.eq$ and $succ.eq$ are dual.
-- The operations $or$ and $and$ are dual.
-
-== Lattice Properties
-
-#proposition[
-  If $(A, prec.eq)$ is a lattice, then for any $a, b, c in A$:
-  1. $sup(a, a) = a or a = a$ [idempotent law].
-  2. $sup(a, b) = a or b = b or a = sup(b, a)$ [commutativity law].
-  3. $sup(a, sup(b, c)) = a or (b or c) = (a or b) or c = sup(sup(a, b), c)$ [associativity law].
-  4. $sup(a, inf(a, b)) = a or (a and b) = a$ [absorption law].
-]
-
-By duality, one obtains
-
-#corollary[
-  If $(A, prec.eq)$ is a lattice, then for any $a, b, c in A$:
-  1. $inf(a, a) = a and a = a$ [idempotent law].
-  2. $inf(a, b) = a and b = b and a = inf(b, a)$ [commutativity law].
-  3. $inf(a, inf(b, c)) = a and (b and c) = (a and b) and c = inf(inf(a, b), c)$ [associativity law].
-  4. $inf(a, sup(a, b)) = a and (a or b) = a$ [absorption law].
-]
-
-#proposition[
-  If $(A, prec.eq)$ is a lattice, then the following statements are equivalent for any $a, b in A$:
-  1. $a prec.eq b$.
-  2. $sup(a, b) = a or b = b$.
-  3. $inf(a, b) = a and b = a$.
-]
-
-#proposition(title: "Distributive Inequalities")[
-  If $(A, prec.eq)$ is a lattice, then for any $a, b, c in A$:
-  1. $inf(a, sup(b, c)) = a and (b or c) prec.eq (a and b) or (a and c) = sup(inf(a, b), inf(a, c))$.
-  2. $sup(a, inf(b, c)) = a or (b and c) succ.eq (a or b) and (a or c) = inf(sup(a, b), sup(a, c))$.
-]
-
-== Lattices as Algebraic Structures
-
-#definition[
-  A lattice is an algebraic structure $(A, or, and)$ with two binary operations $or$ and $and$ that satisfy the commutative, associative, and absorption laws.
-]
-
-- The absorption law implies the idempotent law.
-- Even though we do not assume the existence of any order relation on $A$, there is one order relation induced by the properties of the operations $or$ and $and$. In particular, for any $a, b in A$,
-  $ a prec.eq b <==> a or b = b $
-- $a prec.eq a$ because $a or a = a$ (idempotent law).
-- If $a prec.eq b <==> a or b = b$. If $b prec.eq a <==> b or a = a$. Therefore, $a = b$.
-- If $a prec.eq b <==> a or b = b$ and $b prec.eq c <==> b or c = c$, then $a or c = a or (b or c) = (a or b) or c = b or c = c$. Therefore $a prec.eq c$.
-- In summary, $prec.eq$ is a partial order relation and $(A, prec.eq)$ is a partially ordered set.
-
-#definition[
-  Given a lattice $(A, or, and)$, a sublattice $(M, or, and)$ of $(A, or, and)$ is given by a nonempty subset $M subset.eq A$ such that $(M, or, and)$ is also a lattice using the same operations as those used in $(A, or, and)$. (In other words, $(M, or, and)$ should be closed under the binary operations $or$ and $and$.)
-]
-
-Any lattice is a sublattice of itself.
-
-== Bounded Lattices
-
-#definition[
-  A lattice $(A, prec.eq)$ has a lower bound, denoted by $0$, if $0 prec.eq a$ for all $a in A$. A lattice has an upper bound denoted by $1$, if $a prec.eq 1$ for all $a in A$. A lattice is bounded if it contains a lower bound $0$ and an upper bound $1$.
-]
-
-The bounds $0$ and $1$ satisfy the following properties for all $a in A$:
-- $sup(a, 1) = a or 1 = 1$.
-- $inf(a, 1) = a and 1 = a$.
-- $sup(a, 0) = a or 0 = a$.
-- $inf(a, 0) = a and 0 = 0$.
-
-- The upper bound $1$ is the identity element for $and$: $a and 1 = a$, and it satisfies $a or 1 = 1$.
-- The lower bound $0$ is the identity element for $or$: $a or 0 = a$, and it satisfies $a and 0 = 0$.
-- In a bounded lattice, we can extend the duality principle by considering the interchange $0 <-> 1$.
-- Any finite lattice $A$ is bounded: $1 = sup(A)$ and $0 = inf(A)$.
-
-== Distributive Lattices
-
-#definition[
-  A lattice $(A, prec.eq)$ is a distributive lattice if for all $a, b, c in A$,
-  $
-    inf(a, sup(b, c)) & = a and (b or c) = (a and b) or (a and c) = sup(inf(a, b), inf(a, c)) \
-    sup(a, inf(b, c)) & = a or (b and c) = (a or b) and (a or c) = inf(sup(a, b), sup(a, c))
-  $
-]
-
-This property is stronger than the distributive laws:
-$
-  inf(a, sup(b, c)) & = a and (b or c) prec.eq (a and b) or (a and c) = sup(inf(a, b), inf(a, c)) \
-  sup(a, inf(b, c)) & = a or (b and c) succ.eq (a or b) and (a or c) = inf(sup(a, b), sup(a, c))
-$
-
-#theorem[
-  A lattice is distributive if and only if it does not contain a sublattice that is isomorphic to any of the following two lattices: $N_5$ (the "pentagonal lattice") and $M_3$ (the "diamond lattice").
-]
-
-== Complemented Lattices
-
-#definition[
-  Let $(A, or, and, 0, 1)$ be a bounded lattice. An element $a in A$ has a complement $b in A$ if $sup(a, b) = a or b = 1$ and $inf(a, b) = a and b = 0$.
-]
-
-- The bounds $0$ and $1$ are complements of each other.
-- If $a$ is a complement of $b$, then $b$ is a complement of $a$.
-- An element $a in A$ may have no complements, or it may have several ones.
-- The unique complement of $1$ is $0$, and vice versa.
-
-#definition[
-  A bounded lattice $(A, or, and, 0, 1)$ is complemented if for each $a in A$ there is at least one complement.
-]
-
-#proposition[
-  Let $(A, or, and)$ be a distributive lattice. If an element $a in A$ has a complement, then this element is unique.
-]
-
-If $(A, or, and)$ is a distributive and complemented lattice, then each element $a in A$ has a unique complement. This element will be denoted by $overline(a)$.
-
-== Boolean Algebras
-
-#definition(title: "Definition 1")[
-  A Boolean algebra is a bounded, distributive and complemented lattice $(A, or, and, overline(#hide[a]), 0, 1)$.
-]
-
-#definition(title: "Definition 2")[
-  Let $B$ be a nonempty set with at least two distinct elements $0, 1$. We define on $B$ the following operations:
-  - The (binary) Boolean sum $(a, b) -> a + b in B$.
-  - The (binary) Boolean multiplication $(a, b) -> a dot b in B$.
-  - The (unary) complementation $a -> overline(a) in B$.
-
-  Then $B$ is a Boolean algebra if the following properties hold for all $a, b, c in B$:
-  1. $a + 0 = a$ [identity w.r.t. the sum].
-  2. $a dot 1 = a$ [identity w.r.t. the multiplication].
-  3. $a + b = b + a$, $a dot b = b dot a$ [commutativity laws].
-  4. $a + (b + c) = (a + b) + c$, $a dot (b dot c) = (a dot b) dot c$ [associativity laws].
-  5. $a + (b dot c) = (a + b) dot (a + c)$, $a dot (b + c) = (a dot b) + (a dot c)$ [distributive laws].
-  6. $a + overline(a) = 1$, $a dot overline(a) = 0$ [complement laws].
-]
-
-== Simple Boolean Algebra
-
-- We can drop the symbol $dot$ in the Boolean multiplication $a dot b = a b$ whenever there is no confusion.
-- The elements $0, 1 in A$ do not have to be equal to the numbers $0, 1 in ZZ$.
-- The Boolean operations $+$ and $dot$ do not have to coincide with the sum and multiplication of real numbers.
-
-Let $(B, +, dot, overline(#hide[a]), 0, 1)$ be an algebra with $B = {0, 1}$ and the operations $+$, $dot$, and $overline(#hide[a])$ defined on $B$ as follows:
-$
-      1 dot 0 & = 0 dot 1 = 0 dot 0 = 0 \
-      1 dot 1 & = 1 \
-        1 + 1 & = 1 + 0 = 0 + 1 = 1 \
-        0 + 0 & = 0 \
-  overline(1) & = 0 \
-  overline(0) & = 1
-$
-
-Then $(B, +, dot, overline(#hide[a]), 0, 1)$ is a Boolean algebra, and it is the simplest one that exists: the Boolean algebra of two elements.
-
-== General Non-Trivial Boolean Algebras
-
-Let $A$ be a nonempty set. We now consider the power set $cal(P)(A)$ with the order relation for every pair $B, C subset.eq A$:
-$ B prec.eq C <==> B subset.eq C $
-
-- The set $(cal(P)(A), prec.eq)$ is a partially ordered set.
-- The set $(cal(P)(A), prec.eq)$ is a lattice. Given $B, C subset.eq A$, then
-  - $sup(B, C) = B union C subset.eq A$ ($or => union$).
-  - $inf(B, C) = B inter C subset.eq A$ ($and => inter$).
-- The identities are
-  - $1 = A$.
-  - $0 = emptyset$.
-- The set $(cal(P)(A), union, inter, emptyset, A)$ is a distributive lattice.
-- Each $B subset.eq A$ has a unique complement $overline(B) = A \\ B subset.eq A$.
-- The set $(cal(P)(A), union, inter, \\, emptyset, A)$ is a Boolean algebra.
-- Practical use in probability theory.
-
-== Properties of a Boolean Algebra
-
-#proposition[
-  Let $(B, +, dot, overline(#hide[a]), 0, 1)$ be a Boolean algebra. Then, for all $a, b in B$:
-  1. Idempotent laws: $a + a = a$ and $a dot a = a$.
-  2. Dominance laws: $a + 1 = 1$ and $a dot 0 = 0$.
-  3. Absorption laws: $a dot (a + b) = a$ and $a + a dot b = a$.
-  4. De Morgan laws: $overline((a + b)) = overline(a) dot overline(b)$ and $overline((a dot b)) = overline(a) + overline(b)$.
-  5. Involution law: $overline(overline(a)) = a$.
-  6. $overline(1) = 0$ and $overline(0) = 1$.
-]
-
-#definition[
-  Given a statement in a Boolean algebra, its dual statement is obtained by interchanging $+ <-> dot$ and $0 <-> 1$ in the original statement.
-]
-
-#proposition[
-  If a theorem is a consequence of the definitions of Boolean algebra, then the dual of the theorem is also a theorem.
-]
-
-#definition[
-  Let $(B, +, dot, overline(#hide[a]), 0, 1)$ be a Boolean algebra. Then a subset $C subset.eq B$ is a Boolean subalgebra if $0, 1 in C$, and it is closed under the same operations $+$, $dot$, $overline(#hide[a])$.
-]
