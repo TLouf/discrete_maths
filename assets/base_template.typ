@@ -6,10 +6,10 @@
 #import "@preview/equate:0.3.2": equate
 #import "@preview/quick-maths:0.2.1": shorthands
 #import "@preview/cetz:0.4.1"
-#import "@preview/itemize:0.1.2" as el
+#import "@preview/itemize:0.2.0" as el
 #import "@preview/booktabs:0.0.3": *
 
-#import "@preview/theorion:0.4.0": *
+#import "@preview/theorion:0.4.1": *
 #import "@preview/thmbox:0.3.0": proof
 #import cosmos.rainbow: *
 
