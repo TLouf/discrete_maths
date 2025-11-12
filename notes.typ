@@ -1,13 +1,8 @@
 #import "assets/base_template.typ": *
 
 #show: base
-
-Discrete Mathematics Course Map
-- Binary relations
-- Set theory
-- Combinatorics
-- Induction
-- Graph theory
+// To hide solutions and proofs:
+#set-result("noanswer")
 
 // arrange in 11 chapters taught over 13 weeks (two weeks of revision+partial)
 // https://aplicaciones.uc3m.es/cpa/generaFicha?est=350&plan=566&asig=16489&&anio=2025&idioma=2
@@ -26,120 +21,306 @@ Discrete Mathematics Course Map
 
 // boolean algebra? introduce from parallel between set relations and logical operations as in Epp?
 
-#pagebreak()
+= Set theory
 
-= Set Theory and Functions
+== Sets
 
-== Elementary Set Theory
+=== Definitions
 
-#definition[
-  A *set* $S$ is a well-defined collection of objects, each of which is called an element of the set:
-  $ S = {s_1, s_2, s_3, ...} $
+#definition(title: [Set and elements])[
+  A set is a collection of objects which are called elements of the set.
+  A set is fully determined by _which_ elements compose it.
+] <def-set>
 
-  Given a set $S$ and a certain object $s$, one (and only one) of the following statements is true:
-  - the object $s$ belongs to the set $S$: $s in S$, or
-  - the object $s$ does not belong to $S$: $s in.not S$.
-
-  The order of the elements in a set is irrelevant, as well as the number of occurrences of an element in the list.
+#notation[
+  - If $a$ is an element of the set $A$, we write $a in A$.
+  - If an object $a$ is not an element of the set $A$, we write $a in.not A$.
 ]
 
-#definition[
+How to describe a set?
+
+- By using a roster, listing all elements of the set, either explicitly like:
+  $ S_1 = {1, 2, 3, 4, 5, 6} $
+  or implicitly, using an ellipsis:
+  $
+    S_1 = {1, 2, dots, 6}
+  $
+
+- By using a defining predicate:
+  $ S = {y in S_0 | P(y)} $
+  where $P(y)$ is a condition on the elements $y$ of another set $S_0$. Then $S$ is the set of all elements $y$ of $S_0$ such that $P(y)$ is true.
+  For instance:
+  $
+    S_2 = { y in S_1 | y < 3 }
+  $
+
+- Through a transformation $f$ of the elements $y$ of another set $S_0$:
+  $
+    S = { f(y) | y in S_0 }
+  $
+  For instance:
+  $
+    S_3 = {n^3 | n in S_1}
+  $
+
+The notation "$|$" is read as "such that".
+It can also be written with a colon "`:`".
+
+You may also combine the predicate and transformation methods, but it's very rarely necessary.
+
+Note that there is often more than one way to define the same set.
+However, there is often a better choice, at least in terms of clarity.
+For instance, how would you write $S_3$ above using a predicate on the set of natural numbers?
+
+
+#solution[
+$
+  S_3 =  {m in NN | exists k in NN "such that" m = k^3}
+$
+which is equally valid but probably less clear.
+]
+
+#question-box[
+  From @def-set, especially its second part, can you guess the condition for two sets to be equal?
+  For instance, are $A = {1, 2}$, $B= {2, 1}$ and $C = {1, 1, 2}$ equal?
+]
+
+#solution[
+  Yes they are! This means that the order of the elements in a set is irrelevant, as well as the number of occurrences of an element in the list.
+]
+
+
+#definition(title: [Sets equality])[
   Two sets are equal if and only if they have the same elements.
 ]
 
-#definition[
-  The *empty set* $emptyset$ is the set with no elements: $emptyset = {}$. The *universal set* $U$ is the set containing all objects under consideration.
+This definition of sets equality actually also indirectly defines what a set is.
+
+
+#definition(title: [Empty set $emptyset$])[
+  The *empty set* $emptyset$ is the set with no elements: $emptyset = {}$.
 ]
 
-=== How to Describe a Set
-
-- By using a roster (when it is possible to list all the elements of the set):
-  $ X = {1, 2, 3, 4, 5, 6} $
-
-- By using a defining predicate:
-  $ Y = {y : P(y)} $
-  where $P(y)$ is a predicate containing the free variable $y$. Then $Y$ is the set of all objects $y$ such that $P(y)$ is true.
-
-- By using set operations to build a new set from already existing sets:
-  $ Z = {1, 2} union {x in RR : x in [4, 5]} $
-
-- By using a recursive description of the set $C$ in terms of another set $D$ and some operations on the elements of $D$:
-  $ C = {n^3 : n in NN} = {m in NN : exists k in NN "such that" m = k^3} $
-
-== Subsets
-
-#definition[
-  The set $A$ is a *subset* of the set $B$ ($A subset.eq B$) if and only if every element of $A$ is also an element of $B$. The set $A$ is a *proper subset* of $B$ ($A subset B$) if $A$ is a subset of $B$, and $B$ contains at least an element not in $A$.
+#definition(title: [Universal set $U$])[
+  The *universal set* $U$ is the set containing all objects under consideration.
 ]
 
-Properties:
-- Every set $A$ satisfies $A subset.eq A subset.eq U$.
-- The empty set $emptyset$ is a subset of every set $A$: $emptyset subset.eq A$.
+This concept can be useful to keep notation consistent. For instance, to formally write sets equality: two sets $A$ and $B$ are equal iff
+$
+  forall x in U, x in A <=> x in B,
+$
+instead of
+$
+  forall x mathc(in ?, #red), x in A <=> x in B.
+$
+Most of the time, and in the following of this course, $x in U$ can be omitted for convenience, though.
 
-#definition[
-  The *power set* of the set $A$, denoted as $cal(P)(A)$, is the set of all subsets of $A$:
-  $ cal(P)(A) = {B : B subset.eq A} $
+
+#definition(title: [Set finiteness and cardinality])[
+  Let $S$ be a set. If there are exactly $n in NN$ distinct elements in $S$, we say that $S$ is a *finite set*, and that $|S| = n$ is the *cardinality* of $S$.
 ]
 
-== Set Operations
 
-Given two sets $A$ and $B$ we can define the following operations:
-
-- *Union*: $A union B = {x : (x in B) or (x in A)}$
-- *Intersection*: $A inter B = {x : (x in B) and (x in A)}$
-- *Complement*: $overline(A) = {x : x in.not A}$, and it satisfies that $overline((overline(A))) = A$
-- *Difference*: $A without B = {x : (x in A) and (x in.not B)}$
-- *Symmetric difference*: $A triangle.t B = {x : (x in A union B) and (x in.not A inter B)}$
-
-*Some properties:*
-- *Distributive laws*
-  - $A union (B inter C) = (A union B) inter (A union C)$
-  - $A inter (B union C) = (A inter B) union (A inter C)$
-- *De Morgan's laws*
-  - $overline(A union B) = overline(A) inter overline(B)$
-  - $overline(A inter B) = overline(A) union overline(B)$
-- $A triangle.t B = (A without B) union (B without A)$
-
-== Cartesian Product
-
-#definition[
-  Given two sets $A$ and $B$, the *Cartesian product* $A times B$ is the set of all ordered pairs of the form:
-  $ A times B = {(a, b) : (a in A) and (b in B)} $
-]
-
-*Remark.* ${a, b}$ is not the same as $(a, b)$. In particular, ${1, 2}$ is a set and therefore, ${1, 2} = {2, 1}$. However, $(1, 2)$ is an ordered pair and therefore, $(1, 2) != (2, 1)$.
-
-#definition[
-  Two sets $A$ and $B$ are *disjoint* if $A inter B = emptyset$.
-]
-
-== Natural Numbers
+=== Examples: some already-known sets
 
 #definition[
   The set of natural numbers $NN$ is defined by the following conditions:
   1. $1 in NN$.
   2. If $n in NN$, then the successor of $n$ (i.e., the number $n + 1$) belongs to $NN$.
   3. Every $n in NN$ except 1 is the successor of some number in $NN$.
-  4. Every non-empty subset of $NN$ has a minimum element (well-ordering property).
+  4. Every non-empty subset of $NN$ has a minimum element. //(well-ordering property).
 ]
 
 Notes:
 - Note that $0 in.not NN$.
-- The non-negative integers are defined as $ZZ^+ = {0} union NN$.
 - We can informally "define" the following sets of numbers:
   - Integer numbers: $ZZ = {0, plus.minus 1, plus.minus 2, ...}$
-  - Rational numbers: $QQ = {p/q : p, q in ZZ, q != 0}$
+  - Rational numbers: $QQ = {p/q | p, q in ZZ, q != 0}$
+- These sets are discrete yet infinite: their cardinality is undefined (or infinite).
 
-== Functions
 
-#definition(title: "Spivak")[
-  A *function* $f subset X times Y$ from a set $X$ onto a set $Y$ is a subset of the Cartesian product $X times Y$ such that for every $x in X$, $f$ contains exactly one pair of the form $(x, y)$. The set $X$ is called the *domain* of $f$ and it is denoted as $"Dom"(f)$. The set $Y$ is called the *codomain* of $f$. The *image* of $f$ is the set
-  $ "Im"(f) = {y : exists x in X "such that" (x, y) in f} $
+=== Subsets
+
+#definition(title: [Subset])[
+  The set $A$ is a *subset* of the set $B$ ($A subset.eq B$) if and only if every element of $A$ is also an element of $B$. The set $A$ is a *proper subset* of $B$ ($A subset B$) if $A$ is a subset of $B$, and $B$ contains at least an element not in $A$.
 ]
 
-Given two sets $X$ and $Y$, a function is an object that assigns to each element $x in X$ a unique element $y in Y$, which is denoted as $y = f(x)$. Usually, functions are denoted as $f : X -> Y$.
 
-== Function Types
+We can represent $A subset.eq B$, or $A subset B$ here to be precise, with a *Venn diagram*:
+#figure(
+  image("assets/A_sub_B.svg", height: 6em)
+)
+
+Properties:
+- The empty set $emptyset$ is a subset of every set $A$: $emptyset subset.eq A$.
+- Every set $A$ satisfies $A subset.eq A subset.eq U$.
+
+#important[
+The latter implies that $A = B <=> (A subset.eq B) and (B subset.eq A$).
+This is the basis for how we usually prove the equality of two sets:
++ Consider $x in A$, prove it is also in $B$.
++ Consider $x in B$, prove it is also in $A$.
+]
+
+#definition(title: [Power set])[
+  The *power set* of the set $A$, denoted as $cal(P)(A)$, is the set of all subsets of $A$:
+  $ cal(P)(A) = {B | B subset.eq A} $
+]
+
+
+== Set operations
+
+Given two sets $A$ and $B$ we can define a number of operations.
+
+#definition(title: [Sets union])[
+  The union of two sets $A$ and $B$ is the set of all elements that are in $A$, in $B$, or in both:
+  $
+    A union B = {x | (x in A) or (x in B)}
+  $
+]
+
+#definition(title: [Sets intersections])[
+  The intersection of two sets $A$ and $B$ is the set of all elements that are in both $A$ and $B$:
+  $
+    A inter B = {x | (x in A) and (x in B)}
+  $
+]
+
+#definition(title: [Sets difference])[
+  The difference of two sets $A$ and $B$ is the set of all elements that are in $A$ but not in $B$:
+  $
+    A without B = {x | (x in A) and (x in.not B)}
+  $
+]
+
+#definition(title: [Sets symmetric difference])[
+  The symmetric difference of two sets $A$ and $B$ is the set of all elements that are in $A$ or in $B$ but not in both:
+  $
+    A triangle.t B = {x | (x in A union B) and (x in.not A inter B)}
+  $
+]
+
+#definition(title: [Set complement])[
+  The complement of a set $A$ is the set of all elements that are not in $A$:
+  $
+    overline(A) = {x | x in.not A} = U without A
+  $
+]
+
+A set can therefore be defined as the result of operations involving other sets. For instance,
+$
+  ZZ = NN union {0} union {-n | n in NN}
+$
+
+You can represent these operations with a Venn diagram too. For instance:
+#figure(
+  grid(
+    columns: 2,
+    gutter: 1em,
+    image("assets/A_union_B.svg", height: 6em),
+    image("assets/A_inter_B.svg", height: 6em),
+  )
+)
+
+#question-box[
+How would you represent the other operations?
+]
+
+#properties[
+- *Distributive laws*:
+  - $A union (B inter C) = (A union B) inter (A union C)$
+  - $A inter (B union C) = (A inter B) union (A inter C)$
+- *De Morgan's laws*:
+  - $overline(A union B) = overline(A) inter overline(B)$
+  - $overline(A inter B) = overline(A) union overline(B)$
+- $A triangle.t B = (A without B) union (B without A)$
+]
+
+You can check these laws hold with Venn diagrams too.
+
+
+#definition[
+  Two sets $A$ and $B$ are *disjoint* if $A inter B = emptyset$.
+]
+
+== Applications
+
+=== Datatypes as sets
+
+The very concept of a datatype in computer science is built upon the concept of a set. For instance, a boolean is an element of the set ${0,1}$, or, equivalently, `{False, True}`. A datatype is more than a set though, as it also defines the operations which are allowed on the elements of the set.
+
+#question-box[
+  Note that all datatypes correspond to a set which is _necessarily_ finite. Can you guess why?
+]
+
+// To check that an object is of a given type, so to check it belongs to the corresponding set, you can run #link("https://docs.python.org/3/library/functions.html#isinstance")[`isinstance(object, type)`].
+
+=== Sets as a datatype
+
+Most programming languages define a set datatype. #link("https://docs.python.org/3/library/stdtypes.html#set")[Python is no exception]: you can define a set with a syntax that is very similar to the notation we have seen until now:
+```python
+S = {'a', 1, {'b'}}
+```
+
+#home[
+  Find the equivalents of the set operations we saw above in the #link("https://docs.python.org/3/library/stdtypes.html#set")[Python documentation], and try them out! Also check that sets in Python have the properties listed above, in particular that the ordering of elements does not matter.
+]
+
+
+== Relations
+
+#definition(title: [Tuple])[
+  An $n$-tuple is an ordered collection of $n$ objects, of the form $(a_1, a_2, dots, a_n)$.
+  A 2-tuple is often called an ordered pair.
+]
+
+This means that, contrary to sets, for tuples the ordering of elements matters.
+Thus, while ${a_1, a_2} = {a_2, a_1}$, for tuples $(a_1, a_2) != (a_2, a_1)$.
+
+#definition(title: [Cartesian product])[
+  Given two sets $A$ and $B$, the *Cartesian product* $A times B$ is the set of all ordered pairs $(a, b)$ where $a in A$ and $b in B$.
+  Formally, that is:
+  $ A times B = {(a, b) | (a in A) and (b in B)} $
+]
+
+#remark[
+  A Cartesian product gives you all the possible combinations involving one element from each set.
+  If $A = B$, it gives all the possible combinations of two elements in this set.
+  You already saw Cartesian products in calculus, when you wrote, for instance, $forall (x, y) in RR^2$: these are all the possible pairs of real numbers.
+  Then, you used the notation $RR^2 = RR times RR$.
+]
+
+#definition(title: [Binary relations])[
+  A *binary relation* $R$ between two sets $A$ and $B$ is a set of ordered pairs from the two sets. Said differently, $R$ is a subset of $A times B$, which can be written $R subset.eq A times B$.
+
+  The set $A$ is then called the *domain* of $R$ while $B$ is called its *codomain*.
+
+  If $a in A$ is related to $b in B$ by $R$, we can write either $a rel b$ or $(a, b) in R$. If they are not related, we write $a cancel(rel) b$, or $(a,b) in.not R$.
+]
+
+// TODO: examples
+
+Representing relations: cartesian and bipartite graph TODO
+
+#definition(title: [Inverse relations])[
+  Let $R$ be a relation between sets $A$ and $B$. The inverse relation of $R$ is the relation that assigns to each element $b in B$ an element $a in A$. We denote the inverse by $R^(-1)$, so that
+  $
+    forall (a, b) in A times B, a rel b <=> b rel^(-1) a
+  $
+]
+
+
+== Defining functions as relations
+// TODO: introduce as special case of relation?
+
+#definition(title: "Spivak")[
+  A *function* $f subset X times Y$ from a set $X$ onto a set $Y$ is a binary relation between these two sets such that for every $x in X$, $f$ contains exactly one pair of the form $(x, y)$.
+
+  In other words,  a function is an object that assigns to each element $x in X$ a unique element $y in Y$, and it is is denoted as $y = f(x)$
+]
+
+Given two sets $X$ and $Y$,. Usually, functions are denoted as $f : X -> Y$.
+
 
 #definition[
   Given a function $f : X -> Y$, we say that
@@ -158,6 +339,7 @@ The function $g compose f$ is the *composition* of $f$ and $g$.
 
 = Integer and Modular Arithmetic
 
+// TODO: too long!
 This chapter covers:
 1. Integer arithmetic:
   - Integer divisibility
@@ -213,7 +395,7 @@ However, the result of dividing two integers might not be an integer.
   If $a | b_i$ for $i = 1, ..., N$, then $a | sum_(i=1)^N u_i dot b_i$ for every $u_i in ZZ$.
 ]
 
-== Greatest Common Divisor. Euclid's Lemma (IIIrd century BC)
+== Greatest Common Divisor. Euclid's Lemma
 
 #definition[
   Let $a, b$ be integers, not both simultaneously zero. The largest integer $d$ such that $d | a$ and $d | b$ is called the greatest common divisor of $a$ and $b$. It is denoted by $gcd(a, b)$.
@@ -402,12 +584,12 @@ Modular arithmetic allows us to perform algebraic operations using, instead of a
 == The Quotient Set $ZZ_m$
 
 The equivalence classes (or congruence classes) modulo $m$
-$ [a]_m = {b in ZZ : a equiv b (mod m)} = {a + m k : k in ZZ} $
+$ [a]_m = {b in ZZ | a equiv b (mod m)} = {a + m k | k in ZZ} $
 form a partition of $ZZ$. There are $m$ distinct equivalence classes corresponding to the $m$ possible remainders obtained by dividing an integer by $m$.
 
 #theorem[
   The quotient set $ZZ_m = ZZ \/ equiv (mod m)$ is given by
-  $ ZZ_m = {[a]_m : 0 <= a <= m - 1} $
+  $ ZZ_m = {[a]_m | 0 <= a <= m - 1} $
 ]
 
 *Remark:* Usually, the notation for $ZZ_m$ is a bit sloppy:
@@ -567,11 +749,11 @@ None of these two properties holds in general in $ZZ_m$.
 
 #definition[
   A *binary relation* $R$ between the sets $V$ and $W$ is a subset of the Cartesian product $V times W$:
-  $ V times W = {(v, w) : (v in V) and (w in W)} $
+  $ V times W = {(v, w) | (v in V) and (w in W)} $
   Therefore, $R subset.eq V times W$. The *domain* of $R$ is the set:
-  $ "Dom" R = {v in V : (v, w) in R "for some" w in W} $
+  $ "Dom" R = {v in V | (v, w) in R "for some" w in W} $
   and the *image* of $R$ is the set:
-  $ "Im" R = {w in W : (v, w) in R "for some" v in V} $
+  $ "Im" R = {w in W | (v, w) in R "for some" v in V} $
 ]
 
 *Notation*: If $(v, w) in R$, we denote it as $v R w$.
@@ -580,9 +762,9 @@ None of these two properties holds in general in $ZZ_m$.
 
 #definition[
   A *binary relation* $R$ on the set $V$ is a subset of the Cartesian product $V times V$. Hence, $R subset.eq V times V$. The *domain* of $R$ is the set:
-  $ "Dom" R = {v in V : (v, w) in R "for some" w in V} $
+  $ "Dom" R = {v in V | (v, w) in R "for some" w in V} $
   and the *image* of $R$ is the set:
-  $ "Im" R = {w in V : (v, w) in R "for some" v in V} $
+  $ "Im" R = {w in V | (v, w) in R "for some" v in V} $
 ]
 
 *Important remark*: A function $f : A -> B$ is a relation between the sets $A$ and $B$ and such that to each element $x in "Dom"(f)$ there corresponds a unique element of $B$ (i.e., $f(x)$).
@@ -595,7 +777,7 @@ None of these two properties holds in general in $ZZ_m$.
   Let $V$ and $W$ be the sets $V = {v_1, v_2, ..., v_(|V|)}$ and $W = {w_1, w_2, ..., w_(|W|)}$. Then entry $(i, j)$ of $A_R$ is equal to 1 if $v_i R w_j$, and it is equal to 0 otherwise.
 - *Directed graph $G_R$ associated to $R$*:
   The vertices of $G_R$ are the elements of the set $V$ where the relation $R$ is defined. The set of (directed) edges is the set of ordered pairs:
-  $ E = {(v_i, v_j) in V times V : v_i R v_j} $
+  $ E = {(v_i, v_j) in V times V | v_i R v_j} $
 
 == Operations with Relations
 
@@ -668,7 +850,7 @@ Using Boolean operations (instead of regular ones) guarantees that $A_(S circle 
 
 #definition[
   Let $R$ be an equivalence relation on a set $V$. The set of all the elements of $V$ related to a certain element $v in V$ is called the equivalence class determined by $v$, and it is denoted as $[v]_R$, or simply as $[v]$. Therefore,
-  $ [v]_R = {w in V : v R w} $
+  $ [v]_R = {w in V | v R w} $
   Any element $w in [v]_R$ (in particular, $v$) is a representative of the equivalence class $[v]_R$.
 ]
 
@@ -688,7 +870,7 @@ Using Boolean operations (instead of regular ones) guarantees that $A_(S circle 
 
 #definition[
   Let $R$ be an equivalence relation on $V$. The set of all the equivalence classes of $R$ is called the quotient set of $V$ by $R$, and it is denoted by $V\/R$:
-  $ V\/R = {[v]_R : v in V} $
+  $ V\/R = {[v]_R | v in V} $
 ]
 
 
@@ -838,9 +1020,7 @@ The directed graph associated to an order relation $prec.eq$ can be simplified b
 
 = Counting
 
-#definition[
-  Let $S$ be a set. If there are exactly $n in NN$ distinct elements in $S$, we say that $S$ is a *finite set*, and that $n$ is the *cardinality* of $S$. The cardinality of $S$ is denoted by $|S|$.
-]
+The *goal of counting* is basically to determine the cardinality of certain finite sets.
 
 #definition[
   Two sets $A$ and $B$ have the same cardinality if and only if there exists a *bijective function* $f : A -> B$.
@@ -850,7 +1030,6 @@ The directed graph associated to an order relation $prec.eq$ can be simplified b
   A set that is either finite or has the same cardinality as the set $NN$ is called *countable*.
 ]
 
-The *goal of combinatorics* is to compute the cardinality of certain finite sets.
 
 == Basic Counting Principles
 
@@ -926,7 +1105,7 @@ The *goal of combinatorics* is to compute the cardinality of certain finite sets
 = Combinatorics
 
 *Remarks.*
-- $overline(A_1) inter overline(A_2) inter ... inter overline(A_n) = {x : x in.not A_1, x in.not A_2, ..., x in.not A_n}$
+- $overline(A_1) inter overline(A_2) inter ... inter overline(A_n) = {x | x in.not A_1, x in.not A_2, ..., x in.not A_n}$
 - $overline(A) = S without A => |overline(A)| = |S| - |A|$
 
 == Permutations
@@ -1048,6 +1227,7 @@ $ binom(n, r) equiv binom("row", "column") $
 ]
 
 = Advanced counting
+// TODO: too long!
 
 == Recurrence Relations
 
@@ -1487,7 +1667,7 @@ $ B prec.eq C <==> B subset.eq C $
 3. *Combinatorial problems on graphs*.
 
 #definition[
-  A *pseudograph* $G = (V, E, gamma)$ consists of a nonempty vertex set $V$, an edge set $E$, and a function $gamma : E -> {{u, v} : u, v in V}$
+  A *pseudograph* $G = (V, E, gamma)$ consists of a nonempty vertex set $V$, an edge set $E$, and a function $gamma : E -> {{u, v} | u, v in V}$
 
   - The function $gamma$ encodes the graph connectivities.
   - If $e in E$ satisfies $gamma(e) = {u, v}$ with $u != v$, we say that $u$ and $v$ are *adjacent*, and that $e$ is *incident* with $u$ and $v$.
@@ -1500,14 +1680,29 @@ $ B prec.eq C <==> B subset.eq C $
   A *multigraph* $G = (V, E)$ is a pseudograph in which multiple edges are allowed, but loops are not allowed. A *simple graph* $G = (V, E)$ is a pseudograph in which loops and multiple edges are not allowed.
 ]
 
-== More Definitions
+#definition[
+  A graph $G = (V, E)$ is *bipartite* if its vertex set $V$ can be partitioned into two disjoint subsets $V_1$ and $V_2$ such that every edge in the graph connects a vertex in $V_1$ with a vertex in $V_2$.
+]
+
+*Simple graph families:*
+- The complete graph on $n$ vertices $K_n$.
+- The path $P_n$ on $n$ vertices.
+- The cycle $C_n$ on $n$ vertices.
+- The wheel graph on $n + 1$ vertices $W_n$.
+- The complete bipartite graph on $n$ and $m$ vertices $K_(n,m)$.
+- The $n$-cube graphs $Q_n$ are defined as follows: each vertex represents a bit string of length $n$, and two vertices $u$ and $v$ are adjacent if and only if the corresponding bit strings differ in exactly one bit.
+
+
+== Vertex degree
+
+=== Definitions
 
 #definition[
   The *degree* (or valence) of a vertex $v in V$ in a graph $G = (V, E)$ is the number of edges incident with it, except that a loop contributes twice to the degree of that vertex. The degree of a vertex $v$ is denoted by $d(v)$.
 ]
 
 *Remark.* Given a vertex $v in V$, its degree $d(v)$ is equal to
-$ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
+$ d(v) = |{{v, y} in E | y != v}| + 2 times "number of loops incident with" v $
 
 #definition[
   A vertex of degree 1 is called a *terminal* (or a *pendant vertex*). A vertex of degree 0 is called an *isolated vertex*. A graph with no edges is called *trivial*.
@@ -1517,7 +1712,7 @@ $ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
   A *regular graph* is a graph such that all vertices have the same degree.
 ]
 
-== The Handshaking Theorem
+=== The Handshaking Theorem
 
 #theorem(title: "The Handshaking Theorem")[
   In any undirected graph $G = (V, E)$, we have that
@@ -1536,19 +1731,6 @@ $ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
   For any graph $G$ with an odd number of vertices, there is an odd number of vertices of even degree.
 ]
 
-== More Definitions
-
-#definition[
-  A graph $G = (V, E)$ is *bipartite* if its vertex set $V$ can be partitioned into two disjoint subsets $V_1$ and $V_2$ such that every edge in the graph connects a vertex in $V_1$ with a vertex in $V_2$.
-]
-
-*Simple graph families:*
-- The complete graph on $n$ vertices $K_n$.
-- The path $P_n$ on $n$ vertices.
-- The cycle $C_n$ on $n$ vertices.
-- The wheel graph on $n + 1$ vertices $W_n$.
-- The complete bipartite graph on $n$ and $m$ vertices $K_(n,m)$.
-- The $n$-cube graphs $Q_n$ are defined as follows: each vertex represents a bit string of length $n$, and two vertices $u$ and $v$ are adjacent if and only if the corresponding bit strings differ in exactly one bit.
 
 == Complementary Graph and Subgraphs
 
@@ -1584,10 +1766,10 @@ $ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
 
 *Remark.* $G_1$ and $G_2$ are isomorphic if there exists an invertible linear map (basically a permutation of the "basis vectors") $pi : V_1 -> V_2$ such that $A_2 = P^(-1) dot A_1 dot P$. There are $|V_1|! = |V_2|!$ maps of this type!
 
-== Walks in a Graph
+== Walks on a graph
 
 #definition[
-  A *walk* in a graph $G = (V, E)$ is an alternating sequence of vertices and edges of the form $v_0, {v_0, v_1}, v_1, {v_1, v_2}, v_2, ..., v_(ell-1), {v_(ell-1), v_ell}, v_ell$. The length of the walk is equal to the number of edges in the walk. There is an implicit direction in every walk: $v_0$ is the initial vertex, and $v_ell$ is the final vertex.
+  A *walk* on a graph $G = (V, E)$ is an alternating sequence of vertices and edges of the form $v_0, {v_0, v_1}, v_1, {v_1, v_2}, v_2, ..., v_(ell-1), {v_(ell-1), v_ell}, v_ell$. The length of the walk is equal to the number of edges in the walk. There is an implicit direction in every walk: $v_0$ is the initial vertex, and $v_ell$ is the final vertex.
 ]
 
 #definition[
@@ -1625,15 +1807,7 @@ $ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
 
 == Trees
 
-1. *Undirected graphs*:
-  - Basic notation and definitions.
-  - Graph representation.
-  - Graph isomorphism.
-  - Walks in a graph.
-  - *Trees*.
-  - Planar graphs.
-2. *Algorithms in graph theory*.
-3. *Combinatorial problems on graphs*.
+=== Definitions
 
 #definition[
   A *tree* is a simple connected graph with no cycles. A *forest* is a simple graph with no cycles. Each connected component of a forest is a tree.
@@ -1650,12 +1824,6 @@ $ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
   A graph $G = (V, E)$ is a tree if and only if there exists a unique path between any pair of vertices.
 ]
 
-#theorem[
-  Any tree with at least two vertices contains at least two vertices of degree one.
-]
-
-== Properties of Trees
-
 #definition[
   How to grow a tree?
   1. Start from the trivial tree $T = ({r}, emptyset)$, where $r$ is the root vertex.
@@ -1664,6 +1832,12 @@ $ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
 
 #theorem[
   Any graph obtained by using the preceding procedure is a tree, and any tree can be obtained in this way.
+]
+
+=== Properties
+
+#theorem[
+  Any tree with at least two vertices contains at least two vertices of degree one.
 ]
 
 #theorem[
@@ -1679,6 +1853,9 @@ $ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
 
 == Planar Graphs
 
+
+=== Definitions
+
 #definition[
   A *planar graph* is a graph that can be embedded in the plane: i.e., it can be drawn on the plane in such a way that their edges do not cross each other. A *plane graph* is a graphical representation of a planar graph such that their edges do not cross each other.
 ]
@@ -1691,7 +1868,7 @@ $ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
   A graph is planar if and only if it does not contain a subgraph that is a subdivision of $K_5$ or $K_(3,3)$.
 ]
 
-== Planar and Dual Graphs
+=== Planar and Dual Graphs
 
 #theorem(title: "Euler's formula, 1752")[
   A plane and connected graph $G = (V, E)$ divides the plane into $R$ regions (or faces), such that
@@ -1707,7 +1884,7 @@ $ d(v) = |{{v, y} in E : y != v}| + 2 times "number of loops incident with" v $
 - $G^*$ can be drawn in such a way that any dual edge $e^*$ only crosses $e$.
 - Notice that $(G^*)^* = G$.
 
-== Some Corollaries About Graph Planarity
+=== Some Corollaries About Graph Planarity
 
 #definition[
   Given a plane graph, the *degree of a region* $r$ is the degree of the dual vertex $r in V^*$ associated with it in the dual graph $G^*$. We denote the degree of the region $r$ as $d_r$ (or $d(r)$).
@@ -1828,7 +2005,7 @@ We will denote the weight of the edge ${i, j} in E$ as $omega({i, j}) = omega_(i
   - If $delta_v + omega_(v,j) > delta_j$, the label $(delta_j, P_j)$ remains the same.
 
 3. Among all temporary vertices $j$, we choose one $j_0$ with the minimum label
-  $ delta_(j_0) = min(delta_j : j "is temporary") = delta_"min" $
+  $ delta_(j_0) = min(delta_j | j "is temporary") = delta_"min" $
   - If $delta_"min" = infinity$, the algorithm ends: there is no path between $s$ and $t$.
   - If $delta_"min" < infinity$, we mark such vertex with the permanent label $underline((delta_"min", P_(j_0)))$.
 
