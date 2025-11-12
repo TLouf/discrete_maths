@@ -29,11 +29,21 @@
 #let Span = math.op("Span")
 #let proj = math.op("proj")
 #let sign = math.op("sign")
+#let rel = math.op($"" R ""$)
 #let argmin = math.op("argmin", limits: true)
 #let argmax = math.op("argmax", limits: true)
 #let rmat = math.mat.with(align: right)
+#let mathc(x, color) = text(fill: color)[$#x$]
 
 #let important = important-box
+#let notation = remark.with(title: "Notation", icon-name: "pencil")
+#let home = tip-box.with(title: "Try at home", icon-name: "home")
+
+#let question-box = note-box.with(
+  fill: rgb("#BA0865"),
+  title: "Question",
+  icon-name: "question",
+)
 
 #let (properties-counter, properties-box, properties, show-properties) = make-frame(
   "properties",
@@ -70,6 +80,8 @@
 }
 
 #let base(doc) = {
+  show link: set text(blue)
+
   set heading(numbering: "1.1")
   show heading.where(level: 1): it => {
     counter(math.equation).update(0)
@@ -104,9 +116,10 @@
   set-leading-zero(true)
   set-theorion-numbering("1.1")
   show: show-properties
-  set math.mat(delim: "[", column-gap: 0.7em)
-  set math.vec(delim: "[")
   show math.prec.eq: math.scripts(math.prec.eq)
+
+  show "Python": [#fa-python() Python]
+  show " iff ": [if and only if]
 
   doc
 }
