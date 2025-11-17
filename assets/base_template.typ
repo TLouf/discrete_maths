@@ -6,6 +6,7 @@
 #import "@preview/equate:0.3.2": equate
 #import "@preview/quick-maths:0.2.1": shorthands
 #import "@preview/cetz:0.4.1"
+#import "@preview/lilaq:0.5.0" as lq
 #import "@preview/itemize:0.2.0" as el
 #import "@preview/booktabs:0.0.3": *
 
@@ -118,8 +119,13 @@
   show: show-properties
   show math.prec.eq: math.scripts(math.prec.eq)
 
-  show "Python": [#fa-python() Python]
-  show " iff ": [if and only if]
+  show: lq.set-diagram(
+    xaxis: (position: bottom, subticks: none),
+    yaxis: (position: left, subticks: none),
+  )
+
+  show "python": [#fa-python() Python]
+  show " iff": [if and only if]
 
   doc
 }
