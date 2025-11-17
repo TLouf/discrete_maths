@@ -1,0 +1,372 @@
+#import "assets/base_template.typ": *
+
+#show: base
+
+= Set theory
+
+== Sets
+
+=== Definitions
+
+#definition(title: [Set and elements])[
+  A set is a collection of objects which are called elements of the set.
+  A set is fully determined by _which_ elements compose it.
+] <def-set>
+
+#notation[
+  - If $a$ is an element of the set $A$, we write $a in A$.
+  - If an object $a$ is not an element of the set $A$, we write $a in.not A$.
+]
+
+How to describe a set?
+
+- By using a roster, listing all elements of the set, either explicitly like:
+  $ S_1 = {1, 2, 3, 4, 5, 6} $
+  or implicitly, using an ellipsis:
+  $
+    S_1 = {1, 2, dots, 6}
+  $
+
+- By using a defining predicate:
+  $ S = {y in S_0 | P(y)} $
+  where $P(y)$ is a condition on the elements $y$ of another set $S_0$. Then $S$ is the set of all elements $y$ of $S_0$ such that $P(y)$ is true.
+  For instance:
+  $
+    S_2 = { y in S_1 | y < 3 }
+  $
+
+- Through a transformation $f$ of the elements $y$ of another set $S_0$:
+  $
+    S = { f(y) | y in S_0 }
+  $
+  For instance:
+  $
+    S_3 = {n^3 | n in S_1}
+  $
+
+The notation "$|$" is read as "such that".
+It can also be written with a colon "`:`".
+
+You may also combine the predicate and transformation methods, but it's very rarely necessary.
+
+Note that there is often more than one way to define the same set.
+However, there is often a better choice, at least in terms of clarity.
+For instance, how would you write $S_3$ above using a predicate on the set of natural numbers?
+
+
+#solution[
+  $
+    S_3 = {m in NN | exists k in NN "such that" m = k^3}
+  $
+  which is equally valid but probably less clear.
+]
+
+#question-box[
+  From @def-set, especially its second part, can you guess the condition for two sets to be equal?
+  For instance, are $A = {1, 2}$, $B= {2, 1}$ and $C = {1, 1, 2}$ equal?
+]
+
+#solution[
+  Yes they are! This means that the order of the elements in a set is irrelevant, as well as the number of occurrences of an element in the list.
+]
+
+
+#definition(title: [Sets equality])[
+  Two sets are equal if and only if they have the same elements.
+]
+
+This definition of sets equality actually also indirectly defines what a set is.
+
+
+#definition(title: [Empty set $emptyset$])[
+  The *empty set* $emptyset$ is the set with no elements: $emptyset = {}$.
+]
+
+#definition(title: [Universal set $U$])[
+  The *universal set* $U$ is the set containing all objects under consideration.
+]
+
+This concept can be useful to keep notation consistent. For instance, to formally write sets equality: two sets $A$ and $B$ are equal iff
+$
+  forall x in U, x in A <=> x in B,
+$
+instead of
+$
+  forall x mathc(in ?, #red), x in A <=> x in B.
+$
+Most of the time, and in the following of this course, $x in U$ can be omitted for convenience, though.
+
+
+#definition(title: [Set finiteness and cardinality])[
+  Let $S$ be a set. If there are exactly $n in NN$ distinct elements in $S$, we say that $S$ is a *finite set*, and that $|S| = n$ is the *cardinality* of $S$.
+]
+
+
+=== Examples: some already-known sets
+
+#definition[
+  The set of natural numbers $NN$ is defined by the following conditions:
+  1. $1 in NN$.
+  2. If $n in NN$, then the successor of $n$ (i.e., the number $n + 1$) belongs to $NN$.
+  3. Every $n in NN$ except 1 is the successor of some number in $NN$.
+  4. Every non-empty subset of $NN$ has a minimum element. //(well-ordering property).
+]
+
+Notes:
+- Note that $0 in.not NN$.
+- We can informally "define" the following sets of numbers:
+  - Integer numbers: $ZZ = {0, plus.minus 1, plus.minus 2, ...}$
+  - Rational numbers: $QQ = {p/q | p, q in ZZ, q != 0}$
+- These sets are discrete yet infinite: their cardinality is undefined (or infinite).
+
+
+=== Subsets
+
+#definition(title: [Subset])[
+  The set $A$ is a *subset* of the set $B$ ($A subset.eq B$) if and only if every element of $A$ is also an element of $B$. The set $A$ is a *proper subset* of $B$ ($A subset B$) if $A$ is a subset of $B$, and $B$ contains at least an element not in $A$.
+]
+
+
+We can represent $A subset.eq B$, or $A subset B$ here to be precise, with a *Venn diagram*:
+#figure(
+  image("assets/A_sub_B.svg", height: 6em),
+)
+
+Properties:
+- The empty set $emptyset$ is a subset of every set $A$: $emptyset subset.eq A$.
+- Every set $A$ satisfies $A subset.eq A subset.eq U$.
+
+#important[
+  The latter implies that $A = B <=> (A subset.eq B) and (B subset.eq A$).
+  This is the basis for how we usually prove the equality of two sets:
+  + Consider $x in A$, prove it is also in $B$.
+  + Consider $x in B$, prove it is also in $A$.
+]
+
+#definition(title: [Power set])[
+  The *power set* of the set $A$, denoted as $cal(P)(A)$, is the set of all subsets of $A$:
+  $ cal(P)(A) = {B | B subset.eq A} $
+]
+
+
+== Set operations
+
+Given two sets $A$ and $B$ we can define a number of operations.
+
+#definition(title: [Sets union])[
+  The union of two sets $A$ and $B$ is the set of all elements that are in $A$, in $B$, or in both:
+  $
+    A union B = {x | (x in A) or (x in B)}
+  $
+]
+
+#definition(title: [Sets intersections])[
+  The intersection of two sets $A$ and $B$ is the set of all elements that are in both $A$ and $B$:
+  $
+    A inter B = {x | (x in A) and (x in B)}
+  $
+]
+
+#definition(title: [Sets difference])[
+  The difference of two sets $A$ and $B$ is the set of all elements that are in $A$ but not in $B$:
+  $
+    A without B = {x | (x in A) and (x in.not B)}
+  $
+]
+
+#definition(title: [Sets symmetric difference])[
+  The symmetric difference of two sets $A$ and $B$ is the set of all elements that are in $A$ or in $B$ but not in both:
+  $
+    A triangle.t B = {x | (x in A union B) and (x in.not A inter B)}
+  $
+]
+
+#definition(title: [Set complement])[
+  The complement of a set $A$ is the set of all elements that are not in $A$:
+  $
+    overline(A) = {x | x in.not A} = U without A
+  $
+]
+
+A set can therefore be defined as the result of operations involving other sets. For instance,
+$
+  ZZ = NN union {0} union {-n | n in NN}
+$
+
+You can represent these operations with a Venn diagram too. For instance:
+#figure(
+  grid(
+    columns: 2,
+    gutter: 1em,
+    image("assets/A_union_B.svg", height: 6em), image("assets/A_inter_B.svg", height: 6em),
+  ),
+)
+
+#question-box[
+  How would you represent the other operations?
+]
+
+#properties[
+  - *Distributive laws*:
+    - $A union (B inter C) = (A union B) inter (A union C)$
+    - $A inter (B union C) = (A inter B) union (A inter C)$
+  - *De Morgan's laws*:
+    - $overline(A union B) = overline(A) inter overline(B)$
+    - $overline(A inter B) = overline(A) union overline(B)$
+  - $A triangle.t B = (A without B) union (B without A)$
+]
+
+You can check these laws hold with Venn diagrams too.
+
+
+#definition[
+  Two sets $A$ and $B$ are *disjoint* if $A inter B = emptyset$.
+]
+
+== Applications
+
+=== Datatypes as sets
+
+The very concept of a datatype in computer science is built upon the concept of a set. For instance, a boolean is an element of the set ${0,1}$, or, equivalently, `{False, True}`. A datatype is more than a set though, as it also defines the operations which are allowed on the elements of the set.
+
+#question-box[
+  Note that all datatypes correspond to a set which is _necessarily_ finite. Can you guess why?
+]
+
+// To check that an object is of a given type, so to check it belongs to the corresponding set, you can run #link("https://docs.python.org/3/library/functions.html#isinstance")[`isinstance(object, type)`].
+
+=== Sets as a datatype
+
+Most programming languages define a set datatype. #link("https://docs.python.org/3/library/stdtypes.html#set")[python is no exception]: you can define a set with a syntax that is very similar to the notation we have seen until now:
+```python
+S = {'a', 1, {'b'}}
+```
+
+#home[
+  Find the equivalents of the set operations we saw above in the #link("https://docs.python.org/3/library/stdtypes.html#set")[python documentation], and try them out! Also check that sets in python have the properties listed above, in particular that the ordering of elements does not matter.
+]
+
+
+== Relations
+
+#definition(title: [Tuple])[
+  An $n$-tuple is an ordered collection of $n$ objects, of the form $(a_1, a_2, dots, a_n)$.
+  A 2-tuple is often called an ordered pair.
+]
+
+This means that, contrary to sets, for tuples the ordering of elements matters.
+Thus, while ${a_1, a_2} = {a_2, a_1}$, for tuples $(a_1, a_2) != (a_2, a_1)$.
+
+#definition(title: [Cartesian product])[
+  Given two sets $A$ and $B$, the *Cartesian product* $A times B$ is the set of all ordered pairs $(a, b)$ where $a in A$ and $b in B$.
+  Formally, that is:
+  $ A times B = {(a, b) | (a in A) and (b in B)} $
+]
+
+#remark[
+  A Cartesian product gives you all the possible combinations involving one element from each set.
+  If $A = B$, it gives all the possible combinations of two elements in this set.
+  You already saw Cartesian products in calculus, when you wrote, for instance, $forall (x, y) in RR^2$: these are all the possible pairs of real numbers.
+  Then, you used the notation $RR^2 = RR times RR$.
+]
+
+#definition(title: [Binary relations])[
+  A *binary relation* $R$ between two sets $A$ and $B$ is a set of ordered pairs from the two sets. Said differently, $R$ is a subset of $A times B$, so: $R subset.eq A times B$.
+
+  The set $A$ is then called the *domain* of $R$ while $B$ is called its *codomain*.
+
+  If $a in A$ is related to $b in B$ by $R$, we therefore have $(a, b) in R$, which we can also write $a rel b$. If they are not related, we have $(a, b) in.not R$, which we can also write $a cancel(rel) b$.
+]
+
+// TODO: examples
+
+How can we represent binary relations graphically?
+What we want is to show each set on a separate "side", and link related elements together.
+Here we'll see three options, which are the bipartite, Cartesian and adjacency matrix representations.
+
+#example[
+  #let names = ("Alice", "Bob", "Eve")
+  #let ages = (28, 20, 22)
+  Let's consider that we know three persons, called Alice, Bob and Eve, who are respectively 28, 20 and 22 years-old.
+  We want to represent this information as a binary relation.
+  We can then consider the set $A={"Alice", "Bob", "Eve"}$ of people's names and the set $B = {20, 22, 28}$ of some ages.
+  We can thus define the relation $R$ as $a rel b$ if person $a in A$ has the age $b in B$, and represent it as:
+  #figure(
+    grid(
+      columns: 3,
+      gutter: 3em,
+      align: horizon,
+      cetz.canvas({
+        import cetz.draw: *
+        for (i, (n, a)) in names.sorted().zip(ages.sorted()).rev().enumerate() {
+          content((0, i), n, name: n, padding: 0.2)
+          content((3, i), [#a], name: str(a), padding: 0.2)
+        }
+        for (n, a) in names.zip(ages) {
+          line(n + ".mid-east", str(a) + ".mid-west")
+        }
+      }),
+      [
+        #set math.equation(numbering: none)
+        $
+          mat(0, 0, 1; 1, 0, 0; 0, 1, 0;)
+        $
+      ],
+      lq.diagram(
+        lq.scatter(range(names.len()), ages, size: 12pt),
+        xaxis: (ticks: names.enumerate()),
+        yaxis: (ticks: ages),
+      ),
+    ),
+  )
+]
+
+#question-box[
+  - When is the Cartesian representation preferable?
+    Hint: imagine if we took $B = NN$.
+  - Imagine other relations in which the individual relations are not one-to-one, but one-to-many, many-to-one or many-to-many.
+]
+// Give more examples with non one-to-one,, show how full cartesian product looks like...
+
+#definition(title: [Inverse relations])[
+  Let $R$ be a relation between sets $A$ and $B$. The inverse relation of $R$ is the relation that assigns to each element $b in B$ an element $a in A$. We denote the inverse by $R^(-1)$, so that
+  $
+    forall (a, b) in A times B, a rel b <=> b rel^(-1) a
+  $
+]
+
+
+== Defining functions as relations
+
+#definition(title: "Functions")[
+  A binary relation $f$ with a domain $X$ and codomain $Y$ is said to be a *function* if it assigns exactly one element of $Y$ to each element of $X$.
+]
+
+#notation[
+  A function $f subset X times Y$ is usually defined with the notation $f: X -> Y$, to signify that it maps each element of $X$ to a unique element of $Y$.
+
+  Also, we write $f(x) = y$ if $y$ is the unique element of $Y$ assigned by $f$ to the element $x$ of $X$.
+]
+
+// TODO: question: is this a function? like with a circle.
+
+
+#definition[
+  Given a function $f : X -> Y$, we say that
+  - $f$ is *injective* or *one-to-one* if $x_1 != x_2$ implies $f(x_1) != f(x_2)$.
+  - $f$ is *surjective* if for every $y in Y$, there exists at least an element $x in X$ such that $y = f(x)$.
+  - $f$ is *bijective* if it is injective and surjective.
+]
+
+// TODO (graphical) examples
+
+#definition(title: "Inverse function")[
+  If $f : X -> Y$ is bijective, we can define its *inverse function* $f^(-1) : Y -> X$ by the well-defined rule:
+  $ f^(-1)(y) = x <==> y = f(x) $
+]
+
+#definition(title: "Composition of functions")[
+  Given two functions $f : X -> Y$, $g : Y -> Z$, we can define a new function $g compose f : X -> Z$ by the following rule:
+  $ (g compose f)(x) = g(f(x)) $
+  The function $g compose f$ is the *composition* of $f$ and $g$.
+]
