@@ -348,6 +348,13 @@ Here we'll see three options, which are the bipartite, Cartesian and adjacency m
   Also, we write $f(x) = y$ if $y$ is the unique element of $Y$ assigned by $f$ to the element $x$ of $X$.
 ]
 
+#definition(title: [Function images and range])[
+  Let's consider $f: X -> Y$ and $(x,y) in X times Y$ such that $f(x) = y$.
+  We then say that $y$ is the *image* of $x$ under the function, and that $x$ is the *preimage* of $y$.
+  We also define the *range* of the function as the set of images of every element in the domain $X$, and often write this range as $f(X)$.
+  The range is therefore a subset of the codomain: $f(X) subset.eq Y$.
+]
+
 // TODO: question: is this a function? like with a circle.
 
 
