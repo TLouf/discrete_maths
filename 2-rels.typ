@@ -5,7 +5,7 @@
 = Relations
 
 
-== Binary Relations on a Set
+== Binary relations on a set
 
 While we previously introduced relations $R$ from a set $A$ to a set $B$, here we'll be particularly interested in the case where $A = B$, that is relations on a single set.
 
@@ -13,51 +13,71 @@ While we previously introduced relations $R$ from a set $A$ to a set $B$, here w
   A *binary relation* $R$ on the set $A$ is a subset of $A times A$, so: $R subset.eq A times A$.
 ]
 
+In the following, unless otherwise specified, "a relation $R$" refers to a relation on a single set $A$.
 
 #definition(title: [Reflexive relations])[
-  A relation $R$ is reflexive if for every $a in A$, $a rel a$.
+  A relation $R$ is reflexive if all elements of $A$ are related to themselves:
+  $
+    forall a in A, a rel a
+  $
 
-  A relation $R$ is irreflexive if for every $a in A$, $a cancel(rel) a$.
+  A relation $R$ is irreflexive if all elements of $A$ are not related to themselves:
+  $
+    forall a in A, a cancel(rel) a
+  $
 ]
 
 
 #definition(title: [Symmetric relations])[
-  A relation $R$ is symmetric if $R = R^(-1)$, i.e., if $a rel b ==> b rel a$.
+  A relation $R$ is symmetric if $R = R^(-1)$, i.e., if
+  $
+    forall (a, b) in A^2, a rel b => b rel a
+  $
 
-  A relation $R$ is antisymmetric if $(a rel b) and (b rel a) ==> a = b$.
+  A relation $R$ is antisymmetric if
+  $
+    forall (a,b) in A^2 "such that" a!=b, a rel b => b cancel(rel) a
+  $
 ]
 
-== Transitive Relations
 
-#definition[
-  A relation $R$ is transitive if $(a rel b) and (b rel c) ==> a rel c$.
+#definition(title: [Transitive relations])[
+  A relation $R$ is transitive if
+  $
+    forall (a,b,c) in A^3, (a rel b) and (b rel c) => a rel c
+  $
 ]
 
 #proposition[
   A relation $R$ is transitive if and only if $R^n subset.eq R$ for all $n in NN$. The $n$-th power $R^n$ of the relation $R$ is recursively defined as follows:
   $ R^1 = R, quad R^n = R circle R^(n-1) $
 ]
+// proof that uses induction in Rosen p.608
 
 #corollary[
   A relation $R$ is transitive if and only if $R^2 subset.eq R$. In other words, $R$ is transitive if and only if for each nonzero entry $(A_(R^2))_(i,j) = 1$ of the adjacency matrix of $R^2$, the corresponding entry of the adjacency matrix of $R$ is also nonzero $(A_R)_(i,j) = 1$.
 ]
 
-== Equivalence Relations
-// One example why modulo stuff should be before relations
-#definition[
+
+== Equivalence relations
+
+#definition(title: [Equivalence relations])[
   A relation $R$ on a set $A$ is an equivalence relation if it is reflexive, symmetric and transitive.
 ]
 
-*Notation:* If $R$ is an equivalence relation, $a rel b$ is usually denoted as $a equiv b (mod R)$.
-
-#definition[
-  Let $R$ be an equivalence relation on a set $A$. The set of all the elements of $A$ related to a certain element $a in A$ is called the equivalence class determined by $a$, and it is denoted as $[a]_R$, or simply as $[a]$. Therefore,
-  $ [a]_R = {b in A | a rel b} $
-  Any element $b in [a]_R$ (in particular, $a$) is a representative of the equivalence class $[a]_R$.
+#notation[
+  If $R$ is an equivalence relation, $a rel b$ is usually denoted as $a scripts(equiv)_R b$ or $a scripts(~)_R b$.\
+  The $R$ subscript can be dropped when there is no ambiguity on which equivalence relation we're dealing with.
 ]
 
-== Quotient Set
-// TODO: keep?
+#definition(title: [Equivalence classes])[
+  Let $R$ be an equivalence relation on a set $A$.
+  The set of all the elements of $A$ related to a certain element $a in A$ is called the *equivalence class* of $a$ with respect to $R$, and it is denoted as $[a]_R$, or simply as $[a]$.
+  Therefore,
+  $ [a]_R = {b in A | a rel b} $
+  Any element $b in [a]_R$ is called a *representative* of the equivalence class of $a$.
+]
+// mention why we use the word representative: because all elements in the class are equivalent
 
 #theorem[
   Let $R$ be an equivalence relation on $A$. Then,
@@ -66,116 +86,169 @@ While we previously introduced relations $R$ from a set $A$ to a set $B$, here w
   3. The equivalence classes determine the relation uniquely.
 ]
 
-#theorem[
-  Let $R$ be an equivalence relation on $A$. Then the set of all equivalence classes of $R$ form a partition of $A$. Conversely, given a partition ${V_1, V_2, ...}$ of $A$, there exists an equivalence relation $R$ such that its equivalence classes are the sets $V_i$.
+Equivalence classes are useful because they allow us to partition a set.
+But first, what does that even mean?
+
+#definition(title: [Set partition])[
+  A partition of a set $A$ is a set of disjoint nonempty subsets of $A$ whose union form $A$.\
+  In other words, a set of $n$ subsets ${A_i}_(i in [|1, n|])$ such that:
+  $
+    cases(
+      forall i in [| 1, n |] \, A_i != emptyset,
+      forall (i, j) in [| 1, n |]^2 \, A_i inter A_j = emptyset "if" i!= j,
+      limits(union.big)_(i in [| 1, n |]) A_i = A,
+    )
+  $
 ]
 
-#definition[
+
+#theorem[
+  Let $R$ be an equivalence relation on $A$.
+  Then the set of all equivalence classes of $R$ form a partition of $A$.
+  Conversely, given a partition ${A_1, A_2, ...}$ of $A$, there exists an equivalence relation $R$ such that its equivalence classes are the sets $A_i$.
+]
+
+#question-box[
+  If there exists $a,b in A$ such that $a equiv b$, then $[ a ]_R = [ b ]_R$, which means $[ a ]_R inter [ b ]_R != emptyset$.
+  Since equivalence classes partition a set, doesn't that contradict the fact that the subsets composing a partition should be disjoint?
+]
+// clarify that the set of subsets contains in fact the equivalence classes after de-duplicating them, since it's a set!
+
+#definition(title: [Quotient set])[
   Let $R$ be an equivalence relation on $A$. The set of all the equivalence classes of $R$ is called the quotient set of $A$ by $R$, and it is denoted by $A\/R$:
   $ A\/R = {[a]_R | a in A} $
 ]
 
 
-= Order Relations
+== Order relations
 
-1. Order relations:
-  - Partially ordered sets.
-  - Hasse diagrams.
-  - Maximal elements.
-  - Totally ordered sets.
-  - Well-ordered sets and mathematical induction.
-
-== Partial Order Relations
-
-#definition[
-  A binary relation on a set $A$ is a partial order (or an order relation) if it is reflexive, antisymmetric, and transitive.
+#definition(title: [Partial order relation])[
+  A relation on a set $A$ is called a *partial order* if it is reflexive, antisymmetric, and transitive.
 ]
 
-*Notation:* Order relations are usually denoted by the symbol $prec.eq$.
-
-#definition[
-  A set $A$ equipped with an order relation $prec.eq$ is called a partially ordered set $(A, prec.eq)$ (or poset).
+#notation[
+  Order relations are usually denoted by the symbol $prec.curly.eq$.\
+  We write $a prec b$ to denote that $a prec.curly.eq b$ and $a != b$, and then say that "$a$ precedes $b$".
 ]
 
-#definition[
-  Let $(A, prec.eq)$ be a partially ordered set. Two elements $a, b in A$ are comparable if either $a prec.eq b$ or $b prec.eq a$. If none of these conditions holds, such elements are incomparable.
+#definition(title: [Posets])[
+  A set $A$ equipped with an order relation $prec.curly.eq$ is called a *partially ordered set*, or poset, and is denoted by $(A, prec.curly.eq)$.
 ]
 
-#definition[
-  A partially ordered set $(A, prec.eq)$ is totally ordered when any pair of elements $a, b in A$ are comparable. In this case, $(A, prec.eq)$ is a totally ordered set (or linear order or chain).
+
+#definition(title: [Comparability])[
+  Let $(A, prec.curly.eq)$ be a partially ordered set. Two elements $a, b in A$ are said to be *comparable* if either $a prec.curly.eq b$ or $b prec.curly.eq a$.
+  This is basically just another word for "related", but which makes more intuitive sense in the context of orderings.
+  If neither of these conditions holds, such elements are said to be incomparable.
 ]
 
-== Hasse Diagrams (1926)
+The adjective "partial" above refers to the fact that not all pairs of elements of the poset are necessarily comparable.
+But if it is the case, the poset has some interesting properties, and so we have a special term to refer to them.
 
-// TODO: haven/t seen graphs until now
-The directed graph associated to an order relation $prec.eq$ can be simplified by eliminating redundant elements.
-
-*Algorithm to obtain the Hasse diagram for a partial order $prec.eq$:*
-1. As $prec.eq$ is reflexive, there is a loop incident with each vertex. We eliminate all these loops.
-2. The transitivity of $prec.eq$ implies the existence of subgraphs of the following type: If $a prec.eq b$ and $b prec.eq c$, we eliminate the superfluous edge associated to $a prec.eq c$.
-3. We choose that all the oriented edges point upwards. Then, we eliminate all the arrows.
-
-== Extremal Elements
-
-#definition[
-  Let $(A, prec.eq)$ be a partially ordered set. $M in A$ is a maximal element if for all $a in A$, $M prec.eq a$ implies that $M = a$. $m in A$ is a minimal element if for all $a in A$, $a prec.eq m$ implies that $m = a$. In other words, in the Hasse diagram associated to $(A, prec.eq)$, there is no element above $M$, and no element below $m$.
+#definition(title: [Total order])[
+  A partially ordered set $(A, prec.curly.eq)$ is said to be *totally ordered* when any two elements of $A$ are comparable.
 ]
 
-#definition[
-  Let $(A, prec.eq)$ be a partially ordered set. $M^star in A$ is a maximum (or greatest element) if $a prec.eq M^star$ for all $a in A$. $m^star in A$ is a minimum (or least element) if $m^star prec.eq a$ for all $a in A$.
+=== Representing posets: Hasse diagrams
 
-  In other words, in the Hasse diagram associated to $(A, prec.eq)$, $M^star$ is above all the elements of $A$, and $m^star$ is below all elements of $A$. The maximum and minimum of $(A, prec.eq)$ are denoted by $max(A)$ and $min(A)$, respectively.
+We saw in @sec-rels-sets that relations can be represented by a directed graph, by drawing an arrow from $a in A$ to $b in B$ if $a rel b$.
+A poset can therefore also be represented as a directed graph, but with several simplifications due to its properties.
++ It is a relation on a single set ($A = B$), so elements only need to be represented once.
++ It is antisymmetric, so we can fix a convention such as "if $a prec.curly.eq b$, then $a$ will be represented below $b$", which implies that all edges point in the same direction, upwards, so the arrows can be omitted.
++ It is reflexive, so the loops corresponding to $a prec.curly.eq a$ do not need to be represented.
++ It is transitive, so the edge corresponding to $a prec.curly.eq c$ does not need to be represented if there exists $b$ such that $a prec.curly.eq b$ and $b prec.curly.eq c$.
+All these simplifications lead to a representation known as a *Hasse diagram*.
+
+// TODO: example or by hand? with 1,2,3,4 like in Rosen
+// #figure(
+//   grid(
+//     columns: 3,
+//     cetz.canvas({
+//       import cetz.draw: *
+
+//     })
+//   ),
+// )
+
+
+=== Extremal elements
+
+// mention simplification when set is finite
+#definition(title: [Extremal elements])[
+  Let $(A, prec.curly.eq)$ be a partially ordered set.
+  - $M in A$ is a maximal element if it does not precede any other element:
+    $
+      forall a in A, M prec.curly.eq a => a = M
+    $
+  - $m in A$ is a minimal element if no other element precedes it:
+    $
+      forall a in A, a prec.curly.eq m => a = m
+    $
+  In other words, in the Hasse diagram associated to $(A, prec.curly.eq)$, there is no element above $M$, and no element below $m$.
+]
+// why "M does not precede any other element" is not equivalent to "all elements precede M" for posets in general? -> because not all elements are necessarily comparable!
+
+#definition(title: [The maximum and minimum])[
+  Let $(A, prec.curly.eq)$ be a partially ordered set.
+  - $M^star in A$ is *the maximum (or greatest element)* of $A$ if all elements precede or are equal to it:
+    $
+      forall a in A, a prec.curly.eq M^star
+    $
+  - $m^star in A$ is *the minimum (or least element)* if it precedes or is equal to all elements:
+    $
+      forall a in A, m^star prec.curly.eq a
+    $
+  In other words, in the Hasse diagram associated to $(A, prec.curly.eq)$, $M^star$ is above all the elements of $A$, and $m^star$ is below all elements of $A$.
+  The maximum and minimum of $(A, prec.curly.eq)$ are denoted by $max(A)$ and $min(A)$, respectively.
 ]
 
-*Remark:* The maximal, minimal, greatest, and/or least elements of $(A, prec.eq)$ might not exist.
+#remark[
+  The maximal, minimal, greatest and least elements of $(A, prec.curly.eq)$ might not exist.
+]
 
 #theorem[
-  The maximum $M^star$ of a partially ordered set $(A, prec.eq)$, if it exists, is unique. In addition, the maximum of $(A, prec.eq)$ is also a maximal element of it.
+  The maximum $M^star$ of a partially ordered set $(A, prec.curly.eq)$, if it exists, is unique. In addition, the maximum of $(A, prec.curly.eq)$ is also a maximal element of it.
 ]
 
-#definition[
-  Let $(A, prec.eq)$ be a partially ordered set, and $B subset A$. $u in A$ is an upper bound of $B$ if $b prec.eq u$ for all $b in B$. The set of the upper bounds of $B$ is denoted by $"major"(B)$.
-
-  The supremum of $B$, $sup(B)$, is the least upper element of $B$: $sup(B) = min("major"(B))$.
-
-  $d in A$ is a lower bound of $B$ if $d prec.eq b$ for all $b in B$. The set of all the lower bounds of $B$ is denoted by $"minor"(B)$.
-
-  The infimum of $B$, $inf(B)$, is the greatest lower element of $B$: $inf(B) = max("minor"(B))$.
+#remark[
+  To be the maximum, a maximal element needs to be comparable to all other elements!
 ]
+
+#definition(title: [Bounds])[
+  Let $(A, prec.curly.eq)$ be a partially ordered set, and $B subset A$.
+  - $u in A$ is an upper bound of $B$ if $b prec.curly.eq u$ for all $b in B$.
+    - The set of the upper bounds of $B$ is denoted by $"major"(B)$.
+    - The supremum of $B$, $sup(B)$, is the least upper element of $B$:
+      $
+        sup(B) = min("major"(B))
+      $
+  - $l in A$ is a lower bound of $B$ if $l prec.curly.eq b$ for all $b in B$.
+    - The set of all the lower bounds of $B$ is denoted by $"minor"(B)$.
+    - The infimum of $B$, $inf(B)$, is the greatest lower element of $B$:
+      $
+        inf(B) = max("minor"(B))
+      $
+]
+
+// TODO: examples! especially tricky ones where no bound in the subset, or maximal elements but no maximum, etc
 
 *Remark:* It may happen that $"major"(B) = emptyset$, $"minor"(B) = emptyset$ and/or $sup(B)$ and $inf(B)$ do not exist.
 
-== Total Order Compatible with a Partial Order
+
+=== Well-ordered sets
 
 #definition[
-  A total order $(A, prec.eq_T)$ is compatible with the partial order $(A, prec.eq_P)$ if for all $a, b in A$, $a prec.eq_P b$ implies that $a prec.eq_T b$.
-]
-
-#algorithm(
-  pseudocode-list(numbered-title: [Topological Sort], booktabs: true)[
-    + k = 1
-    + while $A != emptyset$
-      + $v_k = "a minimal element of" (A, prec.eq_P)$
-      + $A <- A \\ {v_k}$
-      + $k <- k + 1$
-    + $v_1 prec.eq_T v_2 prec.eq_T ... prec.eq_T v_n "is a total order compatible with" (A, prec.eq_P)$.
-  ],
-)
-
-
-== Well-Ordered Sets
-
-#definition[
-  $(A, prec.eq)$ is a well-ordered set if $(A, prec.eq)$ is a total order and any nonempty subset of $A$ always has a minimum.
+  $(A, prec.curly.eq)$ is a well-ordered set if $(A, prec.curly.eq)$ is a total order and all nonempty subsets of $A$ have a minimum.
 ]
 
 *Remarks:*
 - The set of natural numbers with the usual order $(NN, <=)$ is a well-ordered set. This property is equivalent to the induction principle.
-- The totally-ordered set $(ZZ, <=)$ is not a well-ordered set; but as $ZZ$ is isomorphic to $NN$, we can choose another order $prec.eq$ such that $(ZZ, prec.eq)$ is a well-ordered set.
+- The totally-ordered set $(ZZ, <=)$ is not a well-ordered set; but as $ZZ$ is isomorphic to $NN$, we can choose another order $prec.curly.eq$ such that $(ZZ, prec.curly.eq)$ is a well-ordered set.
 
-== The Induction Principle for the Natural Numbers
 
-#definition(title: "Induction Principle: Weak Version")[
+=== The induction principle
+
+#definition(title: "Induction principle: weak version")[
   Let $P$ be some predicate that satisfies the following conditions:
   1. Base step: $P(1)$ is true.
   2. Inductive step: If $P(k)$ is true for an arbitrary and fixed $k$, then $P(k + 1)$ is true.
@@ -185,7 +258,7 @@ The directed graph associated to an order relation $prec.eq$ can be simplified b
 
 *Remark:* The hypothesis in the inductive step ($P(k)$ is true) is called the induction hypothesis. To perform the inductive step, one assumes the induction hypothesis, and then uses this assumption to prove that $P(k + 1)$ is true.
 
-#definition(title: "Induction Principle: Strong Version")[
+#definition(title: "Induction principle: strong version")[
   Let $P$ be some predicate that satisfies the following conditions:
   1. Base step: $P(1)$ is true.
   2. Inductive step: Given an arbitrary fixed $k$, if $P(m)$ is true for any $1 <= m <= k$, then $P(k + 1)$ is true.
@@ -193,17 +266,16 @@ The directed graph associated to an order relation $prec.eq$ can be simplified b
   Then, $P(n)$ is true for every $n in NN$.
 ]
 
-#proposition(title: "Strong Induction Principle for Well-Ordered Sets")[
-  Let $(A, prec.eq)$ be a well-ordered set, and $P$ be some predicate that satisfies the following conditions:
+#proposition(title: "Strong induction principle for well-ordered Sets")[
+  Let $(A, prec.curly.eq)$ be a well-ordered set, and $P$ be some predicate that satisfies the following conditions:
   1. Base step: $P(v_0)$ is true for $v_0 = min(A)$.
-  2. Inductive step: Let $b$ be an arbitrary fixed element of $A$, and let $a$ be its successor. If $P(x)$ is true for all $v_0 prec.eq x prec.eq b$, then $P(a)$ is true.
+  2. Inductive step: Let $b$ be an arbitrary fixed element of $A$, and let $a$ be its successor. If $P(x)$ is true for all $v_0 prec.curly.eq x prec.curly.eq b$, then $P(a)$ is true.
 
   Then, $P(a)$ is true for every $a in A$.
 ]
 
-// TODO: recursion?
 
-== Summary: Types of Relations
+== Summary: types of relations
 
 #table(
   columns: 6,
@@ -218,3 +290,8 @@ The directed graph associated to an order relation $prec.eq$ can be simplified b
   [Every pair is comparable], [Well-ordered set], [✅], [❌], [✅], [✅],
   [Every nonempty subset has a minimum], bottomrule(),
 )
+
+You will see different kinds of relations again in a more or less close future.
+- In relational databases, each table defines a relation between $n$ sets of attributes, where the values for each set are stored in a column (see Rosen 9.2 for further reading).
+- A particular case of equivalence relation and its associated classes will be studied in @sec-mod-arithmetic.
+- Order relations constitute the formalism on which all sorting algorithms are built, whether they concern numbers or strings of text.

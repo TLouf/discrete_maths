@@ -76,6 +76,7 @@ However, the result of dividing two integers might not be an integer.
 
 
 == Modular Arithmetic
+<sec-mod-arithmetic>
 
 Modular arithmetic allows us to perform algebraic operations using, instead of a given set of numbers, their respective remainders with respect to some fixed positive number called the modulus.
 This might sound convoluted but is actually fairly common.
@@ -99,10 +100,9 @@ The congruence modulo $m$ between two integers thus indicates that they have the
   // anything with cycle: so time-related stuff but also angles!
 ]
 
-// #theorem[
-//   For each positive integer $m$, the binary relation $equiv (mod m)$ is an equivalence relation.
-// ]
-// TODO: mention it when treating equivalence relations
+#theorem[
+  For each positive integer $m$, the binary relation $equiv (mod m)$ is an equivalence relation.
+]
 
 === The Quotient Set $ZZ_m$
 
