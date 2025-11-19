@@ -271,7 +271,7 @@ Thus, while ${a_1, a_2} = {a_2, a_1}$, for tuples $(a_1, a_2) != (a_2, a_1)$.
 ]
 
 #definition(title: [Binary relations])[
-  A *binary relation* $R$ between two sets $A$ and $B$ is a set of ordered pairs from the two sets. Said differently, $R$ is a subset of $A times B$, so: $R subset.eq A times B$.
+  A *binary relation* $R$ from the set $A$ to the set $B$ is a set of ordered pairs from the two sets. Said differently, $R$ is a subset of $A times B$, so: $R subset.eq A times B$.
 
   The set $A$ is then called the *domain* of $R$ while $B$ is called its *codomain*.
 
@@ -329,7 +329,9 @@ Here we'll see three options, which are the bipartite, Cartesian and adjacency m
 // Give more examples with non one-to-one,, show how full cartesian product looks like...
 
 #definition(title: [Inverse relations])[
-  Let $R$ be a relation between sets $A$ and $B$. The inverse relation of $R$ is the relation that assigns to each element $b in B$ an element $a in A$. We denote the inverse by $R^(-1)$, so that
+  Let $R$ be a relation from the set $A$ to the set $B$.
+  The inverse relation of $R$ is the relation that assigns to each element $b in B$ an element $a in A$.
+  We denote the inverse by $R^(-1)$, so that
   $
     forall (a, b) in A times B, a rel b <=> b rel^(-1) a
   $
@@ -340,14 +342,14 @@ Here we'll see three options, which are the bipartite, Cartesian and adjacency m
 ]
 
 #definition(title: [Composition of relations])[
-  Let $R$ be a relation between the sets $V$ and $W$, and let $S$ be a relation between the sets $W$ and $Y$.
-  The composition of the relation $S$ and $R$ is a relation between the sets $V$ and $Y$ denoted as $S circle R$.
-  In particular, $S circle R$ is a subset of the Cartesian product $V times Y$ such that, given any $v in V$ and $y in Y$, $v(S circle R)y$ if and only if there exists some $w in W$ satisfying $v R w$ and $w S y$.
+  Let $R$ be a relation from the set $A$ to the set $B$, and let $S$ be a relation from the set $B$ to the set $C$.
+  The composition of the relation $S$ and $R$ is a relation from $A$ to $C$ denoted as $S circle R$.
+  In particular, $S circle R$ is a subset of the Cartesian product $A times C$ such that, given any $a in A$ and $c in C$, $a (S circle R) c$ if and only if there exists some $b in B$ satisfying $a rel b$ and $b "" S "" c$.
 ]
 
 #proposition[
-  Let $A_R$ be the adjacency matrix of the relation $R$ between $V$ and $W$, and let $A_S$ be the adjacency matrix of the relation $S$ between $W$ and $Y$.
-  Then, the adjacency matrix $A_(S circle R)$ of the composition of the relations $S circle R$ between $V$ and $Y$ is given by:
+  Let $A_R$ be the adjacency matrix of the relation $R$ from the set $A$ to the set $B$, and let $A_S$ be the adjacency matrix of the relation $S$ from the set $B$ to the set $C$.
+  Then, the adjacency matrix $A_(S circle R)$ of the composition of the relations $S circle R$ from $A$ to $C$ is given by:
   $ A_(S circle R) = A_R circle.small A_S $
   where the product $circle.small$ is the Boolean product of matrices.
 ]
