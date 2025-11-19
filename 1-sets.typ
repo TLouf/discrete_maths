@@ -350,8 +350,8 @@ Here we'll see three options, which are the bipartite, Cartesian and adjacency m
 #proposition[
   Let $A_R$ be the adjacency matrix of the relation $R$ from the set $A$ to the set $B$, and let $A_S$ be the adjacency matrix of the relation $S$ from the set $B$ to the set $C$.
   Then, the adjacency matrix $A_(S circle R)$ of the composition of the relations $S circle R$ from $A$ to $C$ is given by:
-  $ A_(S circle R) = A_R circle.small A_S $
-  where the product $circle.small$ is the Boolean product of matrices.
+  $ A_(S circle R) = A_R dot.o A_S $
+  where the product $dot.o$ is the Boolean product of matrices.
 ]
 
 Using Boolean operations (instead of regular ones) guarantees that $A_(S circle R)$ is an adjacency matrix associated to a binary relation.
