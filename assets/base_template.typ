@@ -91,7 +91,10 @@
     counter(figure.where(kind: raw)).update(0)
     it
   }
+
+  show math.cases: math.display
   set math.equation(numbering: none)
+
   set figure(numbering: (..num) => numbering("1.1", counter(heading).get().first(), num.pos().first()))
   set enum(numbering: "(i)")
 
