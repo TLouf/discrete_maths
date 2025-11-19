@@ -248,6 +248,7 @@ S = {'a', 1, {'b'}}
 
 
 == Relations
+<sec-rels-sets>
 
 #definition(title: [Tuple])[
   An $n$-tuple is an ordered collection of $n$ objects, of the form $(a_1, a_2, dots, a_n)$.
@@ -282,7 +283,7 @@ Thus, while ${a_1, a_2} = {a_2, a_1}$, for tuples $(a_1, a_2) != (a_2, a_1)$.
 
 How can we represent binary relations graphically?
 What we want is to show each set on a separate "side", and link related elements together.
-Here we'll see three options, which are the bipartite, Cartesian and adjacency matrix representations.
+Here we'll see three options, which are the direct graph, Cartesian and adjacency matrix representations.
 
 #example[
   #let names = ("Alice", "Bob", "Eve")
@@ -303,7 +304,7 @@ Here we'll see three options, which are the bipartite, Cartesian and adjacency m
           content((3, i), [#a], name: str(a), padding: 0.2)
         }
         for (n, a) in names.zip(ages) {
-          line(n + ".mid-east", str(a) + ".mid-west")
+          line(n + ".mid-east", str(a) + ".mid-west", mark: (end: ">"))
         }
       }),
       [
