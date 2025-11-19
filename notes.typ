@@ -43,19 +43,6 @@
   - Quotient set.
 3. *Order relations*.
 
-== Binary Relations Between Two Sets
-
-#definition[
-  A *binary relation* $R$ between the sets $V$ and $W$ is a subset of the Cartesian product $V times W$:
-  $ V times W = {(v, w) | (v in V) and (w in W)} $
-  Therefore, $R subset.eq V times W$. The *domain* of $R$ is the set:
-  $ "Dom" R = {v in V | (v, w) in R "for some" w in W} $
-  and the *image* of $R$ is the set:
-  $ "Im" R = {w in W | (v, w) in R "for some" v in V} $
-]
-
-*Notation*: If $(v, w) in R$, we denote it as $v R w$.
-
 == Binary Relations on a Set
 
 #definition[
@@ -64,46 +51,6 @@
   and the *image* of $R$ is the set:
   $ "Im" R = {w in V | (v, w) in R "for some" v in V} $
 ]
-
-*Important remark*: A function $f : A -> B$ is a relation between the sets $A$ and $B$ and such that to each element $x in "Dom"(f)$ there corresponds a unique element of $B$ (i.e., $f(x)$).
-
-== Graphical Representation of a Relation
-
-- Cartesian representation.
-- Venn's diagrams.
-- *Adjacency matrix of $R$*:
-  Let $V$ and $W$ be the sets $V = {v_1, v_2, ..., v_(|V|)}$ and $W = {w_1, w_2, ..., w_(|W|)}$. Then entry $(i, j)$ of $A_R$ is equal to 1 if $v_i R w_j$, and it is equal to 0 otherwise.
-- *Directed graph $G_R$ associated to $R$*:
-  The vertices of $G_R$ are the elements of the set $V$ where the relation $R$ is defined. The set of (directed) edges is the set of ordered pairs:
-  $ E = {(v_i, v_j) in V times V | v_i R v_j} $
-
-== Operations with Relations
-
-#definition[
-  Given the relation $R$ on $V$, we define its *inverse relation* $R^(-1)$ as the relation on $V$ defined as $(v_1, v_2) in R^(-1) <==> (v_2, v_1) in R$, or in other words, $v_1 R^(-1) v_2 <==> v_2 R v_1$.
-]
-
-Given any relation $R$, there always exists its inverse relation $R^(-1)$. On the other hand, the inverse function $f^(-1)$ exists if and only if $f$ is bijective.
-
-#definition[
-  Given a relation $R$ on $V$, we define its *complementary relation* $overline(R)$ as the relation on $V$ such that $(v_1, v_2) in overline(R) <==> (v_1, v_2) in.not R$.
-]
-
-Binary relations are subsets of $V times W$, therefore, set operations can be interpreted as operations with relations.
-
-== Composition of Relations
-
-#definition[
-  Let $R$ be a relation between the sets $V$ and $W$, and let $S$ be a relation between the sets $W$ and $Y$. The composition of the relation $S$ and $R$ is a relation between the sets $V$ and $Y$ denoted as $S circle R$. In particular, $S circle R$ is a subset of the Cartesian product $V times Y$ such that, given any $v in V$ and $y in Y$, $v(S circle R)y$ if and only if there exists some $w in W$ satisfying $v R w$ and $w S y$.
-]
-
-#proposition[
-  Let $A_R$ be the adjacency matrix of the relation $R$ between $V$ and $W$, and let $A_S$ be the adjacency matrix of the relation $S$ between $W$ and $Y$. Then, the adjacency matrix $A_(S circle R)$ of the composition of the relations $S circle R$ between $V$ and $Y$ is given by:
-  $ A_(S circle R) = A_R circle.small A_S $
-  where the product $circle.small$ is the Boolean product of matrices.
-]
-
-Using Boolean operations (instead of regular ones) guarantees that $A_(S circle R)$ is an adjacency matrix associated to a binary relation.
 
 == Properties of Relations on a Set $V$
 

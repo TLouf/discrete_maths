@@ -335,6 +335,25 @@ Here we'll see three options, which are the bipartite, Cartesian and adjacency m
   $
 ]
 
+#remark[
+  All relations have an inverse.
+]
+
+#definition(title: [Composition of relations])[
+  Let $R$ be a relation between the sets $V$ and $W$, and let $S$ be a relation between the sets $W$ and $Y$.
+  The composition of the relation $S$ and $R$ is a relation between the sets $V$ and $Y$ denoted as $S circle R$.
+  In particular, $S circle R$ is a subset of the Cartesian product $V times Y$ such that, given any $v in V$ and $y in Y$, $v(S circle R)y$ if and only if there exists some $w in W$ satisfying $v R w$ and $w S y$.
+]
+
+#proposition[
+  Let $A_R$ be the adjacency matrix of the relation $R$ between $V$ and $W$, and let $A_S$ be the adjacency matrix of the relation $S$ between $W$ and $Y$.
+  Then, the adjacency matrix $A_(S circle R)$ of the composition of the relations $S circle R$ between $V$ and $Y$ is given by:
+  $ A_(S circle R) = A_R circle.small A_S $
+  where the product $circle.small$ is the Boolean product of matrices.
+]
+
+Using Boolean operations (instead of regular ones) guarantees that $A_(S circle R)$ is an adjacency matrix associated to a binary relation.
+
 
 == Defining functions as relations
 
@@ -370,6 +389,11 @@ Here we'll see three options, which are the bipartite, Cartesian and adjacency m
 #definition(title: "Inverse function")[
   If $f : X -> Y$ is bijective, we can define its *inverse function* $f^(-1) : Y -> X$ by the well-defined rule:
   $ f^(-1)(y) = x <==> y = f(x) $
+]
+
+#question-box[
+  While all relations have an inverse, a function, which is a particular kind of relation, only has an inverse if it is bijective.
+  How come?
 ]
 
 #definition(title: "Composition of functions")[
