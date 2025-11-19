@@ -8,12 +8,15 @@
 // https://aplicaciones.uc3m.es/cpa/generaFicha?est=350&plan=566&asig=16489&&anio=2025&idioma=2
 // https://aplicaciones.uc3m.es/cpa/generaFicha?est=506&plan=555&asig=20191&anio=2025&idioma=2
 // discrete maths: study discrete objects, so objects which are distinct and not connected. Also means they are countable. Why? Computers deal with discrete information. Even real numbers, which are theoretically continuous, are represented discretely on computers: i.e. there is a finite number of possible real numbers
+
+// syllabus:
 // set theory (Rosen 2.)
-// number theory (Rosen 4.) -> crypto, RNG
 // relations (Rosen 9.) -> boolean ops
 // order as particular case of relation (Rosen 9.) -> induction (Rosen 3.), sorting
 // counting (Rosen 6.) -> proba (Rosen 7.) (perspective only?)
 // advanced counting (Rosen 8.)
+// number theory (Rosen 4.) -> crypto, RNG
+// partial exam
 // graph theory: application of everything
 
 
@@ -398,6 +401,7 @@ The *goal of counting* is basically to determine the cardinality of certain fini
 ]
 
 = Combinatorics
+// https://www.youtube.com/watch?v=VJkvPTY6kZw
 
 *Remarks.*
 - $overline(A_1) inter overline(A_2) inter ... inter overline(A_n) = {x | x in.not A_1, x in.not A_2, ..., x in.not A_n}$
@@ -482,6 +486,7 @@ $ binom(n, r) equiv binom("row", "column") $
 #theorem(title: "Newton's binomial theorem")[
   $ (x + y)^n = sum_(k=0)^n binom(n, k) x^k y^(n-k), quad n >= 0 $
 ]
+// https://www.youtube.com/watch?v=6agQBHWP8IE
 
 #corollary[
   $ (1 + x)^n = sum_(k=0)^n binom(n, k) x^k, quad n >= 0 $
@@ -521,10 +526,9 @@ $ binom(n, r) equiv binom("row", "column") $
   where $r_k$ if the number of subsets of cardinality $k$.
 ]
 
-= Advanced counting
-// TODO: too long!
 
-== Recurrence Relations
+= Recurrence Relations
+// cover sequences Rosen 2.4, recurrence: Rosen 5.3, 5.4 + Rosen 8.? that's a lot
 
 1. *Recurrence relations*:
   - Definitions.
