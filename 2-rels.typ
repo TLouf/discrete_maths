@@ -70,6 +70,18 @@ In the following, unless otherwise specified, "a relation $R$" refers to a relat
   The $R$ subscript can be dropped when there is no ambiguity on which equivalence relation we're dealing with.
 ]
 
+#question-box[
+  What is the simplest equivalence relation that you know?
+]
+
+#example[
+  Is the following relation on the set $P$ of all people an equivalence relation?
+  $
+    R_P = {(a,b) in P^2 | a "is the brother of" b}
+  $
+  If not, what's the closest relation you can think of that's actually an equivalence?
+]
+
 #definition(title: [Equivalence classes])[
   Let $R$ be an equivalence relation on a set $A$.
   The set of all the elements of $A$ related to a certain element $a in A$ is called the *equivalence class* of $a$ with respect to $R$, and it is denoted as $[a]_R$, or simply as $[a]$.
@@ -92,14 +104,15 @@ But first, what does that even mean?
 #definition(title: [Set partition])[
   A partition of a set $A$ is a set of disjoint nonempty subsets of $A$ whose union form $A$.\
   In other words, a set of $n$ subsets ${A_i}_(i in [|1, n|])$ such that:
-  $
-    cases(
-      forall i in [| 1, n |] \, A_i != emptyset,
-      forall (i, j) in [| 1, n |]^2 \, A_i inter A_j = emptyset "if" i!= j,
-      limits(union.big)_(i in [| 1, n |]) A_i = A,
-    )
-  $
-]
+
+  #math.equation(block: false)[
+    $
+        "(i)" & forall i in [| 1, n |] \, A_i != emptyset, \
+       "(ii)" & forall (i, j) in [| 1, n |]^2 \, A_i inter A_j = emptyset "if" i!= j, \
+      "(iii)" & limits(union.big)_(i in [| 1, n |]) A_i = A.
+    $
+  ]
+] <def-partition>
 
 
 #theorem[
@@ -113,6 +126,11 @@ But first, what does that even mean?
   Since equivalence classes partition a set, doesn't that contradict the fact that the subsets composing a partition should be disjoint?
 ]
 // clarify that the set of subsets contains in fact the equivalence classes after de-duplicating them, since it's a set!
+
+#example[
+  From the equivalence relation you defined in the example above. translate in plain words what its associated equivalence classes represent.
+  Then also explain in plain words why they do form a partition of the set of all people, that is how they fulfill each condition of @def-partition.
+]
 
 #definition(title: [Quotient set])[
   Let $R$ be an equivalence relation on $A$. The set of all the equivalence classes of $R$ is called the quotient set of $A$ by $R$, and it is denoted by $A\/R$:
@@ -135,14 +153,24 @@ But first, what does that even mean?
   A set $A$ equipped with an order relation $prec.curly.eq$ is called a *partially ordered set*, or poset, and is denoted by $(A, prec.curly.eq)$.
 ]
 
+#example[
+  Are the following posets?
+  + $(ZZ, >=)$
+  + $(NN, divides)$, where $divides$ is the "divides" relation: $a divides b <=> exists q in NN "such that" b = q dot a$.
+  + $(P, {(a,b) in P | a "is older than" b}$, where $P$ is the set of all people.
+]
+
+Since a partial order is a relation, by definition it does not impose any constraint between unrelated elements.
+It is therefore useful to distinguish between elements which can be compared using an ordering, and those which cannot.
 
 #definition(title: [Comparability])[
-  Let $(A, prec.curly.eq)$ be a partially ordered set. Two elements $a, b in A$ are said to be *comparable* if either $a prec.curly.eq b$ or $b prec.curly.eq a$.
+  Let $(A, prec.curly.eq)$ be a partially ordered set.
+  Two elements $a, b in A$ are said to be *comparable* if either $a prec.curly.eq b$ or $b prec.curly.eq a$.
   This is basically just another word for "related", but which makes more intuitive sense in the context of orderings.
   If neither of these conditions holds, such elements are said to be incomparable.
 ]
 
-The adjective "partial" above refers to the fact that not all pairs of elements of the poset are necessarily comparable.
+The adjective "partial" in "partial ordering" thus refers to the fact that the ordering does not necessarily order all elements of its associated set.
 But if it is the case, the poset has some interesting properties, and so we have a special term to refer to them.
 
 #definition(title: [Total order])[
@@ -154,10 +182,10 @@ But if it is the case, the poset has some interesting properties, and so we have
 We saw in @sec-rels-sets that relations can be represented by a directed graph, by drawing an arrow from $a in A$ to $b in B$ if $a rel b$.
 A poset can therefore also be represented as a directed graph, but with several simplifications due to its properties.
 + It is a relation on a single set ($A = B$), so elements only need to be represented once.
-+ It is antisymmetric, so we can fix a convention such as "if $a prec.curly.eq b$, then $a$ will be represented below $b$", which implies that all edges point in the same direction, upwards, so the arrows can be omitted.
++ It is antisymmetric, so we can fix a convention such as "if $a prec b$, then $a$ will be represented below $b$". This implies that all arrows point in the same direction, upwards, so they can be omitted.
 + It is reflexive, so the loops corresponding to $a prec.curly.eq a$ do not need to be represented.
-+ It is transitive, so the edge corresponding to $a prec.curly.eq c$ does not need to be represented if there exists $b$ such that $a prec.curly.eq b$ and $b prec.curly.eq c$.
-All these simplifications lead to a representation known as a *Hasse diagram*.
++ It is transitive, so the edge corresponding to $a prec c$ does not need to be represented if there exists $b$ such that $a prec b$ and $b prec c$.
+All these simplifications lead to a representation for posets known as a *Hasse diagram*.
 
 // TODO: example or by hand? with 1,2,3,4 like in Rosen
 // #figure(
@@ -206,6 +234,14 @@ All these simplifications lead to a representation known as a *Hasse diagram*.
   The maximal, minimal, greatest and least elements of $(A, prec.curly.eq)$ might not exist.
 ]
 
+#example[
+  Do the following posets have extremal elements and a maximum and minimum?
+  + $({2, 5, 3, 7}, divides}$, // nothing because all unrelated
+  + $({2, 3, 4, 9}, divides}$, // only extremal elements
+  + $({2, 4, 6, 8}, divides}$, // no maximum because 6 divides.not 8
+  ("$divides$" is the "divides" relation from the example above).
+]
+
 #theorem[
   The maximum $M^star$ of a partially ordered set $(A, prec.curly.eq)$, if it exists, is unique. In addition, the maximum of $(A, prec.curly.eq)$ is also a maximal element of it.
 ]
@@ -214,6 +250,7 @@ All these simplifications lead to a representation known as a *Hasse diagram*.
   To be the maximum, a maximal element needs to be comparable to all other elements!
 ]
 
+// bounds not strictly necessary to introduce
 #definition(title: [Bounds])[
   Let $(A, prec.curly.eq)$ be a partially ordered set, and $B subset A$.
   - $u in A$ is an upper bound of $B$ if $b prec.curly.eq u$ for all $b in B$.
@@ -235,43 +272,49 @@ All these simplifications lead to a representation known as a *Hasse diagram*.
 *Remark:* It may happen that $"major"(B) = emptyset$, $"minor"(B) = emptyset$ and/or $sup(B)$ and $inf(B)$ do not exist.
 
 
-=== Well-ordered sets
+=== Well-ordering and induction
 
 #definition[
   $(A, prec.curly.eq)$ is a well-ordered set if $(A, prec.curly.eq)$ is a total order and all nonempty subsets of $A$ have a minimum.
 ]
 
-*Remarks:*
-- The set of natural numbers with the usual order $(NN, <=)$ is a well-ordered set. This property is equivalent to the induction principle.
-- The totally-ordered set $(ZZ, <=)$ is not a well-ordered set; but as $ZZ$ is isomorphic to $NN$, we can choose another order $prec.curly.eq$ such that $(ZZ, prec.curly.eq)$ is a well-ordered set.
+#remark[
+  - The set of natural numbers with the usual order $(NN, <=)$ is a well-ordered set.
+  - The totally-ordered set $(ZZ, <=)$ is not a well-ordered set; but as $ZZ$ is isomorphic to $NN$, we can choose another order $prec.curly.eq$ such that $(ZZ, prec.curly.eq)$ is a well-ordered set.
+]
 
-
-=== The induction principle
+The well-ordering of natural numbers then explains the validity of proofs by induction!
 
 #definition(title: "Induction principle: weak version")[
-  Let $P$ be some predicate that satisfies the following conditions:
-  1. Base step: $P(1)$ is true.
-  2. Inductive step: If $P(k)$ is true for an arbitrary and fixed $k$, then $P(k + 1)$ is true.
-
-  Then, $P(n)$ is true for every $n in NN$.
+  Let $P$ be some predicate on the positive integers. Under the following conditions:
+  / Basis step: We can show that $P(n_0)$ is true for a fixed $n_0 in NN$.
+  / Inductive step: If we assume that $P(k)$ is true for some $k >= n_0$, then we can show that $P(k + 1)$ is true.
+  $P(n)$ is true for every $n >= n_0$.
 ]
-
-*Remark:* The hypothesis in the inductive step ($P(k)$ is true) is called the induction hypothesis. To perform the inductive step, one assumes the induction hypothesis, and then uses this assumption to prove that $P(k + 1)$ is true.
 
 #definition(title: "Induction principle: strong version")[
-  Let $P$ be some predicate that satisfies the following conditions:
-  1. Base step: $P(1)$ is true.
-  2. Inductive step: Given an arbitrary fixed $k$, if $P(m)$ is true for any $1 <= m <= k$, then $P(k + 1)$ is true.
-
-  Then, $P(n)$ is true for every $n in NN$.
+  Let $P$ be some predicate on the positive integers. Under the following conditions:
+  / Basis step: We can show that $P(n_0)$ is true for a fixed $n_0 in NN$.
+  / Inductive step: If we assume that for some $k >= n_0$, $P(j)$ is true for any $n_0 <= j <= k$, then we can show that $P(k + 1)$ is true.
+  $P(n)$ is true for every $n >= n_0$.
 ]
 
-#proposition(title: "Strong induction principle for well-ordered Sets")[
-  Let $(A, prec.curly.eq)$ be a well-ordered set, and $P$ be some predicate that satisfies the following conditions:
-  1. Base step: $P(v_0)$ is true for $v_0 = min(A)$.
-  2. Inductive step: Let $b$ be an arbitrary fixed element of $A$, and let $a$ be its successor. If $P(x)$ is true for all $v_0 prec.curly.eq x prec.curly.eq b$, then $P(a)$ is true.
+#remark[
+  $n_0$ is very often $0$ or $1$, but not always!
+]
 
-  Then, $P(a)$ is true for every $a in A$.
+#example[
+  Find $n_0$ such that $2^n >= n + 5$ for all $n >= n_0$.
+]
+
+#theorem(title: "Strong induction principle for well-ordered sets")[
+  Let $(A, prec.curly.eq)$ be a well-ordered set. Under the following condition:
+  / Inductive step: If we assume that for any $b$ in $A$, for all its predecessors $a prec b$, $P(a)$ is true, then we can show that $P(b)$ is true.
+  $P(a)$ is true for every $a in A$.
+]
+
+#remark[
+  There is no basis step here because since $A$ is well-ordered, we know that its least element $a_0$ has no predecessor (${a in A | a prec a_0} = emptyset$), so the inductive step suffices to prove that $P(a_0)$ is true.
 ]
 
 
