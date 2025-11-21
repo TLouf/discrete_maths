@@ -103,15 +103,17 @@ But first, what does that even mean?
 
 #definition(title: [Set partition])[
   A partition of a set $A$ is a set of disjoint nonempty subsets of $A$ whose union form $A$.\
-  In other words, a set of $n$ subsets ${A_i}_(i in [|1, n|])$ such that:
+  In other words, a set of subsets ${A_i}_(i in I)$ such that:
 
   #math.equation(block: false)[
     $
-        "(i)" & forall i in [| 1, n |] \, A_i != emptyset, \
-       "(ii)" & forall (i, j) in [| 1, n |]^2 \, A_i inter A_j = emptyset "if" i!= j, \
-      "(iii)" & limits(union.big)_(i in [| 1, n |]) A_i = A.
+        "(i)" & forall i in I \, A_i != emptyset, \
+       "(ii)" & forall (i, j) in I^2 \, A_i inter A_j = emptyset "if" i!= j, \
+      "(iii)" & limits(union.big)_(i in I) A_i = A,
     $
   ]
+
+  and where $I$ is a (potentially infinite!) set of indices.
 ] <def-partition>
 
 
