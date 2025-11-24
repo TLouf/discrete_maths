@@ -186,9 +186,9 @@ $
   A_1 B_2 B_1 C_1 C_2 C_3
 $
 in which we permuted the $B$'s, would look exactly the same!
-So for each labelled permutation, two unlabelled ones would have the same ordering for the $B$'s.
-Similary, the $C$'s can be reordered in $3!$ ways in each labelled permutation.
-Therefore, all in all, each labelled permutation has $2! dot 3! = 12$ equivalent unlabelled ones.
+So for each labeled permutation, two unlabeled ones would have the same ordering for the $B$'s.
+Similarly, the $C$'s can be reordered in $3!$ ways in each labeled permutation.
+Therefore, all in all, each labeled permutation has $2! dot 3! = 12$ equivalent unlabeled ones.
 We can thus get the number of ways we can shuffle this string as:
 $
   6! / (2! dot 3!) = (6 dot 5 dot 4) / 2 = 60
@@ -315,7 +315,7 @@ The processes behind the distribution and the combination with repetition can be
 
 === Binomial coefficients
 
-There are many useful identieis related to these coefficients.
+There are many useful identities related to these coefficients.
 One of the most important is Pascal's identity.
 
 #theorem(title: "Pascal's identity")[
@@ -372,7 +372,7 @@ Pascal's triangle can then be drawn left or centre-aligned, as preferred:
   ),
 )
 
-This also allows us to see the symmetry in the binomial coefficients, especially using the cente-aligned representation.
+This also allows us to see the symmetry in the binomial coefficients, especially using the centre-aligned representation.
 
 #theorem(title: "Symmetry")[
   $ forall r in NN, n >= r, binom(n, r) = binom(n, n-r) = frac(n!, r!(n-r)!) $
@@ -425,6 +425,8 @@ Finally, the binomial theorem together with @prop-r-comb-count enables us the de
   Given a finite set $A$ of cardinality $n$,
   $ |cal(P)(A)| = sum_(r=0)^n C(n,r) = 2^n $
 ]
+
+// TODO: multinomial theorem?
 
 #remark[
   You will find again the binomial coefficients in the binomial distribution and other distributions in probability theory.

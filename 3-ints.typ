@@ -396,7 +396,7 @@ And as a direct consequence, to redefine relatively-prime integers through the f
   If $gcd(a, m) = 1$, the solutions $x$ of the linear congruence equation $a dot x equiv b (mod m)$ form a unique congruence class modulo $m$.
 ]
 
-// why multilicate inverse? to solve extra type of linear congruence eqs
+// why multiplicative inverse? to solve extra type of linear congruence eqs
 #corollary[
   If $gcd(a, m) = 1$ with $m > 1$, then there exists a multiplicative inverse of $a$ modulo $m$. This multiplicative inverse is unique modulo $m$.
 ]

@@ -241,12 +241,12 @@ You can check these laws hold with Venn diagrams too.
 
 == Applications
 
-=== Datatypes as sets
+=== Data types as sets
 
 The very concept of a datatype in computer science is built upon the concept of a set. For instance, a boolean is an element of the set ${0,1}$, or, equivalently, `{False, True}`. A datatype is more than a set though, as it also defines the operations which are allowed on the elements of the set.
 
 #question-box[
-  Note that all datatypes correspond to a set which is _necessarily_ finite. Can you guess why?
+  Note that all data types correspond to a set which is _necessarily_ finite. Can you guess why?
 ]
 
 // To check that an object is of a given type, so to check it belongs to the corresponding set, you can run #link("https://docs.python.org/3/library/functions.html#isinstance")[`isinstance(object, type)`].
