@@ -290,14 +290,14 @@ The well-ordering of natural numbers then explains the validity of proofs by ind
 #definition(title: "Induction principle: weak version")[
   Let $P$ be some predicate on the positive integers. Under the following conditions:
   / Basis step: We can show that $P(n_0)$ is true for a fixed $n_0 in NN$.
-  / Inductive step: If we assume that $P(k)$ is true for some $k >= n_0$, then we can show that $P(k + 1)$ is true.
+  / Inductive step: If we assume that $P(k)$ is true for some unspecified $k >= n_0$, then we can show that $P(k + 1)$ is true.
   $P(n)$ is true for every $n >= n_0$.
 ]
 
 #definition(title: "Induction principle: strong version")[
   Let $P$ be some predicate on the positive integers. Under the following conditions:
   / Basis step: We can show that $P(n_0)$ is true for a fixed $n_0 in NN$.
-  / Inductive step: If we assume that for some $k >= n_0$, $P(j)$ is true for any $n_0 <= j <= k$, then we can show that $P(k + 1)$ is true.
+  / Inductive step: If we assume that for some unspecified $k >= n_0$, $P(j)$ is true for any $n_0 <= j <= k$, then we can show that $P(k + 1)$ is true.
   $P(n)$ is true for every $n >= n_0$.
 ]
 
