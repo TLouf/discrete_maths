@@ -2,43 +2,152 @@
 
 #show: base
 
-= Recurrence Relations
-// cover sequences Rosen 2.4, recurrence: Rosen 5.3, 5.4 + Rosen 8.? that's a lot
+= Sequences
 
-1. *Recurrence relations*:
-  - Definitions.
-  - Solution of a linear homogeneous recurrence relation.
-  - Solution of a linear nonhomogeneous recurrence relation.
-2. *Generating functions*.
+#fa-book() This chapter overlaps with sections 2.4, 8.2, 8.4 of Rosen. TODO
 
-#definition[
-  A *recurrence relation* for the sequence $(a_n)_(n in NN)$ is an equation that expresses $a_n$ in terms of one or more terms $a_(n-1), a_(n-2), ..., a_(n-k)$, and possibly $n$. In other words, it is, for any fixed $k >= 1$, an equation of the type
-  $ F(n; a_n, a_(n-1), a_(n-2), ..., a_(n-k)) = 0 $
-  which is valid for all $n >= k + 1$. The *initial conditions* are the first $k$ terms in the sequence: i.e., $(a_1, ..., a_k)$.
+== Defining sequences
+
+Sequences are basically indexed collections of elements, or, to be more formal:
+
+#definition(title: [Sequence])[
+  A sequence is a function from a set of indices $I subset.eq NN$ to a set $A$ of elements at each index.
+  The image in $A$ of the integer $n in I$ is denoted $a_n$, and is called the $n^"th"$ term of the sequence.
+  The sequence can be represented as $( a_n )_(n in I)$.
 ]
 
-#definition[
-  - A recurrence relation is of *$k$-th order* if $a_n$ can be expressed in terms of $k$ terms $a_(n-1), a_(n-2), ..., a_(n-k)$.
-  - A recurrence relation is *linear* if it expresses $a_n$ as a linear function of $a_(n-1), a_(n-2), ..., a_(n-k)$. Otherwise, the relation is *nonlinear*.
-  - A recurrence relation is *homogeneous* if the zero sequence $a_n = a_(n-1) = ... = a_(n-k) = 0$ satisfies the relation. Otherwise, it is *nonhomogeneous*.
+#remark[
+  There are many ways to represent sequences in computers.
+  In python for instance, there are `bytes` (bytes sequences), `str` (text sequences), `list`, `tuple`, or even `range` which #link("https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range")[are sequence types].
+  Note how #link("https://docs.python.org/3/library/collections.abc.html#collections-abstract-base-classes")[even in python] the difference is made between sequences and sets: the `Sequence`'s central method is `__getitem__` ---which allows you to retrieve their $n"th"$ element---, which doesn't exist for `Set`, whose central method is `__contains__`, to check if an element is inside the set.
 ]
 
-== Solution of a Linear Homogeneous Recurrence Relation
+The terms of a sequence can be defined explicitly...
+
+#example[
+  Let's define the sequence $(a_n)_(n in NN)$ where $a_n = 2^n$.
+  Then the terms of the sequence are $1, 2, 4, 8, dots$
+]
+
+... but not only!
+They may also be defined recursively, that is, providing some initial terms together with a rule that is needed to determine subsequent terms.
+
+// we know recursively defined functions are well-defined from the principle of induction
+#definition(title: [Recurrence relation])[
+  A *recurrence relation* for the sequence $(a_n)_(n in NN)$ is an equation that expresses $a_n$ in terms of one or more previous terms $a_(n-1), a_(n-2), ..., a_(n-k)$, and possibly $n$.
+  The *initial conditions* are the first $k$ terms in the sequence $(a_1, ..., a_k)$, which are necessary to be able to determine all terms of such a sequence.
+]
+
+#example[
+  Redefine the previous sequence ($a_n = 2^n$) and the factorial ($b_n = n!$) using recurrence relations.
+]
+
+#remark[
+  - More than one sequence may satisfy the same recurrence relation, hence the importance of initial conditions.
+  - From the principle of strong induction (@thm-strong-induction), we know that a recurrence relation together with a set of initial conditions define a unique sequence.
+]
+
+// TODO: sums? and arithmetic/geometric progressions? fibo?
+
+== Solving recurrence relations
+
+We have seen above how to translate an explicit sequence definition into a recurrence relation.
+However, most of the time, it's the other way around.
+In this case, we want to *solve* the recurrence relation, that is, to find the equivalent explicit sequence definition, also known as a *closed formula*, if it exists.
+
+=== Linear homogeneous recurrence relations
+
+Let us first study linear recurrence relations, as they often appear in real-world problems, and can be solved systemically.
+
+#definition[
+  - A recurrence relation is of *$k^"th"$ order* if $a_n$ can be expressed in terms of its $k$ previous terms $a_(n-1), a_(n-2), ..., a_(n-k)$.
+  - A recurrence relation is *linear* if it expresses $a_n$ as a linear combination of its previous terms.
+  - A recurrence relation is *homogeneous* if the zero sequence $a_n = 0$ satisfies the relation.
+]
+
+#proposition[
+  A $k^"th"$ order linear recurrence relation with constant coefficients is of the form
+  $
+    a_n = c_1 a_(n-1) + c_2 a_(n-2) + dots + c_k a_(n-k) + f(n)
+  $
+  where $c_1, dots, c_k in RR$, $c_k != 0$, and $f: NN -> RR$ which does not depend on any sequence term.\
+  The relation is also homogeneous iff $f(n) = 0$ for all $n$.
+]
+
+To gain some intuition on the solution of such recurrence relations, let's start simple.
 
 #theorem(title: "Solution of a homogeneous first-order recurrence relation")[
   Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
-  $ a_n = A a_(n-1), quad n >= 2 $
-  where $A in RR$, and we know the initial condition $a_1$. Then, the solution of this relation is given by
-  $ a_n = a_1 A^(n-1), quad n >= 1 $
+  $ forall n >=1, a_n = c a_(n-1), $
+  where $c in RR$, and we know the initial condition $a_1$. Then, the solution of this relation is given by
+  $ forall n in NN, a_n = a_0 c^n. $
 ]
 
-*Remark.* In this course, we will only consider linear recurrence relations with constant coefficients ($A$ in the previous theorem).
+Let us now observe that $a_n = alpha x^n$ with $alpha, x in RR^*$ is a solution of such recurrence relations iff
+$
+  &alpha x^n = c_1 alpha x^(n-1) +  c_2 alpha x^(n-2) + dots +  c_k alpha x^(n-k)\
+  <=> & x^k - c_1 x^(k-1) - c_2 x^(k-2) - dots - c_(k-1) x - c_k = 0\
+  <=> & P(x) = 0
+$
+where we introduced the *characteristic polynomial* $P$, whose roots we will call the *characteristic roots*.
+This implies that if $x_i$ is a characteristic root, $alpha x_i^n$ is a solution of the recurrence relation.
+The multiplicative $alpha$ cancelled out above, so its value is to be fixed according to the initial conditions.
+The characteristic polynomial of a $k^"th"$ order linear recurrence is of degree $k$, so it admits $k$ characteristic roots, $x_1, dots, x_k$.
 
-#theorem(title: "Solution of a homogeneous Fibonacci-type recurrence relation")[
+Let us first suppose all roots are distinct.
+Then the solution is a linear combination of the form:
+$
+  a_n = sum_(i=1)^k alpha_i x_i^n
+$
+
+Let us now suppose we have a root $x_i$ of multiplicity $k_i > 1$.
+Then the derivative $P'$ of the characteristic polynomial also has $x_i$ as a root, of multiplicity $k_i - 1$!
+So $x_i$ also satisfies
+$
+  &P'(x_i) = 0\
+  <=> & k x_i^(k-1) - c_1 (k-1) x_i^(k-2) - dots - c_(k-1) = 0\
+  <=> & k x_i^(k) - c_1 (k-1) x_i^(k-1) - dots - c_(k-1) x_i = 0\
+$
+which shows that $n x_i^n$ is also a solution.
+Thus, the fact that $x_i$ is a root of the first, second, ..., $(k-1)^"th"$ derivative of the characteristic polynomial $P$ enables us to see that $n x_i^n, n^2 x_i^n, dots, n^(k-1) x_i^n$ are also solutions.
+
+Putting everything together, we get the following general result.
+
+// Second, we can observe that a linear combination of two solutions of such a recurrence relation is also a solution.
+// Indeed, let's consider $s_n$ and $t_n$ two solutions of a recurrence relation, and take $b_1, b_2 in RR$, then:
+// $
+//   b_1 s_n + b_2 t_n &= b_1 (c_1 s_(n-1) + dots + c_k s_(n-k)) +  b_2 (c_1 t_(n-1) + dots + c_k t_(n-k))\
+//   &= c_1 (b_1 s_(n-1) + b_2 t_(n-1)) + dots + c_k (b_1 s_(n-k) + b_2 t_(n-k))
+// $
+// which means that $b_1 s_n + b_2 t_n$ is also a solution of the same recurrence relation.
+
+#theorem(title: "Solution of a linear homogeneous recurrence relation")[
+  Let $(a_n)$ be recurrence relation of the form:
+  $
+    a_n = c_1 a_(n-1) + c_2 a_(n-2) + dots + c_k a_(n-k)
+  $
+  with $c_1, dots, c_k in RR$.
+  Let us assume that its characteristic polynomial
+  $
+    P(x) = x^k - c_1 x^(k-1) - c_2 x^(k-2) - dots - c_(k-1) x - c_k
+  $
+  has $r$ distinct roots $x_1, dots, x_r$ with multiplicities $k_1, dots, k_r$.
+
+  Then, a sequence $(a_n)$ is a solution of the recurrence relation iff
+  $
+    forall n in NN, a_n = sum_(i=1)^r (sum_(j=0)^(m_i-1) alpha_(i, j) n^(j) ) x_i^n
+  $
+  where $alpha_(i,j)$ are constants to be fixed according to initial conditions.
+]
+
+
+Let us see this in practice with the Fibonacci recurrence.
+
+#corollary(title: "Solution of a homogeneous Fibonacci-type recurrence relation")[
   Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
-  $ a_n = A a_(n-1) + B a_(n-2), quad n >= 3 $
-  with $A, B in RR$, and known initial conditions $a_1, a_2$. If the *characteristic equation* associated to this relation
-  $ x^2 = A x + B $
+  $ a_n = c_1 a_(n-1) + c_2 a_(n-2), quad n >= 3 $
+  with $c_1, c_2 in RR$, and known initial conditions $a_1, a_2$. If the *characteristic equation* associated to this relation
+  $ x^2 = c_1 x + c_2 $
   has characteristic roots $alpha$ and $beta$, then the solution of the recurrence relation is given for all $n >= 1$ by
   $
     a_n = cases(
@@ -49,49 +158,15 @@
   where the constants $K_1$ and $K_2$ can be obtained using the initial conditions $a_1, a_2$.
 ]
 
-=== General Case
 
-Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the linear recursion:
-$ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k), quad n >= k + 1 $
-with real numbers $c_1, c_2, ..., c_k$. We assume that the $k$ initial conditions $a_1, a_2, ..., a_k$ are known.
-
-If we look for a solution of the form
-$ a_n = K_i x^n $
-then the amplitude $K_i$ cancels out, and the indeterminate $x$ should satisfy the *characteristic equation*:
-$ x^k = c_1 x^(k-1) + c_2 x^(k-2) + ... + c_k $
-
-If $a_n$ and $b_n$ are two solutions of a given linear homogeneous recurrence relation, then any linear combination $alpha a_n + beta b_n$ will be also a solution of that recursion.
-
-The space of solutions has a vector space structure.
-
-To each distinct characteristic root $x_i$, there corresponds a solution $a_n^((i))$, whose structure depends on the multiplicity of $x_i$:
-- If the root $x_i$ is simple, then $a_n^((i)) = K_i x_i^n$.
-- If the root $x_i$ is double, then $a_n^((i)) = (K_i + K_i' n) x_i^n$.
-- If the root $x_i$ is triple, then $a_n^((i)) = (K_i + K_i' n + K_i'' n^2) x_i^n$, etc.
-
-If the characteristic equation has $r$ distinct roots $x_i$ with multiplicities $k_i$ (such that $sum_(i=1)^r k_i = k$), then the general solution for this recursion has the form:
-$ a_n = sum_(i=1)^r [sum_(j=1)^(k_i) K_i^((j)) n^(j-1)] x_i^n, quad n >= 1 $
-where the $k$ constants $K_i^((j))$ are determined using the $k$ initial conditions.
-
-== Solution of a Linear Nonhomogeneous Recurrence Relation
+=== Linear nonhomogeneous recurrence relation
 
 #theorem(title: "Solution of a linear nonhomogeneous recurrence relation")[
   Let us assume that the sequence $(a_n)_(n in NN)$ satisfies the linear nonhomogeneous recurrence relation with constant coefficients:
   $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + t_n, quad n >= k + 1 $
   where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, ..., a_k$ are known. The function $t_n : NN -> RR$ is a given *known function* of $n$. Then, the general solution of this linear nonhomogeneous recurrence is equal to the sum of the general solution for the linear homogeneous recurrence relation
   $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k), quad n >= k + 1 $
-  plus any particular solution of the full recurrence.
-]
-
-#theorem(title: "Solution of a linear nonhomogeneous recurrence relation")[
-  Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the linear nonhomogeneous recurrence
-  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + t_n, quad n >= k + 1 $
-  where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, a_2, ..., a_k$ are known. Let us further assume that the function $t_n : NN -> RR$ is of the form
-  $ t_n = s^n [b_0 + b_1 n + ... + b_t n^t] $
-  with real numbers $b_0, b_1, ..., b_t$. If $s$ is not a characteristic root of the associated linear homogeneous recurrence, then there exists a particular solution of the form
-  $ a_n^p = s^n [p_0 + p_1 n + ... + p_t n^t] $
-  If $s$ is a characteristic root with multiplicity $m$ of the associated linear homogeneous recurrence, then there exists a particular solution of the form
-  $ a_n^p = n^m s^n [p_0 + p_1 n + ... + p_t n^t] $
+  plus any particular solution $a_n^p$ of the full recurrence.
 ]
 
 The particular solution $a_n^p$ has no free parameters: there is only a unique choice for the coefficients ${p_k}_(k=1)^t$ such that $a_n^p$ is actually a solution.
