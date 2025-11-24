@@ -60,6 +60,7 @@ In the following, unless otherwise specified, "a relation $R$" refers to a relat
 
 
 == Equivalence relations
+<sec-equiv-rels>
 
 #definition(title: [Equivalence relations])[
   A relation $R$ on a set $A$ is an equivalence relation if it is reflexive, symmetric and transitive.
@@ -121,7 +122,7 @@ But first, what does that even mean?
   Let $R$ be an equivalence relation on $A$.
   Then the set of all equivalence classes of $R$ form a partition of $A$.
   Conversely, given a partition ${A_1, A_2, ...}$ of $A$, there exists an equivalence relation $R$ such that its equivalence classes are the sets $A_i$.
-]
+] <thm-equiv-classes-partition>
 
 #question-box[
   If there exists $a,b in A$ such that $a equiv b$, then $[ a ]_R = [ b ]_R$, which means $[ a ]_R inter [ b ]_R != emptyset$.
@@ -309,6 +310,7 @@ The well-ordering of natural numbers then explains the validity of proofs by ind
   Find $n_0$ such that $2^n >= n + 5$ for all $n >= n_0$.
 ]
 
+// TODO: keep?
 #theorem(title: "Strong induction principle for well-ordered sets")[
   Let $(A, prec.curly.eq)$ be a well-ordered set. Under the following condition:
   / Inductive step: If we assume that for any $b$ in $A$, for all its predecessors $a prec b$, $P(a)$ is true, then we can show that $P(b)$ is true.
