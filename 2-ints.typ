@@ -3,11 +3,12 @@
 #show: base
 
 
-= Integer and Modular Arithmetic
+= Elementary number theory
 
 #fa-book() This chapter overlaps with sections 4.1, 4.3, 4.5 and 4.6 of Rosen.
 // TODO: add 4.2?
 // TODO: too long!
+
 
 == Integer divisibility
 
@@ -103,14 +104,14 @@ The congruence modulo $m$ between two integers thus indicates that they have the
 ]
 
 #theorem[
-  For each positive integer $m$, the binary relation $equiv (mod m)$ is an equivalence relation.
-]
+  For each positive integer $m$, the binary relation $equiv (mod m)$ is an equivalence relation, as defined in @sec-equiv-rels.
+] <thm-mod-is-equiv>
+
 
 === The Quotient Set $ZZ_m$
 
 A good way to visualize such problems of modular arithmetic is to imagine that the straight lines of integers gets rolled into a single circle with $m$ ticks:
 
-// TODO
 #let n = 10
 #let m = 5
 #figure(
@@ -156,9 +157,14 @@ A good way to visualize such problems of modular arithmetic is to imagine that t
 This is equivalent to defining the quotient set we'll introduce below!
 
 #definition(title: "Congruence classes")[
-  The congruence classes modulo $m$
+  We define the congruence classes modulo $m$ as
   $ [a]_m = {b in ZZ | a equiv b (mod m)} = {a + m k | k in ZZ} $
-  form a partition of $ZZ$. There are $m$ distinct equivalence classes corresponding to the $m$ possible remainders obtained by dividing an integer by $m$.
+]
+
+#property[
+  It follows from @thm-mod-is-equiv that congruence classes are equivalence classes, and thus from @thm-equiv-classes-partition that they form a partition of $ZZ$.
+
+  Also, there are $m$ distinct equivalence classes corresponding to the $m$ possible remainders obtained by dividing an integer by $m$.
 ]
 
 #theorem[
