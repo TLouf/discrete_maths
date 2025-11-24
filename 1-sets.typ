@@ -160,10 +160,30 @@ Given two sets $A$ and $B$ we can define a number of operations.
   $
 ]
 
-#definition(title: [Sets intersections])[
+#definition(title: [Sets intersection])[
   The intersection of two sets $A$ and $B$ is the set of all elements that are in both $A$ and $B$:
   $
     A inter B = {x | (x in A) and (x in B)}
+  $
+]
+
+#notation[
+  These two operations can be chained an arbitrary number of times.\
+  For example we can perform the union of $n$ sets $A_1, A_2, dots, A_n$ and use the following notation:
+  $
+    A_1 union A_2 union dots union A_n = limits(union.big)_(i=1)^n A_i,
+  $
+  or perform the intersection of the same sets:
+  $
+    A_1 inter A_2 inter dots inter A_n = limits(inter.big)_(i=1)^n A_i.
+  $
+  These two notations are the respective equivalents of the sum $sum$ and product $product$ notations that you already knew.
+]
+
+#definition(title: [Set complement])[
+  The complement of a set $A$ is the set of all elements that are not in $A$:
+  $
+    overline(A) = {x | x in.not A} = U without A
   $
 ]
 
@@ -178,13 +198,6 @@ Given two sets $A$ and $B$ we can define a number of operations.
   The symmetric difference of two sets $A$ and $B$ is the set of all elements that are in $A$ or in $B$ but not in both:
   $
     A triangle.t B = {x | (x in A union B) and (x in.not A inter B)}
-  $
-]
-
-#definition(title: [Set complement])[
-  The complement of a set $A$ is the set of all elements that are not in $A$:
-  $
-    overline(A) = {x | x in.not A} = U without A
   $
 ]
 
@@ -204,6 +217,7 @@ You can represent these operations with a Venn diagram too. For instance:
 
 #question-box[
   How would you represent the other operations?
+  Then, using these representations, how would you write the difference operations as combinations of the union, intersection and complement operations?
 ]
 
 #properties[
