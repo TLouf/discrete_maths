@@ -104,16 +104,16 @@ Most of the time, and in the following of this course, $x in U$ can be omitted f
 
 === Examples: some already-known sets
 
-#definition[
+#definition(title: [Natural numbers])[
   The set of natural numbers $NN$ is defined by the following conditions:
-  1. $1 in NN$.
+  1. $0 in NN$.
   2. If $n in NN$, then the successor of $n$ (i.e., the number $n + 1$) belongs to $NN$.
-  3. Every $n in NN$ except 1 is the successor of some number in $NN$.
+  3. Every $n in NN$ except 0 is the successor of some number in $NN$.
   4. Every non-empty subset of $NN$ has a minimum element. //(well-ordering property).
 ]
 
 Notes:
-- Note that $0 in.not NN$.
+- Some define the natural numbers starting from one, thus excluding zero. To avoid any ambiguity, one can respectively use the terms "non-negative" or "positive" integers to distinguish between the definition of natural numbers including or excluding zero.
 - We can informally "define" the following sets of numbers:
   - Integer numbers: $ZZ = {0, plus.minus 1, plus.minus 2, ...}$
   - Rational numbers: $QQ = {p/q | p, q in ZZ, q != 0}$
@@ -190,7 +190,7 @@ Given two sets $A$ and $B$ we can define a number of operations.
 
 A set can therefore be defined as the result of operations involving other sets. For instance,
 $
-  ZZ = NN union {0} union {-n | n in NN}
+  ZZ = NN union {-n | n in NN}, quad ZZ^+ = NN without {0}
 $
 
 You can represent these operations with a Venn diagram too. For instance:
