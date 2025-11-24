@@ -29,7 +29,7 @@
 #colbreak()
 #include "2-rels.typ"
 #colbreak()
-#include "2-ints.typ"
+#include "3-ints.typ"
 #colbreak()
 #include "4-counting.typ"
 #colbreak()
