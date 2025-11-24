@@ -5,6 +5,8 @@
 
 = Integer and Modular Arithmetic
 
+#fa-book() This chapter overlaps with sections 4.1, 4.3, 4.5 and 4.6 of Rosen.
+// TODO: add 4.2?
 // TODO: too long!
 
 == Integer divisibility

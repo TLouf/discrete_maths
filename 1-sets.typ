@@ -4,6 +4,8 @@
 
 = Set theory
 
+#fa-book() This chapter overlaps with sections 2.1, 2.2, 2.3, 9.1 and 9.3 of Rosen.
+
 == Sets
 
 === Definitions

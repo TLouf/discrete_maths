@@ -4,6 +4,7 @@
 
 = Relations
 
+#fa-book() This chapter overlaps with sections 9.1, 9.5, 9.6, 5.1 and 5.2 of Rosen.
 
 == Binary relations on a set
 

@@ -4,6 +4,8 @@
 
 = Counting
 
+#fa-book() This chapter overlaps with sections 6.1, 6.3, 6.4, 6.5 of Rosen.
+
 The *goal of counting* is basically to determine the cardinality of certain finite sets.
 
 #definition[
