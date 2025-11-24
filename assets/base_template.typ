@@ -128,7 +128,7 @@
   )
 
   show "python": [#fa-python() Python]
-  show " iff": [if and only if]
+  show " iff": [ if and only if]
 
   doc
 }
