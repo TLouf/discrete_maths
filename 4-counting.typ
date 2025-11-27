@@ -408,7 +408,7 @@ This leads to the binomial theorem.
   $
     (x + y)^n = sum_(k=0)^n binom(n, k) x^k y^(n-k)
   $
-]
+] <thm-binomial>
 // https://www.youtube.com/watch?v=6agQBHWP8IE
 
 #corollary[
