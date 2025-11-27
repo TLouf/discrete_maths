@@ -47,7 +47,78 @@ They may also be defined recursively, that is, providing some initial terms toge
   - From the principle of strong induction (@thm-strong-induction), we know that a recurrence relation together with a set of initial conditions define a unique sequence.
 ]
 
-// TODO: sums? and arithmetic/geometric progressions? fibo?
+
+== Aggregating sequences
+
+Sometimes, we're not interested in every term of the sequence, but in some aggregate.
+For instance, you're not really interested in all movements in your bank account, but in your balance, so the sum of all these movements.
+
+The two fundamental ways to aggregate a sequence are the summation and products, that we introduce below.
+
+#definition(title: [Sequence sum])[
+  Given a sequence $(a_n)_(n in I)$ with $I subset.eq NN$, its *sum* is the sum of its terms.
+  Very often, we sum over contiguous integers, so $I = {m, m+1, dots, M}$ with $M > m$, and we write it
+  $
+    sum_(n in I) a_n = a_m + a_(m+1) + dots + a_M = sum_(n=m)^M a_n.
+  $
+  If $I$ is infinite, the sum is called a *series*.
+  If it is empty, the sum is $0$.
+]
+
+
+#definition(title: [Sequence product])[
+  Given a sequence $(a_n)_(n in I)$ with $I subset.eq NN$, its *product* is the product of its terms.
+  Very often, we sum over contiguous integers, so $I = {m, m+1, dots, M}$ with $M > m$, and we write it
+  $
+    product_(n in I) a_n = a_m a_(m+1) dots a_M = product_(n=m)^M a_n.
+  $
+  If $I$ is infinite, the sum is called an *infinite product*.
+  If it is empty, the product is $1$.
+]
+
+The usual laws of arithmetic apply to these sums and products.
+
+#proposition[
+  Let $(x_n)$ and $(y_n)$ be two sequences, $I subset.eq NN$ and $a,b in RR$, then
+  $
+    sum_(i in I) (a x_n + b y_n) = a sum_(i in I) x_n + b sum_(i in I) y_n
+  $
+
+  $
+    product_(i in I) (x_n^a y_n^b) = (product_(i in I) x_n)^a (product_(i in I) y_n)^b
+  $
+]
+
+We can often prove a closed form for a sum or a product using induction.
+To show it, let's introduce two fundamental kinds of sequences.
+
+#definition(title: [Arithmetic progression])[
+  An arithmetic progression is a sequence $(a_n)_(n in NN)$ that satisfies the recurrence relation
+  $
+    a_(n+1) = a_n + d
+  $
+  where $d in RR$ is called the common difference.
+]
+
+
+#definition(title: [Geometric progression])[
+  A geometric progression is a sequence $(a_n)_(n in NN)$ that satisfies the recurrence relation
+  $
+    a_(n+1) = r a_n
+  $
+  where $r in RR$ is called the common ratio.
+]
+
+Then the following can be proven by induction.
+
+#proposition[
+  For all $n in NN$ and $r in RR without {1}$:
+  $
+     "(i)" & sum_(k=0)^n k = (n (n+1)) / 2 \
+    "(ii)" & sum_(k=0)^n r^k = (1 - r^(n+1)) / (1 - r)
+  $
+] <prop-arithm-geo-sums>
+
 
 == Solving recurrence relations
 
