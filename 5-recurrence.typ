@@ -22,7 +22,7 @@ Sequences are basically indexed collections of elements, or, to be more formal:
   Note how #link("https://docs.python.org/3/library/collections.abc.html#collections-abstract-base-classes")[even in python] the difference is made between sequences and sets: the `Sequence`'s central method is `__getitem__` ---which allows you to retrieve their $n"th"$ element---, which doesn't exist for `Set`, whose central method is `__contains__`, to check if an element is inside the set.
 ]
 
-The terms of a sequence can be defined explicitly...
+The terms of a sequence can be defined explicitly, with a closed form...
 
 #example[
   Let's define the sequence $(a_n)_(n in NN)$ where $a_n = 2^n$.
@@ -32,7 +32,6 @@ The terms of a sequence can be defined explicitly...
 ... but not only!
 They may also be defined recursively, that is, providing some initial terms together with a rule that is needed to determine subsequent terms.
 
-// we know recursively defined functions are well-defined from the principle of induction
 #definition(title: [Recurrence relation])[
   A *recurrence relation* for the sequence $(a_n)_(n in NN)$ is an equation that expresses $a_n$ in terms of one or more previous terms $a_(n-1), a_(n-2), ..., a_(n-k)$, and possibly $n$.
   The *initial conditions* are the first $k$ terms in the sequence $(a_1, ..., a_k)$, which are necessary to be able to determine all terms of such a sequence.
@@ -156,12 +155,12 @@ To gain some intuition on the solution of such recurrence relations, let's start
 
 Let us now observe that $a_n = alpha x^n$ with $alpha, x in RR^*$ is a solution of such recurrence relations iff
 $
-  &alpha x^n = c_1 alpha x^(n-1) +  c_2 alpha x^(n-2) + dots +  c_k alpha x^(n-k)\
-  <=> & x^k - c_1 x^(k-1) - c_2 x^(k-2) - dots - c_(k-1) x - c_k = 0\
+      & alpha x^n = c_1 alpha x^(n-1) + c_2 alpha x^(n-2) + dots + c_k alpha x^(n-k) \
+  <=> & x^k - c_1 x^(k-1) - c_2 x^(k-2) - dots - c_(k-1) x - c_k = 0 \
   <=> & P(x) = 0
 $
 where we introduced the *characteristic polynomial* $P$, whose roots we will call the *characteristic roots*.
-This implies that if $x_i$ is a characteristic root, $alpha x_i^n$ is a solution of the recurrence relation.
+The equivalence above implies that if $x_i$ is a characteristic root, $alpha x_i^n$ is a solution of the recurrence relation.
 The multiplicative $alpha$ cancelled out above, so its value is to be fixed according to the initial conditions.
 The characteristic polynomial of a $k^"th"$ order linear recurrence is of degree $k$, so it admits $k$ characteristic roots, $x_1, dots, x_k$.
 
@@ -175,9 +174,9 @@ Let us now suppose we have a root $x_i$ of multiplicity $k_i > 1$.
 Then the derivative $P'$ of the characteristic polynomial also has $x_i$ as a root, of multiplicity $k_i - 1$!
 So $x_i$ also satisfies
 $
-  &P'(x_i) = 0\
-  <=> & k x_i^(k-1) - c_1 (k-1) x_i^(k-2) - dots - c_(k-1) = 0\
-  <=> & k x_i^(k) - c_1 (k-1) x_i^(k-1) - dots - c_(k-1) x_i = 0\
+      & P'(x_i) = 0 \
+  <=> & k x_i^(k-1) - c_1 (k-1) x_i^(k-2) - dots - c_(k-1) = 0 \
+  <=> & k x_i^(k) - c_1 (k-1) x_i^(k-1) - dots - c_(k-1) x_i = 0 \
 $
 which shows that $n x_i^n$ is also a solution.
 Thus, the fact that $x_i$ is a root of the first, second, ..., $(k-1)^"th"$ derivative of the characteristic polynomial $P$ enables us to see that $n x_i^n, n^2 x_i^n, dots, n^(k-1) x_i^n$ are also solutions.
@@ -193,7 +192,7 @@ Putting everything together, we get the following general result.
 // which means that $b_1 s_n + b_2 t_n$ is also a solution of the same recurrence relation.
 
 #theorem(title: "Solution of a linear homogeneous recurrence relation")[
-  Let $(a_n)$ be recurrence relation of the form:
+  Let $(a_n)$ be a sequence satisfying a recurrence relation of the form:
   $
     a_n = c_1 a_(n-1) + c_2 a_(n-2) + dots + c_k a_(n-k)
   $
@@ -210,134 +209,158 @@ Putting everything together, we get the following general result.
   $
   where $alpha_(i,j)$ are constants to be fixed according to initial conditions.
 ]
+// highlight in alpha sub: i = which root, j = which multiplicity
 
 
-Let us see this in practice with the Fibonacci recurrence.
+Let us see what this gives in practice with Fibonacci-like recurrences.
 
-#corollary(title: "Solution of a homogeneous Fibonacci-type recurrence relation")[
+#corollary(title: "Solution of a homogeneous Fibonacci-like recurrence relation")[
   Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
-  $ a_n = c_1 a_(n-1) + c_2 a_(n-2), quad n >= 3 $
-  with $c_1, c_2 in RR$, and known initial conditions $a_1, a_2$. If the *characteristic equation* associated to this relation
+  $ forall n >= 2, a_n = c_1 a_(n-1) + c_2 a_(n-2) $
+  with $c_1, c_2 in RR$.
+  If the *characteristic equation* associated to this relation
   $ x^2 = c_1 x + c_2 $
-  has characteristic roots $alpha$ and $beta$, then the solution of the recurrence relation is given for all $n >= 1$ by
+  has characteristic roots $x_1$ and $x_2$, then the solution of the recurrence relation is
   $
-    a_n = cases(
-      K_1 alpha^n + K_2 beta^n & "if" alpha != beta,
-      (K_1 + n K_2) alpha^n & "if" alpha = beta
+    forall n in NN, a_n = cases(
+      alpha_1 x_1^n + alpha_2 x_2^n & "if" x_1 != x_2,
+      (alpha_1 + n alpha_2) x_1^n & "if" x_1 = x_2
     )
   $
-  where the constants $K_1$ and $K_2$ can be obtained using the initial conditions $a_1, a_2$.
+  where the constants $alpha_1$ and $alpha_2$ can be obtained using the initial conditions $a_1, a_2$.
 ]
 
+#example[
+  TODO  with actual Fibo
+]
 
 === Linear nonhomogeneous recurrence relation
 
+What if we now add heterogeneity?
+
 #theorem(title: "Solution of a linear nonhomogeneous recurrence relation")[
-  Let us assume that the sequence $(a_n)_(n in NN)$ satisfies the linear nonhomogeneous recurrence relation with constant coefficients:
-  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + t_n, quad n >= k + 1 $
-  where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, ..., a_k$ are known. The function $t_n : NN -> RR$ is a given *known function* of $n$. Then, the general solution of this linear nonhomogeneous recurrence is equal to the sum of the general solution for the linear homogeneous recurrence relation
-  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k), quad n >= k + 1 $
-  plus any particular solution $a_n^p$ of the full recurrence.
+  Let us consider the linear nonhomogeneous recurrence relation with constant coefficients:
+  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + f(n) $
+  where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, ..., a_k$ are known.\
+  Then, the general solution of this linear nonhomogeneous recurrence is equal to $(a_n^((h)) + a_n^((p)))_(n in NN)$, where $(a_n^((h)))$ is the solution of the associated _homogeneous_ recurrence relation
+  $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k), $
+  and $(a_n^((p)))$ is any _particular_ solution of the nonhomogeneous relation.
+]
+// proof: consider two particular solutions of the nonhomogeneous relation, and subtract them -> solution to homogenous
+
+So the hard part is to "guess" a particular solution of the nonhomogeneous relation.
+In some simple examples though, it is not too hard to make the right guess.
+
+#example[
+  TODO, like example 10 p 548
 ]
 
-The particular solution $a_n^p$ has no free parameters: there is only a unique choice for the coefficients ${p_k}_(k=1)^t$ such that $a_n^p$ is actually a solution.
+== Generating functions
+// emphasize difference between formal series, and the actual function: would be nice to change terminology so GF is always an actual function, while GS is the abstract, formal series that can represent any sequence, regardless of its convergence.
 
-== Generating Functions
-// TODO: keep?
+=== Definitions
 
-1. *Recurrence relations*.
-2. *Generating functions*:
-  - Definitions.
-  - How to efficiently encode combinatorial problems?
-  - Solution of recurrence relations.
+We will now introduce generating functions, which are a very powerful tool to manipulate sequences.
+The idea is not to find a function which is "equal" to the sequence in any sense, but one that *encodes the sequence*.
+To be more specific, when you formulate a generating function you compress all the information necessary to reproduce the full sequence, so the value of all its terms, into a simple function such as $f(x) = e^x$, $f(x)=1 / (1-x)$, etc .
+How can a function contain all this information, though?
+By using the fact that many functions can be written as a power series, which means there is a sequence $(a_n)_(n in NN)$ such that
+$
+  f(x) = sum_(n=0)^(+oo) a_n x^n.
+$
+An obvious example is the polynomials: for instance $P(x) = 1 + 2 x^2$ can be written as a power series with sequence $(a_n)$ such that $a_0 = 1, a_2 = 2, "and" forall n in NN without {0, 2}, a_n = 0$.
+But many other functions can be written as a power series, for instance by using their Taylor expansion!
+For instance, $e^x = sum_(n=0)^(+oo) x^n / n!$, so its associated sequence is $a_n = 1 / n!$.
+We can thus say that $e^x$ _generates_ this sequence, in the sense that it can tell you the values of all its terms.
+Contrary to what you've seen previously in calculus though, here we do things the other way around: we start from a sequence and try to find its generating function.
 
 #definition[
-  The *generating function* (GF) associated to the sequence $(a_k)_(k=0)^infinity$ is the following formal power series:
-  $ F(x) = a_0 + a_1 x + a_2 x^2 + ... + a_n x^n + ... = sum_(n=0)^infinity a_n x^n $
+  The *generating function* (GF) associated to the sequence $(a_n)_(n in NN)$ is a function $G$ which can be written as a formal power series with the terms of the sequence as coefficients:
+  $ G(x) = a_0 + a_1 x + a_2 x^2 + ... + a_n x^n + ... = sum_(n=0)^(+ oo) a_n x^n $
+  The series itself is called a *generating series*.
 ]
 
-Examples:
-- $(1 + x)^k = sum_(n=0)^k binom(k, n) x^n$ is the GF of $(binom(k, 0), binom(k, 1), ..., binom(k, k), 0, 0, ...)$.
-- $1 + x + x^2 + ... + x^(k-1) = sum_(n=0)^(k-1) x^n = frac(1 - x^k, 1 - x)$ is the GF of $(1, 1, ..., 1, 0, 0, ...)$ where there are $k$ ones.
-- $frac(1, 1 - x) = 1 + x + x^2 + x^3 + ... = sum_(n=0)^infinity x^n$ is the GF of $(1, 1, 1, ...)$.
-- $e^x = 1 + x + frac(x^2, 2!) + frac(x^3, 3!) + ... = sum_(n=0)^infinity frac(x^n, n!)$ is the GF of $(1, 1, frac(1, 2!), frac(1, 3!), ...)$.
+#remark[
+  We used the term _formal_ because the series is only used as a representation of the sequence.
+  $x$ shouldn't be seen as an actual variable taking real values, we only use $x^n$ as a symbol that marks, or corresponds to "where" the $n^"th"$ term of the sequence is in the series.
+  It is only when we state the equality of a generating series with a function that the associated "real" series should be well-defined, that is, it should converge for at least some values of $x$.
+]
 
-== Basic Operations with Generating Functions
+Because we have this abstraction of a formal power series, we can redefine how to add or multiply them together.
 
-The GF for the sequence $(1, 2, 3, ...)$ is given by
-$
-  sum_(n=0)^infinity (n + 1) x^n = frac(d, d x) sum_(n=0)^infinity x^(n+1) = frac(d, d x) frac(x, 1 - x) = frac(1, (1 - x)^2)
-$
-
-If $F(x) = sum_(n=0)^infinity a_n x^n$, and $G(x) = sum_(n=0)^infinity b_n x^n$, then
-$ (F + G)(x) = sum_(n=0)^infinity (a_n + b_n) x^n $
-
-If $F$ is the GF of the sequence ${a_n}_(n=0)^infinity$, then the GF of the sequence $(0, 0, ..., 0, a_0, a_1, ...)$ where there are $k$ zeros is $G(x) = x^k F(x)$.
-
-== Integer Partitions
-
-*Problem 7*: Count the number of distinct partitions of the positive integer $N$. For example, if $N = 4$, there are 5 partitions: $4 = 3 + 1 = 2 + 2 = 2 + 1 + 1 = 1 + 1 + 1 + 1$.
-
-1. The sum principle allows us to compute the generating function associated to use the positive integer $k$ in the partition:
-  - The generating function for using 1 in the partition is $f_1 = 1 + x + x^2 + x^3 + ... = frac(1, 1-x)$.
-  - The generating function for using $2 = 1 + 1$ in the partition is $f_2 = 1 + x^2 + x^4 + x^6 + ... = frac(1, 1-x^2)$.
-  - The generating function for using $p >= 1$ in the partition is $f_p = 1 + x^p + x^(2p) + x^(3p) + ... = frac(1, 1-x^p)$.
-
-2. Because writing up a partition is a sequential process, the generating function that encodes Problem 7 is given by the product principle:
+#definition[
+  Let $f(x) = sum_(n=0)^(+ oo) a_n x^n$ and $g(x) = sum_(n=0)^(+ oo) b_n x^n$. Then
   $
-    f(x) = product_(k=1)^infinity f_k (x) = product_(k=1)^infinity frac(1, 1 - x^k) = 1 + x + 2x^2 + 3x^3 + 5x^4 + 7x^5 + ...
+      "(i)" & f(x) + g(x) = sum_(n=0)^(+ oo) (a_n + b_n) x^n,             && "(addition)" \
+     "(ii)" & f(x) g(x) = sum_(n=0)^(+ oo) (sum_(j=0)^k a_j b_(k-j)) x^n, && "(multiplication)" \
+    "(iii)" & x^m f(x) = sum_(n=m)^(+ oo) a_(n-m) x^n                     && "(shifting)"
+  $
+]
+
+#remark[
+  This actually matches the algebra of actual power series, simply because we defined it so it matches, since we want to eventually interpret the series as a closed-form function.
+]
+
+A summary of known series which can be identified when determining a closed form from a generating series is shown in @tbl-power-series.
+
+#figure(
+  table(
+    columns: 3,
+    gutter: 1em,
+    align: horizon,
+    table.hline(),
+    table.header([Power series], [Closed form], [Reference]),
+    table.hline(),
+    [$ sum_(n=0)^(k) binom(k, n) x^n $], [$ (1 + x)^k $], [@thm-binomial],
+    [$ sum_(n=0)^(k) x^n $], [$ (1 - x^(k+1)) / (1 - x) $], [@prop-arithm-geo-sums],
+    [$ sum_(n=0)^(+ oo) x^n $], [$ 1 / (1 - x) $], [Taylor],
+    [$ sum_(n=0)^(+ oo) x^n / (n!) $], [$ e^x $], [Taylor],
+    [$ sum_(n=1)^(+ oo) (-1)^(n+1) / n x^n $], [$ log(1+x) $], [Taylor],
+    table.hline(),
+  ),
+  caption: [Some useful closed forms for power series],
+) <tbl-power-series>
+
+
+=== Solving recurrence relations
+
+An example of the power of generating functions is how they can be used to solve recurrence relations, using the following procedure:
+1. Rewrite the recurrence relation for $a_n$ in terms of an equation that only involves the generating function $G$.
+2. Solve this equation and obtain a closed form for $G(x)$.
+3. Compute the coefficients $a_n$ by performing the Taylor expansion of $G$ around $x = 0$.
+
+#example[
+  Solve the recurrence relation $forall NN^*, a_n = 3 a_(n-1)$, with initial condition $a_0 = 2$.
+]
+
+
+=== Solving counting problems
+
+A generating series can encode a specific kind of sequence: namely, the sequence $(a_n)$ of number of ways to select some object $n$ times from a set.
+So for instance, the series $(1 + 2 x + 3 x^2)$ can encode the fact that we have a single way to not select the object, two to select it once, and three to select it three times.
+
+#example[
+  Let's see this with the following example: let's say we want to determine the number of ways to insert tokens worth $1 euro$, $2 euro$ and $5 euro$ into a vending machine to pay for an item that costs $r$ euros, when the order in which the tokens are inserted does not matter.
+
+  The number of euros produced by picking $n$ tokens worth $i$ euros can be seen as the exponent in $(x^(i))^n = x^(i n)$ within the formalism of generating functions.
+  Besides, we might pick any number of tokens of each type, so for each type we need to sum over all possible number of picks $n$.
+  Then the answer is the coefficient in front of $x^r$ in the following generating function:
+  $
+    (sum_(n=0)^(+ oo) x^n)(sum_(n=0)^(+ oo) x^(2 n))(sum_(n=0)^(+ oo) x^(5 n))
+  $
+  using the product rule.
+  The independence of picks (so their order) is clearly visible in the generating function.
+
+  When the order matters, then using the product rule, the process of picking $n$ tokens successively can be represented by $(x + x^2 + x^5)^n$.
+  The number of ways for these $n$ picks to sum up to $r$ euros is then the coefficient of $x^r$.
+  Since any number of tokens may be inserted, the number of ways to produce $r$ euros when the order matters is the coefficient of $x^r$ when we sum over all possible $n$ values:
+  $
+    sum_(n=0)^(+ oo) (x + x^2 + x^5)^n
   $
 
-== Practical Procedure
+  In both cases, the answer might seem complicated to get by hand for large $r$, but it is relatively straightforward using a computer.
+]
 
-*Encoding of a combinatorial problem:*
-1. Compute the generating function $F$ by using the sum/product principles and other operations.
-2. Compute the coefficients $a_n$ by performing the Taylor power-series expansion of $F$ around $x = 0$.
-
-*Solving a recurrence relation:*
-1. Rewrite the recurrence relation for $a_n$ in terms of an equation that only involves the generating function $F$.
-2. Solve this equation and obtain a closed form for $F$ in terms of $x$.
-3. Compute the coefficients $a_n$ by performing the Taylor power-series expansion of $F$ around $x = 0$.
-
-== Example: The Fibonacci Recursion
-
-We want to solve the recurrence relation
-$ f_n = f_(n-1) + f_(n-2), quad n >= 2, quad f_0 = 0, quad f_1 = 1 $
-by using the generating function
-$ F(x) = sum_(n=0)^infinity f_n x^n = f_0 + f_1 x + sum_(n=2)^infinity f_n x^n $
-
-Algorithm:
-1. Multiply the recurrence relation by $x^n$, and sum over all values of $n$ for which this recursion is valid (in our case, $n >= 2$):
-  $ sum_(n=2)^infinity f_n x^n = sum_(n=2)^infinity f_(n-1) x^n + sum_(n=2)^infinity f_(n-2) x^n $
-
-2. Manipulate the sums so that they can be expressed in terms of $F$ and the initial conditions $f_0 = 0, f_1 = 1$:
-  - $sum_(n=2)^infinity f_n x^n = F - f_0 - f_1 x = F - x$.
-  - $sum_(n=2)^infinity f_(n-1) x^n = x sum_(n=2)^infinity f_(n-1) x^(n-1) = x sum_(m=1)^infinity f_m x^m = x(F - f_0) = x F$.
-  - $sum_(n=2)^infinity f_(n-2) x^n = x^2 sum_(n=2)^infinity f_(n-2) x^(n-2) = x^2 sum_(m=0)^infinity f_m x^m = x^2 F$.
-
-  The Fibonacci recursion now becomes the equation
-  $ F - x = x F + x^2 F $
-
-3. We solve this equation for $F$:
-  $ F(x) = frac(x, 1 - x - x^2) = sum_(n=0)^infinity f_n x^n $
-
-4. We compute the Taylor power-series expansion of $F$ and we read the coefficient of $x^n$:
-  $ F(x) = frac(x, 1 - x - x^2) = x + x^2 + 2x^3 + 3x^4 + 5x^5 + 8x^6 + 13x^7 + ... $
-
-  We can obtain all coefficients with a little algebra:
-  $
-    F(x) = frac(alpha, x + (1 + sqrt(5))\/2) + frac(beta, x + (1 - sqrt(5))\/2) = frac(1, sqrt(5)) [frac(1, 1 - x(1 + sqrt(5))\/2) - frac(1, 1 - x(1 - sqrt(5))\/2)]
-  $
-  $ = sum_(n=0)^infinity frac(x^n, sqrt(5)) [(frac(1 + sqrt(5), 2))^n - (frac(1 - sqrt(5), 2))^n] $
-
-  Therefore,
-  $ f_n = frac(1, sqrt(5)) [(frac(1 + sqrt(5), 2))^n - (frac(1 - sqrt(5), 2))^n] $
-
-== Generalized Binomial Theorem
-
-#theorem[
-  Let $k$ be a fixed positive integer, then we have formally that
-  $ frac(1, (1 + x)^k) = sum_(n=0)^infinity binom(-k, n) x^n $
-  where for all $n >= 0$ the above binomial coefficient is defined as
-  $ binom(-k, n) = frac(-k(-k - 1)(-k - 2) ... (-k - n + 1), n!) = (-1)^n binom(n + k - 1, n) $
+#remark[
+  In generating functions representing combinatorial problems, you can think of additions as logical "or", and products as logical "and".
 ]
