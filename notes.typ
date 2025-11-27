@@ -33,7 +33,7 @@
 #colbreak()
 #include "4-counting.typ"
 #colbreak()
-#include "5-recurrence.typ"
+#include "5-seqs.typ"
 #colbreak()
 
 
