@@ -1,6 +1,11 @@
 #import "assets/base_template.typ": *
 
 #show: base
+
+#show heading.where(level: 1): h => {
+  pagebreak(to: "odd", weak: true)
+  h.body
+}
 // To hide solutions and proofs:
 #set-result("noanswer")
 
@@ -23,17 +28,9 @@
 
 // AI BSc have logic course but DS BSc don't!
 
-// boolean algebra? introduce from parallel between set relations and logical operations as in Epp?
-
 #include "1-sets.typ"
-#colbreak()
 #include "2-rels.typ"
-#colbreak()
 #include "3-ints.typ"
-#colbreak()
 #include "4-counting.typ"
-#colbreak()
 #include "5-seqs.typ"
-#colbreak()
 #include "6-graphs.typ"
-#colbreak()
