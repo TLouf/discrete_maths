@@ -1,7 +1,14 @@
-#import "@preview/itemize:0.2.0" as el
-#show: el.default-enum-list
+#import "assets/base_template.typ": *
 
-#set page(margin: 1.5cm, columns: 2)
+#set document(title: "Discrete Mathematics @ UC3M - Exercises")
+#set page(
+  margin: 1.5cm,
+  columns: 2,
+  footer: [
+    #set text(gray)
+    Discrete Mathematics @ UC3M - Exercises
+  ],
+)
 #set par(justify: true)
 #set text(size: 11pt)
 #set enum(full: true, numbering: (..nums) => {
@@ -18,12 +25,14 @@
 }
 #set heading(numbering: "1")
 
-= Set theory and functions
+// TODO: all drawings!
 
-+ Let $A = {x in ZZ : x^2 < 16}$. For each of the following statements, determine whether it is true or not:
+= Set theory
+
++ Let $A = {x in ZZ | x^2 < 16}$. For each of the following statements, determine whether it is true or not:
   + ${0, 1, 2, 3} subset A$
   + ${3, 1} in A$
-  + ${x in ZZ : |x| < 4} subset A$
+  + ${x in ZZ | |x| < 4} subset A$
   + $emptyset subset A$
   + $3 in A$
   + ${3} in A$
@@ -72,12 +81,136 @@
     _Note: Each byte contains 8 bits._
 
 + Determine if each one of the following functions $f : A arrow B$ is injective (one-to-one), surjective (onto), bijective, or none of these:
-  + $A eq.not emptyset$, $B = cal(P)(A)$, $f(a) = {a}$.
-  + $A = B = cal(P)({a, b, c, d})$, $f(X) = overline(X)$.
-  + $A = B = cal(P)({a, b, c, d})$, $f(X) = X union {a, b}$.
-  + $A = B = cal(P)({a, b, c, d})$, $f(X) = X inter {a, b}$.
+  + $A eq.not emptyset$, $B = cal(P)(A)$, $f(a) = {a}$
+  + $A = B = cal(P)({a, b, c, d}), f(X) = overline(X)$
+  + $A = B = cal(P)({a, b, c, d}), f(X) = X union {a, b}$
+  + $A = B = cal(P)({a, b, c, d}), f(X) = X inter {a, b}$
 
-= Elementary combinatorics I
+= Relations
+
++ Let $A$ and $B$ be two sets, and let $f: A -> B$ be a certain function. Show that any binary relation defined on $A$ of the form
+  $ a rel b <==> f(a) = f(b), quad a, b in A $
+  is an equivalence relation for any $f$. Find the quotient set $A\/R$.
+
++ Let $A$ be a set, and $B subset.eq A$ a fixed subset of $A$. We now consider the power set $cal(P)(A)$, and define the following relation on $cal(P)(A)$: for any subsets $X, Y subset.eq A$:
+  $ X rel Y <==> X inter B = Y inter B $
+  + Prove that $R$ is an equivalence relation.
+  + Compute its quotient set $cal(P)(A)\/R$, and prove that there is a bijection between this quotient set and $cal(P)(B)$.
+
++ Let $R$ be a relation defined on $NN times NN$, such that $(a, b)R(c, d)$ if and only if $a + b = c + d$. Show that $R$ is an equivalence relation on $NN times NN$, and that there exists a bijection between the quotient set $(NN times NN)\/R$ and $NN$.
+
++ Let
+  $
+    A = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
+  $
+  and let $R$ be a relation on $A$, such that $a rel b$ if and only if $floor(sqrt(a)) = floor(sqrt(b))$. Show that $R$ is an equivalence relation, find its classes of equivalence, and its quotient set.
+
++ We define the relation $R$ on $RR^2 = RR times (RR without {0})$ such that
+  $ (a, b)R(c, d) <==> a d = b c $
+  Show that this is an equivalence relation, and obtain the quotient set $RR^2\/R$.
+
++ A relation $R$ defined on a set $A$ is a *circular relation* if it verifies the following property:
+  $ a rel b "and" b rel c ==> c rel a $
+  Prove that a relation is an equivalence relation if and only if it is circular and reflexive.
+
++ A relation $R$ on a set $A$ is *weakly transitive* if, for all elements $a, b, c, d in A$, the relations $a rel b$, $b rel c$, and $c rel d$ imply that $a rel d$. Determine which one of the following two statements is true and which one is false (by proving the former, and giving a counter-example of the latter):
+  + Every symmetric and weakly transitive relation is transitive.
+  + Every reflexive, symmetric, and weakly transitive relation is an equivalence relation.
+
++ The adjacency matrix of a binary relation $R$ is given by
+  $ A_R = mat(1, 0, 1; 0, 1, b; 1, a, c) $
+  where $a, b, c = 0, 1$. Which conditions should $a$, $b$, and $c$ satisfy so that $R$ becomes an equivalence relation?
+
++ Show that the following relations are equivalence relations. Find the corresponding classes of equivalence and the quotient set $V\/R$:
+  + $V = ZZ$ and $v rel w$ if $|v - w|$ is a multiple of 2.
+  + $V = ZZ$ and $v rel w$ if $v^2 - w^2 = v - w$. Describe the equivalence class containing the element 2005.
+  + $V = RR^2$ and $(x, y)R(u, w)$ if $x y = u w$.
+  + $V = RR^2$ and $(x, y)R(u, w)$ if $(x - y)(x + y) = (u - w)(u + w)$.
+  + $V = RR^2$ and $(x, y)R(u, w)$ if $x^2 + y^2 = u^2 + w^2$.
+
+
+
++ Given the matrix representing the relation $R$ on a set $A$
+  $ mat(1, 1, 1, 1, 0; 0, 1, 1, 1, 0; 0, 0, 1, 1, 0; 0, 0, 0, 1, 0; 0, 0, 1, 1, 1) $
+  + Compute $"Dom"(R)$ and $"Im"(R)$.
+  + Draw its Hasse diagram.
+  + Find a total order compatible with $R$.
+
++ Let $A = {0, 1, 2} times {2, 5, 8}$, and let us define the order relation $R$ on $A$ such that $(a, b) rel (c, d) <==> (a + b) | (c + d)$. Find the maximal, minimal, maximum, and minimum elements of the poset $(A, R)$.
+
++ Let us consider the relation $R$ on $RR^2$ given by
+  $ (a, b) rel (c, d) <==> a <= c "and" b <= d $
+  Find the maximal and minimal elements of the set $C subset.eq RR^2$:
+  $ C = {(x, y) in RR^2 | x^2 + y^2 = 1} $
+  Find $sup(C)$ and $inf(C)$ by considering $C$ as a subset of $RR^2$.
+
++ Let us consider two binary relations on the set $NN$.
+  $ a rel_1 b <==> exists n in NN "such that" a = b^n $
+  $ a rel_2 b <==> exists n in NN union {0} "such that" a = b^n $
+  + Show that $R_1$ is an order relation. Is $R_2$ also an order relation? Is $R_1$ a total order?
+  + Find the Hasse diagram of both relations on the set $A = {n in NN | 1 <= n <= 9}$.
+  + Find for $R_1$ and $R_2$ the maximal, minimal, maximum, and minimum elements on $A$. Find also the supremum and infimum of $A$ as a subset of $NN$.
+
++ A polygon $P$ is convex if, for any two points $a, b in P$, the segment $overline(a b)$ joining both points is totally contained inside the polygon. Prove that the sum of the interior angles of a convex polygon of $n >= 3$ sides is $(n - 2)pi$.
+
++ Prove that $1 + 2^n < 3^n$ for each $n >= 2$.
+
+
+
+= Elementary number theory
+
++ Given $a = 92$ and $b = 84$, use Euclid's algorithm to compute $d = gcd(a, b)$. Find integers $x, y in ZZ$ such that $a x + b y = d$.
+
++ The product of two natural numbers is 1260, and their lcm is 630. Find those numbers.
+
++ How many positive divisors does the number $29338848000 = 2^8 dot 3^5 dot 5^3 dot 7^3 dot 11$ have? How many of them are multiple of 99? And how many of them are multiple of 39?
+
++ Prove that $log_2 3$ is an irrational number.
+
++ Prove that 101 is a prime number.
+
++ Prove that $6 | a(a + 1)(2a + 1)$ for any $a in ZZ$.
+
++ Find the integer solutions of the Diophantine equations:
+  + $28x + 36y = 44$.
+  + $66x + 550y = 88$.
+
++ Solve the following congruence equations:
+  + $3x equiv 5 space (mod 13)$.
+  + $8x equiv 2 space (mod 10)$.
+  + $5x equiv 7 space (mod 15)$.
+  + $3x equiv 9 space (mod 15)$.
+
++ Find the remainder of the integer $2^68$ when divided by 19.
+
++ Prove that $30 | (a^25 - a)$ for any $a in ZZ$.
+
++ Compute the last two digits of the integer $3^1492$.
+
++ Find the remainder of the hexadecimal number $"A1F05FFA01AFA0F"$ when divided by 5.
+
+// 11.2
++ Let $A = {6, 10, 12, 18, 21, 40, 441, 1323}$. We define the following binary relation $R$ on $A$:
+  $ x rel y <==> "x and y have the same prime divisors" $
+  If $R$ is an equivalence relation, find its classes of equivalence, or if it is not an equivalence relation, say which properties do not hold.
+
+// 13.4
++ Let $A = {n in ZZ | 2 <= n <= 12}$, and let us define on $A$ the order relation $R$ given by
+  $ n rel m <==> n | m, "or" n "is prime and" n <= m $
+  Give the maximal, minimal, maximum, and minimum elements of the poset $(A, R)$.
+
+// 13.7
++ Prove that for all $n in NN$ the following equation holds:
+  $ 3 | (4^n - 1) $
+
+// 13.11
++ Given their form provided below, prove by induction that the Fibonacci numbers $F_n$ and $F_(n+1)$ are relatively prime for all integer $n >= 0$:
+  $
+    F_n = F_(n-1) + F_(n-2), quad n >= 2, quad F_0 = 0, quad F_1 = 1
+  $
+
+
+= Counting
 
 + Computers represent information using bits. A bit has two possible values: 0 or 1. A bit string of length $n$ is a sequence of $n$ bits $b_1 b_2 b_3 ... b_n$.
   + How many different bit strings are there of length $n$?
@@ -114,19 +247,18 @@
   How many trajectories are there joining the points $(-1, 2, 0)$ and $(1, 3, 7)$? How many of them go through the point $(0, 3, 4)$?
 
 
-*Proposition 1 (The pigeonhole principle)*: If $k + 1$ or more objects are placed into $k$ boxes, then there is at least one box containing two or more of the objects.
+// *Proposition 1 (The pigeonhole principle)*: If $k + 1$ or more objects are placed into $k$ boxes, then there is at least one box containing two or more of the objects.
 
-_Remark_: Given a function $f : A arrow B$ with $|A| > |B|$, then $f$ cannot be injective. Therefore, there exist at least two distinct elements $a, b in A$ such that $f(a) = f(b) in B$.
+// _Remark_: Given a function $f : A arrow B$ with $|A| > |B|$, then $f$ cannot be injective. Therefore, there exist at least two distinct elements $a, b in A$ such that $f(a) = f(b) in B$.
 
-*Proposition 2 (The generalized pigeonhole principle)*: If $N$ objects are placed into $k$ boxes, then there is at least one box containing at least $ceil(N\/k)$ objects.
+// *Proposition 2 (The generalized pigeonhole principle)*: If $N$ objects are placed into $k$ boxes, then there is at least one box containing at least $ceil(N\/k)$ objects.
 
 
-*Theorem 2.8 (The division algorithm)*: Let $a$ and $b eq.not 0$ be two integers. Then there exists a unique pair of integers $q$ and $r$ such that
-$ a = q dot b + r quad "with" quad 0 <= r < |b|. $
+// *Theorem 2.8 (The division algorithm)*: Let $a$ and $b eq.not 0$ be two integers. Then there exists a unique pair of integers $q$ and $r$ such that
+// $ a = q dot b + r quad "with" quad 0 <= r < |b|. $
 
-+ Show that, given any five distinct integers, there are at least two of them with the same remainder when divided by four.
+// + Show that, given any five distinct integers, there are at least two of them with the same remainder when divided by four.
 
-= Elementary combinatorics II
 
 + We have 4 golf balls and 10 distinct boxes. Compute the number of distinct ways of distributing the golf balls in the boxes if:
   + All golf balls are distinct, and each box may contain at most one ball.
@@ -143,11 +275,10 @@ $ a = q dot b + r quad "with" quad 0 <= r < |b|. $
 
 + Find the number of $p$-element subsets taken from the $n$-element set ${a_1, a_2, ..., a_n}$, and such that they do not contain consecutive elements.
 
-+ Find the number of distinct solutions of the equation $x_1 + x_2 + x_3 = 17$ when the $x_i$ all belong to the set of the non-negative integers $ZZ^+$.
-
-+ Find the number of distinct solutions of the equation $x_1 + x_2 + x_3 = 17$ when the $x_i$ all belong to the set of the natural numbers $NN$.
-
-+ Find the number of distinct solutions of the equation $x_1 + x_2 + x_3 = 17$ when the $x_i$ all belong to the set ${0, 1, 2, 3, 4, 5, 6}$.
++ Find the number of distinct solutions of the equation $x_1 + x_2 + x_3 = 17$ when the $x_i$ all belong to the set
+  + $NN$ of the non-negative integers.
+  + $NN^*$ of positive integers.
+  + ${0, 1, 2, 3, 4, 5, 6}$.
 
 + We have 7 distinct object types, and we want to choose 25 objects in such a way that there are always at least 2 objects and at most six objects of each type. In how many distinct ways can we achieve this task?
 
@@ -165,7 +296,84 @@ $ a = q dot b + r quad "with" quad 0 <= r < |b|. $
   + In how many distinct ways can the company manager split the 20 cities in 5 groups of 4 cities each?
   + In how many distinct ways can the company manager assign the cities to the 5 employees?
 
-= Graph theory I
+
+= Sequences
+
++ For each integer $n in NN$, let us consider the set of $n$ lines in the plane with the following properties:
+  - P1. There are no parallel lines.
+  - P2. At each intersection point, only two lines meet.
+
+  Let $S_n$ be the number of regions of the plane defined by $n$ lines with the above properties:
+  - Find a recurrence equation for $S_n$.
+  - Solve this equation.
+
++ Let us consider numerical strings of 10 digits formed with elements in the set ${0, 1, 2}$. How many of these strings are such that the sum of the 10 digits is an even number?
+
++ A software company is trying to solve a very complicated problem. They say they are in the $n$-th phase of the project when there are $n$ steps left to finish it. Let us suppose that in each phase there are five options. Two of them, lead to the $(n - 1)$-th phase; but the other three options are better in the sense that they lead directly to the $(n - 2)$-th phase. Let us denote by $a_n$ the number of ways of achieving the solution of the project from the $n$-th phase. If $a_1 = 2$, check that $a_2 = 7$, and obtain a recurrence equation for $a_n$. Prove that
+  $ a_n = 1/4 [3^(n+1) + (-1)^n]. $
+
++ Compute the number of bit strings of length $n >= 1$ such that they do not have two consecutive zeros.
+
++ There are $3^n$ strings of length $n$ formed by ${0, 1, 2}$. Compute the number of those strings with an odd number of zeros $a_n$, by first proving that the recurrence equation for $a_n$ is
+  $ a_n = a_(n-1) + 3^(n-1), quad n >= 2, quad a_1 = 1, $
+  and then, by solving this equation.
+
++ Solve the equation:
+  $ a_n = 4a_(n-1) - 4a_(n-2), quad n >= 3, quad a_1 = a_2 = 1. $
+
++ Let $a_n$ be the number of strings of length $n$ which can be formed with ${0, 1, 2}$ in such a way that there are no consecutive 1's nor two consecutive 2's.
+  + Show that $a_n = 2a_(n-1) + a_(n-2)$, $n >= 3$.
+  + Find an explicit solution for $a_n$.
+
++ Solve the equation:
+  $ a_n = -a_(n-1) + 3 dot 2^(n-1), quad n >=2, quad a_1 = 0. $
+
++ Let us consider the following recursive algorithm to compute the exponential $a^n$ with $n in NN$:
+  ```
+  procedure exp1(a,n)
+    if (n = 1)
+      return a
+    else
+      m = floor(n/2)
+      return exp1(a,m) * exp1(a,n-m)
+  ```
+  Let $b_n$ be the number of multiplications needed to compute $a^n$:
+  - Compute $b_1$, $b_2$, $b_3$, and $b_4$.
+  - Find a recurrence equation for ${b_n}$.
+  - Solve this recurrence when $n$ is a power of 2.
+  - Prove that $b_n = n - 1$ for any $n in NN$.
+
++ Find the number of distinct integer solutions of the linear equation
+  $ x_1 + x_2 + x_3 = 17 $
+  if the variables are constrained as follows:
+  + $x_i in {0, 1, 2, dots, 6}$.
+  + $x_1, x_2 in 2NN$ are even integers, and $x_3 >= 0$ is an odd integer.
+  + $x_i$ are non-negative odd integers.
+
++ Solve the following recurrences using generating functions:
+  + $a_(n+1) - a_n = 3^n$, $n >= 0$, $a_0 = 1$.
+  + $a_(n+1) - a_n = n^2$, $n >= 0$, $a_0 = 1$.
+  + $a_n - a_(n-1) = 5^(n-1)$, $n >= 1$, $a_0 = 1$.
+  + $a_(n+2) - 3a_(n+1) + 2a_n = 0$, $n >= 0$, $a_0 = 1$, $a_1 = 6$.
+  + $a_(n+2) - 2a_(n+1) + a_n = 2^n$, $n >= 0$, $a_0 = 1$, $a_1 = 2$.
+  + $a_(n+2) - 2a_(n+1) - a_n = 2^n$, $n >= 0$, $a_0 = 1$, $a_1 = 2$.
+
++ Prove that given a positive integer $N$, the number of partitions of $N$ into distinct positive integers is equal to the number of partitions of $N$ into odd positive integers. For instance, the integer $N = 4$ has two partitions into distinct positive integers ($3 + 1$ and $4$), and two partitions into odd positive integers ($1 + 1 + 1 + 1$ and $3 + 1$). The integer $N = 6$ has four partitions into distinct positive integers ($1 + 2 + 3$, $2 + 4$, $1 + 5$, and $6$), and four partitions into odd positive integers ($1 + 1 + 1 + 1 + 1 + 1$, $1 + 1 + 1 + 3$, $3 + 3$, and $1 + 5$).
+
++ Let $F$ be the generating function that solves the following recurrence with $n$-dependent coefficients:
+  $
+    forall n >= 2, n a_n = 2(a_(n-1) + a_(n-2)), \
+    quad a_0 = e, quad a_1 = 2e
+  $
+  Find the equation satisfied by $F$. \
+  _Hint:_ The equation may involve $F'$.
+
++ Find, using generating functions, the number of distinct integer solutions of the equation
+  $ x_1 + x_2 + x_3 = N $
+  with $x_i >= 0$.
+
+
+= Graph theory
 
 + Let $V$ be the set of those two-letter words formed with the alphabet ${w, x, y, z}$ and starting with either $y$ or $z$. We define the graph $G = (V, A)$ in such a way that two words in $V$ determine an edge in $A$ if they differ in exactly one letter:
   + How many vertices does $G$ have?
@@ -202,11 +410,21 @@ $ a = q dot b + r quad "with" quad 0 <= r < |b|. $
 
   Determine which ones are trails, paths, cycles, or circuits, and compute their corresponding lengths.
 
-= Graph theory II
 
 + Let $K_n$ be the complete graph of $n$ vertices.
   + How many length-3 cycles does it contain?
   + How many triangles does each edge of $K_n$ belong to?
+
+// 13.6
++ Let us consider the cycle $C_4 = (V_4, E_4)$ with labeled vertices $V_4 = {a, b, c, d}$.
+  + If $A$ is the set of the spanning subgraphs of $C_4$:
+    $ A = {G = (V_4, E) | E subset.eq E_4} $
+    compute the cardinal of $A$.
+  + We define on $A$ the following equivalence relation $R$: if $G_1, G_2 in A$,
+    $ G_1 rel G_2 <==> G_1 "is isomorphic to" G_2 $
+    Find the equivalence classes $[G]_R$, and the quotient set $C = A\/R$.
+  + We now define the order relation $prec.eq.curly$ on the quotient set $C$ as follows: $[A]_R prec.eq.curly [B]_R$ if and only if there exist graphs $G_1 = (V_4, E_1) in [A]_R$ and $G_2 = (V_4, E_2) in [B]_R$ such that $E_1 subset.eq E_2$. Find the Hasse diagram associated to the set $(C, prec.eq.curly)$. Is $(C, prec.eq.curly)$ a totally ordered set?
+  + Let $Z subset C$ be the subset of $C$ containing the classes of equivalence that contain at least one representative with two edges. Compute $sup(Z)$ and $inf(Z)$.
 
 + Show that the paraffins $C_n H_(2n+2)$ have tree-like molecules [Arthur Caley, 1857].
 
@@ -226,7 +444,7 @@ $ a = q dot b + r quad "with" quad 0 <= r < |b|. $
 
 + How many trees does a forest of 62 vertices and 51 edges contain?
 
-+ Let $X$ be the set $X = {A, B, C}$. We define the simple graph $G = (V, E)$ in the following way: the set of vertices is given by the power set of $X$ ($V = cal(P)(X)$), and two vertices $R, S in V$ are adjacent if and only if $R subset S$ or $S subset R$.
++ Let $X = {A, B, C}$. We define the simple graph $G = (V, E)$ in the following way: the set of vertices is given by the power set of $X$ ($V = cal(P)(X)$), and two vertices $R, S in V$ are adjacent if and only if $R subset S$ or $S subset R$.
   - How many vertices and edges does $G$ contain?
   - Determine the degree of each vertex in $V$. Is $G$ regular?
   - Is $G$ planar?
@@ -258,7 +476,6 @@ $ a = q dot b + r quad "with" quad 0 <= r < |b|. $
   + Let $i eq.not j$ be two distinct vertices of $G$ ($i, j in V$). Let $n_(i j)$ be the number of walks from $i$ to $j$ of length 3. Find all the possible values of $n_(i j)$ for $G$.
   + Which is the length of a minimum-length cycle of $G$?
 
-= Graph theory III
 
 + Let $G = (V, E)$ be the graph defined by the following adjacency matrix:
   $
@@ -294,7 +511,6 @@ $ a = q dot b + r quad "with" quad 0 <= r < |b|. $
   - If the constructor places the water supply on house A, compute using Dijsktra's algorithm the minimum-cost path to reach house I (where he will live). As a side result, compute the total cost of the rooted (at A) spanning tree that connects A to all the other vertices.
   - When they heard this idea, the other neighbors complained about the price. They preferred to place the pipes using a minimum-cost spanning tree. Find one of these subgraphs using Prim's algorithm, and compute the total cost of the pipes.
 
-= Graph theory IV
 
 + Let $G$ be the following weighted graph, let $H$ be the simple graph obtained by erasing the weights of $G$.
   + Find a minimum-weight spanning tree for $G$.
@@ -343,225 +559,5 @@ $ a = q dot b + r quad "with" quad 0 <= r < |b|. $
 
   If $n$ is a fixed natural number, compute $|V_n|$ and $|E_n|$. Is $G_n$ a regular graph? If the answer is positive, then give the common degree; and if the answer is negative, then give the degree sequence. For which values of $n$ the graph $G_n$ is Eulerian?
 
-= Recurrences
-
-+ For each integer $n in NN$, let us consider the set of $n$ lines in the plane with the following properties:
-  - P1. There are no parallel lines.
-  - P2. At each intersection point, only two lines meet.
-
-  Let $S_n$ be the number of regions of the plane defined by $n$ lines with the above properties:
-  - Find a recurrence equation for $S_n$.
-  - Solve this equation.
-
-+ Let us consider numerical strings of 10 digits formed with elements in the set ${0, 1, 2}$. How many of these strings are such that the sum of the 10 digits is an even number?
-
-+ A software company is trying to solve a very complicated problem. They say they are in the $n$-th phase of the project when there are $n$ steps left to finish it. Let us suppose that in each phase there are five options. Two of them, lead to the $(n - 1)$-th phase; but the other three options are better in the sense that they lead directly to the $(n - 2)$-th phase. Let us denote by $a_n$ the number of ways of achieving the solution of the project from the $n$-th phase. If $a_1 = 2$, check that $a_2 = 7$, and obtain a recurrence equation for $a_n$. Prove that
-  $ a_n = 1/4 [3^(n+1) + (-1)^n]. $
-
-+ Compute the number of bit strings of length $n >= 1$ such that they do not have two consecutive zeros.
-
-+ There are $3^n$ strings of length $n$ formed by ${0, 1, 2}$. Compute the number of those strings with an odd number of zeros $a_n$, by first proving that the recurrence equation for $a_n$ is
-  $ a_n = a_(n-1) + 3^(n-1), quad n >= 2, quad a_1 = 1, $
-  and then, by solving this equation.
-
-+ Solve the equation:
-  $ a_n = 4a_(n-1) - 4a_(n-2), quad n >= 3, quad a_1 = a_2 = 1. $
-
-+ Let $a_n$ be the number of strings of length $n$ which can be formed with ${0, 1, 2}$ in such a way that there are no consecutive 1's nor two consecutive 2's.
-  + Show that $a_n = 2a_(n-1) + a_(n-2)$, $n >= 3$.
-  + Find an explicit solution for $a_n$.
-
-+ Solve the equation:
-  $ a_n = -a_(n-1) + 3 dot 2^(n-1), quad n >=2, quad a_1 = 0. $
-
-+ Let us consider the following recursive algorithm to compute the exponential $a^n$ with $n in NN$:
-  ```
-  procedure exp1(a,n)
-    if (n = 1)
-      return a
-    else
-      m = floor(n/2)
-      return exp1(a,m) * exp1(a,n-m)
-  ```
-  Let $b_n$ be the number of multiplications needed to compute $a^n$:
-  - Compute $b_1$, $b_2$, $b_3$, and $b_4$.
-  - Find a recurrence equation for ${b_n}$.
-  - Solve this recurrence when $n$ is a power of 2.
-  - Prove that $b_n = n - 1$ for any $n in NN$.
-
-= Generating Functions
-
-+ Find the number of distinct integer solutions of the linear equation
-  $ x_1 + x_2 + x_3 = 17 $
-  if the variables are constrained as follows:
-  + $x_i in {0, 1, 2, dots, 6}$.
-  + $x_1, x_2 in 2NN$ are even integers, and $x_3 >= 0$ is an odd integer.
-  + $x_i$ are non-negative odd integers.
-
-+ Solve the following recurrences using generating functions:
-  + $a_(n+1) - a_n = 3^n$, $n >= 0$, $a_0 = 1$.
-  + $a_(n+1) - a_n = n^2$, $n >= 0$, $a_0 = 1$.
-  + $a_n - a_(n-1) = 5^(n-1)$, $n >= 1$, $a_0 = 1$.
-  + $a_(n+2) - 3a_(n+1) + 2a_n = 0$, $n >= 0$, $a_0 = 1$, $a_1 = 6$.
-  + $a_(n+2) - 2a_(n+1) + a_n = 2^n$, $n >= 0$, $a_0 = 1$, $a_1 = 2$.
-  + $a_(n+2) - 2a_(n+1) - a_n = 2^n$, $n >= 0$, $a_0 = 1$, $a_1 = 2$.
-
-+ Prove that given a positive integer $N$, the number of partitions of $N$ into distinct positive integers is equal to the number of partitions of $N$ into odd positive integers. For instance, the integer $N = 4$ has two partitions into distinct positive integers ($3 + 1$ and $4$), and two partitions into odd positive integers ($1 + 1 + 1 + 1$ and $3 + 1$). The integer $N = 6$ has four partitions into distinct positive integers ($1 + 2 + 3$, $2 + 4$, $1 + 5$, and $6$), and four partitions into odd positive integers ($1 + 1 + 1 + 1 + 1 + 1$, $1 + 1 + 1 + 3$, $3 + 3$, and $1 + 5$).
-
-+ Let $F$ be the generating function that solves the following recurrence with $n$-dependent coefficients:
-  $ n a_n = 2(a_(n-1) + a_(n-2)), quad n >= 2, quad a_0 = e, quad a_1 = 2e $
-  Find the equation satisfied by $F$. \
-  _Hint:_ The equation may involve $F'$.
-
-+ Find, using generating functions, the number of distinct integer solutions of the equation
-  $ x_1 + x_2 + x_3 = N $
-  with $x_i >= 0$.
-
-= Graph Theory V
-
-+ Let $G_n$ be the graph with $2(n + 1)$ vertices shown below:
-  // TODO
-  - Is $G_n$ bipartite? Is it planar?
-  - Compute the number of perfect matchings $a_n$ of $G_n$:
-    - Show that $a_n$ satisfies the recurrence $a_n = a_(n-1) + 2a_(n-2)$ for all $n >= 3$, with $a_1 = 3$ and $a_2 = 5$.
-    - Solve the recurrence equation and prove that $a_n = 1/3 [2^(n+2) + (-1)^(n+1)]$.
-
-+ Find the chromatic polynomial $P_(C_n)$ of a cycle of $n$ vertices:
-  - Find the recurrence equation for $P_(C_n)$ by using the deletion-contraction theorem.
-  - Solve the above recurrence.
-
-+ Find the chromatic polynomial $P_G$ of the graph $G$ defined as follows: \
-  _[Graph description missing in original]_
-
-+ Find the number of perfect matchings for the wheel graph $W_n$ (please, recall that $W_n$ has $n$ vertices on the "wheel" and an extra vertex at the "axis").
-
-+ Find the chromatic polynomial of a forest with $n$ vertices and $k$ connected components.
-
-+ Let $G_n = (V_n, E_n)$ be the graph family defined as follows: the vertex set is $V_n = {1, dots, n + 1}$, and the edge set is given by
-  $ E_n = {{i, i + 1} : 1 <= i <= n - 1} union {{n, 1}} union {{n + 1, k} : 1 <= k <= 3} $
-  Compute its chromatic polynomial. _Hint:_ draw $G_n$ as a cycle of $n$ vertices with the vertex $n + 1$ placed inside that cycle.
-
-= Equivalence Relations
-
-+ Let $A$ and $B$ be two sets, and let $f : A -> B$ be a certain function. Show that any binary relation defined on $A$ of the form
-  $ a R b <==> f(a) = f(b), quad a, b in A $
-  is an equivalence relation for any $f$. Find the quotient set $A\/R$.
-
-+ Let $A$ be the set $A = {6, 10, 12, 18, 21, 40, 441, 1323}$. We define the following binary relation $R$ on $A$:
-  $ x R y <==> "x and y have the same prime divisors" $
-  If $R$ is an equivalence relation, find its classes of equivalence, or if it is not an equivalence relation, say which properties do not hold.
-
-+ Let $A$ be a set, and $B subset.eq A$ a fixed subset of $A$. We now consider the power set $cal(P)(A)$, and define the following relation on $cal(P)(A)$: for any subsets $X, Y subset.eq A$:
-  $ X R Y <==> X sect B = Y sect B $
-  + Prove that $R$ is an equivalence relation.
-  + Compute its quotient set $cal(P)(A)\/R$, and prove that there is a bijection between this quotient set and $cal(P)(B)$.
-
-+ Let $R$ be a relation defined on $NN times NN$, such that $(a, b)R(c, d)$ if and only if $a + b = c + d$. Show that $R$ is an equivalence relation on $NN times NN$, and that there exists a bijection between the quotient set $(NN times NN)\/R$ and $NN$.
-
-+ Let $A$ be the set $A = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}$, and let $R$ be a relation on $A$, such that $a R b$ if and only if $floor(sqrt(a)) = floor(sqrt(b))$. Show that $R$ is an equivalence relation, find its classes of equivalence, and its quotient set.
-
-+ We define the relation $R$ on $RR^2 = RR times (RR without {0})$ such that
-  $ (a, b)R(c, d) <==> a d = b c $
-  Show that this is an equivalence relation, and obtain the quotient set $RR^2\/R$.
-
-+ A relation $R$ defined on a set $A$ is a *circular relation* if it verifies the following property:
-  $ a R b "and" b R c ==> c R a $
-  Prove that a relation is an equivalence relation if and only if it is circular and reflexive.
-
-+ A relation $R$ on a set $A$ is *weakly transitive* if, for all elements $a, b, c, d in A$, the relations $a R b$, $b R c$, and $c R d$ imply that $a R d$. Determine which one of the following two statements is true and which one is false (by proving the former, and giving a counter-example of the latter):
-  + Every symmetric and weakly transitive relation is transitive.
-  + Every reflexive, symmetric, and weakly transitive relation is an equivalence relation.
-
-+ The adjacency matrix of a binary relation $R$ is given by
-  $ A_R = mat(1, 0, 1; 0, 1, b; 1, a, c) $
-  where $a, b, c = 0, 1$. Which conditions should $a$, $b$, and $c$ satisfy so that $R$ becomes an equivalence relation?
-
-+ Show that the following relations are equivalence relations. Find the corresponding classes of equivalence and the quotient set $V\/R$:
-  + $V = ZZ$ and $v R w$ if $|v - w|$ is a multiple of 2.
-  + $V = ZZ$ and $v R w$ if $v^2 - w^2 = v - w$. Describe the equivalence class containing the element 2005.
-  + $V = RR^2$ and $(x, y)R(u, w)$ if $x y = u w$.
-  + $V = RR^2$ and $(x, y)R(u, w)$ if $(x - y)(x + y) = (u - w)(u + w)$.
-  + $V = RR^2$ and $(x, y)R(u, w)$ if $x^2 + y^2 = u^2 + w^2$.
-
-= Modular Arithmetic
-
-+ Given $a = 92$ and $b = 84$, use Euclid's algorithm to compute $d = gcd(a, b)$. Find integers $x, y in ZZ$ such that $a x + b y = d$.
-
-+ The product of two natural numbers is 1260, and their lcm is 630. Find those numbers.
-
-+ How many positive divisors does the number $29338848000 = 2^8 dot 3^5 dot 5^3 dot 7^3 dot 11$ have? How many of them are multiple of 99? And how many of them are multiple of 39?
-
-+ Prove that $log_2 3$ is an irrational number.
-
-+ Prove that 101 is a prime number.
-
-+ Prove that $6 | a(a + 1)(2a + 1)$ for any $a in ZZ$.
-
-+ Find the integer solutions of the Diophantine equations:
-  + $28x + 36y = 44$.
-  + $66x + 550y = 88$.
-
-+ Solve the following congruence equations:
-  + $3x equiv 5 space (mod 13)$.
-  + $8x equiv 2 space (mod 10)$.
-  + $5x equiv 7 space (mod 15)$.
-  + $3x equiv 9 space (mod 15)$.
-
-+ Find the remainder of the integer $2^68$ when divided by 19.
-
-+ Prove that $30 | (a^25 - a)$ for any $a in ZZ$.
-
-+ Compute the last two digits of the integer $3^1492$.
-
-+ Find the remainder of the hexadecimal number $"A1F05FFA01AFA0F"$ when divided by 5.
-
-= Order Relations
-
-
-+ Given the matrix representing the relation $R$ on a set $A$
-  $ mat(1, 1, 1, 1, 0; 0, 1, 1, 1, 0; 0, 0, 1, 1, 0; 0, 0, 0, 1, 0; 0, 0, 1, 1, 1) $
-  + Compute $"Dom"(R)$ and $"Im"(R)$.
-  + Draw its Hasse diagram.
-  + Find a total order compatible with $R$.
-
-+ Let $A = {0, 1, 2} times {2, 5, 8}$, and let us define the order relation $R$ on $A$ such that $(a, b)R(c, d) <==> (a + b) | (c + d)$. Find the maximal, minimal, maximum, and minimum elements of the poset $(A, R)$.
-
-+ Let us consider the relation $R$ on $RR^2$ given by
-  $ (a, b)R(c, d) <==> a <= c "and" b <= d $
-  Find the maximal and minimal elements of the set $C subset.eq RR^2$:
-  $ C = {(x, y) in RR^2 : x^2 + y^2 = 1} $
-  Find $sup(C)$ and $inf(C)$ by considering $C$ as a subset of $RR^2$.
-
-+ Let $A$ be the set $A = {n in ZZ : 2 <= n <= 12}$, and let us define on $A$ the order relation $R$ given by
-  $ n R m <==> n | m, "or" n "is prime and" n <= m $
-  Tell the maximal, minimal, maximum, and minimum elements of the poset $(A, R)$.
-
-+ Let us consider two binary relations on the set $NN$.
-  $ a R_1 b <==> exists n in NN "such that" a = b^n $
-  $ a R_2 b <==> exists n in NN union {0} "such that" a = b^n $
-  + Show that $R_1$ is an order relation. Is $R_2$ also an order relation? Is $R_1$ a total order?
-  + Find the Hasse diagram of both relations on the set $A = {n in NN : 1 <= n <= 9}$.
-  + Find for $R_1$ and $R_2$ the maximal, minimal, maximum, and minimum elements on $A$. Find also the supremum and infimum of $A$ as a subset of $NN$.
-
-+ Let us consider the cycle $C_4 = (V_4, E_4)$ with labelled vertices $V_4 = {a, b, c, d}$.
-  + If $A$ is the set of the spanning subgraphs of $C_4$:
-    $ A = {G = (V_4, E) | E subset.eq E_4} $
-    compute the cardinal of $A$.
-  + We define on $A$ the following equivalence relation $R$: if $G_1, G_2 in A$,
-    $ G_1 R G_2 <==> G_1 "is isomorphic to" G_2 $
-    Find the equivalence classes $[G]_R$, and the quotient set $C = A\/R$.
-  + We now define the order relation $prec.eq.curly$ on the quotient set $C$ as follows: $[A]_R prec.eq.curly [B]_R$ if and only if there exist graphs $G_1 = (V_4, E_1) in [A]_R$ and $G_2 = (V_4, E_2) in [B]_R$ such that $E_1 subset.eq E_2$. Find the Hasse diagram associated to the set $(C, prec.eq.curly)$. Is $(C, prec.eq.curly)$ a totally ordered set?
-  + Let $Z subset C$ be the subset of $C$ containing the classes of equivalence that contain at least one representative with two edges. Compute $sup(Z)$ and $inf(Z)$.
-
-+ Prove that for all $n in NN$ the following equation holds:
-  $ 3 | (4^n - 1) $
-
-+ A polygon $P$ is convex if, for any two points $a, b in P$, the segment $overline(a b)$ joining both points is totally contained inside the polygon. Prove that the sum of the interior angles of a convex polygon of $n >= 3$ sides is $(n - 2)pi$.
-
-+ Prove that $1 + 2^n < 3^n$ for each $n >= 2$.
-
+// 13.10
 + Prove using induction that the number of odd-degree vertices in any graph $G$ is an even number.
-
-+ Prove by induction that the Fibonacci numbers $F_n$ and $F_(n+1)$ are relatively prime for all integer $n >= 0$:
-  $ F_n = F_(n-1) + F_(n-2), quad n >= 2, quad F_0 = 0, quad F_1 = 1 $
-  _Hint:_ You do not need to solve the recurrence equation to perform the proof.
