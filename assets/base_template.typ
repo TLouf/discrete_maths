@@ -109,7 +109,7 @@
     ($=<$, math.arrow.l.double),
   )
 
-  show ref: el.ref-enum
+  show: el.config.ref
   show: el.default-enum-list
 
   set table(stroke: none)
