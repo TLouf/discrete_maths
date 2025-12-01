@@ -10,6 +10,8 @@
 #import "@preview/itemize:0.2.0" as el
 #import "@preview/booktabs:0.0.3": *
 
+#import "@preview/diagraph:0.3.6": *
+
 #import "@preview/theorion:0.4.1": *
 #import "@preview/thmbox:0.3.0": proof
 #import cosmos.rainbow: *
