@@ -51,7 +51,7 @@
 +
   1. The graphics are [floor and ceiling function graphs]
   2. $floor(1\/2) = 0$. $ceil(1\/2) = 1$. $floor(-1\/2) = -1$. $ceil(-1\/2) = 0$. $floor(pi) = 3$. $ceil(pi) = 4$. $floor(1\/2 + ceil(1\/2)) = 1$. $ceil(floor(1\/2) + ceil(1\/2) + 1\/2) = 2$.
-  3. 72 452 groups.
+  3. $72 452$ groups.
 
 +
   1. Injective, not surjective, and not bijective.
@@ -131,13 +131,13 @@
   + The Hasse diagram is:
     #align(center)[
       ```
+      4
+      │
+      3 ─────┐
+      │      │
+      2      5
+      │
       1
-      │
-      2
-      │
-      5
-      ├─────┐
-      3     4
       ```
     ]
   + $1 prec.eq 2 prec.eq 5 prec.eq 3 prec.eq 4$.
@@ -157,22 +157,19 @@
   + The Hasse diagram for $R_1$ is:
     #align(center)[
       ```
-      4  8  9  7  5  6  1
-      └──┴──┘
-          │
-      2  3
+      ┌ 2 ┐  3
+      │   │  │
+      4   8  9  7  5  6  1
       ```
     ]
     The Hasse diagram for $R_2$ is:
     #align(center)[
       ```
-      4  8  9  7  5  6
-      └──┴──┴──┴──┴──┘
-            │
-          2  3
-          └──┘
-            │
-            1
+        ┌ 2 ┐  3
+        │   │  │
+        4   8  9  7  5  6
+        └───┴──┴──┴──┴──┘
+                1
       ```
     ]
   + $R_1$: set of maximal elements = ${1, 2, 3, 5, 6, 7}$; set of minimal elements = ${1, 4, 8, 9, 5, 6, 7}$; $max(A)$ and $min(A)$ do not exist.
@@ -184,7 +181,7 @@
     $R_2$: $op("major")(A) = emptyset$, therefore $sup(A)$ does not exist; $op("minor")(A) = {1}$, and $inf(A) = 1$.
 
 
-+ The base case is $n = 3$: the sum of the internal angles of a triangle is equal to $pi = (3 - 2)pi$ (Euclid's axiom). A convex polygon of $n = 6$ sides is the following (hexagon):
++ The base case is $n = 3$: the sum of the internal angles of a triangle is equal to $pi = (3 - 2)pi$ (Euclid's axiom). A convex polygon of $n = 6$ sides is a hexagon.
 
 + Once the induction hypothesis is used, the final result followed by using the inequalities $3 > 2 > 1$.
 
@@ -196,7 +193,10 @@
 + The set of solutions is:
   $ {(2, 630), (10, 126), (14, 90), (18, 70), (630, 2), (126, 10), (90, 14), (70, 18)}. $
 
-+ 1) 1728. 2) 576. 3) 0.
++
+  + $1728$.
+  + $576$.
+  + $0$.
 
 + Use the fundamental theorem of arithmetic.
 
@@ -221,13 +221,13 @@
   + There are no solutions.
   + There are three solutions: $x equiv 3 (mod 15)$, $x equiv 8 (mod 15)$, and $x equiv 13 (mod 15)$.
 
-+ 6.
++ $6$.
 
 + Hint: First prove that $p | (a^25 - a)$ for $p = 2, 3, 5$.
 
-+ 41.
++ $41$.
 
-+ 2.
++ $2$.
 
 + It is an equivalence relation (use #rel-same-function-image), and the equivalence classes are $[6]_R = {6, 12, 18}$, $[10]_R = {10, 40}$, and $[21]_R = {21, 441, 1323}$.
 
@@ -252,22 +252,24 @@
   7. $2^(ceil(n\/2))$.
 
 +
-  1. 90 720.
-  2. 50 400.
-  3. 80 640.
-  4. 16 800.
-  5. 33 600.
-  6. 8 400.
+  1. $90 720$.
+  2. $50 400$.
+  3. $80 640$.
+  4. $16 800$.
+  5. $33 600$.
+  6. $8 400$.
 
 + $3^5 - 3 times 2^5 + 3 = 150$.
 
-+ 120.
++ $120$.
 
 + If we assume that the spaces between two consecutive flags are immaterial, the results are: 1) 1 464. 2) 1 884.
 
 + $binom(8, 3)$.
 
-+ 1) 360. 2) 120.
++
+  + $360$.
+  + $120$.
 
 // + Hint: Use the pigeon-hole principle.
 
@@ -307,7 +309,7 @@
   - $a_n = a_(n-1) + n$ for all $n >= 2$ and $a_1 = 2$.
   - $a_n = (n^2 + n + 2)\/2$ for all $n >= 1$.
 
-+ 29525.
++ $29525$.
 
 + $a_n = 2a_(n-1) + 3a_(n-2)$ for all $n >= 2$ with $a_0 = 1$ and $a_1 = 2$.
 
@@ -353,12 +355,29 @@
 = Graph theory
 
 +
-  1. 8.
-  2. A graphical representation of the graph $G$ is the following: [diagram with vertices $z y$, $z x$, $y x$, $y y$, $z z$, $z w$, $y w$, $y z$]
+  1. $8$.
+  2.
+    #figure(
+      raw-render(
+        ```dot
+        graph {
+          layout=neato
+          node[shape=circle margin=0 width=0.2]
+          zx -- {zw, zy, yx, zz};
+          yy -- {yz, yw, zy, yx};
+          yw -- {yx, zw, yz};
+          zz -- {zw, zy, yz};
+          zw -- zy;
+          yz -- yx;
+          }
+        ```,
+        width: 5cm,
+      ),
+    )
   3. The common degree is 4.
   4. It is not bipartite.
 
-+ 10.
++ $10$.
 
 +
   1. $|V| = 9$.
@@ -366,7 +385,63 @@
   3. $|V| = 6$.
 
 +
-  1. A graphical representation of the graphs $K_n$ with $1 <= k <= 5$ is: [diagrams of $K_1$ through $K_5$]
+  1. A graphical representation of the graphs $K_n$ with $1 <= k <= 5$ is:
+    #figure(
+      grid(
+        columns: (0.5fr, 1fr, 1fr, 1fr, 1fr),
+        raw-render(
+          ```dot
+          graph {
+            layout=neato
+            node[shape=point margin=0]
+            1
+            }
+          ```,
+        ),
+        raw-render(
+          ```dot
+          graph {
+            layout=neato
+            node[shape=point margin=0]
+            1 -- 2;
+            }
+          ```,
+        ),
+        raw-render(
+          ```dot
+          graph {
+            layout=neato
+            node[shape=point margin=0]
+            1 -- {2, 3};
+            2 -- 3;
+            }
+          ```,
+        ),
+        raw-render(
+          ```dot
+          graph {
+            layout=neato
+            node[shape=point margin=0]
+            1 -- {2, 3, 4};
+            4 -- {2, 3};
+            2 -- 3;
+            }
+          ```,
+        ),
+        raw-render(
+          ```dot
+          graph {
+            layout=neato
+            node[shape=point margin=0]
+            1 -- {2, 3, 4, 5};
+            3 -- {2, 4, 5};
+            2 -- {4, 5};
+            4 -- 5;
+            }
+          ```,
+        ),
+      ),
+    )
   2. The degree of $K_n$ is $n - 1$.
   3. $|E_n| = binom(n, 2)$.
   4. Hint: you have to prove that $V_n subset V_m$ and $E_n subset E_m$ whenever $n < m$.
@@ -416,14 +491,70 @@
 +
   + $|A| = 16$.
   + There are 6 equivalence classes (for simplicity let us denote them $C_j$):
-    + $C_0 = [...]_R = {H = (V_4, emptyset)}$.
-    + $C_1 = [...]_R = {H = (V_4, E) : |E| = 1}$.
-    + $C_(2a) = [...]_R = {H = (V_4, E) : |E| = 2 "and" H "is a p.m. of" C_4}$.
-    + $C_(2b) = [...]_R = {H = (V_4, E) : |E| = 2 "and" H "is not a p.m. of" C_4}$.
-    + $C_3 = [...]_R = {H = (V_4, E) : |E| = 3}$.
-    + $C_4 = [...]_R = {H = (V_4, E) : |E| = 4}$.
 
-    where p.m. means perfect matching.
+  #let c0 = cetz.canvas({
+    import cetz.draw: *
+    circle((0, 0), radius: 0.05, fill: black, name: "b")
+    circle((0.3, 0), radius: 0.05, fill: black, name: "c")
+    circle((0, 0.3), radius: 0.05, fill: black, name: "a")
+    circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
+  })
+  #let c1 = cetz.canvas({
+    import cetz.draw: *
+    circle((0, 0), radius: 0.05, fill: black, name: "b")
+    circle((0.3, 0), radius: 0.05, fill: black, name: "c")
+    circle((0, 0.3), radius: 0.05, fill: black, name: "a")
+    circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
+    line("a", "b")
+  })
+  #let c2b = cetz.canvas({
+    import cetz.draw: *
+    circle((0, 0), radius: 0.05, fill: black, name: "b")
+    circle((0.3, 0), radius: 0.05, fill: black, name: "c")
+    circle((0, 0.3), radius: 0.05, fill: black, name: "a")
+    circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
+    line("a", "b")
+    line("d", "a")
+  })
+  #let c2a = cetz.canvas({
+    import cetz.draw: *
+    circle((0, 0), radius: 0.05, fill: black, name: "b")
+    circle((0.3, 0), radius: 0.05, fill: black, name: "c")
+    circle((0, 0.3), radius: 0.05, fill: black, name: "a")
+    circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
+    line("a", "b")
+    line("c", "d")
+  })
+  #let c3 = cetz.canvas({
+    import cetz.draw: *
+    circle((0, 0), radius: 0.05, fill: black, name: "b")
+    circle((0.3, 0), radius: 0.05, fill: black, name: "c")
+    circle((0, 0.3), radius: 0.05, fill: black, name: "a")
+    circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
+    line("a", "b")
+    line("c", "d")
+    line("a", "d")
+  })
+  #let c4 = cetz.canvas({
+    import cetz.draw: *
+    circle((0, 0), radius: 0.05, fill: black, name: "b")
+    circle((0.3, 0), radius: 0.05, fill: black, name: "c")
+    circle((0, 0.3), radius: 0.05, fill: black, name: "a")
+    circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
+    line("a", "b")
+    line("c", "b")
+    line("c", "d")
+    line("a", "d")
+  })
+
+  + $C_0 = [#c0]_R = {H = (V_4, emptyset)}$.
+  + $C_1 = [#c1]_R = {H = (V_4, E) : |E| = 1}$.
+  + $C_(2a) = [#c2a]_R = {H = (V_4, E) : |E| = 2 "and" H "is a p.m. of" C_4}$.
+  + $C_(2b) = [#c2b]_R = {H = (V_4, E) : |E| = 2 "and" H "is not a p.m. of" C_4}$.
+  + $C_3 = [#c3]_R = {H = (V_4, E) : |E| = 3}$.
+  + $C_4 = [#c4]_R = {H = (V_4, E) : |E| = 4}$.
+
+  where p.m. means perfect matching.
 
   + $C = A\/R = {C_0, C_1, C_(2a), C_(2b), C_3, C_4}$.
 
@@ -434,7 +565,7 @@
               │
               C_3
             ┌─┴─┐
-        C_2a  C_2b
+         C_2a   C_2b
             └─┬─┘
               C_1
               │
@@ -474,7 +605,7 @@
 + Hint: Which is the simple graph with $n$ vertices and $binom(n, 2)$ edges?
 
 + Hint: The average degree of a graph $G = (V, E)$ is defined as follows:
-  $ overline(d) = 1/|V| sum_(v in V) d(v) . $
+  $ overline(d) = 1/abs(V) sum_(v in V) d(v) . $
   Use also the following result: Let $G$ be a connected graph containing a cycle. Then, if we remove any edge of that cycle, the resulting graph is also connected.
 
 +
@@ -514,7 +645,23 @@
   1. Using Kruskal's algorithm, a spanning tree $T = (V, E)$ would be given by $E = {{a, b}, {e, g}, {b, e}, {e, c}, {f, g}, {f, d}}$ with weight $omega = 10$.
   2. It is not bipartite.
   3. There are no Euler tours/trails, and there is a Hamilton cycle.
-  4. A possible example is: [diagram]
+  4. A possible example is:
+    #figure(
+      raw-render(
+        ```dot
+        graph {
+          layout=neato
+          node[shape=point margin=0]
+          x -- {a,b,c,d}
+          a -- {b, c}
+          d -- {b, c}
+          y -- z;
+          z -- y;
+          }
+        ```,
+        width: 5cm,
+      ),
+    )
 
 + From left to right:
   1. It not an Eulerian/Hamiltonian graph. It contains an Euler trail and a Hamilton path.
@@ -527,14 +674,61 @@
 + 6 hours.
 
 +
-  1. The interval graph is the following: [diagram with vertices $a$, $c$, $e$, $f$, $d$, $b$]
+  1. The interval graph is the following:
+    #figure(
+      raw-render(
+        ```dot
+        graph {
+          layout=neato
+          node[shape=circle margin=0 width=0.2]
+          a -- {c, e, f, d, b};
+          f -- {b, d, e};
+          e -- {c, d};
+          b -- d;
+          }
+        ```,
+        width: 5cm,
+      ),
+    )
   2. It is not bipartite/Eulerian. It is a Hamiltonian graph.
 
 +
   - $C_7$.
-  - One possible example is: [diagram]
+  - One possible example is:
+    #figure(
+      raw-render(
+        ```dot
+        graph {
+          layout=neato
+          node[shape=point margin=0]
+          zx -- {zw, zy, yx, zz};
+          yy -- {yz, yw, zy, yx};
+          yw -- {yx, zw, yz};
+          zz -- {zw, zy, yz};
+          zw -- zy;
+          yz -- yx;
+          }
+        ```,
+        width: 5cm,
+      ),
+    )
   - $W_7$.
-  - One possible example is: [diagram]
+  - One possible example is:
+    #figure(
+      raw-render(
+        ```dot
+        graph {
+          layout=neato
+          node[shape=point margin=0]
+          c -- {a, b, d, e};
+          a -- b;
+          f -- {d, g};
+          e -- g
+          }
+        ```,
+        width: 5cm,
+      ),
+    )
   - There is no graph satisfying these conditions.
 
 +

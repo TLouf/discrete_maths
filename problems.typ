@@ -402,7 +402,60 @@
 
 + Write the adjacency matrices $A_1$ and $A_2$ corresponding to the graphs shown in the figure, and prove that these two graphs are isomorphic by finding a change-of-basis matrix $P$ satisfying $A_2 = P^(-1) dot A_1 dot P$.
 
+  #figure(
+    grid(
+      columns: 2,
+      column-gutter: 1em,
+      raw-render(
+        ```dot
+        graph {
+          node[shape=circle margin=0 width=0.2]
+          1 -- 2;
+          1 -- 3;
+          1 -- 4;
+          3 -- 2;
+          3 -- 4;
+        }
+        ```,
+        width: 3cm,
+        engine: "circo",
+      ),
+      raw-render(
+        ```dot
+        graph {
+          node[shape=circle margin=0 width=0.2]
+          1 -- 2;
+          1 -- 3;
+          2 -- 4;
+          3 -- 2;
+          3 -- 4;
+        }
+        ```,
+        width: 3cm,
+        engine: "circo",
+      ),
+    ),
+  )
+
 + Let $G$ be the graph shown in the figure below. We now consider the following walks on $G$:
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        node[shape=circle margin=0 width=0.2]
+        a -- b;
+        a -- c;
+        a -- d;
+        a -- e;
+        b -- c;
+        b -- d;
+        c -- e;
+      }
+      ```,
+      width: 5cm,
+      engine: "sfdp",
+    ),
+  )
   + $C_1 = (a, e, b, c, b)$
   + $C_2 = (e, b, a, d, b, e)$
   + $C_3 = (a, e, a, d, b, c, a)$
@@ -494,33 +547,264 @@
   + Find a spanning tree (if any).
 
 + Tell whether the following weighted graph has a spanning tree of weight equal or smaller than 12.
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        edge [fontsize=10 labelfloat=true labeldistance=1]
+        node[shape=circle margin=0 width=0.2]
+        a -- b [taillabel="2"]
+        a -- d [label="5" weight=5]
+        a -- g [label="4"]
+        a -- h [label="7" weight=7]
+        b -- c [label="7" weight=7]
+        b -- d [label="2"]
+        b -- g [label="2"]
+        c -- h [headlabel="2"]
+        c -- d [taillabel="5" weight=5]
+        d -- e [taillabel="1"]
+        e -- f [label="3"]
+        e -- h [label="1"]
+        f -- g [label="3"]
+        f -- h [label="6" weight=6]
+      }
+      ```,
+      width: 5cm,
+    ),
+  )
 
-+ Let us consider the following directed graph. Find the shortest path to go from A to G.
-  + Find the shortest path to go from A to G.
-  + Find the shortest path to go from A to G, assuming that the edges CB and EF are not directed (i.e., you can use both directions).
++ Let us consider the following directed graph.
+  #figure(
+    raw-render(
+      ```dot
+      digraph {
+        layout=neato
+        edge [fontsize=10 labelfloat=true labeldistance=2]
+        node[shape=circle margin=0 width=0.2]
+        a -> b [taillabel="30"]
+        a -> c [label="50"]
+        c -> b [label="19"]
+        c -> d [label="12"]
+        c -> f [headlabel="10"]
+        b -> d [label="6"]
+        b -> e [taillabel="40"]
+        d -> e [taillabel="35"]
+        d -> f [label="23"]
+        e -> f [label="12"]
+        e -> g [label="8"]
+        f -> g [label="20"]
+      }
+      ```,
+      width: 5cm,
+    ),
+  )
+  + Find the shortest path to go from a to g.
+  + Find the shortest path to go from a to g, assuming that the edges cb and ef are not directed (i.e., you can use both directions).
 
 + In the weighted graph shown in the figure below, compute the distances $d(a, h)$, $d(a, e)$, $d(d, a)$, $d(d, g)$, and $d(b, e)$.
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=sfdp
+        splines=true
+        edge [fontsize=10 labelfloat=true labeldistance=1]
+        node[shape=circle margin=0 width=0.2]
+        a -- b [taillabel="6"]
+        a -- f [label="9"]
+        b -- c [label="7"]
+        b -- g [label="8"]
+        b -- f [label="5"]
+        c -- h [headlabel="3"]
+        c -- g [label="5"]
+        c -- d [label="6"]
+        d -- e [taillabel="4"]
+        d -- h [label="10"]
+        e -- f [label="8"]
+        e -- h [label="9"]
+        f -- g [label="4"]
+        f -- h [label="7"]
+        g -- h [label="4"]
+      }
+      ```,
+      width: 7cm,
+    ),
+  )
 
 + Let $V = {A, B, C, D, E, F, G, H, I, J, K, L, M}$ be the set of vertices of the weighted graph $G = (V, E)$. Its weight matrix is given below: e.g., for $(C, D) in E$, its weight is $w(C, D) = 10$.
+  $
+    mat(
+      , 5, , , 7, 14, , , , , , , ;
+      5, , 7, , 1, , 2, , , , , , ;
+      , 7, , 10, , , 6, 6, , , , , ;
+      , , 10, , , , , 4, , , , , ;
+      7, 1, , , , 4, , , , , , , ;
+      14, , , , 4, , 8, , 6, 4, , , ;
+      , 2, 6, , , 8, , 7, 6, 4, , , ;
+      , , 6, 4, , , 7, , , , 1, 2, ;
+      , , , , , 6, 6, , , , , , ;
+      , , , , , 4, 4, , , , 11, 13, ;
+      , , , , , , , 1, , 11, , , 2;
+      , , , , , , , 2, , 13, , , 5;
+      , , , , , , , , , , 2, 5, ;
+    )
+  $
   + Compute the minimum weight (or shortest) path from vertex A to vertex M. Compute the total weight of such path.
   + Find a minimum-weight spanning tree and give its weight.
 
-+ Let $G = (V, E, omega)$ be the following weighted graph (with the weight of the edge ${F, H}$ equal to $x in RR$). Compute the range of values of the weight $x in RR$, so that the minimum-length path from A to H goes through the edge ${F, H}$.
++ Let $G = (V, E, omega)$ be the following weighted graph (with the weight of the edge ${f, h}$ equal to $x in RR$). Compute the range of values of the weight $x in RR$, so that the minimum-length path from a to h goes through the edge ${F, H}$.
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        edge[labeldistance=2]
+        node[shape=circle margin=0 width=0.2]
+        a -- b [label="1"];
+        a -- d [label="3"];
+        a -- c [headlabel="2"];
+        b -- c [label="2"];
+        b -- e [taillabel="5"];
+        c -- d [label="2"];
+        c -- f [taillabel="5"];
+        d -- g [taillabel="4"];
+        e -- f [label="5"];
+        e -- h [label="4"];
+        f -- g [label="3"];
+        f -- h [taillabel="x"];
+        g -- h [label="5"];
+      }
+      ```,
+      width: 5cm,
+    ),
+  )
 
-+ A constructor is planning a new urban development formed by 9 family houses, and now he is designing the water supply. As he knows some graph theory, he defines a weighted graph $G = (V, E, omega)$, where the vertices $V = {A, B, C, D, E, F, G, H, I}$ correspond to the houses, two vertices are adjacent if the houses can be connected by a water pipe, and the weight of each edge is the cost (in thousands of euros) of placing the corresponding water pipe.
-  - If the constructor places the water supply on house A, compute using Dijsktra's algorithm the minimum-cost path to reach house I (where he will live). As a side result, compute the total cost of the rooted (at A) spanning tree that connects A to all the other vertices.
++ A constructor is planning a new urban development formed by 9 family houses, and now he is designing the water supply. As he knows some graph theory, he defines a weighted graph $G = (V, E, omega)$, where the vertices $V = {a, b, c, d, e, f, g, h, i}$ correspond to the houses, two vertices are adjacent if the houses can be connected by a water pipe, and the weight of each edge is the cost (in thousands of euros) of placing the corresponding water pipe. The graph $G$ is given by
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        start=regular
+        node[shape=circle margin=0 width=0.2]
+        a -- b [label="5"];
+        a -- d [label="6"];
+        b -- c [label="6"];
+        b -- e [label="7"];
+        c -- f [label="5"];
+        d -- e [label="6"];
+        d -- g [label="4"];
+        e -- f [label="5"];
+        e -- h [label="5"];
+        f -- i [label="3"];
+        g -- h [label="7"];
+        h -- i [label="8"];
+      }
+      ```,
+      width: 6cm,
+    ),
+  )
+  - If the constructor places the water supply on house a, compute using Dijsktra's algorithm the minimum-cost path to reach house i (where he will live). As a side result, compute the total cost of the rooted (at a) spanning tree that connects A to all the other vertices.
   - When they heard this idea, the other neighbors complained about the price. They preferred to place the pipes using a minimum-cost spanning tree. Find one of these subgraphs using Prim's algorithm, and compute the total cost of the pipes.
 
 
 + Let $G$ be the following weighted graph, let $H$ be the simple graph obtained by erasing the weights of $G$.
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        edge[labeldistance=2]
+        node[shape=circle margin=0 width=0.2]
+        a -- b [label="1"];
+        a -- d [label="5"];
+        b -- c [headlabel="3"];
+        b -- e [taillabel="2"];
+        c -- e [taillabel="2"];
+        c -- g [taillabel="3"];
+        d -- e [taillabel="5"];
+        d -- f [taillabel="2"];
+        e -- g [headlabel="1"];
+        f -- g [label="2"];
+      }
+      ```,
+      width: 5cm,
+    ),
+  )
   + Find a minimum-weight spanning tree for $G$.
   + Is $H$ bipartite? If yes, give the partition of $V$ into two disjoint sets that provides a proof for bipartiteness.
   + Tell whether there are Euler tours/trails, and Hamilton cycles/paths.
   + Find a graph with exactly the same degree sequence as $H$, but not isomorphic to $H$. Explain why it is not isomorphic to $H$.
 
 + Tell whether there are Euler tours/trails, and Hamilton cycles/paths in the following graphs.
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        node[shape=circle margin=0 width=0.2]
+        0 -- 1;
+        0 -- 4;
+        0 -- 5;
+        1 -- 2;
+        2 -- 3;
+        3 -- 4;
+      }
+      ```,
+      width: 5cm,
+    ),
+  )
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        node[shape=circle margin=0 width=0.2]
+        a -- {b, d};
+        c -- {d, b};
+        g -- {f, h};
+        e -- {f, h};
+      }
+      ```,
+      width: 5cm,
+    ),
+  )
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        node[shape=circle margin=0 width=0.2]
+        0 -- {1, 4, 5};
+        2 -- {1, 7, 3};
+        8 -- {3, 7, 9};
+        6 -- {1, 5, 7}
+        4 -- {3, 9};
+        5 -- 9
+        }
+      ```,
+      width: 5cm,
+    ),
+  )
 
 + Tell whether the following graph admits an Euler tour/trail, and find it (if any).
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        node[shape=circle margin=0 width=0.2]
+        e -- {a, b, d, f, h, i};
+        f -- {g, c, d, i, b};
+        g -- c;
+        d -- {h, a};
+        i -- h;
+      }
+      ```,
+      width: 5cm,
+    ),
+  )
 
 + In a film festival there are 6 films on the first day. Films 1, 3, and 5 are dramas; films 2, 4, and 6 are comedies; films 3 and 4 are indies, and films 5 and 6 are blockbusters. Each film lasts two hours. What is the minimum number of hours needed to show all films, in such a way that films of the same type do not overlap?
 
