@@ -1,4 +1,5 @@
 #import "assets/base_template.typ": *
+#show: base
 #set document(title: "Discrete Mathematics @ UC3M - Answers to exercises")
 #show: el.config.ref.with(supplement: "Question")
 
