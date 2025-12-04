@@ -609,6 +609,7 @@
       ```dot
       graph {
         layout=sfdp
+        start=5
         splines=true
         edge [fontsize=10 labelfloat=true labeldistance=1]
         node[shape=circle margin=0 width=0.2]
@@ -660,6 +661,7 @@
       ```dot
       graph {
         layout=neato
+        start=9
         edge[labeldistance=2]
         node[shape=circle margin=0 width=0.2]
         a -- b [label="1"];
@@ -677,7 +679,7 @@
         g -- h [label="5"];
       }
       ```,
-      width: 5cm,
+      width: 6cm,
     ),
   )
 
@@ -687,7 +689,7 @@
       ```dot
       graph {
         layout=neato
-        start=regular
+        start=11
         node[shape=circle margin=0 width=0.2]
         a -- b [label="5"];
         a -- d [label="6"];
@@ -703,7 +705,7 @@
         h -- i [label="8"];
       }
       ```,
-      width: 6cm,
+      width: 5cm,
     ),
   )
   - If the constructor places the water supply on house a, compute using Dijsktra's algorithm the minimum-cost path to reach house i (where he will live). As a side result, compute the total cost of the rooted (at a) spanning tree that connects A to all the other vertices.
