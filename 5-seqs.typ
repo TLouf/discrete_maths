@@ -4,7 +4,7 @@
 
 = Sequences
 
-#fa-book() This chapter overlaps with sections 2.4, 8.2, 8.4 of Rosen. TODO
+#fa-book() This chapter overlaps with sections 2.4, 8.2, 8.4 of Rosen.
 
 == Defining sequences
 
@@ -61,7 +61,7 @@ The two fundamental ways to aggregate a sequence are the summation and products,
     sum_(n in I) a_n = a_m + a_(m+1) + dots + a_M = sum_(n=m)^M a_n.
   $
   If $I$ is infinite, the sum is called a *series*.
-  If it is empty, the sum is $0$.
+  If $I$ is empty, the sum is $0$.
 ]
 
 
@@ -72,7 +72,7 @@ The two fundamental ways to aggregate a sequence are the summation and products,
     product_(n in I) a_n = a_m a_(m+1) dots a_M = product_(n=m)^M a_n.
   $
   If $I$ is infinite, the sum is called an *infinite product*.
-  If it is empty, the product is $1$.
+  If $I$ is empty, the product is $1$.
 ]
 
 The usual laws of arithmetic apply to these sums and products.
@@ -330,7 +330,7 @@ An example of the power of generating functions is how they can be used to solve
 3. Compute the coefficients $a_n$ by performing the Taylor expansion of $G$ around $x = 0$.
 
 #example[
-  Solve the recurrence relation $forall NN^*, a_n = 3 a_(n-1)$, with initial condition $a_0 = 2$.
+  Solve the recurrence relation $forall n in NN^*, a_n = 3 a_(n-1)$, with initial condition $a_0 = 2$.
 ]
 
 

@@ -243,7 +243,7 @@ You can check these laws hold with Venn diagrams too.
 
 === Data types as sets
 
-The very concept of a datatype in computer science is built upon the concept of a set. For instance, a boolean is an element of the set ${0,1}$, or, equivalently, `{False, True}`. A datatype is more than a set though, as it also defines the operations which are allowed on the elements of the set.
+The very concept of a datatype in computer science is built upon the definition of a set. For instance, a boolean is an element of the set ${0,1}$, or, equivalently, `{False, True}`. A datatype is more than a set though, as it also defines the operations which are allowed on the elements of the set.
 
 #question-box[
   Note that all data types correspond to a set which is _necessarily_ finite. Can you guess why?
@@ -251,7 +251,7 @@ The very concept of a datatype in computer science is built upon the concept of 
 
 // To check that an object is of a given type, so to check it belongs to the corresponding set, you can run #link("https://docs.python.org/3/library/functions.html#isinstance")[`isinstance(object, type)`].
 
-=== Sets as a datatype
+=== Sets as a data type
 
 Most programming languages define a set datatype. #link("https://docs.python.org/3/library/stdtypes.html#set")[python is no exception]: you can define a set with a syntax that is very similar to the notation we have seen until now:
 ```python
@@ -299,7 +299,7 @@ Thus, while ${a_1, a_2} = {a_2, a_1}$, for tuples $(a_1, a_2) != (a_2, a_1)$.
 
 How can we represent binary relations graphically?
 What we want is to show each set on a separate "side", and link related elements together.
-Here we'll see three options, which are the direct graph, Cartesian and adjacency matrix representations.
+Here we'll see three options, which are the directed graph, Cartesian and adjacency matrix representations.
 
 #example[
   #let names = ("Alice", "Bob", "Eve")

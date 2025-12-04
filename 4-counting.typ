@@ -117,7 +117,7 @@ The generalisation is less straightforward than before, but as hinted by our ite
 A permutation is basically a way in which elements of a set can be ordered.
 
 #example[
-  Let's consider the set containing the four first letters of the alphabet: $S = {A, B, C, D}$.
+  Let's consider the set containing the first four letters of the alphabet: $S = {A, B, C, D}$.
   In how many ways can we order them, or, in other words, in how many ways can we permute the elements of this set, or, even, how many permutations does this set have?
   To see how to answer that, let's think about the very process of ordering.
   We first choose the element that should come first: at this stage we have 4 different choices.
