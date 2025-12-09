@@ -448,6 +448,31 @@ The notion of degree also gets naturally generalised to the case of weighted gra
 
 These measures, degree and strength, are very local in nature, and thus may not represent the importance of a vertex in the context of the whole graph.
 
+=== Eigenvector centrality
+
+A first way to provide more global information to quantify a vertex' importance is to consider that a vertex should be considered more important not only the more neighbours it has, but also the more important these neighbours are.
+That is how we define the eigenvector centrality $x(u)$ of a vertex $u$ in an undirected graph: it's proportional to the sum of the centralities of its neighbours:
+$
+  x(u) = c^(-1) sum_(v in cal(N) (u)) x(v),
+$
+where $c in RR^+$ is a constant.
+Rewriting this equality for every vertex, and involving the adjacency matrix $A$ of the graph, we get
+$
+  x = c^(-1) A x <=> A x = c x,
+$
+where $x$ is a vector of centrality scores, which is an eigenvector of $A$ associated to the eigenvalue $c$!
+And from the Perron-Frobenius theorem from linear algebra, we know that since $A$ has non-negative values, if we want our centralities to all be non-negative, $c$ must be the largest eigenvalue.
+
+#definition(title: [Eigenvector centrality])[
+  Given a simple undirected graph represented by an adjacency matrix $A$, the eigenvector centrality of vertex $i$ is the $i^"th"$ element of one of $A$'s leading eigenvectors.
+]
+
+#remark[
+  - The point of centralities is to compare vertices, so the same eigenvector should be considered for all nodes!
+  - To generalise to directed networks, some small tweaks are needed: see Sections 7.1.2-3 in Newman.
+]
+
+
 === Betweenness centrality
 
 We can use shortest paths to characterise vertices, in particular as a way to quantify their centrality in the graph.
