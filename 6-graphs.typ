@@ -493,6 +493,32 @@ Alternatively, we can consider its longest shortest path.
 ]
 
 
+=== Graph density
+
+We already saw how to check how well connected a graph is, using cut edges and vertices (@def-cut-ev).
+A complementary, easier way to quantify that is to count how many edges the graph has, and compare it to the maximum it could have.
+
+#question-box[
+  How many edges can a simple undirected graph have at maximum?\ _Hint_: this is a combinatorics question!
+  // the number of ways you can choose two vertices from a set of $n$
+]
+
+#definition(title: [Graph density])[
+  The density $rho$ of a graph is the fraction of possible edges which are actually present in the graph.
+]
+
+#remark[
+  The density can be thought of as the probability that two vertices picked from the graph uniformly at random are connected by an edge.
+]
+
+#proposition[
+  For simple undirected graphs,
+  $
+    rho = (2 m) / (n ( n-1)).
+  $
+]
+
+
 == Euler and Hamilton paths
 
 === Eulerian graphs
