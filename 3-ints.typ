@@ -381,7 +381,7 @@ And as a direct consequence, to redefine relatively-prime integers through the f
 - If $x$ is a solution of a linear congruence equation, and $x' equiv x (mod m)$, then $x'$ is also a solution of that equation: $a dot x' equiv a dot x (mod m) equiv b (mod m)$.
 - Therefore, the solutions of a linear congruence equation (if any) form classes of congruence modulo $m$: i.e., they are elements of $ZZ_m$.
 
-== Solving Linear Congruence Equations
+=== Solving Linear Congruence Equations
 
 #theorem[
   If $d = gcd(a, m)$, then the linear congruence equation
@@ -401,8 +401,8 @@ And as a direct consequence, to redefine relatively-prime integers through the f
   If $gcd(a, m) = 1$ with $m > 1$, then there exists a multiplicative inverse of $a$ modulo $m$. This multiplicative inverse is unique modulo $m$.
 ]
 
-== Arithmetic with $ZZ_m$
-// TODO keep?
+=== Arithmetic with $ZZ_m$
+// TODO keep? put above if keep
 
 The elements of $ZZ_m$ with $m in NN$ are equivalence classes modulo $m$. For the sake of simplicity, $x in ZZ_m$ represents that $x in [x]_m$.
 
@@ -464,7 +464,7 @@ None of these two properties holds in general in $ZZ_m$.
   If $p$ is a prime number, then $phi(p) = p - 1$.
 ]
 
-== Euler's Theorem
+=== Euler's Theorem
 
 #theorem(title: "Euler, 1790")[
   If $y$ is invertible in $ZZ_m$ (i.e., if $gcd(y, m) = 1$), then

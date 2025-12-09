@@ -28,6 +28,7 @@
 
 // AI BSc have logic course but DS BSc don't!
 
+// TODO: join end of sets with rels?
 #include "1-sets.typ"
 #include "2-rels.typ"
 #include "3-ints.typ"

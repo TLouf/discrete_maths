@@ -16,7 +16,7 @@
   // TODO: only really a relation if directed graph! so start from directed? which is probably the most intuitive to understand?
   - $E subset.eq V times V$ is the graph's adjacency relation, which is a binary relation on $V$.
     Its elements are called *edges*, or links.
-    If $e = (u, v) in E$, we say that $e$ is incident on $u$ and $v$, that the two vertices are adjacent, that $u$ is $e$'s tail and $v$ its head, and also that $u$ is $v$'s predecessor and $v$ is $u$'s successor.
+    If $e = (u, v) in E$, we say that $e$ is *incident* on $u$ and $v$, that the two vertices are *adjacent*, that $u$ is $e$'s *tail* and $v$ its *head*, and also that $u$ is $v$'s *predecessor* and $v$ is $u$'s *successor*.
 ]
 
 We actually already introduced directed graphs as a natural representation of a binary relation, in @sec-rels-sets!
@@ -44,7 +44,7 @@ For instance:
 
 #definition(title: [Undirected graphs])[
   An *undirected graph* is an ordered pair $G = (V, E)$ of vertex and edge sets $V$ and $E$, where $E$ is a set of _unordered_ pairs of vertices, that is $E subset.eq { {u,v} | u,v in V}$.
-  If $e = {u, v} in E$, we say that $e$ is incident on $u$ and $v$, and that the two vertices are adjacent.
+  If $e = {u, v} in E$, we say that $e$ is *incident* on $u$ and $v$, or equivalently, that the two vertices are *adjacent*, or that $u$ is in $v$'s *neighbourhood* $cal(N)(v)$, and vice versa.
 ]
 
 #remark[
@@ -93,6 +93,10 @@ Again in a similar fashion to relations, graphs can be represented by an adjacen
   The adjacency matrix of an undirected graph is symmetric.
 ]
 
+#notation[
+  In the following, whenever we refer to a vertex as the vertex $i$ or $j$, we mean $v_i$ or $v_j$ in the ordering $v_1, v_2, ..., v_(|V|)$, from which the graph's adjacency matrix has been defined.
+]
+
 === Particular graphs
 
 An interesting particular case of graphs is the one that represents relationships between two separate sets of entities.
@@ -130,7 +134,10 @@ Multigraphs are actually very rare in practice, as they can often be equivalentl
 ]
 
 #remark[
-  Naturally then, the entries of the adjacency matrix of a weighted graph correspond to the edge weights.
+  Naturally then, the entries of the adjacency matrix of a weighted graph correspond to the edge weights, that is:
+  $
+    A_(i j) = w( (v_i, v_j) ) = w_(i j)
+  $
   // TODO remark on weight meanings? as can be distance or similarity
 ]
 
@@ -175,13 +182,13 @@ That is why traversing graphs is crucial, as it can provide us with central info
 === Definitions
 
 #definition[
-  A *walk* on a graph $G = (V, E)$ is an alternating sequence of vertices and edges of the form $v_0, e_1, v_1, e_2, v_2, ..., v_(L-1), e_L, v_L$, such that $e_i$ is from $v_(i-1)$ to $v_(i)$ for all $i$.
-  It is said to be *closed* if it ends where it starts, so if $v_1 = v_L$, and open otherwise.
-  The *length* of the walk is equal to the number of edges in the walk $L$, and is at least one.
-]
+  A *walk* on a graph $G = (V, E)$ is an alternating sequence of vertices and edges of the form $v_0, e_1, v_1, e_2, v_2, ..., v_(l-1), e_l, v_l$, such that $e_k$ is from $v_(k-1)$ to $v_(k)$ for all $k$.
+  It is said to be *closed* if it ends where it starts, so if $v_1 = v_l$, and open otherwise.
+  The *length* of the walk is equal to the number of edges in the walk $l$, and is at least one.
+] <def-walk>
 
 #remark[
-  - In an undirected graph, the condition on each edge is $e_i = {v_(i-1), v_i}$, meaning that edges can be traversed in both directions.
+  - In an undirected graph, the condition on each edge is $e_k = {v_(k-1), v_k}$, meaning that edges can be traversed in both directions.
   - A walk on a graph without multi-edges can be described more simply by a sequence of vertices, as each edge is uniquely determined by a pair of vertices.
 ]
 
@@ -198,7 +205,7 @@ That is why traversing graphs is crucial, as it can provide us with central info
   In this case, we usually prefer to use the term "path".
 ]
 
-=== Connectivity
+=== Graph connectivity
 // TODO: move to describing graphs?
 
 These definitions allow us to give a basic yet fundamental characteristic of a graph, namely, it connectivity.
@@ -211,7 +218,7 @@ These definitions allow us to give a basic yet fundamental characteristic of a g
   A directed graph $G=(V,E)$ is
   - *strongly connected* if for every $u,v in V$, there is a path from $u$ to $v$ and from $v$ to $u$,
   - *weakly connected* if for every $u,v in V$, there is a path between $u$ and $v$ in the underlying undirected graph.
-  A strongly or weakly disconnected graph can then be partition into strongly and weakly connected components.
+  A strongly or weakly disconnected graph can then be partitioned into strongly and weakly connected components.
 ]
 
 #question-box[
@@ -262,65 +269,134 @@ One way to quantify the connectivity is to check how easy it is to split a graph
   A *cut edge* or *bridge* of a graph $G$ is an edge whose removal produces a graph with more connected components than in $G$.
 
   A *cut vertex* or *articulation point* of a graph $G$ is a vertex whose removal (together with those edges incident with it) produces a graph with more connected components than in $G$.
-]
+] <def-cut-ev>
 
 Counting the minimum number of cut edges/vertices necessary to create $k$ components thus allows a better characterisation of a graph's connectivity.
 
-=== Number of walks between two vertices
+=== Vertices connectivity
+
+How well two vertices are connected can then be measured by counting the number of walks which connect them.
 
 #theorem[
-  Let $G$ be a graph with adjacency matrix $A$ with respect to the ordering ${v_1, v_2, ..., v_(|V|)}$ of its vertex set. The number of distinct oriented walks of length $n >= 1$ that start at $v_i$ and end at $v_j$ is given by the entry $(i, j)$ of the matrix $A^n$.
+  Let $G$ be a graph with adjacency matrix $A$ with respect to the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set. The number of distinct oriented walks of length $n >= 1$ that start at $v_i$ and end at $v_j$ is given by the entry $(i, j)$ of the matrix $A^n$.
 ]
 // beautiful proof by induction p 723
 
+// TODO: reconcile ordering of degree definition
 #corollary[
   Let $G$ be a simple graph with adjacency matrix $A$, then
-  - $A^2_(i i) = d(i)$ for every $1 <= i <= |V|$.
+  - $A^2_(i i) = k(i)$ for every $1 <= i <= |V|$.
   - $"tr" A^2 = 2|E|$.
   - $"tr" A^3 = 6 times$ number of unoriented triangles in $G$.
 ]
 
 === Shortest paths
 
-// TODO: rework
+A very common problem related to paths is to find the shortest way to go from one vertex to another.
+But first, what does "short" mean here?
+Let's generalise the notion of path length to weighted graphs.
 
-Find the shortest path that joins an initial vertex $s$ to a final vertex $t$ belonging to a simple, connected, and weighted graph $G = (V, E, omega)$ such that all weights are positive ($omega_e > 0$ for every edge $e in E$).
-
-#theorem[
-  Dijkstra's algorithm finds the length of the shortest path between two vertices of a simple, connected, and weighted graph $G = (V, E, omega)$ with all its weights being positive.
+#definition[
+  Given a simple, undirected and weighted graph $G = (V, E, omega)$ with positive weights, the length $L(P)$ of a path $P = v_0, e_1 v_1, e_2, v_2 dots, v_(l-1), e_l, v_l$ is the sum of the weights of the edges that it traverses:
+  $
+    L(P) = sum_(i=1)^l w(e_i).
+  $
 ]
 
-*The basic idea:*
-In each iteration, we assign to each vertex $j$ two labels, that might be either temporary $(delta_j, P_j)$ or permanent $underline((delta_j, P_j))$.
-- The label $delta_j$ is an estimate of the length of the path going from the initial vertex $s$ to the vertex $j$.
-- The label $P_j$ is an estimate of the predecessor of the vertex $j$ along the above path.
-We will denote the weight of the edge ${i, j} in E$ as $omega({i, j}) = omega_(i j) > 0$.
+Here, the edge weights are thus interpreted as a distance between the vertices they connect.
+This definition allows to recover the one of walk length for unweighted graphs (@def-walk) by taking unit weights.
 
 
-1. *Initial Step*: We mark the origin $s$ with the permanent label $underline((0, s))$.
-  All the other vertices $j in V$ ($j != s$) are marked with temporary labels:
-  - If ${j, s} in E$, we assign the label $(omega_(s,j), s)$ to $j$.
-  - If ${j, s} in.not E$, we assign to $j$ the label $(infinity, -)$.
+#definition(title: [Shortest path problem])[
+  Given a simple, undirected and weighted graph $G = (V, E, omega)$ with positive weights, and $s,t in V$, a shortest path problem consists in finding the shortest path that connects $s$ and $t$, that is:
+  $
+    argmin_(P in cal(P)(s,t)) L(P),
+  $
+  where $cal(P)(s,t)$ is the set of paths that connect $s$ and $t$.
+]
 
-2. Let $v in V$ be the last vertex that has become permanent. For each temporary vertex $j$, we compare the temporary label $delta_j$ to the new value $delta_v + omega_(v,j)$:
-  - If $delta_v + omega_(v,j) < delta_j$, the old label $(delta_j, P_j)$ is replaced by $(delta_v + omega_(v,j), v)$.
-  - If $delta_v + omega_(v,j) > delta_j$, the label $(delta_j, P_j)$ remains the same.
 
-3. Among all temporary vertices $j$, we choose one $j_0$ with the minimum label
-  $ delta_(j_0) = min(delta_j | j "is temporary") = delta_"min" $
-  - If $delta_"min" = infinity$, the algorithm ends: there is no path between $s$ and $t$.
-  - If $delta_"min" < infinity$, we mark such vertex with the permanent label $underline((delta_"min", P_(j_0)))$.
+#question-box[
+  In an unweighted graph, how can you get the shortest path length using the adjacency matrix?
+]
 
-4. If $t$ is the vertex whose label has become permanent, the algorithm ends. The length of the shortest path between $s$ and $t$ is $delta_t$, and such a path is obtained by following the permanent labels in reverse order $t -> P_t -> ... -> s$. Otherwise, go back to Step (2).
+If the path is long, this gets very costly, though.
+Also, if the graph is weighted, the shortest path in terms of number of traversed edges is not necessarily the shortest path in terms of edge weights.
+That's why we need another method to compute shortest paths, such as Dijkstra's algorithm.
+The basic idea of the algorithm is to iteratively explore the graph from the point of view of the starting vertex $s$.
+Starting from $s$, in each step we find its next closest vertex, until we've reached $t$.
+Crucially though, since shortcuts can sometimes appear, we need to keep track of known or estimated distances throughout the exploration.
+Let's proceed on the following example.
 
-*Remarks.*
-- If at a given step there are several options, we can choose any of them.
-- The shortest path between two vertices may not be unique; but the shortest length does not depend on such a choice.
-- The final output of Dijkstra's algorithm (when all vertices have been marked permanent) is a rooted spanning tree $T$, such that the root is the initial vertex $s$, and the distance between $s$ and any other vertex $j$ of the graph is the sum of all the weights of the unique path between $s$ and $j$ on $T$.
+#example[
+  Find the shortest path from $a$ to $z$ in:
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        node[shape=circle margin=0]
+        edge[labeldistance=2]
+        a [pos="0,1!"]
+        b [pos="1,2!"]
+        c [pos="1,0!"]
+        d [pos="3,2!"]
+        e [pos="3,0!"]
+        z [pos="4,1!"]
+        a -- b [label=4]
+        a -- c [taillabel=2]
+        b -- c [label=1]
+        e -- c [label=9]
+        d -- b [label=5]
+        d -- c [label=8]
+        d -- e [label=2]
+        d -- z [headlabel=4]
+        e -- z [label=3]
+      }
+      ```,
+      width: 7cm,
+    ),
+  )
+]
+// do iteratively with a table
+
+#algorithm(
+  pseudocode-list(
+    numbered-title: [Dijkstra's
+
+      *Input:* $G=(V, E, omega)$ connected and simple with positive weights, and with vertices \ $a=v_0, v_1, dots, v_n=z$.//, and taking $w(u,v) = +oo$ if $(u,v) in.not E$.
+
+      *Output:* $d(a, z)$, length of shortest path from $a$ to $z$.
+    ],
+    booktabs: true,
+  )[
+    + for $i = 1$ to $n$
+      + $d(a, v_i) = infinity$ #comment[initialise unknown shortest lengths as infinity]
+    + $d(a, a) = 0$
+    + $S = emptyset$
+    + *while* $z in.not S$ #comment[until we've reached $z$]
+      + $u = "a vertex not in" S "with" d(a, u) "minimal"$ #comment[consider the next closest vertex] #line-label(
+          <lalg-next-closest>,
+        )
+      + $S = S union {u}$
+      + *for* all $v in cal(N)(u)$ #comment[for all neighbours $v$ of $u$]
+        + *if* $d(a, u) + w(u, v) < d(a, v)$ #comment[if going through $u$ creates a shortcut to reach $v$]
+          + *then* $d(a, v) = d(a, u) + w(u, v)$ #comment[update the shortest length to reach $v$] #line-label(<lalg-dist-update>)
+
+  ],
+)
+
+#remark[
+  - If at @lalg-next-closest there are several options, we can choose any of them.
+  - The sequence of vertices composing the path can be obtained by keeping track of the current best path, or simply of the best predecessor, whenever we reassign $d(a, v)$ in @lalg-dist-update.
+  - The shortest path between two vertices is not necessarily unique. It is perfectly possible to have two or more paths of equal length between a given pair of vertices.
+]
 
 
 == Describing graphs
 // TODO: vertex neighbourhood? Laplacian?
+// TODO: add clustering from discussion on transitivity of relation, as in Newman p.183?
+// TODO: Mengers theorem p. 139?
 
 === Degree
 
@@ -328,8 +404,8 @@ A vertex' importance can first be quantified by its degree.
 
 #definition[
   Let $G$ be a directed graph $G = (V, E)$, and let $v in V$ be a vertex of $G$.
-  The *in-degree* $d^(("in")) (v)$ of $v$ is the number of edges whose head is $v$, that is which end at $v$.
-  The *out-degree* $d^(("out")) (v)$ of $v$ is the number of edges whose tail is $v$, that is which start from $v$.
+  The *in-degree* $k^(("in")) (v)$ of $v$ is the number of edges whose head is $v$, that is which end at $v$.
+  The *out-degree* $k^(("out")) (v)$ of $v$ is the number of edges whose tail is $v$, that is which start from $v$.
 ]
 
 #figure(
@@ -375,8 +451,8 @@ A vertex' importance can first be quantified by its degree.
   Then:
   $
     forall i in [| 1, abs(V) |], cases(
-      d^(("in")) (v_i) = sum_j A_(j i),
-      d^(("out")) (v_i) = sum_j A_(i j),
+      k^(("in")) (v_i) = sum_j A_(j i),
+      k^(("out")) (v_i) = sum_j A_(i j),
     )
   $
 ] <prop-dir-deg-adj>
@@ -385,20 +461,20 @@ It then follows that summing over degrees amounts to summing all entries of the 
 
 #proposition[
   In any directed graph $G = (V, E)$:
-  $ sum_(v in V) d^(("in")) (v) = sum_(v in V) d^(("out")) (v) = |E| $
+  $ sum_(v in V) k^(("in")) (v) = sum_(v in V) k^(("out")) (v) = |E| $
 ] <prop-handshaking-dir>
 
 The definition of degree follows naturally for undirected graphs, by considering that two directed edges $(u,v)$ and $(v,u)$ correspond to a single undirected edge ${u,v}$.
 
 #definition[
-  The *degree* of a vertex $v in V$ in an undirected graph $G = (V, E)$ is the number of edges incident with it, except that a loop contributes twice to the degree of that vertex. The degree of a vertex $v$ is denoted by $d(v)$.
+  The *degree* of a vertex $v in V$ in an undirected graph $G = (V, E)$ is the number of edges incident with it, except that a loop contributes twice to the degree of that vertex. The degree of a vertex $v$ is denoted by $k(v)$.
 ]
 
 #proposition[
   Let's consider an undirected graph $G$ and its adjacency matrix $A$ associated to the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set $V$.
   Then:
   $
-    forall i in [| 1, abs(V) |], d (v_i) = A_(i i) + sum_j (A_(i j) + A_(j i)) / 2 = A_(i i) + sum_j A_(i j)
+    forall i in [| 1, abs(V) |], k (v_i) = A_(i i) + sum_j (A_(i j) + A_(j i)) / 2 = A_(i i) + sum_j A_(i j)
   $
 ] <prop-undir-deg-adj>
 
@@ -406,7 +482,7 @@ We can then get a similar result as @prop-handshaking-dir, which is known as the
 
 #theorem(title: "The handshaking theorem")[
   In any undirected graph $G = (V, E)$, we have that
-  $ sum_(v in V) d(v) = 2|E| $
+  $ sum_(v in V) k(v) = 2|E| $
 ]
 
 #remark[
@@ -475,7 +551,7 @@ And from the Perron-Frobenius theorem from linear algebra, we know that since $A
 
 === Betweenness centrality
 
-We can use shortest paths to characterise vertices, in particular as a way to quantify their centrality in the graph.
+A second way to account for the global graph context to quantify a vertex' centrality is to use shortest paths.
 
 #definition(title: [Vertex betweenness: simple])[
   The betweenness centrality of a vertex is the number of shortest paths between pairs of other vertices which pass through it.
@@ -486,7 +562,7 @@ However, as mentioned above, there may be more than one shortest path between a 
 #definition(title: [Vertex betweenness: full])[
   The betweenness centrality of a vertex is the number of shortest paths between pairs of other vertices which pass through it, where we weight each path by the number of shortest paths between each pair of vertices:
   $
-    forall u in V, b(u) = sum_(s, t in V without {u}) #h(.5em) sum_(P in cal(P)(s,t)) #h(.5em) sum_(u in P) 1 / abs(cal(P)(s,t))
+    forall u in V, b(u) = sum_(s, t in V without {u}) #h(.5em) sum_(P in cal(P)(s,t)) #h(.5em) sum_(u in P) 1 / abs(cal(P)(s,t)),
   $
   where $cal(P)(s,t)$ is the set of shortest paths from $s$ to $t$.
 ]
@@ -545,6 +621,7 @@ A complementary, easier way to quantify that is to count how many edges the grap
 
 
 == Euler and Hamilton paths
+// TODO: keep?
 
 === Eulerian graphs
 
@@ -745,7 +822,7 @@ The problem of deciding that a given graph is Hamiltonian or not is hard.
 // === Some corollaries about graph planarity
 
 // #definition[
-//   Given a plane graph, the *degree of a region* $r$ is the degree of the dual vertex $r in V^*$ associated with it in the dual graph $G^*$. We denote the degree of the region $r$ as $d_r$ (or $d(r)$).
+//   Given a plane graph, the *degree of a region* $r$ is the degree of the dual vertex $r in V^*$ associated with it in the dual graph $G^*$. We denote the degree of the region $r$ as $d_r$ (or $k(r)$).
 // ]
 
 // #theorem(title: "Handshake Theorem for the dual graph")[
