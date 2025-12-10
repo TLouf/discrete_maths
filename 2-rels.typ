@@ -6,6 +6,8 @@
 
 #fa-book() This chapter overlaps with sections 9.1, 9.5, 9.6, 5.1 and 5.2 of Rosen.
 
+#slidebreak()
+
 == Binary relations on a set
 
 While we previously introduced relations $R$ from a set $A$ to a set $B$, here we'll be particularly interested in the case where $A = B$, that is relations on a single set.

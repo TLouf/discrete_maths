@@ -6,6 +6,8 @@
 
 #fa-book() This chapter overlaps with sections 6.1, 6.3, 6.4, 6.5 of Rosen.
 
+#slidebreak()
+
 The *goal of counting* is basically to determine the cardinality of certain finite sets.
 This is much more useful than it sounds like: a fundamental way to compute discrete probabilities is to count in how many ways a given event can occur, and divide it by the total number of possible alternatives.
 

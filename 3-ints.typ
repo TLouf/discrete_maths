@@ -8,6 +8,7 @@
 // TODO: add 4.2?
 // TODO: too long!
 
+#slidebreak()
 
 == Integer divisibility
 

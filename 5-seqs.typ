@@ -5,6 +5,8 @@
 
 #fa-book() This chapter overlaps with sections 2.4, 8.2, 8.4 of Rosen.
 
+#slidebreak()
+
 == Defining sequences
 
 Sequences are basically indexed collections of elements, or, to be more formal:
