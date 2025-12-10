@@ -5,7 +5,7 @@
 
   show heading.where(level: 1): h => {
     pagebreak(to: "odd", weak: true)
-    h.body
+    h
   }
   set page(paper: "a4", margin: 2cm)
   set text(size: 12pt)

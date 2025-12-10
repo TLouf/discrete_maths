@@ -50,13 +50,6 @@
   icon-name: "question",
 )
 
-#let (properties-counter, properties-box, properties, show-properties) = make-frame(
-  "properties",
-  (en: (us: "Properties", gb: "Properties")),
-  counter: theorem-counter,
-  render: render-fn.with(fill: eastern.darken(10%)),
-)
-
 #let iif-list-markers = level => {
   if level == 1 {
     (
@@ -118,7 +111,6 @@
   set-zero-fill(true)
   set-leading-zero(true)
   set-theorion-numbering("1.1")
-  show: show-properties
   show math.prec.eq: math.scripts(math.prec.eq)
 
   show: lq.set-diagram(
