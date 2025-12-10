@@ -19,6 +19,8 @@
 // Issues:
 // - pause in enum inside a theorion env like definition doesn't work
 
+#let slidebreak() = {}
+
 #let transp = white.transparentize(100%)
 
 #let implies() = box(rotate(fa-reply(solid: true), 180deg))
@@ -95,16 +97,11 @@
   }
 
   show math.cases: math.display
-  set math.equation(numbering: none)
 
+  show figure: set block(breakable: true)
   set figure(numbering: (..num) => numbering("1.1", counter(heading).get().first(), num.pos().first()))
   set enum(numbering: "(i)")
 
-  set page(paper: "a4", margin: 1in)
-  set text(size: 12pt)
-  set par(justify: true)
-
-  show: equate.with(breakable: true, sub-numbering: false)
   show: shorthands.with(
     ($+-$, $plus.minus$),
     ($|-$, math.tack),

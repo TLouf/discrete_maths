@@ -1,6 +1,5 @@
-#import "assets/base_template.typ": *
-
-#show: base
+#import "assets/theory_template.typ": *
+#show: theory
 
 
 = Elementary number theory

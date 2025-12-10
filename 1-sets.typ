@@ -1,6 +1,6 @@
-#import "assets/base_template.typ": *
+#import "assets/theory_template.typ": *
+#show: theory
 
-#show: base
 
 = Set theory
 

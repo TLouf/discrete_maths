@@ -1,13 +1,5 @@
-#import "assets/base_template.typ": *
-
-#show: base
-
-#show heading.where(level: 1): h => {
-  pagebreak(to: "odd", weak: true)
-  h.body
-}
-// To hide solutions and proofs:
-#set-result("noanswer")
+#import "assets/theory_template.typ": *
+#show: theory
 
 // arrange in 11 chapters taught over 13 weeks (two weeks of revision+partial)
 // https://aplicaciones.uc3m.es/cpa/generaFicha?est=350&plan=566&asig=16489&&anio=2025&idioma=2
