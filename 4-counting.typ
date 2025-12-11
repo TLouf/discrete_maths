@@ -268,7 +268,7 @@ Let's first consider $n$ distinguishable objects to be placed into $k$ boxes thr
   We can thus form a bijective function between the distributions of cards to the players and permutations with indistinguishable objects from @prop-permut_w_rep!
   From @def-same-card-bij, we can therefore use the previous result to get that the total number of ways to distribute the hands is
   $
-    52! / (4 dot 5! 32!)
+    52! / (4 dot 5! dot 32!)
   $
   // Let's assume we order the 52 cards in some way, assigning them a label that goes from 1 to 52.
 ]
@@ -360,16 +360,20 @@ Pascal's triangle can then be drawn left or centre-aligned, as preferred:
       [1], [], [5], [], [10], [], [10], [], [5], [], [1],
     ),
 
+    // @typstyle off
     $
       #pin(1) binom(n, r-1)#pin(2) quad & quad #pin(3)binom(n, r)#pin(4) #v(5em) \
-                                        & #pin(10)binom(n+1, r)#pin(11)
-                                          #pinit-line((1, 2), 10, start-dy: 15pt, end-dy: -15pt)
-                                          #pinit-line((3, 4), (10, 11), start-dy: 15pt, end-dy: -15pt)
+      & #pin(10)binom(n+1, r)#pin(11)
+
+      #pinit-line((1, 2), 10, start-dy: 15pt, end-dy: -15pt)
+      #pinit-line((3, 4), (10, 11), start-dy: 15pt, end-dy: -15pt)
     $,
+    // @typstyle off
     $
-      binom(n, r-1)#pin(12) quad &                               &                    quad #pin(13)binom(n, r)#v(5em) \
-                                 & #pin(20)binom(n+1, r)#pin(21) & #pinit-line(12, 20, start-dy: 15pt, end-dy: -15pt)
-                                                                   #pinit-line(13, 21, start-dy: 15pt, end-dy: -15pt)
+      binom(n, r-1)#pin(12) quad & & quad #pin(13)binom(n, r)#v(5em) \
+      & #pin(20)binom(n+1, r)#pin(21)
+      #pinit-line(12, 20, start-dy: 15pt, end-dy: -15pt)
+      #pinit-line(13, 21, start-dy: 15pt, end-dy: -15pt)
     $,
   ),
 )
@@ -389,16 +393,17 @@ The binomial coefficients also appear in the expansion of some polynomials.
   This gives us $2^3$ products of the form $x^alpha y^beta$ with $0<= alpha, beta <= 3$, which we then sum.
   We can thus simply count the number of ways to choose $alpha$ times $x$ (then $beta = 3 - alpha$) from the three parenthesised terms, which is $binom(3, alpha)$!
   Explicitly, here:
+  // @typstyle off
   $
     (x+y)^3 = #pin(1)x x x#pin(2) + #pin(11)x x y#pin(12) + #pin(13)x y x#pin(14) + #pin(21)x y y#pin(22) + #pin(15)y x x#pin(16) + #pin(23)y x y#pin(24) + #pin(25)y y x#pin(26) + #pin(31)y y y#pin(32),
-    #pinit-highlight(1, 2)
-    #pinit-highlight(11, 12, fill: yellow.transparentize(80%))
-    #pinit-highlight(13, 14, fill: yellow.transparentize(80%))
-    #pinit-highlight(15, 16, fill: yellow.transparentize(80%))
-    #pinit-highlight(21, 22, fill: blue.transparentize(80%))
-    #pinit-highlight(23, 24, fill: blue.transparentize(80%))
-    #pinit-highlight(25, 26, fill: blue.transparentize(80%))
-    #pinit-highlight(31, 32, fill: olive.transparentize(80%))
+    // #pinit-highlight(1, 2)
+    // #pinit-highlight(11, 12, fill: yellow.transparentize(80%))
+    // #pinit-highlight(13, 14, fill: yellow.transparentize(80%))
+    // #pinit-highlight(15, 16, fill: yellow.transparentize(80%))
+    // #pinit-highlight(21, 22, fill: blue.transparentize(80%))
+    // #pinit-highlight(23, 24, fill: blue.transparentize(80%))
+    // #pinit-highlight(25, 26, fill: blue.transparentize(80%))
+    // #pinit-highlight(31, 32, fill: olive.transparentize(80%))
   $
   so the number of ways we can put two $x$ in three slots is $binom(3, 2)$, to put only 1 is $binom(3, 1)$ and only $binom(3, 3)=binom(3, 0)=1$ way to put either three or zero of them.
 ]

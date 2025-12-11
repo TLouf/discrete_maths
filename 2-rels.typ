@@ -13,7 +13,10 @@
 While we previously introduced relations $R$ from a set $A$ to a set $B$, here we'll be particularly interested in the case where $A = B$, that is relations on a single set.
 
 #definition(title: [Binary relation on a set])[
-  A *binary relation* $R$ on the set $A$ is a subset of $A times A$, so: $R subset.eq A times A$.
+  A *binary relation* $R$ on the set $A$ is a subset of $A times A$, so:
+  $
+    R subset.eq A times A.
+  $
 ]
 
 In the following, unless otherwise specified, "a relation $R$" refers to a relation on a single set $A$.
