@@ -3,7 +3,7 @@
 
 = Graph theory
 
-#fa-book() This chapter overlaps with sections 10.1-6, 11.1 and 11.4-5 of Rosen.
+#fa-book() This chapter overlaps with sections 10.1-4, 10.6, 11.1 and 11.4-5 of Rosen.
 
 #slidebreak()
 
@@ -291,6 +291,12 @@ How well two vertices are connected can then be measured by counting the number 
   - $"tr" A^3 = 6 times$ number of unoriented triangles in $G$.
 ]
 
+#remark[
+  Connectivity between two vertices is better characterised by computing the number of _paths_ joining them.
+  However, counting paths is a harder problem.
+  // ref 8.7 of Newman
+]
+
 === Shortest paths
 
 A very common problem related to paths is to find the shortest way to go from one vertex to another.
@@ -330,29 +336,29 @@ Crucially though, since shortcuts can sometimes appear, we need to keep track of
 Let's proceed on the following example.
 
 #example[
-  Find the shortest path from $a$ to $z$ in:
+  Find the shortest path from $s$ to $t$ in:
   #figure(
     raw-render(
       ```dot
       graph {
         layout=neato
-        node[shape=circle margin=0]
+        node[shape=circle margin=0 fontsize=20]
         edge[labeldistance=2]
-        a [pos="0,1!"]
+        s [pos="0,1!"]
         b [pos="1,2!"]
         c [pos="1,0!"]
         d [pos="3,2!"]
         e [pos="3,0!"]
-        z [pos="4,1!"]
-        a -- b [label=4]
-        a -- c [taillabel=2]
+        t [pos="4,1!"]
+        s -- b [label=4]
+        s -- c [taillabel=2]
         b -- c [label=1]
         e -- c [label=9]
         d -- b [label=5]
         d -- c [label=8]
         d -- e [label=2]
-        d -- z [headlabel=4]
-        e -- z [label=3]
+        d -- t [headlabel=4]
+        e -- t [label=3]
       }
       ```,
       width: 7cm,
@@ -362,30 +368,24 @@ Let's proceed on the following example.
 // do iteratively with a table
 
 #algorithm(
-  pseudocode-list(
-    numbered-title: [Dijkstra's
-
-      *Input:* $G=(V, E, omega)$ connected and simple with positive weights, and with vertices \ $a=v_0, v_1, dots, v_n=z$.//, and taking $w(u,v) = +oo$ if $(u,v) in.not E$.
-
-      *Output:* $d(a, z)$, length of shortest path from $a$ to $z$.
-    ],
-    booktabs: true,
-  )[
-    + for $i = 1$ to $n$
-      + $d(a, v_i) = infinity$ #comment[initialise unknown shortest lengths as infinity]
-    + $d(a, a) = 0$
-    + $S = emptyset$
-    + *while* $z in.not S$ #comment[until we've reached $z$]
-      + $u = "a vertex not in" S "with" d(a, u) "minimal"$ #comment[consider the next closest vertex] #line-label(
-          <lalg-next-closest>,
-        )
-      + $S = S union {u}$
-      + *for* all $v in cal(N)(u)$ #comment[for all neighbours $v$ of $u$]
-        + *if* $d(a, u) + w(u, v) < d(a, v)$ #comment[if going through $u$ creates a shortcut to reach $v$]
-          + *then* $d(a, v) = d(a, u) + w(u, v)$ #comment[update the shortest length to reach $v$] #line-label(<lalg-dist-update>)
-
+  pseudocode-list(numbered-title: [Dijkstra's], booktabs: true)[
+    + *procedure* Dijkstra($G=(V, E, omega)$ with $V={s=v_0, v_1, dots, v_n=t}$)
+      + for $i = 1$ to $n$
+        + $d(s, v_i) = infinity$ #comment[initialise unknown shortest lengths as infinity]
+      + $S = emptyset$
+      + *while* $t in.not S$ #comment[until we've reached $t$]
+        + $u = "a vertex not in" S "with" d(s, u) "minimal"$ #comment[consider the next closest vertex] #line-label(
+            <lalg-next-closest>,
+          )
+        + $S = S union {u}$
+        + *for* all $v in cal(N)(u)$ #comment[for all neighbours $v$ of $u$]
+          + *if* $d(s, u) + w(u, v) < d(s, v)$ *then* #comment[if going through $u$ creates a shortcut to reach $v$]
+            + $d(s, v) = d(s, u) + w(u, v)$ #comment[update the shortest length to reach $v$] #line-label(
+                <lalg-dist-update>,
+              )
+      + *return* $d(s,t)$ #comment[shortest path length from source $s$ to target $t$]
   ],
-)
+) <alg-dijkstra>
 
 #remark[
   - If at @lalg-next-closest there are several options, we can choose any of them.
@@ -621,221 +621,419 @@ A complementary, easier way to quantify that is to count how many edges the grap
 ]
 
 
-== Euler and Hamilton paths
-// TODO: keep?
-
-=== Eulerian graphs
-
-*Problem*: The old city of Königsberg was crossed by a river and there were seven bridges. Was it possible to start walking at some point of the city and get back to the same place by crossing every bridge exactly once?
-
-#figure(image("./assets/konisgberg.svg", width: 50%))
-
-In graph theory terms, this gives: given a graph $G = (V, E)$, is there any circuit containing every edge $e in E$? (If it is a circuit, then each edge is visited exactly once).
-
-#definition[
-  An *Euler tour* is a circuit containing every edge of the graph. A graph admitting an Euler tour is an *Eulerian graph*.
-
-  An *Euler trail* is an open trail that contains all the edges of the graph.
-]
-
-#theorem[
-  A connected graph is Eulerian if and only if the degree of all its vertices is even.
-  A connected graph contains an Euler trail if and only if it contains exactly two vertices of odd degree.
-  A connected and directed graph is Eulerian if and only if for every vertex $v in V$, $d_i (v) = d_o (v)$.
-]
-
-Therefore, the *problem of the bridges of Königsberg* does not have any solution: the corresponding graph does not admit any Euler tour/trail.
-
-=== Fleury's algorithm
-
-Let $G = (V, E)$ be a connected graph with all its vertices of even degree:
-1. *Initial step*: We choose any vertex $v_0$ as the initial vertex of the Euler tour $C_0 = (v_0)$ and we define $G_0 = (V_0, E_0) = G$. The algorithm sequentially increases the tour $C_0$, while it sequentially deletes elements from $G$.
-
-2. *How to extend the trail?*: Let $C_i = (v_0, e_1, v_1, ..., e_i, v_i)$ be the trail corresponding to the graph $G_i = (V_i, E_i) subset.eq G_0$.
-  - If there exits a unique edge incident with $v_i$, $e_(i+1) = {v_i, w} in E_i = E without {e_1, e_2, ..., e_i}$:
-    - $C_(i+1) = (v_0, e_1, v_1, ..., e_i, v_i, e_(i+1), w)$.
-    - $G_(i+1) = (V_i without {v_i}, E_i without {e_(i+1)}) = (V_(i+1), E_(i+1))$.
-  - If there are several edges in $E_i$ incident with $v_i$, we can choose any of these edges as long as the chosen one is not a bridge of $G_i$. If we choose $e_(i+1) = {v_i, w} in E_i$:
-    - $C_(i+1) = (v_0, e_1, v_1, ..., e_i, v_i, e_(i+1), w)$.
-    - $G_(i+1) = (V_i, E_i without {e_(i+1)}) = (V_(i+1), E_(i+1))$.
-
-3. We repeat Step (2) $|E|$ times until $G_(|E|) = (emptyset, emptyset)$. Then $C_(|E|)$ is the Euler tour we were looking for.
-
-=== Hamiltonian graphs
-
-*Problem 6*: Is it possible to find a cycle on a graph $G$ such that it contains all vertices of $G$ exactly once?
-
-#definition[
-  A *Hamilton cycle* of a graph $G$ is a cycle that contains all the vertices of $G$. A graph admitting one Hamilton graph is a *Hamiltonian graph*.
-
-  A *Hamilton path* of a graph $G$ is an open path that contains all vertices of $G$.
-]
-
-The problem of deciding that a given graph is Hamiltonian or not is hard.
-
-#theorem(title: "Dirac, 1950")[
-  If $G$ is a simple graph with $n >= 3$ vertices and each vertex has a degree $>= n\/2$, then $G$ is a Hamiltonian graph.
-]
-
-*Remark.* Not every Hamiltonian graph satisfies the above condition: e.g. $C_n$ with $n >= 5$.
-
-// TODO: relate to traveling salesman problem, p. 749
-
-
 
 == Trees
 
+A tree is a special kind of graph which is useful in many applications, especially in computer science.
+
 === Definitions
 
-#definition[
-  A *tree* is a simple connected graph with no cycles. A *forest* is a simple graph with no cycles. Each connected component of a forest is a tree.
+#definition(title: [Tree])[
+  A *tree* is a simple connected and undirected graph with no cycles.
+  A *forest* is a simple undirected graph with no cycles. Each connected component of a forest is a tree.
 ]
 
-*Remark.* Trees may be rooted trees. A rooted tree is a tree with one distinguished vertex (the root). Hereafter, we will assume that all trees are rootless, unless specified.
+The natural way to represent a tree is to pick one of its vertices as its *root*, and place it at its top, with a branching structure going down.
+The vertices at the bottom are then called *leaves*, as they are the extremities of the tree represented thus.
+
+#example[
+  Here is how the same tree can be represented when non-rooted (lefft) and when rooted on $1$ (right).
+  #figure(
+    grid(
+      columns: 2,
+      column-gutter: 2em,
+      raw-render(
+        ```dot
+        graph {
+          layout=neato
+          start=11
+          node[shape=circle fontsize=20 margin=0]
+          1 -- {2, 3};
+          2 -- {4, 5};
+          4 -- {6, 7};
+          3 -- {8,9,10};
+          10 -- 11;
+        }
+        ```,
+        width: 80%,
+      ),
+      raw-render(
+        ```dot
+        graph {
+          layout=neato
+          start=10
+          node[shape=circle fontsize=24 margin=0]
+          1[pos="3,4!"]
+          2[pos="5,3!"]
+          4[pos="6,2!"]
+          5[pos="4,2!"]
+          6[pos="5,1!"]
+          7[pos="7,1!"]
+          3[pos="1,3!"]
+          8[pos="0,2!"]
+          9[pos="1,2!"]
+          10[pos="2,2!"]
+          11[pos="2,1!"]
+          1 -- {2, 3};
+          2 -- {4, 5};
+          4 -- {6, 7};
+          3 -- {8,9,10};
+          10 -- 11;
+        }
+        ```,
+        width: 80%,
+      ),
+    ),
+  )
+]
+
+#example[
+  Computer file systems are organized as trees with a natural root called the root directory `/`.
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        start=10
+        node[shape=none fontsize=24 margin=0]
+        1[pos="3,4!" label="\/"]
+        2[pos="5,3!" label="usr"]
+        4[pos="6,2!" label="bin"]
+        5[pos="4,2!" label="share"]
+        6[pos="5,1!" label="firefox"]
+        7[pos="7,1!" label="typst"]
+        3[pos="1,3!" label="home"]
+        8[pos="0,2!" label="Alice"]
+        9[pos="1,2!" label="Bob"]
+        10[pos="2,2!" label="Eve"]
+        11[pos="2,1!" label="file.pdf"]
+        1 -- {2, 3};
+        2 -- {4, 5};
+        4 -- {6, 7};
+        3 -- {8,9,10};
+        10 -- 11;
+      }
+      ```,
+      width: 50%,
+    ),
+  )
+  What do leaves and non-leave vertices correspond to in this case?
+]
+
+The most important property of trees follows.
+
+#theorem[
+  A graph $G = (V, E)$ is a tree if and only if there exists a unique path between any pair of vertices.
+]
+
+It comes naturally from the fact that if we add a second path between any pair of vertices of a tree, we create a cycle.
+It is central because it means many problems very simple on trees, notably those related to shortest paths.
 
 #theorem[
   1. The simple graph $G$ is a tree if and only if it is connected and, if we remove any edge, we obtain a disconnected graph.
   2. The simple graph $G$ is a tree if and only if it does not contain any cycles and, if we add any edge, we create a cycle.
 ]
 
-#theorem[
-  A graph $G = (V, E)$ is a tree if and only if there exists a unique path between any pair of vertices.
-]
-
-#definition[
-  How to grow a tree?
-  1. Start from the trivial tree $T = ({r}, emptyset)$, where $r$ is the root vertex.
-  2. Given $T = (V, E)$, add a new vertex $u$ and a new edge ${u, v}$ where $v in V$.
-]
+A tree can therefore only be grown by adding a vertex and an edge connecting an existing vertex to this new one.
+More specifically, to grow a tree:
+1. Start from the trivial tree $T = ({r}, emptyset)$, where $r$ is the root vertex.
+2. Given $T = (V, E)$, add a new vertex $u$ and a new edge ${u, v}$ where $v in V$.
 
 #theorem[
   Any graph obtained by using the preceding procedure is a tree, and any tree can be obtained in this way.
 ]
 
-=== Properties
-
-#theorem[
-  Any tree with at least two vertices contains at least two vertices of degree one.
-]
+The validity of this growing procedure also leads to the following property, which follows by induction.
 
 #theorem[
   Any tree with $n$ vertices has $n - 1$ edges.
-]
+] <thm-tree-nr-edges>
+
+And the converse is also true!
+If we suppose a connected graph with $n$ vertices and $n-1$ edges is not a tree, then it means we can remove edges from this graph to destroy existing cycles, and thus create a tree, which would have fewer than $n-1$ edges, which contradicts the above theorem.
 
 #theorem[
-  If $G$ is a graph with $n$ vertices, then the following statements are equivalent:
+  If $G$ is a simple undirected graph with $n$ vertices, then the following statements are equivalent:
   1. $G$ is a tree.
   2. $G$ is connected and has $n - 1$ edges.
   3. $G$ has $n - 1$ edges and does not contain any cycle.
 ]
 
-=== Minimum-weight spanning tree
+// TODO: add decision tree as application, p. 796?
 
-// TODO move to trees
-#definition[
-  A *spanning tree* of a connected graph $G$ is a subgraph of $G$ that is a tree and contains all vertices of $G$.
+=== Spanning trees
+
+#definition(title: [Spanning tree])[
+  A *spanning tree* of a connected graph $G$ is a subgraph of $G$ that is a tree containing all vertices of $G$.
 ]
 
+The most basic way to build a spanning tree is to remove edges from a graph to destroy its cycles, without removing vertices.
+This idea is the basis on which we can prove the following.
+
+#theorem[
+  A simple graph is connected if and only if it has a spanning tree.
+]
+
+Identifying cycles can be computationally hard, hence the need for other algorithms, such as breadth-first search.
+The idea of the algorithm is to explore the graph iteratively, starting from a root vertex, and at each step considering all the neighbours of the vertices added to the tree in the previous step.
+A neighbour and its associated edge are then added to the spanning tree only if the vertex is not already present.
+The reason it's called breadth-first can be directly understood from the figure below: at each step shown in a distinct shade of grey, we add all vertices of a given level to the tree, thus obtaining its full "breadth" at this level.
+
+#figure(
+  grid(
+    columns: 2,
+    column-gutter: 1em,
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        start=8
+        node[style=filled shape=circle fontsize=24 margin=0]
+        a [fillcolor="#00000088"]
+        subgraph {
+          node [fillcolor="#00000055"]
+          b;c;
+        }
+        subgraph {
+          node [fillcolor="#00000022"]
+          d;e;i;j;h
+        }
+        subgraph {
+          node [fillcolor="#ffffff"]
+          g;f;k;
+        }
+        a -- {b, c};
+        b -- {d, e};
+        d -- {f, g};
+        c -- {h,i,j};
+        e -- {g,d}
+        j -- {i, k};
+        k -- h;
+      }
+      ```,
+      width: 100%,
+    ),
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        node[shape=circle style=filled fontsize=24 margin=0]
+        a [fillcolor="#00000088"]
+        subgraph {
+          node [fillcolor="#00000055"]
+          b;c;
+        }
+        subgraph {
+          node [fillcolor="#00000022"]
+          d;e;i;j;h
+        }
+        subgraph {
+          node [fillcolor="#ffffff"]
+          g;f;k;
+        }
+        a[pos="3,4!"]
+        b[pos="5,3!"]
+        d[pos="4,2!"]
+        e[pos="6,2!"]
+        f[pos="3,1!"]
+        g[pos="5,1!"]
+        c[pos="1,3!"]
+        h[pos="0,2!"]
+        i[pos="1,2!"]
+        j[pos="2,2!"]
+        k[pos="0,1!"]
+        a -- {b, c};
+        b -- {d, e};
+        d -- {f, g};
+        c -- {h,i,j};
+        h -- k;
+      }
+      ```,
+      width: 100%,
+    ),
+  ),
+)
+It can be formally written as follows.
+#algorithm(
+  pseudocode-list(numbered-title: [Breadth-first search (BFS)], booktabs: true)[
+    + *procedure* BFS($G=(V,E)$: connected graph with $V={v_1, v_2, dots, v_n}$)
+      + $T = (V_T, E_T) = ({v_1}, emptyset)$ #comment[pick a root $v_1$ and initialise the tree]
+      + $S_p = {v_1}$ #comment[set of vertices previously added to $T$]
+      + *while* $abs(S_p)$ > 0 #comment[while we have vertices to consider]
+        + $S_n = emptyset$ #comment[set of vertices to consider next]
+        + *for* each $v in S_p$ #comment[for each vertex previously added to $T$]
+          + *for* each $w in cal(N) (v) without V_T$ #comment[for all $v$'s neighbours not already in $T$]
+            + $T = (V_T union {w}, E_T union {{v,w}})$ #comment[add it to the tree]
+            + $S_n = S_n union {w}$ #comment[consider $w$'s neighbours at the next step]
+        + $S_p = S_n$
+      + *return* $T$ #comment[spanning tree]
+  ],
+)
+
+#remark[
+  We already saw a variant of breadth-first search: Dijkstra's algorithm (@alg-dijkstra)!
+]
+
+We can also produce a spanning tree of a simple graph by the use of depth-first search.
+The idea here is to form the tree by forming the longest paths possible at each step.
+A first path starting from an arbitrary root is formed, until no more vertices can be added.
+The vertices and edges composing this path are added to the tree.
+We then backtrack through the path until we find a vertex from which we can start a second path.
+The same procedure as before is repeated, and the backtracking as well until all vertices were added to the tree.
+We show on the figure below the tree resulting from a depth-first search carried out on the same graph as above.
+On the right-hand side vertex labels indicate the order in which they were added.
+The reason it's called depth-first can be directly understood from this figure: the tree is formed by forming branches which are as deep as possible, given the choices made during path formation.
+
+#figure(
+  grid(
+    columns: 2,
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        node[shape=circle fontsize=24 margin=0]
+        a[pos="2.5,4!"]
+        b[pos="4,3!"]
+        d[pos="4,2!"]
+        e[pos="5,0!"]
+        f[pos="3,1!"]
+        g[pos="5,1!"]
+        c[pos="1,3!"]
+        j[pos="1,2!"]
+        h[pos="2,0!"]
+        k[pos="2,1!"]
+        i[pos="0,1!"]
+        a -- {b, c};
+        b -- {d};
+        d -- {f, g};
+        e -- g;
+        c -- j;
+        j -- {i,k};
+        k -- h;
+      }
+      ```,
+      width: 90%,
+    ),
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        node[shape=circle fontsize=24 margin=0]
+        a[pos="2.5,4!" label="1"]
+        b[pos="4,3!" label="7"]
+        d[pos="4,2!" label="8"]
+        e[pos="5,0!" label="11"]
+        f[pos="3,1!" label="9"]
+        g[pos="5,1!" label="10"]
+        c[pos="1,3!" label="2"]
+        h[pos="2,0!" label="6"]
+        i[pos="0,1!" label="4"]
+        j[pos="1,2!" label="3"]
+        k[pos="2,1!" label="5"]
+        a -- {b, c};
+        b -- {d};
+        d -- {f, g};
+        e -- g;
+        c -- j;
+        j -- {i,k};
+        k -- h;
+      }
+      ```,
+      width: 90%,
+    ),
+  ),
+)
+
+#algorithm(
+  pseudocode-list(numbered-title: [Depth-first search (DFS)], booktabs: true)[
+    + *procedure* DFS($G=(V,E)$: connected graph with $V={v_1, v_2, dots, v_n}$)
+      + $T = (V_T, E_T) = ({v_1}, emptyset)$ #comment[pick a root $v_1$ and initialise the tree]
+      + visit($v_1$)
+      + *return* $T$ #comment[spanning tree]
+    + *procedure* visit($v: v in V$)
+      + *for* each $w in cal(N) (v) without V_T$ #comment[for each neighbour of $v$ not already in $T$]
+        + $T = (V_T union {w}, E_T union {{v,w}})$ #comment[add it to the tree]
+        + visit($w$) #comment[visit its neighbours]
+  ],
+)
+
+// TODO: show cut vertex application?
+Both algorithms can be used as the basis for algorithms that solve many different problems.
+For example, they can be used to find paths and circuits in a graph, to determine the connected components of a graph, or to find the cut vertices of a connected graph.
+
+
+=== Minimum-weight spanning trees
+
+A graph may admit many spanning trees, all with the same number of edges according to @thm-tree-nr-edges, so a priori equivalent.
+However, for weighted graphs, some might be more optimal, in a certain sense.
 
 #definition[
   A *minimum-weight spanning tree* of a connected weighted graph $G = (V, E, omega)$ is a spanning tree $T = (V, A)$ of $G$ such that $omega(A) = sum_(e in A) omega(e)$ takes the minimum possible value.
 ]
 
-*Problem 1*: Find a minimum-weight spanning tree of a connected weighted graph $G = (V, E, omega)$.
+Thus, if the weights encode some form of cost to traverse edges, as in the shortest path problem, finding a minimum-weight spanning tree gives an optimal way to fully traverse a graph.
 
-*Remark.* The number of trees on $n$ vertices grows very rapidly with $n$.
+#example[
+  TODO
+]
 
 #definition[
-  A *greedy algorithm* to solve a given problem is an algorithm such that at every step, it always takes, among all the choices allowed by the problem, the optimum one.
+  A *greedy algorithm* to solve a given problem is an algorithm that when presented with a choice, always selects what seems to be the best option at this given moment.
 ]
+
+#remark[
+  There is no guarantee that selecting the best option at each step, so the one that's best _locally_, leads to a _globally_ optimal solution in the end.
+]
+
+The two algorithms we will present below are greedy, but actually lead to an optimal solution!
+
+The first is Prim's algorithm: it starts by adding any edge with smallest weight to the spanning tree.
+It then successively add edges of minimum weight that are incident to a vertex already in the tree, all the while avoiding to form cycles.
+It can stop once the tree is spanning, that is, once it has $abs(V)-1$ edges, following @thm-tree-nr-edges.
 
 #algorithm(
   pseudocode-list(numbered-title: [Prim's algorithm], booktabs: true)[
-    // *procedure* Prim($G$: connected weighted graph with $n$ vertices)
-    + $T_1 = (V_1, E_1)$ where $E_1 = {e_1}$, $e_1 = {x_0, x_1}$ is one edge with minimum weight $omega_"min"$, and $V_1 = {x_0, x_1}$.
-    + *for* $i = 1$ *to* $n - 2$
-      + $e_(i+1) = {x_i, x_(i+1)}$ edge of minimum weight that is incident with a vertex $x_j$ of $T_i = (V_i, E_i)$, and such that it does not form a cycle when added to $T_i$
-      + $T_(i+1) = (V_i union {x_(i+1)}, E_i union {e_(i+1)}) = (V_(i+1), E_(i+1))$
+    + *procedure* Prim($G=(V,E, omega)$: connected weighted graph with $V={v_1, v_2, dots, v_n}$)
+      + $T = (V_T, E_T) = ({v_(k_0), v_(j_0)}, {{v_(k_0), v_(j_0)}})$ where $omega({v_(k_0), v_(j_0)})$ is minimum.
+      + *for* $i = 1$ to $n - 2$
+        + $e_(i) = {v_(k_i), v_(j_i)}$ edge of minimum weight that doesn't form cycles and such that $v_(k_i) in V_T$.
+        + $T = (V_T union {v_(k_i)}, E_T union {e_(i)})$
+      + *return* $T$ #comment[minimum-weight spanning tree]
   ],
 )
 
-*Remarks.*
-- The edge $e_i$ ($i = 1, ..., n-1$) might not be unique.
-- The minimum-weight spanning tree might not be unique.
-- At each step, $T_i$ is a tree ($1 <= i <= n-1$).
+But an #link("https://upload.wikimedia.org/wikipedia/commons/9/9b/PrimAlgDemo.gif")[image] is worth a thousand words.
+
 
 #theorem[
   Given a connected weighted graph $G = (V, E, omega)$, Prim's algorithm produces a minimum-weight spanning tree of $G$.
 ]
 
+Kruskal's algorithm, on the other hand, starts with a tree comprising all vertices.
+It then iterates through the list of edges sorted by weight, and adds it to the tree if it does not form a cycle.
+It stops when $abs(V)-1$ edges have been added.
+
 #algorithm(
   pseudocode-list(numbered-title: [Kruskal's algorithm], booktabs: true)[
-    // *procedure* Kruskal($G$: connected weighted graph with $n$ vertices)
-    + $T_0 = (V, E_0)$ with $E_0 = emptyset$
-    + *for* $i = 1$ *to* $n - 1$
-      + $e_i =$ edge of minimum weight such that it does not form a cycle when added to $T_(i-1) = (V, E_(i-1))$
-      + $T_i = (V, E_(i-1) union {e_i}) = (V, E_i)$
+    + *procedure* Kruskal($G=(V,E, omega)$: connected weighted graph
+      + $T = (V_T, E_T) = (V, emptyset)$
+      + Place the edges by increasing weight into a list $L$
+      + *for* each $e$ in $L$
+        + *if* $e$ does not form a cycle when added to $T$
+          + $T = (V, E_T union {e})$
+      + *return* $T$ #comment[minimum-weight spanning tree]
   ],
 )
 
-*Remarks.*
-- The edge $e_i$ ($i = 1, ..., n-1$) might not be unique.
-- At each step, $T_i$ is a forest ($1 <= i <= n-1$).
+Again, an #link("https://upload.wikimedia.org/wikipedia/commons/b/bb/KruskalDemo.gif")[image] is worth a thousand words.
+
 
 #theorem[
   Given a connected weighted graph $G = (V, E, omega)$, Kruskal's algorithm produces a minimum-weight spanning tree of $G$.
 ]
 
-// == Planar graphs
-
-// // TODO: keep?
-
-// === Definitions
-
-// #definition[
-//   A *planar graph* is a graph that can be embedded in the plane: i.e., it can be drawn on the plane in such a way that their edges do not cross each other. A *plane graph* is a graphical representation of a planar graph such that their edges do not cross each other.
-// ]
-
-// #definition[
-//   A *subdivision* of an edge results from inserting a new vertex into that edge. The subdivision of a graph $G$ is obtained by subdividing one or more edges in $G$.
-// ]
-
-// #theorem(title: "Kuratowski, 1930")[
-//   A graph is planar if and only if it does not contain a subgraph that is a subdivision of $K_5$ or $K_(3,3)$.
-// ]
-
-// === Planar and dual graphs
-
-// #theorem(title: "Euler's formula, 1752")[
-//   A plane and connected graph $G = (V, E)$ divides the plane into $R$ regions (or faces), such that
-//   $ |V| - |E| + R = 2 $
-//   A plane graph (not necessarily connected) divides the plane into $R$ regions, such that
-//   $ |V| - |E| + R = 1 + "number of connected components of" G $
-// ]
-
-// #definition[
-//   Given a plane connected graph $G = (V, E)$, we can define its *dual graph* $G^* = (V^*, E^*)$ in the following way: To each region $f$ of $G$ we associate a dual vertex $f^* in V^*$, and to each edge $e in E$, there corresponds a unique dual edge $e^* in E^*$. If the original edge $e$ is the intersection of two faces $f, h$ (possibly, $f = h$), then the corresponding dual edge $e^*$ is incident with the dual vertices $f^*, g^* in V^*$.
-// ]
-
-// - $G^*$ can be drawn in such a way that any dual edge $e^*$ only crosses $e$.
-// - Notice that $(G^*)^* = G$.
-
-// === Some corollaries about graph planarity
-
-// #definition[
-//   Given a plane graph, the *degree of a region* $r$ is the degree of the dual vertex $r in V^*$ associated with it in the dual graph $G^*$. We denote the degree of the region $r$ as $d_r$ (or $k(r)$).
-// ]
-
-// #theorem(title: "Handshake Theorem for the dual graph")[
-//   Given a plane connected graph $G$, then
-//   $ 2|E| = sum_(r in R) d_r $
-//   where $R$ is the set of regions defined on the plane by $G$.
-// ]
-
-// #corollary[
-//   If $G$ is a simple, connected, and planar graph with $|V| >= 3$, then $|E| <= 3|V| - 6$.
-// ]
-
-// #corollary[
-//   If $G$ is a simple, connected, and planar graph with $|V| >= 3$ and without cycles of length 3, then $|E| <= 2|V| - 4$.
-// ]
+#remark[
+  In both cases,
+  - more than one edge may have the same weight,
+  - which means that the minimum-weight spanning tree might not be unique.
+]
