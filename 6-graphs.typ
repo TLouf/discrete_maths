@@ -45,7 +45,7 @@ For instance:
 
 #definition(title: [Undirected graphs])[
   An *undirected graph* is an ordered pair $G = (V, E)$ of vertex and edge sets $V$ and $E$, where $E$ is a set of _unordered_ pairs of vertices, that is $E subset.eq { {u,v} | u,v in V}$.
-  If $e = {u, v} in E$, we say that $e$ is *incident* on $u$ and $v$, or equivalently, that the two vertices are *adjacent*, or that $u$ is in $v$'s *neighbourhood* $cal(N)(v)$, and vice versa.
+  If $e = {u, v} in E$, we say that $e$ is *incident* on $u$ and $v$, or equivalently, that the two vertices are *adjacent* or *neighbours*.
 ]
 
 #remark[
@@ -58,6 +58,10 @@ For instance:
 
 #remark[
   An undirected graph can be seen as a directed graph whose adjacency relation is symmetric ---meaning if $(u,v)$ is an edge, then $(v,u)$ as well---, but also crucially considering that these are not two distinct edges but a single one, which can be represented as a 2-set ${u,v}$.
+]
+
+#notation[
+  In an undirected graph $G=(V,E)$, the set of neighbours of $v in V$, also called its *neighbourhood*, is denoted $cal(N) (v)$.
 ]
 
 The representation of undirected graphs then simplifies the edges by removing the arrows indicating direction:
@@ -395,7 +399,6 @@ Let's proceed on the following example.
 
 
 == Describing graphs
-// TODO: vertex neighbourhood? Laplacian?
 // TODO: add clustering from discussion on transitivity of relation, as in Newman p.183?
 // TODO: Mengers theorem p. 139?
 
@@ -973,9 +976,9 @@ However, for weighted graphs, some might be more optimal, in a certain sense.
 
 Thus, if the weights encode some form of cost to traverse edges, as in the shortest path problem, finding a minimum-weight spanning tree gives an optimal way to fully traverse a graph.
 
-#example[
-  TODO
-]
+// #example[
+//   TODO
+// ]
 
 #definition[
   A *greedy algorithm* to solve a given problem is an algorithm that when presented with a choice, always selects what seems to be the best option at this given moment.
