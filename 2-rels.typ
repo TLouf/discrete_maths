@@ -144,7 +144,7 @@ But first, what does that even mean?
 #definition(title: [Quotient set])[
   Let $R$ be an equivalence relation on $A$. The set of all the equivalence classes of $R$ is called the quotient set of $A$ by $R$, and it is denoted by $A\/R$:
   $ A\/R = {[a]_R | a in A} $
-]
+] <def-quotient-set>
 
 
 == Order relations
@@ -314,17 +314,6 @@ The well-ordering of natural numbers then explains the validity of proofs by ind
 
 #example[
   Find $n_0$ such that $2^n >= n + 5$ for all $n >= n_0$.
-]
-
-// TODO: keep?
-#theorem(title: "Strong induction principle for well-ordered sets")[
-  Let $(A, prec.curly.eq)$ be a well-ordered set. Under the following condition:
-  / Inductive step: If we assume that for any $b$ in $A$, for all its predecessors $a prec b$, $P(a)$ is true, then we can show that $P(b)$ is true.
-  $P(a)$ is true for every $a in A$.
-]
-
-#remark[
-  There is no basis step here because since $A$ is well-ordered, we know that its least element $a_0$ has no predecessor (${a in A | a prec a_0} = emptyset$), so the inductive step suffices to prove that $P(a_0)$ is true.
 ]
 
 

@@ -206,29 +206,12 @@
 + As any integer $a$ can be written as $a = 6q + r$ with $r in {0, 1, 2, 3, 4, 5}$, it suffices to prove the statement for each possible remainder $r$.
 
 +
-  - The solutions are
-    $ x_k = 11 dot 4 + 36/4 k = 44 + 9k, $
-    $ y_k = 11 dot (-3) - 28/4 k = -33 - 7k, $
-    for any $k in ZZ$.
-
-  - The solutions are
-    $ x_k = 4 dot (-8) + 550/22 k = -32 + 25k, $
-    $ y_k = 4 dot 1 - 66/22 k = 4 - 3k, $
-    for any $k in ZZ$.
-
-+
   + $x equiv 6 (mod 13)$.
   + There are two solutions: $x equiv 4 (mod 10)$ and $x equiv 9 (mod 10)$.
   + There are no solutions.
   + There are three solutions: $x equiv 3 (mod 15)$, $x equiv 8 (mod 15)$, and $x equiv 13 (mod 15)$.
 
-+ $6$.
-
 + Hint: First prove that $p | (a^25 - a)$ for $p = 2, 3, 5$.
-
-+ $41$.
-
-+ $2$.
 
 + It is an equivalence relation (use #rel-same-function-image), and the equivalence classes are $[6]_R = {6, 12, 18}$, $[10]_R = {10, 40}$, and $[21]_R = {21, 441, 1323}$.
 

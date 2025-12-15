@@ -172,23 +172,13 @@
 
 + Prove that $6 | a(a + 1)(2a + 1)$ for any $a in ZZ$.
 
-+ Find the integer solutions of the Diophantine equations:
-  + $28x + 36y = 44$.
-  + $66x + 550y = 88$.
-
 + Solve the following congruence equations:
-  + $3x equiv 5 space (mod 13)$.
-  + $8x equiv 2 space (mod 10)$.
-  + $5x equiv 7 space (mod 15)$.
-  + $3x equiv 9 space (mod 15)$.
-
-+ Find the remainder of the integer $2^68$ when divided by 19.
+  + $3 x equiv 5 space (mod 13)$.
+  + $8 x equiv 2 space (mod 10)$.
+  + $5 x equiv 7 space (mod 15)$.
+  + $3 x equiv 9 space (mod 15)$.
 
 + Prove that $30 | (a^25 - a)$ for any $a in ZZ$.
-
-+ Compute the last two digits of the integer $3^1492$.
-
-+ Find the remainder of the hexadecimal number $"A1F05FFA01AFA0F"$ when divided by 5.
 
 // 11.2
 + Let $A = {6, 10, 12, 18, 21, 40, 441, 1323}$. We define the following binary relation $R$ on $A$:

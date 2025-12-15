@@ -5,8 +5,6 @@
 = Elementary number theory
 
 #fa-book() This chapter overlaps with sections 4.1, 4.3, 4.5 and 4.6 of Rosen.
-// TODO: add 4.2?
-// TODO: too long!
 
 #slidebreak()
 
@@ -20,7 +18,7 @@ The set of integers $ZZ$ is closed with respect to the operations of sum, subtra
 However, the result of dividing two integers might not be an integer.
 
 #definition(title: [Divisibility])[
-  Given two integers $a != 0$ and $b$, we say that $a$ *divides* $b$ if there exists an integer $q in ZZ$ such that $b = a dot q$. If $a$ divides $b$, we say that $a$ is a *factor* or *divisor* of $b$ and that $b$ is a *multiple* of $a$. We denote $a divides b$ when $a$ divides $b$, and we write $a divides.not b$ when $a$ does not divide $b$.
+  Given two integers $a != 0$ and $b$, we say that $a$ *divides* $b$ if there exists a *quotient* $q in ZZ$ such that $b = a dot q$. If $a$ divides $b$, we say that $a$ is a *factor* or *divisor* of $b$ and that $b$ is a *multiple* of $a$. We denote $a divides b$ when $a$ divides $b$, and we write $a divides.not b$ when $a$ does not divide $b$.
 ]
 
 #remark[
@@ -51,13 +49,17 @@ However, the result of dividing two integers might not be an integer.
 
 
 #theorem[
-  If $a divides b_i$ for $i = 1, ..., N$, then $a divides sum_(i=1)^N u_i dot b_i$ for all $u_i in ZZ$. In other words, any integer divides any linear combination with integer coefficients of its multiples.
+  If $a divides b_i$ for $i = 1, ..., N$, then $a divides sum_(i=1)^N u_i dot b_i$ for all $u_i in ZZ$. In other words, an integer divides any linear combination with integer coefficients of its multiples.
 ]
+
+What if an integer does not divide another?
+Then we need to involve a remainder.
 
 #theorem(title: "The Division Algorithm")[
   Let $a$ and $b != 0$ be two integers. Then there exists a unique pair of integers $q$ and $r$ such that
   $ a = q dot b + r quad "with" 0 <= r < |b| $
 ] <thm-division-algo>
+// existence p.362
 
 #definition[
   In the equality given in @thm-division-algo:
@@ -78,8 +80,10 @@ However, the result of dividing two integers might not be an integer.
 // Rosen ex.24
 
 
-== Modular Arithmetic
+== Modular arithmetic
 <sec-mod-arithmetic>
+
+=== Congruence
 
 Modular arithmetic allows us to perform algebraic operations using, instead of a given set of numbers, their respective remainders with respect to some fixed positive number called the modulus.
 This might sound convoluted but is actually fairly common.
@@ -87,12 +91,21 @@ For example, to answer the question "What day of the week will we be 10 days fro
 We've already seen the operation notation $r = a mod b$, but to perform module arithmetic we need to introduce a related notation, which involves a relation instead.
 
 #definition(title: "Congruence")[
-  Let $a, b$ be integers, and let $m$ be a natural number. Then $a, b$ are congruent modulo $m$ if $m divides (a - b)$. This relation is denoted as $a equiv b (mod m)$. It is called a congruence with modulus $m$.
+  Let $a, b in ZZ$, and $m in NN^*$.
+  Then $a$ and $b$ are said to be congruent modulo $m$ if $m divides (a - b)$.
+  This relation is denoted as $a equiv b (mod m)$.
+  It is called a congruence with modulus $m$.
 ]
 
-#proposition[
-  1. $a equiv b (mod m)$ if and only if $a mod m = b mod m$.
-  2. $a equiv b (mod m)$ if and only if $a = b + k dot m$ for some $k in ZZ$.
+$a equiv b (mod m)$ and $a mod m = b$ include different uses of "$mod$"": in the first it represents a relation, while it represents an operation in the second.
+However, this shared notation comes from the fact that the relation and the operation are closely related.
+
+#theorem[
+  Let $a,b in ZZ$ and $m in NN^*$.
+  $a$ and $b$ are congruent modulo $m$ iff they have the same remainder when divided by $m$, that is:
+  $
+    a equiv b (mod m) <=> a mod m = b mod m.
+  $
 ]
 
 The congruence modulo $m$ between two integers thus indicates that they have the same remainder when they are divided by the modulus $m$.
@@ -103,14 +116,74 @@ The congruence modulo $m$ between two integers thus indicates that they have the
   // anything with cycle: so time-related stuff but also angles!
 ]
 
+From the definition of divisibility, we can directly get that:
+#theorem[
+  Let $a,b in ZZ$ and $m in NN^*$.
+  $a$ and $b$ are congruent modulo $m$ if and only if there is an integer $k$ such that $a = b + k m$, that is:
+  $
+    a equiv b (mod m) <=> exists k in ZZ, a = b + k dot m.
+  $
+] <thm-congruence-remainder>
+
+
+Let's now see how operations between congruent integers go.
+
+#theorem[
+  Let $m$ be a positive integer. If $a_1 equiv b_1 (mod m)$ and $a_2 equiv b_2 (mod m)$, then:
+  - $a_1 plus.minus a_2 equiv b_1 plus.minus b_2 (mod m)$.
+  - $a_1 dot a_2 equiv b_1 dot b_2 (mod m)$.
+]
+
+#proof[
+  Using @thm-congruence-remainder, we know there exist $s$ and $t$ such that $a_1 = b_1 + s m$ and $a_2 = b_2 + t m$, so:
+  $
+    cases(
+      a_1 + a_2 = (b_1 + b_2) + (s + t) m,
+      a_1 a_2 = (b_1 b_2) + (b_1 t + b_2 s + s t m) m,
+    ).
+  $
+  Hence the result.
+]
+
+#corollary[
+  Let $m, k in NN^*$ and $a, b in ZZ$. If $a equiv b (mod m)$, then $a^k equiv b^k (mod m)$.
+]
+
+Also since $a equiv (a mod m) (mod m)$, we get that:
+#corollary[
+  Let $a,b in ZZ$ and $m in NN^*$.
+  Then
+  $
+    cases(
+      (a+b) mod m = ((a mod m) + (b mod m)) mod m\,,
+      (a dot b) mod m = ((a mod m) dot (b mod m)) mod m.,
+    )
+  $
+] <cor-mod-add-mult>
+
+#important[
+  Some operations may not go as expected!
+  For instance, while
+  $
+    a equiv b (mod m) => forall c in ZZ, a c equiv b c (mod m),
+  $
+  the converse is not necessarily true, meaning:
+  $
+    a c equiv b c (mod m) cancel(=>) a equiv b (mod m).
+  $
+  For instance: can you divide both sides of the equivalence by $3$ in $12 equiv 6 (mod 3)$?
+]
+
+=== Arithmetic modulo $m$
+
+To study operations involving congruences properly, let's first see how they define particular sets of integers with their own arithmetic.
+
 #theorem[
   For each positive integer $m$, the binary relation $equiv (mod m)$ is an equivalence relation, as defined in @sec-equiv-rels.
 ] <thm-mod-is-equiv>
 
 
-=== The Quotient Set $ZZ_m$
-
-A good way to visualize such problems of modular arithmetic is to imagine that the straight lines of integers gets rolled into a single circle with $m$ ticks:
+A good way to visualize this relation is to imagine that the straight line of integers gets rolled into a wheel with $m$ ticks:
 
 #let n = 10
 #let m = 5
@@ -153,39 +226,69 @@ A good way to visualize such problems of modular arithmetic is to imagine that t
     }),
   ),
 )
-// TODO: all below assumes knowledge of equivalence relations!
+
 This is equivalent to defining the quotient set we'll introduce below!
 
 #definition(title: "Congruence classes")[
   We define the congruence classes modulo $m$ as
-  $ [a]_m = {b in ZZ | a equiv b (mod m)} = {a + m k | k in ZZ} $
+  $ [r]_m = {b in ZZ | b equiv r (mod m)} = {m k + r | k in ZZ} $
 ]
 
-#property[
-  It follows from @thm-mod-is-equiv that congruence classes are equivalence classes, and thus from @thm-equiv-classes-partition that they form a partition of $ZZ$.
-
-  Also, there are $m$ distinct equivalence classes corresponding to the $m$ possible remainders obtained by dividing an integer by $m$.
-]
-
+It follows from @thm-mod-is-equiv that congruence classes are equivalence classes.
+Thus, to a given modulo $m$ correspond $m$ distinct equivalence classes.
+And from @thm-equiv-classes-partition follows that:
 #theorem[
-  The quotient set $ZZ_m = ZZ \/ equiv (mod m)$ is given by
-  $ ZZ_m = {[a]_m | 0 <= a <= m - 1} $
+  For any positive integer $m$, the congruence class modulo $m$ forms a partition of $ZZ$.
 ]
 
-*Remark:* Usually, the notation for $ZZ_m$ is a bit sloppy:
-$ ZZ_m = {0, 1, 2, ..., m - 1} $
-
-=== Modular Arithmetic
-
+Also, following @def-quotient-set:
 #theorem[
-  Let $m$ be a positive integer. If $a_1 equiv b_1 (mod m)$ and $a_2 equiv b_2 (mod m)$, then:
-  - $a_1 plus.minus a_2 equiv b_1 plus.minus b_2 (mod m)$.
-  - $a_1 dot a_2 equiv b_1 dot b_2 (mod m)$.
+  For any positive integer $m$, the quotient set $ZZ_m = ZZ \/ (equiv (mod m))$ is given by
+  $ ZZ_m = {[r]_m | 0 <= r <= m - 1} = {0, 1, dots, m - 1} $
 ]
 
-#corollary[
-  Let $m, k$ be positive integers, and let $a, b in ZZ$. If $a equiv b (mod m)$, then $a^k equiv b^k (mod m)$.
+This is simply the set of possible remainders of divisions by $m$.
+Arithmetic on $ZZ_m$, however, can be distinct from the one you know on $ZZ$.
+Still, we know from @cor-mod-add-mult that they share similarities, which allows us to provide the following definitions.
+
+#definition[
+  For a given $m in NN^*$ and $x, y in ZZ_m$, we define:
+  - the addition $+_m$:
+    $
+      x +_m y = (x + y) mod m,
+    $
+    where the addition on the right-hand side is the addition on $ZZ$,
+  - and the multiplication $dot_m$:
+    $
+      x dot_m y = (x dot y) mod m.
+    $
+    where the multiplication on the right-hand side is the multiplication on $ZZ$.
 ]
+
+These operations satisfy many of the familiar properties that addition and multiplication have on $ZZ$.
+That is, for any $x,y in ZZ_m$:
+- Closure: $x +_m y in ZZ_m$ and $x dot_m y in ZZ_m$.
+- Associativity: $x +_m (y +_m z) = (x +_m y) +_m z$ and $x dot_m (y dot_m z) = (x dot_m y) dot_m z$.
+- Commutativity: $x +_m y = y +_m x$ and $x dot_m y = y dot_m x$.
+- Distributivity: $x dot_m (y +_m z) = x dot_m y +_m x dot_m z$.
+- Identity element (sum): $exists 0_m in ZZ_m$ such that $0_m +_m x = x$.
+- Identity element (product): $exists 1_m in ZZ_m$ such that $1_m dot_m x = x$.
+- Additive inverses: $exists (-_m x) in ZZ_m$ such that $x +_m (-_m x) = 0_m$.
+
+#home[
+  Check they actually satisfy them!
+  What are $0_m$, $1_m$ and $(-x_m)$ with regards to their counterparts in $ZZ$?
+  // TODO: make this an exercise?
+]
+
+Multiplicative inverses do not appear here, simply because they do not always exist in $ZZ_m$.
+For instance, there is no multiplicative inverse of 2 modulo 6, as you can verify.
+
+#definition(title: [Multiplicative inverse])[
+  An element $r in ZZ_m$ has a multiplicative inverse modulo $m$ if there is an element $s in ZZ_m$ such that $r dot s equiv 1 (mod m)$.
+] <def-mult-inv-mod>
+
+We will return to multiplicative inverses later on.
 
 == Greatest common divisors and least common multiples
 
@@ -217,7 +320,7 @@ $ ZZ_m = {0, 1, 2, ..., m - 1} $
 
 The $gcd$ can be obtained systematically using the following lemma.
 
-#lemma[
+#lemma(title: [Euclid's lemma])[
   Given the integers $a$, $b != 0$, $q$ and $r$, such that $a = q dot b + r$ with $0 <= r < |b|$, then $gcd(a, b) = gcd(b, r)$.
 ] <lma-euclid-algo>
 // proof using @thm-divides
@@ -252,7 +355,7 @@ The $lcm$ is then straightforward to compute since we can use the following theo
 #theorem(title: "Bézout's Identity")[
   If $a$ and $b$ are two integers not simultaneously zero, then there exist integers $x, y$ such that
   $ gcd(a, b) = a dot x + b dot y $
-]
+] <thm-bezout>
 
 #proof[
   We write the steps of Euclid's algorithm, and "unroll them":
@@ -310,7 +413,8 @@ And as a direct consequence, to redefine relatively-prime integers through the f
 // TODO: proofs?
 
 #theorem[
-  Let $m$ be a positive integer, and let $a, b, c$ be integers. If $a dot c equiv b dot c (mod m)$ and $gcd(c, m) = 1$, then $a equiv b (mod m)$.
+  Let $m$ be a positive integer, and let $a, b, c$ be integers.
+  If $a dot c equiv b dot c (mod m)$ and $c$ and $m$ are relatively prime, then $a equiv b (mod m)$.
 ]
 
 #remark[
@@ -319,7 +423,7 @@ And as a direct consequence, to redefine relatively-prime integers through the f
 ]
 
 
-== Prime Numbers
+== Prime numbers
 
 === Definition
 
@@ -342,7 +446,8 @@ And as a direct consequence, to redefine relatively-prime integers through the f
   $ n = p_1^(n_1) dot p_2^(n_2) dot p_3^(n_3) dot ... dot p_k^(n_k) $
   where the $p_i$ are distinct prime numbers written in increasing order, and the exponents $n_i$ are natural numbers $n_i >= 1$.
 ]
-// https://www.youtube.com/watch?v=46E0-XJuAXs
+
+#remark[If you're curious as to why this theorem is _fundamental_, you can check out #link("https://www.youtube.com/watch?v=46E0-XJuAXs")[this nice video].]
 
 #theorem[
   The positive integer $n$ is a composite number if and only if $n$ can be divided by some prime number $p <= sqrt(n)$.
@@ -353,6 +458,7 @@ And as a direct consequence, to redefine relatively-prime integers through the f
   + Either $p divides a$, or $p$ and $a$ are relatively prime.
   + If $p divides (a dot b)$, then either $p divides a$ or $p divides b$.
 ]
+// can be used to prove Fermat's little theorem
 
 #proposition[
   If the integers $a, b > 1$ can be factorized in the form
@@ -367,131 +473,93 @@ And as a direct consequence, to redefine relatively-prime integers through the f
   $
 ]
 
-== Linear Congruence Equations
-// TODO keep?
+#home[
+  How primes are distributed is a topic that has attracted interest and fascination for centuries.
+  You can check out this #link("https://www.youtube.com/watch?v=EK32jo7i5LQ")[cool video on prime numbers] (and this cool channel in general!) for an example of how it can connect to other problems.
+]
+
+== Linear congruence equations
+
+Being able to solve linear equations is fundamental to many problems of calculus or linear algebra, and the same is true for linear _congruence_ equations in number theory.
 
 #definition[
-  A congruence modulo $m$ of the form
+  A linear congruence equation is a congruence modulo $m$ of the form
   $ a dot x equiv b (mod m) $
-  where $m$ is a positive integer, $a, b$ are integers, and $x$ is a variable is called a linear congruence equation.
+  where $m$ is a positive integer, $a, b$ are integers, and $x$ is a variable.
 ]
 
-*Remarks:*
-- If there exists a unique solution of the linear congruence equation $a dot x equiv 1 (mod m)$, then solving this equation is equivalent to obtaining the multiplicative inverse of $a$ modulo $m$.
-- If $x$ is a solution of a linear congruence equation, and $x' equiv x (mod m)$, then $x'$ is also a solution of that equation: $a dot x' equiv a dot x (mod m) equiv b (mod m)$.
-- Therefore, the solutions of a linear congruence equation (if any) form classes of congruence modulo $m$: i.e., they are elements of $ZZ_m$.
-
-=== Solving Linear Congruence Equations
-
-#theorem[
-  If $d = gcd(a, m)$, then the linear congruence equation
-  $ a dot x equiv b (mod m) $
-  has a solution if and only if $d divides b$. In this case and if $x_0$ is a particular solution of the linear congruence equation, the general solution is given by
-  $ x_k = x_0 + (m dot k)\/d, quad k in ZZ $
-  In particular, these solutions form $d$ congruence classes modulo $m$ with representatives:
-  ${x_0, x_0 + m\/d, x_0 + (2m)\/d, ..., x_0 + (m(d - 1))\/d}$
-]
-
-#corollary[
-  If $gcd(a, m) = 1$, the solutions $x$ of the linear congruence equation $a dot x equiv b (mod m)$ form a unique congruence class modulo $m$.
-]
-
-// why multiplicative inverse? to solve extra type of linear congruence eqs
-#corollary[
-  If $gcd(a, m) = 1$ with $m > 1$, then there exists a multiplicative inverse of $a$ modulo $m$. This multiplicative inverse is unique modulo $m$.
-]
-
-=== Arithmetic with $ZZ_m$
-// TODO keep? put above if keep
-
-The elements of $ZZ_m$ with $m in NN$ are equivalence classes modulo $m$. For the sake of simplicity, $x in ZZ_m$ represents that $x in [x]_m$.
-
-The sum and the multiplication on $ZZ_m$ are defined as:
+To solve these equations, we can use multiplicative inverses (from @def-mult-inv-mod).
+Indeed, let's consider $m > 1$, and assume $a$ admits a multiplicative inverse $a^(-1) in ZZ_m$.
+Then, we can multiply both sides of the linear congruence equation by $a^(-1)$ to isolate $x$:
 $
-    x + y & = [x]_m + [y]_m = [x + y]_m \
-  x dot y & = [x]_m dot [y]_m = [x dot y]_m
+  a dot x equiv b (mod m) => x equiv a^(-1) dot b (mod m).
 $
-
-and they verify the usual properties: for every $x, y, z in ZZ_m$,
-- Closure: $x + y in ZZ_m$ and $x dot y in ZZ_m$.
-- Associativity: $x + (y + z) = (x + y) + z$ and $x dot (y dot z) = (x dot y) dot z$.
-- Commutativity: $x + y = y + x$ and $x dot y = y dot x$.
-- Distributivity: $x dot (y + z) = x dot y + x dot z$.
-- Identity element (sum): $exists 0 in ZZ_m$ such that $0 + x = x$, $forall x in ZZ_m$.
-- Identity element (product): $exists 1 in ZZ_m$ such that $1 dot x = x$, $forall x in ZZ_m$.
-- Inverse element (sum): $forall x in ZZ_m$, $exists -x in ZZ_m$ such that $x + (-x) = 0$.
-
-*Remark:* These properties are those characterizing a field [like $(RR, +, dot)$], except for the existence of a multiplicative inverse.
-
-In $ZZ$ there does not exist in general the multiplicative inverse of an integer $x$: $y$ is the multiplicative inverse of $x$ if and only if $x dot y = 1$. However, two properties hold:
-1. Cancellation law: If $x != 0$ and $x dot y = x dot z$, then $y = z$.
-2. If $x dot y = 0$, then either $x = 0$ or $y = 0$.
-
-None of these two properties holds in general in $ZZ_m$.
-
-#definition[
-  An element $x equiv.not 0 (mod m)$ of $ZZ_m$ is a divisor of zero if there exists an element $y equiv.not 0 (mod m)$ such that $x dot y equiv 0 (mod m)$.
-]
-
-*Remark:* In some books, the condition $x equiv.not 0 (mod m)$ is dropped.
-
-#definition[
-  An element $x in ZZ_m$ is a unit modulo $m$ if it has a multiplicative inverse modulo $m$; i.e., if there is an element $s in ZZ_m$ such that $x dot s equiv 1 (mod m)$.
-]
+The solutions $x$ are then all integers congruent to $a^(-1) dot b$ modulo $m$.
+But let's first see when we can get such an inverse.
 
 #theorem[
-  The multiplicative inverse of a unit modulo $m$ is unique.
-]
-
-*Remark:* As the inverse of a unit $r$ modulo $m$ is unique, it will be denoted by $r^(-1)$.
-
-#theorem[
-  An element $r in ZZ_m$ is invertible (i.e., it has a multiplicative inverse) if and only if $r$ and $m$ are relatively prime.
+  An element $r in ZZ_m$ has a multiplicative inverse if and only if $r$ and $m$ are relatively prime.
 ]
 
 #corollary[
   If $p$ is a prime number, every nonzero element of $ZZ_p$ is invertible.
 ]
 
-- If $p$ is prime, then $(ZZ_p, +, dot)$ is a field like $(RR, +, dot)$ or $(QQ, +, dot)$.
-- If $m = p dot q$ is composite, then there are divisors of zero in $ZZ_m$: $p dot q equiv 0 (mod m)$ with $p, q equiv.not 0 (mod m)$. In this case, $(ZZ_m, +, dot)$ is a ring with divisors of zero.
-
-#definition[
-  Euler's (totient) function $phi : NN -> NN$ is defined as $phi(m)$ gives the number of invertible elements of $ZZ_m$.
-]
-
-#lemma[
-  If $p$ is a prime number, then $phi(p) = p - 1$.
-]
-
-=== Euler's Theorem
-
-#theorem(title: "Euler, 1790")[
-  If $y$ is invertible in $ZZ_m$ (i.e., if $gcd(y, m) = 1$), then
-  $ y^(phi(m)) equiv 1 (mod m) $
-]
-
-#corollary(title: "Fermat's Little Theorem")[
-  If $p$ is a prime number and if $y equiv.not 0 (mod p)$, then
-  $ y^(p-1) equiv 1 (mod p) $
-]
-
-#corollary[
-  If $p$ is a prime number, then $y^p equiv y (mod p)$ for any integer $y$.
-]
+Here's why we stopped right after introducing multiplicative inverses above: we needed to introduce relatively prime numbers before being able to condition their existence.
 
 #theorem[
-  1. If $p$ is a prime, then $phi(p^k) = p^(k-1)(p - 1)$ for every $k in NN$.
-  2. If $gcd(m, n) = 1$, then $phi(m dot n) = phi(m) dot phi(n)$.
-  3. If $n >= 2$ has the following decomposition in prime factors $n = product_(k=1)^r p_k^(n_k)$ with $n_k >= 1$, then $phi(n) = n dot product_(k=1)^r (1 - 1\/p_k)$.
+  For any $r in ZZ_m$, if its multiplicative inverse exists, then it is unique modulo $m$.
 ]
+
+#notation[
+  Since the inverse of $r$ modulo $m$ is unique when it exists, it will be denoted by $r^(-1)$.
+]
+
+#remark[
+  For small values of $m$ finding a multiplicative inverse is straightforward: we can simply multiply $a$ by $2, dots, m-1$ until the result exceeds a multiple of $m$ by $1$.
+  For higher $m$, we can rather use Bézout (@thm-bezout) to find coefficients $x$ and $y$ such that $gcd(a, m) = 1 = x dot a + y dot m$.
+  It will then follow that $x$ is an inverse of $a$ modulo $m$.
+]
+
+We can thus provide the following way to solve linear congruence equations.
+
+#theorem[
+  If $a$ and $m$ are relatively prime integers, then the linear congruence equation
+  $ a dot x equiv b (mod m) $
+  has a unique solution modulo $m$, which is $x_0 = (a^(-1) dot b) mod m$, where $a^(-1)$ is the inverse of $a$ modulo $m$.
+  The general solution is then given by
+  $
+    forall k in ZZ, x_k = x_0 + (k dot m),
+  $
+  which form a congruent class modulo $m$.
+]
+
+// #example[
+//   Solve the congruence $2 x equiv 7 (mod 17)$
+// ]
+
 
 == Applications
 
 === Random number generators
 
+Many algorithms need to draw random numbers to work, for instance in statistical sampling, cryptography or to train machine-learning models.
+Because generating actually random numbers needs a natural source of randomness, such as complex atmospheric phenomena, it is limited by the "rate of randomness" that these sources can provide.
+Most often we thus rather generate _pseudorandom_ numbers in computers.
+A popular procedure to do so is called the *linear congruential method*.
+It consists in first choosing four integers: the modulus $m$, multiplier $a$, increment $c$, and *seed* $x_0$ , with $2 <= a < m$, $0 <= c < m$, and $0 <= x_0 < m$.
+Using these, a sequence of pseudorandom numbers can be generated by successively applying
+$
+  x_(n+1) = (a x_n + c) mod m.
+$
+
 === Cryptography
 
-=== Further resources
+Number theory, and particularly modular arithmetic, is the basis for many cryptography techniques.
+Perhaps the simplest example is Caesar's encryption process.
+It maps each letter of the latin alphabet to a number in $ZZ_26$, and shifts them by an arbitrary $k$ modulo $26$.
+It can thus be written as the function $f: ZZ_26 -> ZZ_26$ such that $f(l) = (l + k) mod 26$.
 
-- #link("https://www.youtube.com/watch?v=EK32jo7i5LQ")[Cool video on prime numbers] (and cool channel in general!)
+// RSA requires Chinese remainder, Fermat's, fast modular exponentiation... a bit too much.
+More complex techniques which are actually widely used nowadays also involve modular arithmetic, such as the RSA system.
+For more information, see section 4.6 of Rosen.
