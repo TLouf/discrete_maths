@@ -162,7 +162,7 @@
   )
 
   show "python": [#fa-python() Python]
-  show " iff": [ if and only if]
+  show regex("\biff\b"): [if and only if]
 
   doc
 }
