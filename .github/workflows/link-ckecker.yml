@@ -1,0 +1,17 @@
+name: Broken link checker
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@v2.7.0
+        with:
+          args: ./**/*.typ
+          fail: true
