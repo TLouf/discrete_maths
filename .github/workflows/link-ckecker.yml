@@ -13,5 +13,5 @@ jobs:
       - name: Link Checker
         uses: lycheeverse/lychee-action@v2.7.0
         with:
-          args: ./**/*.typ
+          args: './**/*.typ'
           fail: true
