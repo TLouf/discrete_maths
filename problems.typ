@@ -39,6 +39,24 @@
   + ${3} in A$
   + $A subset {-3, -2, -1, 0, 1, 2, 3}$
 
+// R 2.1.13
++ Let $x in U$. For each of the following statements, determine whether it is true or not:
+  + $x in {x}$
+  + ${x} in {x}$
+  + ${x} subset.eq {x}$
+  + ${x} in {{x}}$
+  + $emptyset subset.eq {x}$
+  + $emptyset in {x}$
+
+// R 2.1.20
++ Find two sets $A$ and $B$ such that $A in B$ and $A subset.eq B$.
+
+// R 2.1.27
++ Given two sets $A$ and $B$, show that
+  $
+    A subset.eq B <=> cal(P) (A) subset.eq cal(P) (B).
+  $
+
 + Prove the following identities:
   + $A union (A inter B) = A inter (A union B) = A$
   + $(A union B) without C = (A without C) union (B without C)$
@@ -50,6 +68,14 @@
 + Simplify the following expressions:
   + $[overline(B) inter (A union C) inter D] union [(A union B) inter overline(B)]$ #v(0.5em)
   + $overline(([(A union B) inter C] union overline(B)))$
+
+// R 2.2.54
++ Determine $union_(i=0)^(+ oo) A_i$ and $inter_(i=0)^(+ oo) A_i$ for
+  + $A_i = {0, 1, dots, i}$,
+  + $A_i = {dots, -2, -1, dots, i}$.
+
+// R 2.1.31
++ What is the Cartesian product $A times B times C$, where $A$ is the set of all airlines and $B$ and $C$ are both the set of all cities in Europe? What could this Cartesian product represent, in plain words?
 
 + Determine if the functions $f, g : RR arrow RR$ below are injective or not:
   $
@@ -89,6 +115,18 @@
 
 = Relations
 
+// R 9.5.2
++ Which of these relations on the set of all people are equivalence relations?
+  + ${(a, b) ∣ a "and" b "are the same age"}$
+  + ${(a, b) ∣ a "and" b "have the same parents"}$
+  + ${(a, b) ∣ a "and" b "share a common parent"}$
+  + ${(a, b) ∣ a "and" b "have met"}$
+  + ${(a, b) ∣ a "and" b "speak a common language" }$
+
+// R 9.5.4
++ Define three equivalence relations on the set of students in your group, different from the relations we already presented.
+  Determine the equivalence classes for each of these equivalence relations.
+
 + Let $A$ and $B$ be two sets, and let $f: A -> B$ be a certain function. Show that any binary relation defined on $A$ of the form
   $ a rel b <==> f(a) = f(b), quad a, b in A $
   is an equivalence relation for any $f$. Find the quotient set $A\/R$.
@@ -98,23 +136,25 @@
   + Prove that $R$ is an equivalence relation.
   + Compute its quotient set $cal(P)(A)\/R$, and prove that there is a bijection between this quotient set and $cal(P)(B)$.
 
-+ Let $R$ be a relation defined on $NN times NN$, such that $(a, b)R(c, d)$ if and only if $a + b = c + d$. Show that $R$ is an equivalence relation on $NN times NN$, and that there exists a bijection between the quotient set $(NN times NN)\/R$ and $NN$.
++ Let $R$ be a relation defined on $NN times NN$, such that $(a, b) rel (c, d)$ if and only if $a + b = c + d$.
+  Show that $R$ is an equivalence relation on $NN times NN$, and that there exists a bijection between the quotient set $(NN times NN)\/R$ and $NN$.
 
 + Let
   $
     A = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}
   $
-  and let $R$ be a relation on $A$, such that $a rel b$ if and only if $floor(sqrt(a)) = floor(sqrt(b))$. Show that $R$ is an equivalence relation, find its classes of equivalence, and its quotient set.
+  and let $R$ be a relation on $A$, such that $a rel b$ if and only if $floor(sqrt(a)) = floor(sqrt(b))$.
+  Show that $R$ is an equivalence relation, find its classes of equivalence, and its quotient set.
 
-+ We define the relation $R$ on $RR^2 = RR times (RR without {0})$ such that
-  $ (a, b)R(c, d) <==> a d = b c $
-  Show that this is an equivalence relation, and obtain the quotient set $RR^2\/R$.
++ We define the relation $R$ on $RR times (RR without {0})$ such that
+  $ (a, b) rel (c, d) <==> a d = b c $
+  Show that this is an equivalence relation, and obtain the quotient set $( RR times (RR without {0}) ) \/ R$.
 
 + A relation $R$ defined on a set $A$ is a *circular relation* if it verifies the following property:
-  $ a rel b "and" b rel c ==> c rel a $
+  $ (a rel b) and (b rel c) ==> c rel a $
   Prove that a relation is an equivalence relation if and only if it is circular and reflexive.
 
-+ A relation $R$ on a set $A$ is *weakly transitive* if, for all elements $a, b, c, d in A$, the relations $a rel b$, $b rel c$, and $c rel d$ imply that $a rel d$. Determine which one of the following two statements is true and which one is false (by proving the former, and giving a counter-example of the latter):
++ A relation $R$ on a set $A$ is *weakly transitive* if, for all elements $a, b, c, d in A$, the relations $a rel b$, $b rel c$, and $c rel d$ imply that $a rel d$. Determine which one of the following two statements is true and which one is false (by proving the true statement, and giving a counter-example of the false one):
   + Every symmetric and weakly transitive relation is transitive.
   + Every reflexive, symmetric, and weakly transitive relation is an equivalence relation.
 
@@ -125,19 +165,29 @@
 + Show that the following relations are equivalence relations. Find the corresponding classes of equivalence and the quotient set $V\/R$:
   + $V = ZZ$ and $v rel w$ if $|v - w|$ is a multiple of 2.
   + $V = ZZ$ and $v rel w$ if $v^2 - w^2 = v - w$. Describe the equivalence class containing the element 2005.
-  + $V = RR^2$ and $(x, y)R(u, w)$ if $x y = u w$.
-  + $V = RR^2$ and $(x, y)R(u, w)$ if $(x - y)(x + y) = (u - w)(u + w)$.
-  + $V = RR^2$ and $(x, y)R(u, w)$ if $x^2 + y^2 = u^2 + w^2$.
+  + $V = RR^2$ and $(x, y) rel (u, w)$ if $x y = u w$.
+  + $V = RR^2$ and $(x, y) rel (u, w)$ if $(x - y)(x + y) = (u - w)(u + w)$.
+  + $V = RR^2$ and $(x, y) rel (u, w)$ if $x^2 + y^2 = u^2 + w^2$.
 
+// R 9.5.48
++ List the equivalence relations produced by these partitions of ${a, b, c, d, e, f, g}$.
+  + ${a, b}, {c, d}, {e, f, g}$
+  + ${a}, {b}, {c, d}, {e, f}, {g}$
 
+// R 9.5.45
++ Which of these are partitions of the set $ZZ times ZZ$ of ordered pairs of integers?
+  + The set of pairs $(x, y)$ where $x$ or $y$ is odd, the set of pairs $(x, y)$ where $x$ is even, and the set of pairs $(x, y)$ where $y$ is even.
+  + The set of pairs $(x, y)$ where both $x$ and $y$ are odd, the set of pairs $(x, y)$ where exactly one of $x$ and $y$ is odd, and the set of pairs $(x, y)$ where both $x$ and $y$ are even.
+  + the set of pairs $(x, y)$ where $x != 0$ and $y != 0$, the set of pairs $(x, y)$ where $x = 0$ and $y != 0$, and the set of pairs $(x, y)$ where $x != 0$ and $y = 0$.
 
 + Given the matrix representing the relation $R$ on a set $A$
   $ mat(1, 1, 1, 1, 0; 0, 1, 1, 1, 0; 0, 0, 1, 1, 0; 0, 0, 0, 1, 0; 0, 0, 1, 1, 1) $
   + Compute $"Dom"(R)$ and $"Im"(R)$.
   + Draw its Hasse diagram.
-  + Find a total order compatible with $R$.
+// + Find a total order compatible with $R$.
 
-+ Let $A = {0, 1, 2} times {2, 5, 8}$, and let us define the order relation $R$ on $A$ such that $(a, b) rel (c, d) <==> (a + b) | (c + d)$. Find the maximal, minimal, maximum, and minimum elements of the poset $(A, R)$.
++ Let $A = {0, 1, 2} times {2, 5, 8}$, and let us define the order relation $R$ on $A$ such that $(a, b) rel (c, d) <==> (a + b) | (c + d)$.
+  Find the maximal, minimal, maximum, and minimum elements of the poset $(A, R)$.
 
 + Let us consider the relation $R$ on $RR^2$ given by
   $ (a, b) rel (c, d) <==> a <= c "and" b <= d $
@@ -152,13 +202,29 @@
   + Find the Hasse diagram of both relations on the set $A = {n in NN | 1 <= n <= 9}$.
   + Find for $R_1$ and $R_2$ the maximal, minimal, maximum, and minimum elements on $A$. Find also the supremum and infimum of $A$ as a subset of $NN$.
 
-+ A polygon $P$ is convex if, for any two points $a, b in P$, the segment $overline(a b)$ joining both points is totally contained inside the polygon. Prove that the sum of the interior angles of a convex polygon of $n >= 3$ sides is $(n - 2)pi$.
++ A polygon $P$ is convex if, for any two points $a, b in P$, the segment $overline(a b)$ joining both points is totally contained inside the polygon.
+  Prove that the sum of the interior angles of a convex polygon of $n >= 3$ sides is $(n - 2)pi$.\
+  _Hint:_ You may use the fact that any convex polygon with $n$ edges is the result of adding a triangle to a convex polygon of $n − 1$ edges.
 
 + Prove that $1 + 2^n < 3^n$ for each $n >= 2$.
 
++ Consider the identities
+  $
+                      1 & = 2!/(2) \
+                3 dot 1 & = 4!/(4 dot 2!) \
+          5 dot 3 dot 1 & = 6!/(8 dot 3!) \
+    7 dot 5 dot 3 dot 1 & = 8!/(16 dot 4!)
+  $
+  Guess a general formula and prove its validity by induction.
 
 
 = Elementary number theory
+
+// R 4.1.15
++ What time does a 12-hour clock read
+  + 80 hours after it reads 11:00?
+  + 40 hours before it reads 12:00?
+  + 100 hours after it reads 6:00?
 
 + Given $a = 92$ and $b = 84$, use Euclid's algorithm to compute $d = gcd(a, b)$. Find integers $x, y in ZZ$ such that $a x + b y = d$.
 
@@ -172,6 +238,9 @@
 
 + Prove that $6 | a(a + 1)(2a + 1)$ for any $a in ZZ$.
 
+// R 4.4.6.b)
++ Find an inverse of $a$ modulo $m$ for $a=34$ and $m=89$.
+
 + Solve the following congruence equations:
   + $3 x equiv 5 space (mod 13)$.
   + $8 x equiv 2 space (mod 10)$.
@@ -179,6 +248,9 @@
   + $3 x equiv 9 space (mod 15)$.
 
 + Prove that $30 | (a^25 - a)$ for any $a in ZZ$.
+
+// R 4.4.17
++ Show that if $p$ is prime, the only solutions of $x^2 equiv 1 (mod p)$ are integers $x$ such that $x equiv 1 (mod p)$ or $x equiv −1 (mod p)$.
 
 // 11.2
 + Let $A = {6, 10, 12, 18, 21, 40, 441, 1323}$. We define the following binary relation $R$ on $A$:
@@ -203,6 +275,12 @@
 
 = Counting
 
++ Let $A$ be a set with cardinality $n$.
+  + How many different relations are there on $A$?
+  + How many of them are reflexive?
+  + How many of them are symmetric?
+  + How many of them are antisymmetric?
+
 + Computers represent information using bits. A bit has two possible values: 0 or 1. A bit string of length $n$ is a sequence of $n$ bits $b_1 b_2 b_3 ... b_n$.
   + How many different bit strings are there of length $n$?
   + How many bit strings of length $n >= 2$ start and end with 1?
@@ -220,13 +298,13 @@
   + both the bride and the groom are in the picture but not next to each other?
   + both the groom and the bride are next to each other in the picture, and the bride is on the left of the groom?
 
++ What is the probability that from fifty persons chosen at random, at least two of them have their birthday the same day of the year?
+
 + Find how many five-digit numbers $n$ can be formed with the set $A = {1, 2, 3}$, and such that each digit in $A$ must appear in the number $n$ at least once.
 
-+ Find how many three-letter words can be formed with the 10-element set ${A, B, ..., J}$, and such that the letters are all distinct and ordered in the standard lexicographic way.
-
 + The USS Arizona had 12 distinct flags and the sailors could put up to 3 flags in the corresponding flagpole, each flag configuration describing a distinct circumstance in the ship.
-  - How many distinct circumstances using at least one flag could be described with this set-up?
-  - How many distinct circumstances using at least one flag could be described if there were three equal sets of the above-mentioned 12 flags?
+  + How many distinct circumstances using at least one flag could be described with this set-up?
+  + How many distinct circumstances using at least one flag could be described if there were three equal sets of the above-mentioned 12 flags?
 
 + Find in how many ways we can put three letters A and seven letters B such that there are no two consecutive A's.
 
@@ -235,7 +313,8 @@
   - (V) $(x, y, z) arrow (x, y + 1, z)$,
   - (L) $(x, y, z) arrow (x, y, z + 1)$.
 
-  How many trajectories are there joining the points $(-1, 2, 0)$ and $(1, 3, 7)$? How many of them go through the point $(0, 3, 4)$?
+  + How many trajectories are there joining the points $(-1, 2, 0)$ and $(1, 3, 7)$?
+  + How many of them go through the point $(0, 3, 4)$?
 
 
 // *Proposition 1 (The pigeonhole principle)*: If $k + 1$ or more objects are placed into $k$ boxes, then there is at least one box containing two or more of the objects.
@@ -259,6 +338,16 @@
 
 + If we simultaneously toss 6 identical dice, how many distinct results are possible?
 
++ In how many ways can a card player extract 5 cards from a poker deck (i.e., four suits, each with 13 cards 2, 3, . . . , 9, 10, J, Q, K, A) and obtain
+  + a flush (five cards from the same suit)?
+  + four aces?
+  + a four of a kind (four cards with the same number)?
+  + three aces and two Js?
+  + three aces and a pair (two cards with the same number)?
+  + full house (a three of a kind1 and a pair)?
+  What are then the associated probabilities?
+
+// TODO: R 6.4.18-20
 + We want to line up $a$ white balls and $b$ black balls. In how many distinct ways can we arrange these balls such that there are exactly $k + 1$ groups of black balls?\
   _Note: A group of equal balls may consist in a single ball._
 
@@ -287,6 +376,10 @@
   + In how many distinct ways can the company manager split the 20 cities in 5 groups of 4 cities each?
   + In how many distinct ways can the company manager assign the cities to the 5 employees?
 
++ Show that
+  $
+    forall n in NN, binom(2 n, n) + binom(2 n, n - 1) = 1/2 binom(2 n + 2, n + 1)
+  $
 
 = Sequences
 
@@ -295,8 +388,8 @@
   - P2. At each intersection point, only two lines meet.
 
   Let $S_n$ be the number of regions of the plane defined by $n$ lines with the above properties:
-  - Find a recurrence equation for $S_n$.
-  - Solve this equation.
+  + Find a recurrence equation for $S_n$.
+  + Solve this equation.
 
 + Let us consider numerical strings of 10 digits formed with elements in the set ${0, 1, 2}$. How many of these strings are such that the sum of the 10 digits is an even number?
 
@@ -329,10 +422,10 @@
       return exp1(a,m) * exp1(a,n-m)
   ```
   Let $b_n$ be the number of multiplications needed to compute $a^n$:
-  - Compute $b_1$, $b_2$, $b_3$, and $b_4$.
-  - Find a recurrence equation for ${b_n}$.
-  - Solve this recurrence when $n$ is a power of 2.
-  - Prove that $b_n = n - 1$ for any $n in NN$.
+  + Compute $b_1$, $b_2$, $b_3$, and $b_4$.
+  + Find a recurrence equation for ${b_n}$.
+  + Solve this recurrence when $n$ is a power of 2.
+  + Prove that $b_n = n - 1$ for any $n in NN$.
 
 + Find the number of distinct integer solutions of the linear equation
   $ x_1 + x_2 + x_3 = 17 $
@@ -380,10 +473,10 @@
   + $G$ has 10 edges, 2 vertices of degree 4, and all other vertices have degree 3.
 
 + Let $K_n$ be the complete graph of $n$ vertices.
-  - Draw $K_1$, $K_2$, $K_3$, $K_4$, and $K_5$.
-  - Which is the degree of the vertices of $K_n$?
-  - How many edges does $K_n$ have?
-  - Prove that $K_n$ is a sub-graph of $K_m$ for all $n < m$.
+  + Draw $K_1$, $K_2$, $K_3$, $K_4$, and $K_5$.
+  + Which is the degree of the vertices of $K_n$?
+  + How many edges does $K_n$ have?
+  + Prove that $K_n$ is a sub-graph of $K_m$ for all $n < m$.
 
 + For which values of $n >= 3$ are the graphs $K_n$, $P_n$, $Q_n$, and $C_n$ bipartite?
 
@@ -470,11 +563,7 @@
   + We now define the order relation $prec.eq.curly$ on the quotient set $C$ as follows: $[A]_R prec.eq.curly [B]_R$ if and only if there exist graphs $G_1 = (V_4, E_1) in [A]_R$ and $G_2 = (V_4, E_2) in [B]_R$ such that $E_1 subset.eq E_2$. Find the Hasse diagram associated to the set $(C, prec.eq.curly)$. Is $(C, prec.eq.curly)$ a totally ordered set?
   + Let $Z subset C$ be the subset of $C$ containing the classes of equivalence that contain at least one representative with two edges. Compute $sup(Z)$ and $inf(Z)$.
 
-+ Show that the paraffins $C_n H_(2n+2)$ have tree-like molecules [Arthur Caley, 1857].
-
 + Prove that in a rooted tree such that all vertices that are not leaves have degree 3, then the tree has an even number of vertices.
-
-+ Prove that there is no planar and connected graph satisfying that each vertex has at least degree 8, and each face is bounded by at least 8 edges.
 
 + Let $G$ and $G'$ be two distinct connected graphs. $G$ is a plane graph with 10 vertices, such that it splits the plane into 3 regions. $G'$ is a 10-vertex graph with all vertices of degree at least 3. Are $G$ and $G'$ isomorphic?
 
@@ -489,10 +578,9 @@
 + How many trees does a forest of 62 vertices and 51 edges contain?
 
 + Let $X = {A, B, C}$. We define the simple graph $G = (V, E)$ in the following way: the set of vertices is given by the power set of $X$ ($V = cal(P)(X)$), and two vertices $R, S in V$ are adjacent if and only if $R subset S$ or $S subset R$.
-  - How many vertices and edges does $G$ contain?
-  - Determine the degree of each vertex in $V$. Is $G$ regular?
-  - Is $G$ planar?
-  - Is $G$ bipartite?
+  + How many vertices and edges does $G$ contain?
+  + Determine the degree of each vertex in $V$. Is $G$ regular?
+  + Is $G$ bipartite?
 
 + Show that if $G = (V, E)$ is a simple graph and
   $ |E| > binom(|V| - 1, 2), $
@@ -534,7 +622,7 @@
       0, 0, 1, 1, 0, 1, 0, 0;
     ).
   $
-  + Is it bipartite? Is it planar?
+  + Is it bipartite?
   + Find a spanning tree (if any).
 
 + Tell whether the following weighted graph has a spanning tree of weight equal or smaller than 12.
@@ -599,7 +687,7 @@
       ```dot
       graph {
         layout=sfdp
-        start=5
+        start=6
         splines=true
         edge [fontsize=10 labelfloat=true labeldistance=1]
         node[shape=circle margin=0 width=0.2]
@@ -673,7 +761,7 @@
     ),
   )
 
-+ A constructor is planning a new urban development formed by 9 family houses, and now he is designing the water supply. As he knows some graph theory, he defines a weighted graph $G = (V, E, omega)$, where the vertices $V = {a, b, c, d, e, f, g, h, i}$ correspond to the houses, two vertices are adjacent if the houses can be connected by a water pipe, and the weight of each edge is the cost (in thousands of euros) of placing the corresponding water pipe. The graph $G$ is given by
+  // + A constructor is planning a new urban development formed by 9 family houses, and now he is designing the water supply. As he knows some graph theory, he defines a weighted graph $G = (V, E, omega)$, where the vertices $V = {a, b, c, d, e, f, g, h, i}$ correspond to the houses, two vertices are adjacent if the houses can be connected by a water pipe, and the weight of each edge is the cost (in thousands of euros) of placing the corresponding water pipe. The graph $G$ is given by
   #figure(
     raw-render(
       ```dot
@@ -727,91 +815,8 @@
   )
   + Find a minimum-weight spanning tree for $G$.
   + Is $H$ bipartite? If yes, give the partition of $V$ into two disjoint sets that provides a proof for bipartiteness.
-  + Tell whether there are Euler tours/trails, and Hamilton cycles/paths.
-  + Find a graph with exactly the same degree sequence as $H$, but not isomorphic to $H$. Explain why it is not isomorphic to $H$.
-
-+ Tell whether there are Euler tours/trails, and Hamilton cycles/paths in the following graphs.
-  #figure(
-    raw-render(
-      ```dot
-      graph {
-        layout=neato
-        node[shape=circle margin=0 width=0.2]
-        0 -- 1;
-        0 -- 4;
-        0 -- 5;
-        1 -- 2;
-        2 -- 3;
-        3 -- 4;
-      }
-      ```,
-      width: 5cm,
-    ),
-  )
-  #figure(
-    raw-render(
-      ```dot
-      graph {
-        layout=neato
-        node[shape=circle margin=0 width=0.2]
-        a -- {b, d};
-        c -- {d, b};
-        g -- {f, h};
-        e -- {f, h};
-      }
-      ```,
-      width: 5cm,
-    ),
-  )
-  #figure(
-    raw-render(
-      ```dot
-      graph {
-        layout=neato
-        node[shape=circle margin=0 width=0.2]
-        0 -- {1, 4, 5};
-        2 -- {1, 7, 3};
-        8 -- {3, 7, 9};
-        6 -- {1, 5, 7}
-        4 -- {3, 9};
-        5 -- 9
-        }
-      ```,
-      width: 5cm,
-    ),
-  )
-
-+ Tell whether the following graph admits an Euler tour/trail, and find it (if any).
-  #figure(
-    raw-render(
-      ```dot
-      graph {
-        layout=neato
-        node[shape=circle margin=0 width=0.2]
-        e -- {a, b, d, f, h, i};
-        f -- {g, c, d, i, b};
-        g -- c;
-        d -- {h, a};
-        i -- h;
-      }
-      ```,
-      width: 5cm,
-    ),
-  )
 
 + In a film festival there are 6 films on the first day. Films 1, 3, and 5 are dramas; films 2, 4, and 6 are comedies; films 3 and 4 are indies, and films 5 and 6 are blockbusters. Each film lasts two hours. What is the minimum number of hours needed to show all films, in such a way that films of the same type do not overlap?
-
-+ Given a set of intervals in $RR$, we can construct a graph named _interval graph_ in the following way: each interval is a vertex of the graph, and two vertices are adjacent if and only if the corresponding intervals have a non-empty intersection.
-  + Compute the interval graph $G$ associated to the intervals:
-    $ {(1, 9), (7, 8), (0, 3), (4, 10), (2, 6), (5, 11)} $
-  + Tell whether this graph is bipartite, admits an Euler tour or a Hamilton cycle. In case there is an Euler tour/trail and/or a Hamilton cycle/path, find one example of each.
-
-+ Find examples of simple graphs $G$ that satisfy the following conditions:
-  - $G$ has 7 vertices, is Hamiltonian, and is Eulerian.
-  - $G$ has 8 vertices, is Hamiltonian and Eulerian, but there is at least one Hamilton cycle that does not coincide with any Euler tour.
-  - $G$ has 7 vertices, is Hamiltonian, is not Eulerian, and has no cut-edges.
-  - $G$ has 7 vertices, is not Hamiltonian, and is Eulerian.
-  - $G$ has 7 vertices, is Hamiltonian, is not Eulerian, and is bipartite.
 
 + Let $G = (V, E)$ be the graph defined by the following adjacency matrix:
   $
@@ -826,15 +831,14 @@
       0, 0, 1, 1, 0, 1, 0, 0;
     ).
   $
-  + Find its chromatic number using a graph-theoretic algorithm.
-  + Find a spanning tree of $G$ (if any).
-  + Does $G$ admit an Euler trail? Which is the minimum number of edges we should add to $G$ to make it an Eulerian graph?
+  Find a spanning tree of $G$ (if any).
 
 + Let $G_n = (V_n, E_n)$ with $n in NN$ be a graph family defined as follows:
   - Each vertex $v in V_n$ corresponds to a bit string of length $n$ with an even number of ones.
   - Two vertices $x, y in V_n$ are adjacent (${x, y} in E_n$) if and only if they differ exactly in two bits.
 
-  If $n$ is a fixed natural number, compute $|V_n|$ and $|E_n|$. Is $G_n$ a regular graph? If the answer is positive, then give the common degree; and if the answer is negative, then give the degree sequence. For which values of $n$ the graph $G_n$ is Eulerian?
+  + If $n$ is a fixed natural number, compute $|V_n|$ and $|E_n|$.
+  + Is $G_n$ a regular graph? If the answer is positive, then give the common degree; and if the answer is negative, then give the degree sequence.
 
 // 13.10
 + Prove using induction that the number of odd-degree vertices in any graph $G$ is an even number.

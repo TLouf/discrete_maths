@@ -36,11 +36,29 @@
   + False
   + False.
 
++
+  + True.
+  + False.
+  + True.
+  + True.
+  + True.
+  + False.
+
++ $A = {1}, B = {1, {1}}$
+
++ Suppose $A subset.eq B$, take $S subset.eq A in cal(P) (A)$, prove it is in $cal(P) (B)$, so prove $S subset.eq B$. Then suppose $cal(P) (A) subset.eq cal(P) (B)$, take $a in A$, prove it is in $B$.
+
 + Hint: use Venn diagrams or truth tables.
 
 +
   + $B$.
   + $B inter C$.
+
++
+  + $union_(i=0)^(+ oo) A_i = NN, inter_(i=0)^(+ oo) A_i = {0}$
+  + $union_(i=0)^(+ oo) A_i = ZZ, inter_(i=0)^(+ oo) A_i = ZZ^-$
+
++ The set of triples $(a, b, c)$, where $a$ is an airline and $b$ and $c$ are cities. It can thus represent all the possible combinations of air trips between European cities.
 
 +
   - $f$ is not injective nor surjective.
@@ -63,6 +81,16 @@
 
 = Relations
 
++
+  + Yes.
+  + Yes.
+  + No: not transitive (can have 4 different parents for 3 children).
+  + No: not transitive (same as above, basically).
+  + No: same.
+
++ Can be being from the same city, went to the same highschool, will get the same mark...
+
+
 + The quotient set is isomorphic to $op("Im")(f)$. #let rel-same-function-image = [Question *2.1*] //#el.elabel("lab") <rel-same-function-image>
 
 +
@@ -71,7 +99,7 @@
 
 +
   + Use #rel-same-function-image.
-  + $NN times NN\/R = {[(N, 1)]_R : N >= 1}$, and it is isomorphic to $NN$. $NN$ is obviously isomorphic to $NN \\ {1}$: use the bijective function $f : NN -> NN \\ {1}$ such that $f(n) = n + 1$.
+  + $NN times NN\/R = {[(N, 1)]_R : N >= 1}$, and it is isomorphic to $NN$. $NN$ is obviously isomorphic to $NN without {1}$: use the bijective function $f : NN -> NN without {1}$ such that $f(n) = n + 1$.
 
 +
   + Use #rel-same-function-image.
@@ -80,7 +108,7 @@
 
 +
   + Use #rel-same-function-image.
-  + $RR^2\/R = {[(K, 1)]_R : K in RR}$.
+  + $RR times (RR without {0}) \/ R = {[(K, 1)]_R : K in RR}$.
 
 + You have to show the implications in both directions:
   + If $R$ is an equivalence relation, then $R$ is circular and reflexive.
@@ -125,7 +153,14 @@
     $ RR^2\/R = {[(alpha, 0)]_R : alpha >= 0}, $
     therefore, such set is isomorphic to $RR^+ = {x in RR : x >= 0}$.
 
++
+  + ${(a,a), (b,b), (a,b), (b,a)}$ for ${a,b}$, ${(c,c), (d,d), (c,d), (d,c)}$ for ${c,d}$, ...
+  + ${(a,a)}$ for ${a}$, ${(b,b)}$ for ${b}$, ...
 
++
+  + No (first overlaps with other two).
+  + Yes.
+  + No (misses $(0,0)$).
 
 +
   + $op("Dom")(R) = op("Im")(R) = A$.
@@ -141,7 +176,7 @@
       1
       ```
     ]
-  + $1 prec.eq 2 prec.eq 5 prec.eq 3 prec.eq 4$.
+// + $1 prec.eq 2 prec.eq 5 prec.eq 3 prec.eq 4$.
 
 +
   + Set of maximal elements = ${(1, 8), (1, 5), (0, 8), (2, 8), (2, 5)}$.
@@ -186,8 +221,15 @@
 
 + Once the induction hypothesis is used, the final result followed by using the inequalities $3 > 2 > 1$.
 
++ The general formula for the product of odd numbers is $1 dot 3 dot 5 dots.c (2n - 1) = (2n!)/(2^n dot n!)$.
+
 
 = Elementary number theory
+
++
+  + 7:00
+  + 8:00
+  + 10:00
 
 + $gcd(92, 84) = 4 = 11 dot 84 - 10 dot 92$.
 
@@ -199,11 +241,13 @@
   + $576$.
   + $0$.
 
-+ Use the fundamental theorem of arithmetic.
++ Prove it by contradiction using the fundamental theorem of arithmetic.
 
 + You only need to prove that $p divides.not 101$ for $p = 2, 3, 5, 7$. Why?
 
 + As any integer $a$ can be written as $a = 6q + r$ with $r in {0, 1, 2, 3, 4, 5}$, it suffices to prove the statement for each possible remainder $r$.
+
++ 55.
 
 +
   + $x equiv 6 (mod 13)$.
@@ -212,6 +256,8 @@
   + There are three solutions: $x equiv 3 (mod 15)$, $x equiv 8 (mod 15)$, and $x equiv 13 (mod 15)$.
 
 + Hint: First prove that $p | (a^25 - a)$ for $p = 2, 3, 5$.
+
++ Suppose that $x^2 equiv 1 (mod p)$. Then $p$ divides $x^2 − 1 = (x + 1)(x − 1)$. So $p ∣ x + 1$ or $p ∣ x − 1$, so $x equiv −1 (mod p)$ or $x equiv 1 (mod p)$.
 
 + It is an equivalence relation (use #rel-same-function-image), and the equivalence classes are $[6]_R = {6, 12, 18}$, $[10]_R = {10, 40}$, and $[21]_R = {21, 441, 1323}$.
 
@@ -227,6 +273,12 @@
 = Counting
 
 +
+  + Relation is subset of $A times A$ of cardinality $n^2$, so $2^(n^2)$.
+  + $2^(n^2 - n)$ (like removing diagonal elements of matrix).
+  + $2^(n (n+1) / 2)$. See as independent binary choices to include ordered pair in relation or not. Two kinds of choices: for diagonal elements, have $2^n$ valid choices. For off-diagonal: $n (n-1) / 2$ unordered pairs: for each, can either include both $(a,b)$ and $(b,a)$ only, or neither, because of symmetry, which leads to $2^(n (n-1) / 2)$ valid choices. Since choices are independent, multiply the two to get the result.
+  + $2^n dot 3^(n (n-1) / 2)$. Here again two cases: diagonal: $2^n$ choices and off-diagonal: $n (n-1) / 2$ unordered pairs: for each, can include $(a,b)$ only, $(b,a)$ only, or neither, because of antisymmetry, which leads to $3^(n (n-1) / 2)$ possible choices.
+
++
   1. $2^n$.
   2. $2^(n-2)$ with $n >= 2$.
   3. $sum_(k=1)^n 2^k = 2^(n+1) - 2$.
@@ -236,26 +288,26 @@
   7. $2^(ceil(n\/2))$.
 
 +
-  1. $90 720$.
-  2. $50 400$.
-  3. $80 640$.
-  4. $16 800$.
-  5. $33 600$.
-  6. $8 400$.
+  1. $P(9,5) dot 6 = 90 720$.
+  2. $P(8,4) dot 6 dot 5 = 50 400$.
+  3. $8^2 dot 7 dot 6^2 dot 5 = 80 640$.
+  4. $8 dot 7 dot 6 dot 5^2 dot 2 = 16 800$.
+  5. $8 dot 7 dot 6 dot 5^2 dot 4 = 33 600$.
+  6. $7 dot 6^2 dot 5^2 dot 4 = 8 400$.
+
++ Not considering leap years, it is $1 - 365! / ((365 - 50)! dot 365^50) approx 0.97$.
 
 + $3^5 - 3 times 2^5 + 3 = 150$.
 
-+ $120$.
-
-+ If we assume that the spaces between two consecutive flags are immaterial, the results are: 1) 1 464. 2) 1 884.
++ If we assume that the spaces between two consecutive flags are immaterial, the results are:
+  + $1464$.
+  + $1884$.
 
 + $binom(8, 3)$.
 
 +
   + $360$.
   + $120$.
-
-// + Hint: Use the pigeon-hole principle.
 
 +
   1. $10 times 9 times 8 times 7$.
@@ -264,6 +316,14 @@
   4. $10^4$.
 
 + $binom(11, 6)$.
+
++
+  + $5148 (∼ 0.2%)$.
+  + $48 (∼ 0.002%)$.
+  + $624 (∼ 0.02%)$.
+  + $24 (∼ 0.0009%)$.
+  + $288 (∼ 0.01%)$.
+  + $3744 (∼ 0.1%)$.
 
 + $binom(a+1, k+1) binom(b-1, k)$.
 
@@ -286,6 +346,9 @@
 +
   1. $frac(20!, (4!)^5 5!)$.
   2. $frac(20!, (4!)^5)$.
+
++ $binom(2 n, n + 1) + binom(2 n, n) = binom(2 n + 1, n + 1) = 1/2 (binom(2 n + 1, n + 1) + binom(2 n + 1, n + 1)) = 1/2 (binom(2 n + 1, n + 1) + binom(2 n + 1, n)) = 1/2 binom(2 n + 2, n+1)$
+
 
 = Sequences
 
@@ -562,8 +625,6 @@
   + $sup(Z) = C_3$ and $inf(Z) = C_1$.
 
 
-+ Hint: Note that paraffins can be represented as simple connected graphs with two types of vertices: carbon atoms (of degree 4) and hydrogen atoms (of degree 1).
-
 + Hint: Use that $V = V_1 union V_3$ where $V_1$ (resp. $V_3$) is the set of vertices of degree 1 (resp. 3).
 
 + Hint: Use the hand-shake lemma and Euler's theorem.
@@ -657,79 +718,11 @@
 
 + 6 hours.
 
-+
-  1. The interval graph is the following:
-    #figure(
-      raw-render(
-        ```dot
-        graph {
-          layout=neato
-          node[shape=circle margin=0 width=0.2]
-          a -- {c, e, f, d, b};
-          f -- {b, d, e};
-          e -- {c, d};
-          b -- d;
-          }
-        ```,
-        width: 5cm,
-      ),
-    )
-  2. It is not bipartite/Eulerian. It is a Hamiltonian graph.
++ There is no such spanning tree.
 
 +
-  - $C_7$.
-  - One possible example is:
-    #figure(
-      raw-render(
-        ```dot
-        graph {
-          layout=neato
-          node[shape=point margin=0]
-          zx -- {zw, zy, yx, zz};
-          yy -- {yz, yw, zy, yx};
-          yw -- {yx, zw, yz};
-          zz -- {zw, zy, yz};
-          zw -- zy;
-          yz -- yx;
-          }
-        ```,
-        width: 5cm,
-      ),
-    )
-  - $W_7$.
-  - One possible example is:
-    #figure(
-      raw-render(
-        ```dot
-        graph {
-          layout=neato
-          node[shape=point margin=0]
-          c -- {a, b, d, e};
-          a -- b;
-          f -- {d, g};
-          e -- g
-          }
-        ```,
-        width: 5cm,
-      ),
-    )
-  - There is no graph satisfying these conditions.
-
-+
-  1. $chi(G) = 3$.
-  2. There is no such spanning tree.
-  3. There is no Euler trail. I need to add at least three edges so that $G$ becomes Eulerian.
-
-+
-  - $|V_n| = 2^(n-1)$.
-  - $G_n$ is regular with degree $d = binom(n, 2)$.
-  - $|E_n| = 2^(n-2) binom(n, 2)$.
-  - The values of $n$ for which $G_n$ is Eulerian are:
-    $
-      n = cases(
-        4p "con" p in NN\,,
-        4p + 1 "con" p in NN\,
-      )
-    $
+  + $|V_n| = 2^(n-1)$.
+  + $G_n$ is regular with degree $d = binom(n, 2)$.
+  + $|E_n| = 2^(n-2) binom(n, 2)$.
 
 + The base case corresponds to the trivial graph of $n$ vertices $G = (V, emptyset)$ (with $|V| = n >= 1$). Then, you apply induction on the number of edges $|E|$.
