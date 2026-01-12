@@ -1,5 +1,8 @@
 #import "base_template.typ": *
 
+#let slidebreak() = {}
+#let pause() = {}
+
 #let notes(doc) = {
   show: base
 
