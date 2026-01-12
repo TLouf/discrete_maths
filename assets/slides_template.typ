@@ -30,6 +30,8 @@
   }
   set math.equation(numbering: none)
 
+  show table: set par(leading: 0.5em)
+
   show: simple-theme.with(
     aspect-ratio: "16-9",
     config-common(
