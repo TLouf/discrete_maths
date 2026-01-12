@@ -11,7 +11,7 @@
 
 === Basic definitions
 
-#definition(title: [Directed graphs])[
+#definition(title: [Directed graphs], slide-break: false)[
   A *directed graph* is an ordered pair $G = (V, E)$ where
   - $V$ is a nonempty set of *vertices*, also called nodes.
   // TODO: only really a relation if directed graph! so start from directed? which is probably the most intuitive to understand?
@@ -48,6 +48,8 @@ For instance:
   If $e = {u, v} in E$, we say that $e$ is *incident* on $u$ and $v$, or equivalently, that the two vertices are *adjacent* or *neighbours*.
 ]
 
+#slidebreak()
+
 #remark[
   The edge set of a directed graph is defined as
   $
@@ -63,6 +65,8 @@ For instance:
 #notation[
   In an undirected graph $G=(V,E)$, the set of neighbours of $v in V$, also called its *neighbourhood*, is denoted $cal(N) (v)$.
 ]
+
+#slidebreak()
 
 The representation of undirected graphs then simplifies the edges by removing the arrows indicating direction:
 #figure(
@@ -87,9 +91,11 @@ The representation of undirected graphs then simplifies the edges by removing th
 
 In the following, we'll use the word *"graph"* to refer to either a directed or undirected graph.
 
+#slidebreak()
+
 Again in a similar fashion to relations, graphs can be represented by an adjacency matrix.
 
-#definition(title: [Adjacency matrix])[
+#definition(title: [Adjacency matrix], slide-break: false)[
   Let's consider a graph $G = (V, E)$, and the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set $V$.
   The *adjacency matrix* of $G$ associated to that ordering is the $|V| times |V|$ matrix whose entries $A_(i j)$ count the number of edges between $v_i$ and $v_j$.
 ] <def-adj-mat>
@@ -106,9 +112,11 @@ Again in a similar fashion to relations, graphs can be represented by an adjacen
 
 An interesting particular case of graphs is the one that represents relationships between two separate sets of entities.
 
-#definition(title: [Bipartite graphs])[
+#definition(title: [Bipartite graphs], slide-break: false)[
   A graph $G = (V, E)$ is *bipartite* if its vertex set $V$ can be partitioned into two disjoint subsets $V_1$ and $V_2$ such that every edge in the graph connects a vertex in $V_1$ with a vertex in $V_2$.
 ]
+
+#slidebreak()
 
 #remark[
   A directed bipartite graph can actually represent a binary relations between two sets.
@@ -148,7 +156,7 @@ Multigraphs are actually very rare in practice, as they can often be equivalentl
 
 Most of the time in this course, we will ignore these generalisations and only consider simple graphs.
 
-#definition(title: [Simple graphs])[
+#definition(title: [Simple graphs], slide-break: false)[
   A simple graph is an unweighted graph without multi-edges or self-loops.
 ]
 
@@ -160,12 +168,14 @@ Most of the time in this course, we will ignore these generalisations and only c
 === Isomorphism of graphs
 
 The same graph can be represented in a number of ways: graphically the vertices are placed arbitrarily on a plane, and in an adjacency matrix, the ordering of vertices is also arbitrary.
-Also, if the vertex labels do not carry any particular meaning ---i.e. they are "dummy" labels---, the labels too are arbitrary.
+Also, if the vertex labels do not carry any particular meaning --i.e. they are "dummy" labels--, the labels too are arbitrary.
 It is thus important to be able to recognize the same graph, however it was represented.
 
-#definition[
+#definition(title: [Graph isomorphism])[
   The simple graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ are *isomorphic* if and only if there exist a bijective function $f : V_1 -> V_2$ with the following property: $a$ and $b$ are adjacent in $G_1$ if and only if $f(a)$ and $f(b)$ are adjacent in $G_2$. The function $f$ is called an *isomorphism*.
 ]
+
+#slidebreak()
 
 Some simple tests based on aggregate measures can be used to discard isomorphism between two graphs.
 
@@ -174,6 +184,8 @@ Some simple tests based on aggregate measures can be used to discard isomorphism
   1. If $|V_1| != |V_2|$, then $G_1$ and $G_2$ are not isomorphic.
   2. If $|E_1| != |E_2|$, then $G_1$ and $G_2$ are not isomorphic.
 ]
+
+#slidebreak()
 
 #remark[
   $G_1$ and $G_2$ are isomorphic if there exists an invertible linear map (basically a permutation of the "basis vectors") $pi : V_1 -> V_2$ such that $A_2 = P^(-1) dot A_1 dot P$. There are $|V_1|! = |V_2|!$ maps of this type, hence the difficulty of testing for isomorphism if two graphs share many similarities at the aggregate level!
@@ -186,11 +198,13 @@ That is why traversing graphs is crucial, as it can provide us with central info
 
 === Definitions
 
-#definition[
+#definition(title: [Walks on graphs], slide-break: false)[
   A *walk* on a graph $G = (V, E)$ is an alternating sequence of vertices and edges of the form $v_0, e_1, v_1, e_2, v_2, ..., v_(l-1), e_l, v_l$, such that $e_k$ is from $v_(k-1)$ to $v_(k)$ for all $k$.
   It is said to be *closed* if it ends where it starts, so if $v_1 = v_l$, and open otherwise.
   The *length* of the walk is equal to the number of edges in the walk $l$, and is at least one.
 ] <def-walk>
+
+#slidebreak()
 
 #remark[
   - In an undirected graph, the condition on each edge is $e_k = {v_(k-1), v_k}$, meaning that edges can be traversed in both directions.
@@ -202,7 +216,7 @@ That is why traversing graphs is crucial, as it can provide us with central info
   A *trail* is a walk with no repeated edge.
   A closed trail is called a *circuit*.
 
-  A *path* is a trail with no repeated vertex, with the potential exception of the first which may also appear as the last one. A *cycle* is a closed path.
+  A *path* is a trail with no repeated vertex, with the potential exception of the first which may also appear as the last in the sequence. A *cycle* is a closed path.
 ]
 
 #remark[
@@ -215,7 +229,7 @@ That is why traversing graphs is crucial, as it can provide us with central info
 
 These definitions allow us to give a basic yet fundamental characteristic of a graph, namely, it connectivity.
 
-#definition[
+#definition(title: [Graph connectedness], slide-break: false)[
   An undirected graph is said to be *connected* if every pair of vertices is connected by a path.
 ]
 
@@ -225,6 +239,8 @@ These definitions allow us to give a basic yet fundamental characteristic of a g
   - *weakly connected* if for every $u,v in V$, there is a path between $u$ and $v$ in the underlying undirected graph.
   A strongly or weakly disconnected graph can then be partitioned into strongly and weakly connected components.
 ]
+
+#slidebreak()
 
 #question-box[
   The connectivity only tells us whether a graph is connected, but not how strongly it is.
@@ -280,18 +296,21 @@ Counting the minimum number of cut edges/vertices necessary to create $k$ compon
 
 === Vertices connectivity
 
-How well two vertices are connected can then be measured by counting the number of walks which connect them.
+When looking at individual vertices instead, their connectivity can be measured by counting the number of walks which connect them.
 
 #theorem[
-  Let $G$ be a graph with adjacency matrix $A$ with respect to the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set. The number of distinct oriented walks of length $n >= 1$ that start at $v_i$ and end at $v_j$ is given by the entry $(i, j)$ of the matrix $A^n$.
-]
+  Let $G$ be a graph with adjacency matrix $A$ with respect to the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set.
+  The number of distinct oriented walks of length $n >= 1$ that start at $v_i$ and end at $v_j$ is given by the entry $(i, j)$ of the matrix $A^n$.
+] <thm-walk-count-adj-power>
 // beautiful proof by induction p 723
+
+#slidebreak()
 
 // TODO: reconcile ordering of degree definition
 #corollary[
   Let $G$ be a simple graph with adjacency matrix $A$, then
   - $A^2_(i i) = k(i)$ for every $1 <= i <= |V|$.
-  - $"tr" A^2 = 2|E|$.
+  - $"tr" A^2 = 2 |E|$.
   - $"tr" A^3 = 6 times$ number of unoriented triangles in $G$.
 ]
 
@@ -307,8 +326,8 @@ A very common problem related to paths is to find the shortest way to go from on
 But first, what does "short" mean here?
 Let's generalise the notion of path length to weighted graphs.
 
-#definition[
-  Given a simple, undirected and weighted graph $G = (V, E, omega)$ with positive weights, the length $L(P)$ of a path $P = v_0, e_1 v_1, e_2, v_2 dots, v_(l-1), e_l, v_l$ is the sum of the weights of the edges that it traverses:
+#definition(title: [Path length])[
+  Given a simple, undirected and weighted graph $G = (V, E, omega)$ with positive weights, the length $L(P)$ of a path $P = v_0, e_1, v_1, e_2, v_2 dots, v_(l-1), e_l, v_l$ is the sum of the weights of the edges that it traverses:
   $
     L(P) = sum_(i=1)^l w(e_i).
   $
@@ -331,9 +350,12 @@ This definition allows to recover the one of walk length for unweighted graphs (
   In an unweighted graph, how can you get the shortest path length using the adjacency matrix?
 ]
 
+#slidebreak()
+
 If the path is long, this gets very costly, though.
 Also, if the graph is weighted, the shortest path in terms of number of traversed edges is not necessarily the shortest path in terms of edge weights.
 That's why we need another method to compute shortest paths, such as Dijkstra's algorithm.
+
 The basic idea of the algorithm is to iteratively explore the graph from the point of view of the starting vertex $s$.
 Starting from $s$, in each step we find its next closest vertex, until we've reached $t$.
 Crucially though, since shortcuts can sometimes appear, we need to keep track of known or estimated distances throughout the exploration.
@@ -371,6 +393,8 @@ Let's proceed on the following example.
 ]
 // do iteratively with a table
 
+#slidebreak()
+
 #algorithm(
   pseudocode-list(numbered-title: [Dijkstra's], booktabs: true)[
     + *procedure* Dijkstra($G=(V, E, omega)$ with $V={s=v_0, v_1, dots, v_n=t}$)
@@ -391,6 +415,8 @@ Let's proceed on the following example.
   ],
 ) <alg-dijkstra>
 
+#slidebreak()
+
 #remark[
   - If at @lalg-next-closest there are several options, we can choose any of them.
   - The sequence of vertices composing the path can be obtained by keeping track of the current best path, or simply of the best predecessor, whenever we reassign $d(a, v)$ in @lalg-dist-update.
@@ -406,7 +432,7 @@ Let's proceed on the following example.
 
 A vertex' importance can first be quantified by its degree.
 
-#definition[
+#definition(title: [Vertex in/out-degree], slide-break: false)[
   Let $G$ be a directed graph $G = (V, E)$, and let $v in V$ be a vertex of $G$.
   The *in-degree* $k^(("in")) (v)$ of $v$ is the number of edges whose head is $v$, that is which end at $v$.
   The *out-degree* $k^(("out")) (v)$ of $v$ is the number of edges whose tail is $v$, that is which start from $v$.
@@ -451,7 +477,7 @@ A vertex' importance can first be quantified by its degree.
 
 
 #proposition[
-  Let's consider a directed graph $G$ and its adjacency matrix $A$ associated to the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set $V$.
+  Let's consider a directed graph $G$ and its adjacency matrix $A$ associated to the ordering $v_1, v_2, ..., v_(abs(V))$ of its vertex set $V$.
   Then:
   $
     forall i in [| 1, abs(V) |], cases(
@@ -470,7 +496,7 @@ It then follows that summing over degrees amounts to summing all entries of the 
 
 The definition of degree follows naturally for undirected graphs, by considering that two directed edges $(u,v)$ and $(v,u)$ correspond to a single undirected edge ${u,v}$.
 
-#definition[
+#definition(title: [Vertex degree])[
   The *degree* of a vertex $v in V$ in an undirected graph $G = (V, E)$ is the number of edges incident with it, except that a loop contributes twice to the degree of that vertex. The degree of a vertex $v$ is denoted by $k(v)$.
 ]
 
@@ -482,12 +508,16 @@ The definition of degree follows naturally for undirected graphs, by considering
   $
 ] <prop-undir-deg-adj>
 
+#slidebreak()
+
 We can then get a similar result as @prop-handshaking-dir, which is known as the handshaking theorem.
 
-#theorem(title: "The handshaking theorem")[
+#theorem(title: "The handshaking theorem", slide-break: false)[
   In any undirected graph $G = (V, E)$, we have that
   $ sum_(v in V) k(v) = 2|E| $
 ]
+
+#slidebreak()
 
 #remark[
   This also holds for undirected graphs with loops, thanks to the convention we took to consider a self-loop as incident twice to its vertex.
@@ -505,37 +535,49 @@ We can then get a similar result as @prop-handshaking-dir, which is known as the
   For any undirected graph with an odd number of vertices, there is an odd number of vertices of even degree.
 ]
 
+#slidebreak()
+
 The notion of degree also allows us to define a very special kind of graph.
 
-#definition(title: [Regular graph])[
+#definition(title: [Regular graph], slide-break: false)[
   A *regular graph* is an undirected graph whose vertices all have the same degree.
 ]
 
+#slidebreak()
+
 The notion of degree also gets naturally generalised to the case of weighted graphs.
 
-#definition[
+#definition(title: [Vertex in/out-strength], slide-break: false)[
   Let $G$ be a weighted directed graph $G = (V, E, omega)$, and let $v in V$ be a vertex of $G$.
   The *in-strength* $s^(("in")) (v)$ of $v$ is the sum of the weights of edges whose head is $v$.
   The *out-strength* $s^(("out")) (v)$ of $v$ is the sum of the weights of edges whose tail is $v$.
 ]
 
-#definition[
+#definition(title: [Vertex strength])[
   Let $G$ be a weighted undirected graph $G = (V, E, omega)$, and let $v in V$ be a vertex of $G$.
   The *strength* $s (v)$ of $v$ is the sum of the weights of edges adjacent to $v$, except that a loop contributes its weight twice.
 ]
 
 @prop-dir-deg-adj then also holds for strengths in weighted directed graphs, and @prop-undir-deg-adj for those in weighted undirected ones.
 
+#slidebreak()
+
 These measures, degree and strength, are very local in nature, and thus may not represent the importance of a vertex in the context of the whole graph.
 
 === Eigenvector centrality
 
 A first way to provide more global information to quantify a vertex' importance is to consider that a vertex should be considered more important not only the more neighbours it has, but also the more important these neighbours are.
+
+#slidebreak()
+
 That is how we define the eigenvector centrality $x(u)$ of a vertex $u$ in an undirected graph: it's proportional to the sum of the centralities of its neighbours:
 $
   x(u) = c^(-1) sum_(v in cal(N) (u)) x(v),
 $
 where $c in RR^+$ is a constant.
+
+#slidebreak()
+
 Rewriting this equality for every vertex, and involving the adjacency matrix $A$ of the graph, we get
 $
   x = c^(-1) A x <=> A x = c x,
@@ -547,6 +589,8 @@ And from the Perron-Frobenius theorem from linear algebra, we know that since $A
   Given a simple undirected graph represented by an adjacency matrix $A$, the eigenvector centrality of vertex $i$ is the $i^"th"$ element of one of $A$'s leading eigenvectors.
 ]
 
+#slidebreak()
+
 #remark[
   - The point of centralities is to compare vertices, so the same eigenvector should be considered for all nodes!
   - To generalise to directed networks, some small tweaks are needed: see Sections 7.1.2-3 in Newman.
@@ -557,7 +601,7 @@ And from the Perron-Frobenius theorem from linear algebra, we know that since $A
 
 A second way to account for the global graph context to quantify a vertex' centrality is to use shortest paths.
 
-#definition(title: [Vertex betweenness: simple])[
+#definition(title: [Vertex betweenness: simple], slide-break: false)[
   The betweenness centrality of a vertex is the number of shortest paths between pairs of other vertices which pass through it.
 ]
 
@@ -573,9 +617,11 @@ However, as mentioned above, there may be more than one shortest path between a 
 
 A strength of betweenness is that it not only characterises the importance of vertices, but of edges too!
 
-#definition(title: [Edge betweenness])[
+#definition(title: [Edge betweenness], slide-break: false)[
   The betweenness centrality of an edge is the number of shortest paths passing through it, where we consider paths between all connected vertex pairs, weighting multiple shortest paths appropriately.
 ]
+
+#slidebreak()
 
 #remark[
   This edge centrality is linked to the #link("https://smg.media.mit.edu/library/Granovetter.WeakTies.pdf")["strength of weak ties" theory formulated by the sociologist Mark Granovetter], which suggests that weak social relationships are central for the diffusion of information in a network (in very rough terms).
@@ -586,12 +632,16 @@ A strength of betweenness is that it not only characterises the importance of ve
 The size of a graph can be simply considered to be its number of vertices and edges, but this gives little information.
 Indeed, it does not say how far away vertices are from each other in the graph.
 For that, we can look into the lengths of shortest paths, and for instance compute the average shortest path length.
+
+#slidebreak()
+
 Alternatively, we can consider its longest shortest path.
 
-
-#definition(title: [Graph diameter])[
+#definition(title: [Graph diameter], slide-break: false)[
   The diameter of a graph is the length of its longest shortest path, or in other words, the distance between its farthest vertices, in terms of shortest path length.
 ]
+
+#slidebreak()
 
 #remark[
   The graph diameter is what's behind the idea of the "six degrees of separation": the fact that if you build the graph of social connections between people, its diameter is equal to 6 (or at least, in a famous experiment made by Stanley Milgram, for more see #link("https://www.youtube.com/watch?v=CYlon2tvywA")[this video]).
@@ -616,6 +666,8 @@ A complementary, easier way to quantify that is to count how many edges the grap
   The density can be thought of as the probability that two vertices picked from the graph uniformly at random are connected by an edge.
 ]
 
+#slidebreak()
+
 #proposition[
   For simple undirected graphs,
   $
@@ -631,13 +683,17 @@ A tree is a special kind of graph which is useful in many applications, especial
 
 === Definitions
 
-#definition(title: [Tree])[
+#definition(title: [Tree], slide-break: false)[
   A *tree* is a simple connected and undirected graph with no cycles.
   A *forest* is a simple undirected graph with no cycles. Each connected component of a forest is a tree.
 ]
 
+#slidebreak()
+
 The natural way to represent a tree is to pick one of its vertices as its *root*, and place it at its top, with a branching structure going down.
 The vertices at the bottom are then called *leaves*, as they are the extremities of the tree represented thus.
+
+#slidebreak()
 
 #example[
   Here is how the same tree can be represented when non-rooted (lefft) and when rooted on $1$ (right).
@@ -690,6 +746,8 @@ The vertices at the bottom are then called *leaves*, as they are the extremities
   )
 ]
 
+#slidebreak()
+
 #example[
   Computer file systems are organized as trees with a natural root called the root directory `/`.
   #figure(
@@ -723,19 +781,23 @@ The vertices at the bottom are then called *leaves*, as they are the extremities
   What do leaves and non-leave vertices correspond to in this case?
 ]
 
+#slidebreak()
+
 The most important property of trees follows.
 
-#theorem[
+#theorem(slide-break: false)[
   A graph $G = (V, E)$ is a tree if and only if there exists a unique path between any pair of vertices.
 ]
 
 It comes naturally from the fact that if we add a second path between any pair of vertices of a tree, we create a cycle.
-It is central because it means many problems very simple on trees, notably those related to shortest paths.
+It is central because it means many problems are very simple on trees, notably those related to shortest paths.
 
 #theorem[
   1. The simple graph $G$ is a tree if and only if it is connected and, if we remove any edge, we obtain a disconnected graph.
   2. The simple graph $G$ is a tree if and only if it does not contain any cycles and, if we add any edge, we create a cycle.
 ]
+
+#slidebreak()
 
 A tree can therefore only be grown by adding a vertex and an edge connecting an existing vertex to this new one.
 More specifically, to grow a tree:
@@ -766,20 +828,28 @@ If we suppose a connected graph with $n$ vertices and $n-1$ edges is not a tree,
 
 === Spanning trees
 
-#definition(title: [Spanning tree])[
+#definition(title: [Spanning tree], slide-break: false)[
   A *spanning tree* of a connected graph $G$ is a subgraph of $G$ that is a tree containing all vertices of $G$.
 ]
+
+#slidebreak()
 
 The most basic way to build a spanning tree is to remove edges from a graph to destroy its cycles, without removing vertices.
 This idea is the basis on which we can prove the following.
 
-#theorem[
+#theorem(slide-break: false)[
   A simple graph is connected if and only if it has a spanning tree.
 ]
 
+#slidebreak()
+
 Identifying cycles can be computationally hard, hence the need for other algorithms, such as breadth-first search.
-The idea of the algorithm is to explore the graph iteratively, starting from a root vertex, and at each step considering all the neighbours of the vertices added to the tree in the previous step.
+The idea of the algorithm is to explore the graph iteratively, starting from a root vertex
+At each step, we consider all the neighbours of the vertices added to the tree in the previous step.
 A neighbour and its associated edge are then added to the spanning tree only if the vertex is not already present.
+
+#slidebreak()
+
 The reason it's called breadth-first can be directly understood from the figure below: at each step shown in a distinct shade of grey, we add all vertices of a given level to the tree, thus obtaining its full "breadth" at this level.
 
 #figure(
@@ -873,9 +943,13 @@ It can be formally written as follows.
   ],
 )
 
+#slidebreak()
+
 #remark[
   We already saw a variant of breadth-first search: Dijkstra's algorithm (@alg-dijkstra)!
 ]
+
+#slidebreak()
 
 We can also produce a spanning tree of a simple graph by the use of depth-first search.
 The idea here is to form the tree by forming the longest paths possible at each step.
@@ -883,6 +957,9 @@ A first path starting from an arbitrary root is formed, until no more vertices c
 The vertices and edges composing this path are added to the tree.
 We then backtrack through the path until we find a vertex from which we can start a second path.
 The same procedure as before is repeated, and the backtracking as well until all vertices were added to the tree.
+
+#slidebreak()
+
 We show on the figure below the tree resulting from a depth-first search carried out on the same graph as above.
 On the right-hand side vertex labels indicate the order in which they were added.
 The reason it's called depth-first can be directly understood from this figure: the tree is formed by forming branches which are as deep as possible, given the choices made during path formation.
@@ -960,6 +1037,8 @@ The reason it's called depth-first can be directly understood from this figure: 
   ],
 )
 
+#slidebreak()
+
 // TODO: show cut vertex application?
 Both algorithms can be used as the basis for algorithms that solve many different problems.
 For example, they can be used to find paths and circuits in a graph, to determine the connected components of a graph, or to find the cut vertices of a connected graph.
@@ -970,7 +1049,7 @@ For example, they can be used to find paths and circuits in a graph, to determin
 A graph may admit many spanning trees, all with the same number of edges according to @thm-tree-nr-edges, so a priori equivalent.
 However, for weighted graphs, some might be more optimal, in a certain sense.
 
-#definition[
+#definition(slide-break: false)[
   A *minimum-weight spanning tree* of a connected weighted graph $G = (V, E, omega)$ is a spanning tree $T = (V, A)$ of $G$ such that $omega(A) = sum_(e in A) omega(e)$ takes the minimum possible value.
 ]
 
@@ -988,11 +1067,15 @@ Thus, if the weights encode some form of cost to traverse edges, as in the short
   There is no guarantee that selecting the best option at each step, so the one that's best _locally_, leads to a _globally_ optimal solution in the end.
 ]
 
+#slidebreak()
+
 The two algorithms we will present below are greedy, but actually lead to an optimal solution!
 
 The first is Prim's algorithm: it starts by adding any edge with smallest weight to the spanning tree.
 It then successively add edges of minimum weight that are incident to a vertex already in the tree, all the while avoiding to form cycles.
 It can stop once the tree is spanning, that is, once it has $abs(V)-1$ edges, following @thm-tree-nr-edges.
+
+#slidebreak()
 
 #algorithm(
   pseudocode-list(numbered-title: [Prim's algorithm], booktabs: true)[
@@ -1007,14 +1090,19 @@ It can stop once the tree is spanning, that is, once it has $abs(V)-1$ edges, fo
 
 But an #link("https://upload.wikimedia.org/wikipedia/commons/9/9b/PrimAlgDemo.gif")[image] is worth a thousand words.
 
+#slidebreak()
 
 #theorem[
   Given a connected weighted graph $G = (V, E, omega)$, Prim's algorithm produces a minimum-weight spanning tree of $G$.
 ]
 
+#slidebreak()
+
 Kruskal's algorithm, on the other hand, starts with a tree comprising all vertices.
 It then iterates through the list of edges sorted by weight, and adds it to the tree if it does not form a cycle.
 It stops when $abs(V)-1$ edges have been added.
+
+#slidebreak()
 
 #algorithm(
   pseudocode-list(numbered-title: [Kruskal's algorithm], booktabs: true)[
@@ -1034,6 +1122,8 @@ Again, an #link("https://upload.wikimedia.org/wikipedia/commons/b/bb/KruskalDemo
 #theorem[
   Given a connected weighted graph $G = (V, E, omega)$, Kruskal's algorithm produces a minimum-weight spanning tree of $G$.
 ]
+
+#slidebreak()
 
 #remark[
   In both cases,

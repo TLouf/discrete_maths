@@ -11,17 +11,21 @@
 
 Sequences are basically indexed collections of elements, or, to be more formal:
 
-#definition(title: [Sequence])[
+#definition(title: [Sequence], slide-break: false)[
   A sequence is a function from a set of indices $I subset.eq NN$ to a set $A$ of elements at each index.
   The image in $A$ of the integer $n in I$ is denoted $a_n$, and is called the $n^"th"$ term of the sequence.
   The sequence can be represented as $( a_n )_(n in I)$.
 ]
+
+#slidebreak()
 
 #remark[
   There are many ways to represent sequences in computers.
   In python for instance, there are `bytes` (bytes sequences), `str` (text sequences), `list`, `tuple`, or even `range` which #link("https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range")[are sequence types].
   Note how #link("https://docs.python.org/3/library/collections.abc.html#collections-abstract-base-classes")[even in python] the difference is made between sequences and sets: the `Sequence`'s central method is `__getitem__` ---which allows you to retrieve their $n"th"$ element---, which doesn't exist for `Set`, whose central method is `__contains__`, to check if an element is inside the set.
 ]
+
+#slidebreak()
 
 The terms of a sequence can be defined explicitly, with a closed form...
 
@@ -41,6 +45,8 @@ They may also be defined recursively, that is, providing some initial terms toge
 #example[
   Redefine the previous sequence ($a_n = 2^n$) and the factorial ($b_n = n!$) using recurrence relations.
 ]
+
+#slidebreak()
 
 #remark[
   - More than one sequence may satisfy the same recurrence relation, hence the importance of initial conditions.
@@ -76,9 +82,11 @@ The two fundamental ways to aggregate a sequence are the summation and products,
   If $I$ is empty, the product is $1$.
 ]
 
+#slidebreak()
+
 The usual laws of arithmetic apply to these sums and products.
 
-#proposition[
+#proposition(slide-break: false)[
   Let $(x_n)$ and $(y_n)$ be two sequences, $I subset.eq NN$ and $a,b in RR$, then
   $
     sum_(i in I) (a x_n + b y_n) = a sum_(i in I) x_n + b sum_(i in I) y_n
@@ -89,10 +97,12 @@ The usual laws of arithmetic apply to these sums and products.
   $
 ]
 
+#slidebreak()
+
 We can often prove a closed form for a sum or a product using induction.
 To show it, let's introduce two fundamental kinds of sequences.
 
-#definition(title: [Arithmetic progression])[
+#definition(title: [Arithmetic progression], slide-break: false)[
   An arithmetic progression is a sequence $(a_n)_(n in NN)$ that satisfies the recurrence relation
   $
     a_(n+1) = a_n + d
@@ -109,9 +119,11 @@ To show it, let's introduce two fundamental kinds of sequences.
   where $r in RR$ is called the common ratio.
 ]
 
+#slidebreak()
+
 Then the following can be proven by induction.
 
-#proposition[
+#proposition(slide-break: false)[
   For all $n in NN$ and $r in RR without {1}$:
   $
      "(i)" & sum_(k=0)^n k = (n (n+1)) / 2 \
@@ -130,7 +142,7 @@ In this case, we want to *solve* the recurrence relation, that is, to find the e
 
 Let us first study linear recurrence relations, as they often appear in real-world problems, and can be solved systemically.
 
-#definition[
+#definition(slide-break: false)[
   - A recurrence relation is of *$k^"th"$ order* if $a_n$ can be expressed in terms of its $k$ previous terms $a_(n-1), a_(n-2), ..., a_(n-k)$.
   - A recurrence relation is *linear* if it expresses $a_n$ as a linear combination of its previous terms.
   - A recurrence relation is *homogeneous* if the zero sequence $a_n = 0$ satisfies the relation.
@@ -231,9 +243,9 @@ Let us see what this gives in practice with Fibonacci-like recurrences.
   where the constants $alpha_1$ and $alpha_2$ can be obtained using the initial conditions $a_1, a_2$.
 ]
 
-#example[
-  TODO  with actual Fibo
-]
+// #example[
+//   TODO  with actual Fibo
+// ]
 
 === Linear nonhomogeneous recurrence relation
 
@@ -252,9 +264,9 @@ What if we now add heterogeneity?
 So the hard part is to "guess" a particular solution of the nonhomogeneous relation.
 In some simple examples though, it is not too hard to make the right guess.
 
-#example[
-  TODO, like example 10 p 548
-]
+// #example[
+//   TODO, like example 10 p 548
+// ]
 
 == Generating functions
 // emphasize difference between formal series, and the actual function: would be nice to change terminology so GF is always an actual function, while GS is the abstract, formal series that can represent any sequence, regardless of its convergence.
@@ -263,13 +275,18 @@ In some simple examples though, it is not too hard to make the right guess.
 
 We will now introduce generating functions, which are a very powerful tool to manipulate sequences.
 The idea is not to find a function which is "equal" to the sequence in any sense, but one that *encodes the sequence*.
+
 To be more specific, when you formulate a generating function you compress all the information necessary to reproduce the full sequence, so the value of all its terms, into a simple function such as $f(x) = e^x$, $f(x)=1 / (1-x)$, etc .
+
+#slidebreak()
+
 How can a function contain all this information, though?
 By using the fact that many functions can be written as a power series, which means there is a sequence $(a_n)_(n in NN)$ such that
 $
   f(x) = sum_(n=0)^(+oo) a_n x^n.
 $
 An obvious example is the polynomials: for instance $P(x) = 1 + 2 x^2$ can be written as a power series with sequence $(a_n)$ such that $a_0 = 1, a_2 = 2, "and" forall n in NN without {0, 2}, a_n = 0$.
+
 But many other functions can be written as a power series, for instance by using their Taylor expansion!
 For instance, $e^x = sum_(n=0)^(+oo) x^n / n!$, so its associated sequence is $a_n = 1 / n!$.
 We can thus say that $e^x$ _generates_ this sequence, in the sense that it can tell you the values of all its terms.
@@ -340,6 +357,8 @@ An example of the power of generating functions is how they can be used to solve
 A generating series can encode a specific kind of sequence: namely, the sequence $(a_n)$ of number of ways to select some object $n$ times from a set.
 So for instance, the series $(1 + 2 x + 3 x^2)$ can encode the fact that we have a single way to not select the object, two to select it once, and three to select it three times.
 
+#slidebreak()
+
 #example[
   Let's see this with the following example: let's say we want to determine the number of ways to insert tokens worth $1 euro$, $2 euro$ and $5 euro$ into a vending machine to pay for an item that costs $r$ euros, when the order in which the tokens are inserted does not matter.
 
@@ -364,4 +383,11 @@ So for instance, the series $(1 + 2 x + 3 x^2)$ can encode the fact that we have
 
 #remark[
   In generating functions representing combinatorial problems, you can think of additions as logical "or", and products as logical "and".
+]
+
+#slidebreak()
+
+#remark[
+  Here, we barely scratched the surface of how generating functions can be used for counting problems.
+  They can go as far as #link("https://www.youtube.com/watch?v=bOXCLR3Wric")[pairing together with complex number analysis to solve some hard counting problems.]
 ]

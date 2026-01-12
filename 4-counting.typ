@@ -9,7 +9,7 @@
 #slidebreak()
 
 The *goal of counting* is basically to determine the cardinality of certain finite sets.
-This is much more useful than it sounds like: a fundamental way to compute discrete probabilities is to count in how many ways a given event can occur, and divide it by the total number of possible alternatives.
+This is much more useful than it sounds: a fundamental way to compute discrete probabilities is to count in how many ways a given event can occur, and divide it by the total number of possible alternatives.
 
 #definition[
   Two sets $A$ and $B$ have the same cardinality if and only if there exists a bijective function $f : A -> B$.
@@ -30,6 +30,8 @@ If any combination of first and second course is deemed acceptable, then we have
 
 // represent graphically by drawing the two sets and, for each element of the first set, all the links to all elements of the second.
 
+#slidebreak()
+
 #remark[
   The condition above can be rephrased as "if the choice of second course is independent from the choice of first course".
   "Independent" is a word you'll hear again in probability theory.
@@ -40,14 +42,14 @@ This is the idea behind the product principle stated below.
 
 #proposition(title: "The basic product principle")[
   If $A$ and $B$ are two finite sets, then
-  $ |A times B| = |A| dot |B| $
+  $ abs(A times B) = abs(A) dot abs(B) $
 ]
 
 This can be directly generalised to an arbitrary number of sets.
 
 #proposition(title: "The generalised product principle")[
   If $A_1, A_2, ..., A_m$ are finite sets, then
-  $ |A_1 times A_2 times ... times A_m| = |A_1| dot |A_2| dots |A_m| = product_(k=1)^m |A_k| $
+  $ abs(A_1 times A_2 times ... times A_m) = abs(A_1) dot abs(A_2) dot dots dot abs(A_m) = product_(k=1)^m abs(A_k) $
 ]
 
 #example[
@@ -62,14 +64,16 @@ If the two countries do not share a single recipe in common, then when one consi
 
 #proposition(title: "The basic sum principle")[
   If $A$ and $B$ are two finite and disjoint sets ($A inter B = emptyset$), then
-  $ |A union B| = |A| + |B| $
+  $ abs(A union B) = abs(A) + abs(B) $
 ]
 
 This can be directly generalised to an arbitrary number of sets.
 
 #proposition(title: "The generalised sum principle")[
   If $A_1, A_2, ..., A_m$ are a sequence of finite and pairwise disjoint sets $A_i inter A_j = emptyset$ for all $i != j$, then
-  $ |A_1 union A_2 union ... union A_m| = |A_1| + |A_2| + ... + |A_m| = sum_(j=1)^m |A_j| $
+  $
+    abs(limits(union.big)_(i=1)^m A_i) = abs(A_1 union A_2 union ... union A_m) = abs(A_1) + abs(A_2) + ... + abs(A_m) = sum_(i=1)^m abs(A_i)
+  $
 ]
 
 #example[
@@ -84,7 +88,7 @@ This leads to the inclusion-exclusion principle.
 
 #proposition(title: "The basic inclusion-exclusion principle")[
   If $A$ and $B$ are two finite sets, then
-  $ |A union B| = |A| + |B| - |A inter B| $
+  $ abs(A union B) = abs(A) + abs(B) - abs(A inter B) $
 ]
 
 You may see this graphically by drawing a Venn diagram.
@@ -93,16 +97,19 @@ You may see this graphically by drawing a Venn diagram.
   Try to answer by drawing another diagram.
 ]
 
+#slidebreak()
+
 The generalisation is less straightforward than before, but as hinted by our iterative approach of adding one subset at a time, the following can be proven by induction.
 
-#proposition(title: "The generalised inclusion-exclusion principle")[
+#proposition(title: "The generalised inclusion-exclusion principle", slide-break: false)[
   If $A_1, A_2, ..., A_m$ are finite sets, then
   $
-    |A_1 union A_2 union ... union A_n| & = sum_(1 <= i <= n) |A_i| \
-                                        & quad - sum_(1 <= i < j <= n) |A_i inter A_j| \
-                                        & quad + sum_(1 <= i < j < k <= n) |A_i inter A_j inter A_k| \
-                                        & quad ... \
-                                        & quad + (-1)^(n+1) |A_1 inter A_2 inter ... inter A_n|
+    abs(limits(union.big)_(i=1)^m A_i) & = sum_(1 <= i <= m) abs(A_i) - sum_(1 <= i < j <= m) abs(A_i inter A_j) + sum_(1 <= i < j < k <= m) abs(A_i inter A_j inter A_k) \
+    & quad ... + (-1)^(m+1) abs(A_1 inter A_2 inter ... inter A_m)
+    // & quad - sum_(1 <= i < j <= m) |A_i inter A_j| \
+    // & quad + sum_(1 <= i < j < k <= m) |A_i inter A_j inter A_k| \
+    // & quad ... \
+    // & quad + (-1)^(m+1) |A_1 inter A_2 inter ... inter A_m|
   $
 ]
 
@@ -121,6 +128,11 @@ A permutation is basically a way in which elements of a set can be ordered.
 #example[
   Let's consider the set containing the first four letters of the alphabet: $S = {A, B, C, D}$.
   In how many ways can we order them, or, in other words, in how many ways can we permute the elements of this set, or, even, how many permutations does this set have?
+]
+
+#slidebreak()
+
+#solution[
   To see how to answer that, let's think about the very process of ordering.
   We first choose the element that should come first: at this stage we have 4 different choices.
   Once this choice is made, we have 3 choices left for the second, then after that, 2 choices for the third, and finally, only one.
@@ -136,9 +148,11 @@ A permutation is basically a way in which elements of a set can be ordered.
   For a set $A$, we can directly say that it has $abs(A)!$ permutations, since its elements are distinct by definition.
 ]
 
-We involved the factorial, that we now properly define.
+#slidebreak()
 
-#definition(title: [Factorial])[
+We just involved the factorial, that we now properly define.
+
+#definition(title: [Factorial], slide-break: false)[
   For all $n in NN$, we define the *factorial* of $n$ as
   $
     n! = n dot (n-1) dot (n-2) dots 2 dot 1 = product_(k=1)^n k
@@ -172,6 +186,8 @@ The result above can then be directly extended, as we simply stop making choices
   We can get back the result of @prop-n-permut-distinct for $n$-permutations using the convention $0! = 1$.
 ]
 
+#slidebreak()
+
 If we tweak the permutation process by considering that each choice is independent from the others, we're now allowed to pick any element from the set at every step, even those we've already picked before.
 We're thus allowing repetitions in our permutation, and the number of such permutations is even more straightforward to obtain.
 
@@ -179,27 +195,37 @@ We're thus allowing repetitions in our permutation, and the number of such permu
   The number of $r$-permutations of a set of $n$ objects with repetition allowed is $n^r$.
 ]
 
+#slidebreak()
+
 Now what happens if our objects are not necessarily distinguishable anymore?
 Let's say we now want to know in how many ways we can the shuffle the string $A B B C C C$.
-If we attached labels to each letter to keep track of them, like such: $A_1 B_1 B_2 C_1 C_2 C_3$, then as above, we would have $(1 + 2 + 3)! = 6!$ permutations.
-But notice that if we remove the labels, the two following permutations
-$
-  A_1 B_1 B_2 C_1 C_2 C_3\
-  A_1 B_2 B_1 C_1 C_2 C_3
-$
-in which we permuted the $B$'s, would look exactly the same!
-So for each labeled permutation, two unlabeled ones would have the same ordering for the $B$'s.
-Similarly, the $C$'s can be reordered in $3!$ ways in each labeled permutation.
-Therefore, all in all, each labeled permutation has $2! dot 3! = 12$ equivalent unlabeled ones.
-We can thus get the number of ways we can shuffle this string as:
-$
-  6! / (2! dot 3!) = (6 dot 5 dot 4) / 2 = 60
-$
+
+#slidebreak()
+
+#solution[
+  If we attached labels to each letter to keep track of them, like such: $A_1 B_1 B_2 C_1 C_2 C_3$, then as above, we would have $(1 + 2 + 3)! = 6!$ permutations.
+  But notice that if we remove the labels, the two following permutations
+  $
+    A_1 B_1 B_2 C_1 C_2 C_3\
+    A_1 B_2 B_1 C_1 C_2 C_3
+  $
+  in which we permuted the $B$'s, would look exactly the same!
+  So for each labeled permutation, two unlabeled ones would have the same ordering for the $B$'s.
+  Similarly, the $C$'s can be reordered in $3!$ ways in each labeled permutation.
+
+  Therefore, all in all, each labeled permutation has $2! dot 3! = 12$ equivalent unlabeled ones.
+  We can thus get the number of ways we can shuffle this string as:
+  $
+    6! / (2! dot 3!) = (6 dot 5 dot 4) / 2 = 60
+  $
+]
 
 #proposition(title: "Permutations with indistinguishable objects")[
   Given $n$ objects that can classified into $k$ groups of indistinguishable elements, and such that the first group contains $n_1$ indistinguishable elements of type 1, the second group contains $n_2$ indistinguishable elements of type 2, etc, then the number of distinct ordered arrangements of these objects is
   $ n! / (n_1 ! n_2 ! dots n_k !) $
 ] <prop-permut_w_rep>
+
+#slidebreak()
 
 #remark[
   By definition of the $n_i$ above, $sum_(i=1)^k n_i = n$.
@@ -209,6 +235,7 @@ $
 === Combinations
 
 What if we now count distinct unordered selections of objects from a set, that is, how many distinct subsets of the same size we can form?
+
 This is called a combination.
 If we simply combine all the elements from a set with $n$ elements, by definition of a set there is only one such combination of $n$ elements.
 What's interesting is if we wonder how many combinations of $r < n$ elements from this set of $n$ elements we can form.
@@ -221,11 +248,13 @@ What's interesting is if we wonder how many combinations of $r < n$ elements fro
   The number of such subsets is denoted $C(n,r)$.
 ]
 
+#slidebreak()
+
 As we've seen above, a set of size $n$ admits $n! / (n-r)!$ permutations of size $r$.
 But, once we have an $r$-permutation, this new arrangement itself can be permuted in $P(r,r) = r!$ ways, each of which corresponds to the same subset.
 That's how we can see that
 
-#proposition[
+#proposition(slide-break: false)[
   Given a set of cardinality $n$ and a natural number $r <= n$, the number of $r$-combinations we can form from this set is:
   $
     C(n,r) = P(n,r) / r! = n! / (r! (n-r)!)
@@ -236,12 +265,16 @@ That's how we can see that
   Notice how this does give us $C(n, n) = 1$, using again the convention $0! = 1$.
 ]
 
+#slidebreak()
+
 This leads us to introduce some particular integers: the binomial coefficients.
 
-#definition(title: "Binomial coefficients")[
+#definition(title: "Binomial coefficients", slide-break: false)[
   For all non-negative integers $n, r in ZZ^+$ such that $0 <= r <= n$, we define the *binomial coefficient* as follows:
   $ binom(n, r) = frac(n!, r!(n-r)!) $
 ]
+
+#slidebreak()
 
 #question-box[
   Rewrite $C(n, r)$ and $P(n, r)$ using a binomial coefficient.
@@ -259,12 +292,21 @@ Same as above, the objects can be considered distinguishable, or labeled.
 The distinction could also be made for the boxes, but in this course we will only consider distinguishable boxes.
 
 Let's first consider $n$ distinguishable objects to be placed into $k$ boxes through an example.
+
 #example[
   How many ways are there to distribute hands of 5 cards to each of four players from a deck of 52 cards?
+]
+
+#slidebreak()
+
+#solution[
   This problem does correspond to the general one stated above, because all cards and players are distinct.
   We can notice that once we dealt cards to a player $i$, it is as if we created a group of $n_i=5$ indistinguishable cards, because once in their hands, the order in which they arrived does not matter, only which cards they received.
   We thus create one of these groups for each of the four players, and a final group with the remaining $52 - 4 dot 5 = 32$ cards.
   This amounts to creating $k=5$ groups, each of which contains $n_i$ elements of the same type.
+
+  #slidebreak()
+
   We can thus form a bijective function between the distributions of cards to the players and permutations with indistinguishable objects from @prop-permut_w_rep!
   From @def-same-card-bij, we can therefore use the previous result to get that the total number of ways to distribute the hands is
   $
@@ -281,10 +323,15 @@ We thus get the same result as in @prop-permut_w_rep.
   $
 ]
 
+#slidebreak()
+
 Let's now consider we have $n$ indistinguishable objects.
 Let's use the stars and bars methods to derive the corresponding count.
 Since objects are indistinguishable, they can be represented by any same symbol, such as a star $*$, which is conventionally used as a placeholder.
 The assignment to $k$ boxes can then be represented by separating these stars with $k-1$ bars.
+
+#slidebreak()
+
 #example[
   For $n=8$ and $k=3$, two example distributions can thus be visualised as:
   $
@@ -302,11 +349,15 @@ This is thus a "$k-1$ choose $n+k-1$" combination!
   $
 ]
 
+#slidebreak()
+
 Another parallel with combinations can be established.
 Counting the number of ways of placing $n$ indistinguishable objects into $k$ boxes turns out to be the same as counting the number of $n$-combinations for a set with $k$ elements when repetitions are allowed.
 These are slightly different from @def-combination, since we allow to redraw the same element from the input set.
 The combination with repetition is thus not a subset, but a collection of elements with potential repetitions.
 The processes behind the distribution and the combination with repetition can be directly mapped by imagining that each time the $i^"th"$ element of the input set is included in the combination, we put a ball in the $i^"th"$ box of the distribution.
+
+#slidebreak()
 
 #proposition(title: [$r$-combinations with repetition])[
   Given a set of cardinality $n$ and a natural number $r <= n$, the number of $r$-combinations with repetition that we can form from this set is:
@@ -320,9 +371,11 @@ The processes behind the distribution and the combination with repetition can be
 There are many useful identities related to these coefficients.
 One of the most important is Pascal's identity.
 
-#theorem(title: "Pascal's identity")[
+#theorem(title: "Pascal's identity", slide-break: false)[
   $ forall r in ZZ^+, n >= r,binom(n+1, r) = binom(n, r) + binom(n, r-1) $
 ] <thm-pascal-identity>
+
+#slidebreak()
 
 Using this identity, the binomial coefficients can be visualised by arranging them such that
 $
@@ -330,6 +383,9 @@ $
 $
 Starting with the initial conditions $binom(n, 0) = binom(n, n) = 1$, we thus form Pascal's triangle, expanding it downwards using @thm-pascal-identity.
 Pascal's triangle can then be drawn left or centre-aligned, as preferred:
+
+#slidebreak()
+
 #figure(
   grid(
     columns: 2,
@@ -384,12 +440,16 @@ This also allows us to see the symmetry in the binomial coefficients, especially
   $ forall r in NN, n >= r, binom(n, r) = binom(n, n-r) = frac(n!, r!(n-r)!) $
 ]
 
+#slidebreak()
 
 The binomial coefficients also appear in the expansion of some polynomials.
 
 #example[
   Let's take the example of the expansion of $(x+y)^3$.
   Its expansion can be seen as a combinatorics problem in which we repeatedly pick either $x$ or $y$ from each parenthesised term of $(x+y)^3 = (x+y)(x+y)(x+y)$ to form a product.
+
+  #slidebreak()
+
   This gives us $2^3$ products of the form $x^alpha y^beta$ with $0<= alpha, beta <= 3$, which we then sum.
   We can thus simply count the number of ways to choose $alpha$ times $x$ (then $beta = 3 - alpha$) from the three parenthesised terms, which is $binom(3, alpha)$!
   Explicitly, here:
@@ -416,7 +476,9 @@ This leads to the binomial theorem.
     (x + y)^n = sum_(k=0)^n binom(n, k) x^k y^(n-k)
   $
 ] <thm-binomial>
-// https://www.youtube.com/watch?v=6agQBHWP8IE
+// TODO: https://www.youtube.com/watch?v=6agQBHWP8IE ?
+
+#slidebreak()
 
 #corollary[
   $ (1 + x)^n = sum_(k=0)^n binom(n, k) x^k $
@@ -426,6 +488,8 @@ This leads to the binomial theorem.
   $ sum_(k=0)^n binom(n, k) = 2^n, quad sum_(k=0)^n (-1)^k binom(n, k) = 0 $
 ]
 
+#slidebreak()
+
 Finally, the binomial theorem together with @prop-r-comb-count enables us the determine the cardinality of the power set.
 
 #corollary[
@@ -434,6 +498,7 @@ Finally, the binomial theorem together with @prop-r-comb-count enables us the de
 ]
 
 // TODO: multinomial theorem?
+#slidebreak()
 
 #remark[
   You will find again the binomial coefficients in the binomial distribution and other distributions in probability theory.
