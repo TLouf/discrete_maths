@@ -60,10 +60,13 @@ In the following, unless otherwise specified, "a relation $R$" refers to a relat
 ]
 // proof that uses induction in Rosen p.608
 
+#slidebreak()
+
 #corollary[
   A relation $R$ is transitive if and only if $R^2 subset.eq R$. In other words, $R$ is transitive if and only if for each nonzero entry $(A_(R^2))_(i,j) = 1$ of the adjacency matrix of $R^2$, the corresponding entry of the adjacency matrix of $R$ is also nonzero $(A_R)_(i,j) = 1$.
 ]
 
+All these properties will now allow us to define two kinds of relations which are useful to compare elements of a set.
 
 == Equivalence relations
 <sec-equiv-rels>
@@ -80,6 +83,8 @@ In the following, unless otherwise specified, "a relation $R$" refers to a relat
 #question-box[
   What is the simplest equivalence relation that you know?
 ]
+
+#slidebreak()
 
 #example[
   Is the following relation on the set $P$ of all people an equivalence relation?
@@ -130,11 +135,15 @@ But first, what does that even mean?
   Conversely, given a partition ${A_1, A_2, ...}$ of $A$, there exists an equivalence relation $R$ such that its equivalence classes are the sets $A_i$.
 ] <thm-equiv-classes-partition>
 
+#slidebreak()
+
 #question-box[
   If there exists $a,b in A$ such that $a equiv b$, then $[ a ]_R = [ b ]_R$, which means $[ a ]_R inter [ b ]_R != emptyset$.
   Since equivalence classes partition a set, doesn't that contradict the fact that the subsets composing a partition should be disjoint?
 ]
 // clarify that the set of subsets contains in fact the equivalence classes after de-duplicating them, since it's a set!
+
+#slidebreak()
 
 #example[
   From the equivalence relation you defined in the example above. translate in plain words what its associated equivalence classes represent.
@@ -149,7 +158,9 @@ But first, what does that even mean?
 
 == Order relations
 
-#definition(title: [Partial order relation])[
+=== Partial and total orders
+
+#definition(title: [Partial order relation], slide-break: false)[
   A relation on a set $A$ is called a *partial order* if it is reflexive, antisymmetric, and transitive.
 ]
 
@@ -169,6 +180,8 @@ But first, what does that even mean?
   + $(P, {(a,b) in P | a "is older than" b}$, where $P$ is the set of all people.
 ]
 
+#slidebreak()
+
 Since a partial order is a relation, by definition it does not impose any constraint between unrelated elements.
 It is therefore useful to distinguish between elements which can be compared using an ordering, and those which cannot.
 
@@ -179,10 +192,12 @@ It is therefore useful to distinguish between elements which can be compared usi
   If neither of these conditions holds, such elements are said to be incomparable.
 ]
 
+#slidebreak()
+
 The adjective "partial" in "partial ordering" thus refers to the fact that the ordering does not necessarily order all elements of its associated set.
 But if it is the case, the poset has some interesting properties, and so we have a special term to refer to them.
 
-#definition(title: [Total order])[
+#definition(title: [Total order], slide-break: false)[
   A partially ordered set $(A, prec.curly.eq)$ is said to be *totally ordered* when any two elements of $A$ are comparable.
 ]
 
@@ -190,12 +205,22 @@ But if it is the case, the poset has some interesting properties, and so we have
 
 We saw in @sec-rels-sets that relations can be represented by a directed graph, by drawing an arrow from $a in A$ to $b in B$ if $a rel b$.
 A poset can therefore also be represented as a directed graph, but with several simplifications due to its properties.
-+ It is a relation on a single set ($A = B$), so elements only need to be represented once.
-+ It is antisymmetric, so we can fix a convention such as "if $a prec b$, then $a$ will be represented below $b$". This implies that all arrows point in the same direction, upwards, so they can be omitted.
-+ It is reflexive, so the loops corresponding to $a prec.curly.eq a$ do not need to be represented.
-+ It is transitive, so the edge corresponding to $a prec c$ does not need to be represented if there exists $b$ such that $a prec b$ and $b prec c$.
-All these simplifications lead to a representation for posets known as a *Hasse diagram*.
 
+#slidebreak()
+
++ It is a relation on a single set ($A = B$), so elements only need to be represented once.
+#pause
++ It is antisymmetric, so we can fix a convention such as "if $a prec b$, then $a$ will be represented below $b$". This implies that all arrows point in the same direction, upwards, so they can be omitted.
+#pause
++ It is reflexive, so the loops corresponding to $a prec.curly.eq a$ do not need to be represented.
+#pause
++ It is transitive, so the edge corresponding to $a prec c$ does not need to be represented if there exists $b$ such that $a prec b$ and $b prec c$.
+
+#pause
+
+All these lead to a representation known as a *Hasse diagram*.
+
+#slidebreak()
 // TODO: example or by hand? with 1,2,3,4 like in Rosen
 // #figure(
 //   grid(
@@ -211,7 +236,7 @@ All these simplifications lead to a representation for posets known as a *Hasse 
 === Extremal elements
 
 // mention simplification when set is finite
-#definition(title: [Extremal elements])[
+#definition(title: [Extremal elements], slide-break: false)[
   Let $(A, prec.curly.eq)$ be a partially ordered set.
   - $M in A$ is a maximal element if it does not precede any other element:
     $
@@ -239,15 +264,17 @@ All these simplifications lead to a representation for posets known as a *Hasse 
   The maximum and minimum of $(A, prec.curly.eq)$ are denoted by $max(A)$ and $min(A)$, respectively.
 ]
 
+#slidebreak()
+
 #remark[
   The maximal, minimal, greatest and least elements of $(A, prec.curly.eq)$ might not exist.
 ]
 
 #example[
   Do the following posets have extremal elements and a maximum and minimum?
-  + $({2, 5, 3, 7}, divides}$, // nothing because all unrelated
-  + $({2, 3, 4, 9}, divides}$, // only extremal elements
-  + $({2, 4, 6, 8}, divides}$, // no maximum because 6 divides.not 8
+  + $({2, 5, 3, 7}, divides)$, // nothing because all unrelated
+  + $({2, 3, 4, 9}, divides)$, // only extremal elements
+  + $({2, 4, 6, 8}, divides)$, // no maximum because 6 divides.not 8
   ("$divides$" is the "divides" relation from the example above).
 ]
 
@@ -278,14 +305,18 @@ All these simplifications lead to a representation for posets known as a *Hasse 
 
 // TODO: examples! especially tricky ones where no bound in the subset, or maximal elements but no maximum, etc
 
-*Remark:* It may happen that $"major"(B) = emptyset$, $"minor"(B) = emptyset$ and/or $sup(B)$ and $inf(B)$ do not exist.
+#remark[
+  It may happen that $"major"(B) = emptyset$, $"minor"(B) = emptyset$ and/or $sup(B)$ and $inf(B)$ do not exist.
+]
 
 
 === Well-ordering and induction
 
-#definition[
+#definition(title: [Well-ordered sets], slide-break: false)[
   $(A, prec.curly.eq)$ is a well-ordered set if $(A, prec.curly.eq)$ is a total order and all nonempty subsets of $A$ have a minimum.
 ]
+
+#slidebreak()
 
 #remark[
   - The set of natural numbers with the usual order $(NN, <=)$ is a well-ordered set.
@@ -321,19 +352,22 @@ The well-ordering of natural numbers then explains the validity of proofs by ind
 
 #table(
   columns: 6,
+  row-gutter: .8em,
   align: center,
   toprule(),
   table.header(
-    [*Relation*], [*Reflexive*], [*Symmetric*], [*Antisymmetric*], [*Transitive*], [*Additional Properties*]
+    [*Relation*], [*Reflexive*], [*Symmetric*], [*Anti-\symmetric*], [*Transitive*], [*Additional\ Properties*]
   ),
   midrule(), [Equivalence], [✅], [✅], [❌], [✅],
   [], [Order], [✅], [❌], [✅], [✅],
   [], [Total order], [✅], [❌], [✅], [✅],
-  [Every pair is comparable], [Well-ordered set], [✅], [❌], [✅], [✅],
-  [Every nonempty subset has a minimum], bottomrule(),
+  [Every pair comparable], [Well-ordered set], [✅], [❌], [✅], [✅],
+  [Every subset $!= emptyset$ has a minimum], bottomrule(),
 )
 
+#slidebreak()
+
 You will see different kinds of relations again in a more or less close future.
-- In relational databases, each table defines a relation between $n$ sets of attributes, where the values for each set are stored in a column (see Rosen 9.2 for further reading).
-- A particular case of equivalence relation and its associated classes will be studied in @sec-mod-arithmetic.
-- Order relations constitute the formalism on which all sorting algorithms are built, whether they concern numbers or strings of text.
+- In *relational databases*, each table defines a relation between $n$ sets of attributes, where the values for each set are stored in a column (see Rosen 9.2 for further reading).
+- A particular case of equivalence relation related to *modular arithmetic* and its associated classes will be studied in @sec-mod-arithmetic.
+- Order relations constitute the *formalism* on which all *sorting algorithms* are built, whether they concern numbers or strings of text.

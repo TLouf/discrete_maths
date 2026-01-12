@@ -12,7 +12,7 @@
 
 === Definitions
 
-#definition(title: [Set and elements])[
+#definition(title: [Set and elements], slide-break: false)[
   A set is a collection of objects which are called elements of the set.
   A set is fully determined by _which_ elements compose it.
 ] <def-set>
@@ -21,6 +21,8 @@
   - If $a$ is an element of the set $A$, we write $a in A$.
   - If an object $a$ is not an element of the set $A$, we write $a in.not A$.
 ]
+
+#slidebreak()
 
 How to describe a set?
 
@@ -31,6 +33,7 @@ How to describe a set?
     S_1 = {1, 2, dots, 6}
   $
 
+#slidebreak()
 - By using a defining predicate:
   $ S = {y in S_0 | P(y)} $
   where $P(y)$ is a condition on the elements $y$ of another set $S_0$. Then $S$ is the set of all elements $y$ of $S_0$ such that $P(y)$ is true.
@@ -39,6 +42,7 @@ How to describe a set?
     S_2 = { y in S_1 | y < 3 }
   $
 
+#slidebreak()
 - Through a transformation $f$ of the elements $y$ of another set $S_0$:
   $
     S = { f(y) | y in S_0 }
@@ -53,10 +57,19 @@ It can also be written with a colon "`:`".
 
 You may also combine the predicate and transformation methods, but it's very rarely necessary.
 
-Note that there is often more than one way to define the same set.
-However, there is often a better choice, at least in terms of clarity.
-For instance, how would you write $S_3$ above using a predicate on the set of natural numbers?
+#slidebreak()
 
+#remark[
+  Note that there is often more than one way to define the same set.
+  However, there is often a better choice, at least in terms of clarity.
+]
+
+
+#example[
+  For instance, how would you write $S_3$ above using a predicate on the set of natural numbers?
+]
+
+#pause
 
 #solution[
   $
@@ -65,15 +78,20 @@ For instance, how would you write $S_3$ above using a predicate on the set of na
   which is equally valid but probably less clear.
 ]
 
+#slidebreak()
+
 #question-box[
   From @def-set, especially its second part, can you guess the condition for two sets to be equal?
   For instance, are $A = {1, 2}$, $B= {2, 1}$ and $C = {1, 1, 2}$ equal?
 ]
 
+#pause
+
 #solution[
   Yes they are! This means that the order of the elements in a set is irrelevant, as well as the number of occurrences of an element in the list.
 ]
 
+#slidebreak()
 
 #definition(title: [Sets equality])[
   Two sets are equal if and only if they have the same elements.
@@ -108,7 +126,7 @@ Most of the time, and in the following of this course, $x in U$ can be omitted f
 
 === Examples: some already-known sets
 
-#definition(title: [Natural numbers])[
+#definition(title: [Natural numbers], slide-break: false)[
   The set of natural numbers $NN$ is defined by the following conditions:
   1. $0 in NN$.
   2. If $n in NN$, then the successor of $n$ (i.e., the number $n + 1$) belongs to $NN$.
@@ -116,29 +134,36 @@ Most of the time, and in the following of this course, $x in U$ can be omitted f
   4. Every non-empty subset of $NN$ has a minimum element. //(well-ordering property).
 ]
 
-Notes:
-- Some define the natural numbers starting from one, thus excluding zero. To avoid any ambiguity, one can respectively use the terms "non-negative" or "positive" integers to distinguish between the definition of natural numbers including or excluding zero.
-- We can informally "define" the following sets of numbers:
-  - Integer numbers: $ZZ = {0, plus.minus 1, plus.minus 2, ...}$
-  - Rational numbers: $QQ = {p/q | p, q in ZZ, q != 0}$
-- These sets are discrete yet infinite: their cardinality is undefined (or infinite).
+#remark[
+  - Some define the natural numbers starting from one, thus excluding zero.
+    To avoid any ambiguity, one can respectively use the terms "non-negative" or "positive" integers to distinguish between the definition of natural numbers including or excluding zero.
+    Here, we will denote the set $NN without {0}$ as $NN^*$.
+  - We can informally "define" the following sets of numbers:
+    - Integer numbers: $ZZ = {0, plus.minus 1, plus.minus 2, ...}$
+    - Rational numbers: $QQ = {p/q | p, q in ZZ, q != 0}$
+  - These sets are discrete yet infinite: their cardinality is undefined (or infinite).
+]
 
 
 === Subsets
 
-#definition(title: [Subset])[
-  The set $A$ is a *subset* of the set $B$ ($A subset.eq B$) if and only if every element of $A$ is also an element of $B$. The set $A$ is a *proper subset* of $B$ ($A subset B$) if $A$ is a subset of $B$, and $B$ contains at least an element not in $A$.
+#definition(title: [Subset], slide-break: false)[
+  The set $A$ is a *subset* of the set $B$ ($A subset.eq B$) if and only if every element of $A$ is also an element of $B$.a
+
+  The set $A$ is a *proper subset* of $B$ ($A subset B$) if $A$ is a subset of $B$, and $B$ contains at least an element not in $A$.
 ]
 
+#slidebreak()
 
 We can represent $A subset.eq B$, or $A subset B$ here to be precise, with a *Venn diagram*:
 #figure(
   image("assets/A_sub_B.svg", height: 6em),
 )
 
-Properties:
-- The empty set $emptyset$ is a subset of every set $A$: $emptyset subset.eq A$.
-- Every set $A$ satisfies $A subset.eq A subset.eq U$.
+#property[
+  - The empty set $emptyset$ is a subset of every set $A$: $emptyset subset.eq A$.
+  - Every set $A$ satisfies $A subset.eq A subset.eq U$.
+]
 
 #important[
   The latter implies that $A = B <=> (A subset.eq B) and (B subset.eq A$).
@@ -157,23 +182,25 @@ Properties:
 
 Given two sets $A$ and $B$ we can define a number of operations.
 
-#definition(title: [Sets union])[
+#definition(title: [Sets union], slide-break: false)[
   The union of two sets $A$ and $B$ is the set of all elements that are in $A$, in $B$, or in both:
   $
     A union B = {x | (x in A) or (x in B)}
   $
 ]
 
-#definition(title: [Sets intersection])[
+#definition(title: [Sets intersection], slide-break: false)[
   The intersection of two sets $A$ and $B$ is the set of all elements that are in both $A$ and $B$:
   $
     A inter B = {x | (x in A) and (x in B)}
   $
 ]
 
+#slidebreak()
+
 #notation[
   These two operations can be chained an arbitrary number of times.\
-  For example we can perform the union of $n$ sets $A_1, A_2, dots, A_n$ and use the following notation:
+  For example we can perform the union of $n$ sets $A_1, A_2, dots, A_n$:
   $
     A_1 union A_2 union dots union A_n = limits(union.big)_(i=1)^n A_i,
   $
@@ -224,8 +251,8 @@ You can represent these operations with a Venn diagram too. For instance:
   Then, using these representations, how would you write the difference operations as combinations of the union, intersection and complement operations?
 ]
 
-#properties[
-  - *Distributive laws*:
+#property[
+  - *Distributiveee laws*:
     - $A union (B inter C) = (A union B) inter (A union C)$
     - $A inter (B union C) = (A inter B) union (A inter C)$
   - *De Morgan's laws*:
@@ -237,7 +264,7 @@ You can represent these operations with a Venn diagram too. For instance:
 You can check these laws hold with Venn diagrams too.
 
 
-#definition[
+#definition(title: [Disjoint sets])[
   Two sets $A$ and $B$ are *disjoint* if $A inter B = emptyset$.
 ]
 
@@ -248,7 +275,7 @@ You can check these laws hold with Venn diagrams too.
 The very concept of a datatype in computer science is built upon the definition of a set. For instance, a boolean is an element of the set ${0,1}$, or, equivalently, `{False, True}`. A datatype is more than a set though, as it also defines the operations which are allowed on the elements of the set.
 
 #question-box[
-  Note that all data types correspond to a set which is _necessarily_ finite. Can you guess why?
+  Note that all data types which can be defined on computers correspond to a set which is _necessarily_ finite. Can you guess why?
 ]
 
 // To check that an object is of a given type, so to check it belongs to the corresponding set, you can run #link("https://docs.python.org/3/library/functions.html#isinstance")[`isinstance(object, type)`].
@@ -259,6 +286,8 @@ Most programming languages define a set datatype. #link("https://docs.python.org
 ```python
 S = {'a', 1, {'b'}}
 ```
+
+#slidebreak()
 
 #home[
   Find the equivalents of the set operations we saw above in the #link("https://docs.python.org/3/library/stdtypes.html#set")[python documentation], and try them out! Also check that sets in python have the properties listed above, in particular that the ordering of elements does not matter.
@@ -274,7 +303,7 @@ S = {'a', 1, {'b'}}
 ]
 
 This means that, contrary to sets, for tuples the ordering of elements matters.
-Thus, while ${a_1, a_2} = {a_2, a_1}$, for tuples $(a_1, a_2) != (a_2, a_1)$.
+Thus, while ${a_1, a_2} = {a_2, a_1}$, for tuples $(a_1, a_2) != (a_2, a_1)$ if $a_1 != a_2$.
 
 #definition(title: [Cartesian product])[
   Given two sets $A$ and $B$, the *Cartesian product* $A times B$ is the set of all ordered pairs $(a, b)$ where $a in A$ and $b in B$.
@@ -282,15 +311,21 @@ Thus, while ${a_1, a_2} = {a_2, a_1}$, for tuples $(a_1, a_2) != (a_2, a_1)$.
   $ A times B = {(a, b) | (a in A) and (b in B)} $
 ]
 
+#slidebreak()
+
 #remark[
   A Cartesian product gives you all the possible combinations involving one element from each set.
   If $A = B$, it gives all the possible combinations of two elements in this set.
-  You already saw Cartesian products in calculus, when you wrote, for instance, $forall (x, y) in RR^2$: these are all the possible pairs of real numbers.
+
+  You already saw Cartesian products in calculus, when you wrote, for instance: $forall (x, y) in RR^2$: these are all the possible pairs of real numbers.
   Then, you used the notation $RR^2 = RR times RR$.
 ]
 
 #definition(title: [Binary relations])[
-  A *binary relation* $R$ from the set $A$ to the set $B$ is a set of ordered pairs from the two sets. Said differently, $R$ is a subset of $A times B$, so: $R subset.eq A times B$.
+  A *binary relation* $R$ from the set $A$ to the set $B$ is a set of ordered pairs from the two sets. Said differently, $R$ is a subset of $A times B$, so:
+  $
+    R subset.eq A times B.
+  $
 
   The set $A$ is then called the *domain* of $R$ while $B$ is called its *codomain*.
 
@@ -299,9 +334,13 @@ Thus, while ${a_1, a_2} = {a_2, a_1}$, for tuples $(a_1, a_2) != (a_2, a_1)$.
 
 // TODO: examples
 
+#slidebreak()
+
 How can we represent binary relations graphically?
 What we want is to show each set on a separate "side", and link related elements together.
 Here we'll see three options, which are the directed graph, Cartesian and adjacency matrix representations.
+
+#slidebreak()
 
 #example[
   #let names = ("Alice", "Bob", "Eve")
@@ -339,6 +378,8 @@ Here we'll see three options, which are the directed graph, Cartesian and adjace
     ),
   )
 ]
+
+#slidebreak()
 
 #question-box[
   - When is the Cartesian representation preferable?
@@ -382,8 +423,10 @@ Using Boolean operations (instead of regular ones) guarantees that $A_(S circle 
   A binary relation $f$ with a domain $X$ and codomain $Y$ is said to be a *function* if it assigns exactly one element of $Y$ to each element of $X$.
 ]
 
+#slidebreak()
+
 #notation[
-  A function $f subset X times Y$ is usually defined with the notation $f: X -> Y$, to signify that it maps each element of $X$ to a unique element of $Y$.
+  A function $f subset.eq X times Y$ is usually defined with the notation $f: X -> Y$, to signify that it maps each element of $X$ to a unique element of $Y$.
 
   Also, we write $f(x) = y$ if $y$ is the unique element of $Y$ assigned by $f$ to the element $x$ of $X$.
 ]
@@ -400,10 +443,12 @@ Using Boolean operations (instead of regular ones) guarantees that $A_(S circle 
 
 #definition[
   Given a function $f : X -> Y$, we say that
-  - $f$ is *injective* or *one-to-one* if $x_1 != x_2$ implies $f(x_1) != f(x_2)$.
-  - $f$ is *surjective* if for every $y in Y$, there exists at least an element $x in X$ such that $y = f(x)$.
+  - $f$ is *injective* or *one-to-one* if each element of $Y$ is mapped to at most one element of $X$, or equivalently, if $x_1 != x_2$ implies $f(x_1) != f(x_2)$.
+  - $f$ is *surjective* if it maps every element of $Y$ to at least one element of $X$, that is, if for every $y in Y$, there exists at least an element $x in X$ such that $y = f(x)$.
   - $f$ is *bijective* if it is injective and surjective.
 ]
+
+// summary: is function by drawing vertical lines and checking never intersect two points, is injective if drawing horizontal lines they never intersect two points, and is surjective if all values of y are covered.
 
 // TODO (graphical) examples
 
@@ -416,6 +461,8 @@ Using Boolean operations (instead of regular ones) guarantees that $A_(S circle 
   While all relations have an inverse, a function, which is a particular kind of relation, only has an inverse if it is bijective.
   How come?
 ]
+
+// mention kinda like reversibility, like in directed graph, is invertible if can go and come back unambiguously
 
 #definition(title: "Composition of functions")[
   Given two functions $f : X -> Y$, $g : Y -> Z$, we can define a new function $g compose f : X -> Z$ by the following rule:

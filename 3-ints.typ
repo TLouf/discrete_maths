@@ -10,16 +10,19 @@
 
 == Integer divisibility
 
-The set of integers $ZZ$ is closed with respect to the operations of sum, subtraction, and product. In other words, for every $a, b in ZZ$, $a plus.minus b in ZZ$ and $a dot b in ZZ$. They also satisfy:
+The set of integers $ZZ$ is closed with respect to the operations of sum, subtraction, and product.
+In other words, for every $a, b in ZZ$, $a plus.minus b in ZZ$ and $a dot b in ZZ$. They also satisfy:
 - $0$ is the identity with respect to the sum: $a + 0 = a$ for every $a in ZZ$.
 - $1$ is the identity with respect to the product: $a dot 1 = a$ for every $a in ZZ$.
 - For every $a in ZZ$, there exists a unique inverse element $-a in ZZ$ such that $a + (-a) = 0$.
 
-However, the result of dividing two integers might not be an integer.
+However, the result of dividing two integers is not necessarily an integer!
 
 #definition(title: [Divisibility])[
   Given two integers $a != 0$ and $b$, we say that $a$ *divides* $b$ if there exists a *quotient* $q in ZZ$ such that $b = a dot q$. If $a$ divides $b$, we say that $a$ is a *factor* or *divisor* of $b$ and that $b$ is a *multiple* of $a$. We denote $a divides b$ when $a$ divides $b$, and we write $a divides.not b$ when $a$ does not divide $b$.
 ]
+
+#slidebreak()
 
 #remark[
   - Every non-zero integer divides $0$:
@@ -74,6 +77,8 @@ Then we need to involve a remainder.
     $
 ]
 
+#slidebreak()
+
 #remark[
   $mod$ is called the modulo or remainder operation, and $"div"$ the floor division or quotient operation. They both have associated symbols in most programming languages (respectively `%` and `//` in python, for instance).
 ]
@@ -88,14 +93,19 @@ Then we need to involve a remainder.
 Modular arithmetic allows us to perform algebraic operations using, instead of a given set of numbers, their respective remainders with respect to some fixed positive number called the modulus.
 This might sound convoluted but is actually fairly common.
 For example, to answer the question "What day of the week will we be 10 days from now?", you use modular arithmetic.
-We've already seen the operation notation $r = a mod b$, but to perform module arithmetic we need to introduce a related notation, which involves a relation instead.
 
-#definition(title: "Congruence")[
+#slidebreak()
+
+We've already seen the operation notation $r = a mod b$, but to perform modular arithmetic we need to introduce a related notation, which involves a relation instead.
+
+#definition(title: "Congruence", slide-break: false)[
   Let $a, b in ZZ$, and $m in NN^*$.
   Then $a$ and $b$ are said to be congruent modulo $m$ if $m divides (a - b)$.
   This relation is denoted as $a equiv b (mod m)$.
   It is called a congruence with modulus $m$.
 ]
+
+#slidebreak()
 
 $a equiv b (mod m)$ and $a mod m = b$ include different uses of "$mod$"": in the first it represents a relation, while it represents an operation in the second.
 However, this shared notation comes from the fact that the relation and the operation are closely related.
@@ -116,8 +126,10 @@ The congruence modulo $m$ between two integers thus indicates that they have the
   // anything with cycle: so time-related stuff but also angles!
 ]
 
+#slidebreak()
+
 From the definition of divisibility, we can directly get that:
-#theorem[
+#theorem(slide-break: false)[
   Let $a,b in ZZ$ and $m in NN^*$.
   $a$ and $b$ are congruent modulo $m$ if and only if there is an integer $k$ such that $a = b + k m$, that is:
   $
@@ -125,14 +137,17 @@ From the definition of divisibility, we can directly get that:
   $
 ] <thm-congruence-remainder>
 
+#slidebreak()
 
 Let's now see how operations between congruent integers go.
 
-#theorem[
+#theorem(slide-break: false)[
   Let $m$ be a positive integer. If $a_1 equiv b_1 (mod m)$ and $a_2 equiv b_2 (mod m)$, then:
   - $a_1 plus.minus a_2 equiv b_1 plus.minus b_2 (mod m)$.
   - $a_1 dot a_2 equiv b_1 dot b_2 (mod m)$.
 ]
+
+#slidebreak()
 
 #proof[
   Using @thm-congruence-remainder, we know there exist $s$ and $t$ such that $a_1 = b_1 + s m$ and $a_2 = b_2 + t m$, so:
@@ -144,6 +159,8 @@ Let's now see how operations between congruent integers go.
   $
   Hence the result.
 ]
+
+#slidebreak()
 
 #corollary[
   Let $m, k in NN^*$ and $a, b in ZZ$. If $a equiv b (mod m)$, then $a^k equiv b^k (mod m)$.
@@ -178,10 +195,11 @@ Also since $a equiv (a mod m) (mod m)$, we get that:
 
 To study operations involving congruences properly, let's first see how they define particular sets of integers with their own arithmetic.
 
-#theorem[
+#theorem(slide-break: false)[
   For each positive integer $m$, the binary relation $equiv (mod m)$ is an equivalence relation, as defined in @sec-equiv-rels.
 ] <thm-mod-is-equiv>
 
+#slidebreak()
 
 A good way to visualize this relation is to imagine that the straight line of integers gets rolled into a wheel with $m$ ticks:
 
@@ -234,20 +252,25 @@ This is equivalent to defining the quotient set we'll introduce below!
   $ [r]_m = {b in ZZ | b equiv r (mod m)} = {m k + r | k in ZZ} $
 ]
 
+#slidebreak()
+
 It follows from @thm-mod-is-equiv that congruence classes are equivalence classes.
 Thus, to a given modulo $m$ correspond $m$ distinct equivalence classes.
 And from @thm-equiv-classes-partition follows that:
-#theorem[
+#theorem(slide-break: false)[
   For any positive integer $m$, the congruence class modulo $m$ forms a partition of $ZZ$.
 ]
 
+#slidebreak()
+
 Also, following @def-quotient-set:
-#theorem[
+#theorem(slide-break: false)[
   For any positive integer $m$, the quotient set $ZZ_m = ZZ \/ (equiv (mod m))$ is given by
   $ ZZ_m = {[r]_m | 0 <= r <= m - 1} = {0, 1, dots, m - 1} $
 ]
 
 This is simply the set of possible remainders of divisions by $m$.
+
 Arithmetic on $ZZ_m$, however, can be distinct from the one you know on $ZZ$.
 Still, we know from @cor-mod-add-mult that they share similarities, which allows us to provide the following definitions.
 
@@ -265,6 +288,8 @@ Still, we know from @cor-mod-add-mult that they share similarities, which allows
     where the multiplication on the right-hand side is the multiplication on $ZZ$.
 ]
 
+#slidebreak()
+
 These operations satisfy many of the familiar properties that addition and multiplication have on $ZZ$.
 That is, for any $x,y in ZZ_m$:
 - Closure: $x +_m y in ZZ_m$ and $x dot_m y in ZZ_m$.
@@ -274,6 +299,8 @@ That is, for any $x,y in ZZ_m$:
 - Identity element (sum): $exists 0_m in ZZ_m$ such that $0_m +_m x = x$.
 - Identity element (product): $exists 1_m in ZZ_m$ such that $1_m dot_m x = x$.
 - Additive inverses: $exists (-_m x) in ZZ_m$ such that $x +_m (-_m x) = 0_m$.
+
+#slidebreak()
 
 #home[
   Check they actually satisfy them!
@@ -294,9 +321,11 @@ We will return to multiplicative inverses later on.
 
 === Definitions
 
-#definition(title: "Greatest common divisor")[
+#definition(title: "Greatest common divisor", slide-break: false)[
   Let $a, b$ be integers which are not both zero. The largest positive integer $d$ that divides both $a$ and $b$ is called the *greatest common divisor* of $a$ and $b$. It is denoted by $gcd(a, b)$.
 ]
+
+#slidebreak()
 
 #remark[
   - The case $a = b = 0$ is excluded because any integer divides $0$.
@@ -320,7 +349,7 @@ We will return to multiplicative inverses later on.
 
 The $gcd$ can be obtained systematically using the following lemma.
 
-#lemma(title: [Euclid's lemma])[
+#lemma(title: [Euclid's lemma], slide-break: false)[
   Given the integers $a$, $b != 0$, $q$ and $r$, such that $a = q dot b + r$ with $0 <= r < |b|$, then $gcd(a, b) = gcd(b, r)$.
 ] <lma-euclid-algo>
 // proof using @thm-divides
@@ -338,13 +367,17 @@ $
   gcd(a, b) = gcd(|a|, |b|) = gcd(r_0, r_1) = gcd(r_1, r_2) = dots = gcd(r_(n-1), r_n) = r_n
 $
 
+#slidebreak()
+
 #example[
   Apply recursively Euclid's lemma to compute $gcd(662, 414)$.
 ]
 
+#slidebreak()
+
 The $lcm$ is then straightforward to compute since we can use the following theorem.
 
-#theorem[
+#theorem(slide-break: false)[
   If $a, b$ are two natural numbers, then
   $ gcd(a, b) dot "lcm"(a, b) = a dot b $
 ]
@@ -352,10 +385,12 @@ The $lcm$ is then straightforward to compute since we can use the following theo
 
 === How to use them in modular arithmetic
 
-#theorem(title: "Bézout's Identity")[
+#theorem(title: "Bézout's Identity", slide-break: false)[
   If $a$ and $b$ are two integers not simultaneously zero, then there exist integers $x, y$ such that
   $ gcd(a, b) = a dot x + b dot y $
 ] <thm-bezout>
+
+#slidebreak()
 
 #proof[
   We write the steps of Euclid's algorithm, and "unroll them":
@@ -368,6 +403,8 @@ The $lcm$ is then straightforward to compute since we can use the following theo
     r_(n-2) & = q_(n-1) dot r_(n-1) + r_(n) => r_(n) = r_(n-2) - q_(n-1) dot r_(n-1) \
     r_(n-1) & = q_n dot r_(n) => r_(n) = gcd(a, b)
   $
+
+  #slidebreak()
 
   Then,
   $
@@ -384,11 +421,15 @@ The $lcm$ is then straightforward to compute since we can use the following theo
   Bézout's identity does not imply that the integers $x$ and $y$ are unique.
 ]
 
+#slidebreak()
+
 The identity allows us to redefine the $gcd$ through the following theorem.
 
-#theorem[
+#theorem(slide-break: false)[
   Let $a$ and $b$ be two integers not simultaneously zero with $gcd(a, b) = d$. An integer $c$ can be written in the form $a dot x + b dot y$ for some integers $x$ and $y$ if and only if $c$ is a multiple of $d$. In particular, the $gcd$ $d$ is the smallest positive integer of the form $a dot x + b dot y$ with $x, y in ZZ$.
 ]
+
+#slidebreak()
 
 And as a direct consequence, to redefine relatively-prime integers through the following corollary.
 
@@ -405,6 +446,8 @@ And as a direct consequence, to redefine relatively-prime integers through the f
   2. $ gcd(a/d, b/d) = 1 $
 ]
 
+#slidebreak()
+
 #corollary[
   If $a, b$ are two relatively-prime integers, then:
   1. If $a divides c$ and $b divides c$, then $(a dot b) divides c$.
@@ -417,6 +460,8 @@ And as a direct consequence, to redefine relatively-prime integers through the f
   If $a dot c equiv b dot c (mod m)$ and $c$ and $m$ are relatively prime, then $a equiv b (mod m)$.
 ]
 
+#slidebreak()
+
 #remark[
   - This theorem allows us to divide by a common factor $c$ both sides of the sign $equiv$ whenever $c$ and the modulus $m$ are relatively prime.
   - If $c$ and $m$ are not relatively prime, then the correct result is: Let us write $m = p dot c$ for positive integers $p, c$, and let $a, b$ be integers. If $a dot c equiv b dot c (mod p dot c)$, then $a equiv b (mod p)$.
@@ -427,7 +472,7 @@ And as a direct consequence, to redefine relatively-prime integers through the f
 
 === Definition
 
-#definition(title: "Prime numbers")[
+#definition(title: "Prime numbers", slide-break: false)[
   A natural number $p > 1$ is called a *prime number* if the only positive divisors of $p$ are $1$ and $p$. A natural number $p > 1$ that is not prime is called *composite*.
 ]
 
@@ -441,11 +486,13 @@ And as a direct consequence, to redefine relatively-prime integers through the f
 
 === Primes as building blocks
 
-#theorem(title: "The Fundamental Theorem of Arithmetic")[
+#theorem(title: "The Fundamental Theorem of Arithmetic", slide-break: false)[
   Every natural number $n > 1$ can be written uniquely as a product of primes
   $ n = p_1^(n_1) dot p_2^(n_2) dot p_3^(n_3) dot ... dot p_k^(n_k) $
   where the $p_i$ are distinct prime numbers written in increasing order, and the exponents $n_i$ are natural numbers $n_i >= 1$.
 ]
+
+#slidebreak()
 
 #remark[If you're curious as to why this theorem is _fundamental_, you can check out #link("https://www.youtube.com/watch?v=46E0-XJuAXs")[this nice video].]
 
@@ -473,6 +520,8 @@ And as a direct consequence, to redefine relatively-prime integers through the f
   $
 ]
 
+#slidebreak()
+
 #home[
   How primes are distributed is a topic that has attracted interest and fascination for centuries.
   You can check out this #link("https://www.youtube.com/watch?v=EK32jo7i5LQ")[cool video on prime numbers] (and this cool channel in general!) for an example of how it can connect to other problems.
@@ -487,6 +536,8 @@ Being able to solve linear equations is fundamental to many problems of calculus
   $ a dot x equiv b (mod m) $
   where $m$ is a positive integer, $a, b$ are integers, and $x$ is a variable.
 ]
+
+#slidebreak()
 
 To solve these equations, we can use multiplicative inverses (from @def-mult-inv-mod).
 Indeed, let's consider $m > 1$, and assume $a$ admits a multiplicative inverse $a^(-1) in ZZ_m$.
@@ -521,17 +572,20 @@ Here's why we stopped right after introducing multiplicative inverses above: we 
   It will then follow that $x$ is an inverse of $a$ modulo $m$.
 ]
 
+#slidebreak()
+
 We can thus provide the following way to solve linear congruence equations.
 
-#theorem[
+#theorem(slide-break: false)[
   If $a$ and $m$ are relatively prime integers, then the linear congruence equation
   $ a dot x equiv b (mod m) $
   has a unique solution modulo $m$, which is $x_0 = (a^(-1) dot b) mod m$, where $a^(-1)$ is the inverse of $a$ modulo $m$.
+
   The general solution is then given by
   $
     forall k in ZZ, x_k = x_0 + (k dot m),
   $
-  which form a congruent class modulo $m$.
+  which forms a congruent class modulo $m$.
 ]
 
 // #example[
