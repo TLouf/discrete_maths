@@ -480,8 +480,6 @@
 
 + For which values of $n >= 3$ are the graphs $K_n$, $P_n$, $Q_n$, and $C_n$ bipartite?
 
-+ Prove that in any simple graph with no isolated vertices, there are at least two vertices with the same degree.
-
 + Find the minimum number of vertices of a graph with 7 edges if every vertex has a degree at most 3.
 
 + Write the adjacency matrices $A_1$ and $A_2$ corresponding to the graphs shown in the figure, and prove that these two graphs are isomorphic by finding a change-of-basis matrix $P$ satisfying $A_2 = P^(-1) dot A_1 dot P$.
@@ -565,8 +563,6 @@
 
 + Prove that in a rooted tree such that all vertices that are not leaves have degree 3, then the tree has an even number of vertices.
 
-+ Let $G$ and $G'$ be two distinct connected graphs. $G$ is a plane graph with 10 vertices, such that it splits the plane into 3 regions. $G'$ is a 10-vertex graph with all vertices of degree at least 3. Are $G$ and $G'$ isomorphic?
-
 + Give an example (if any) of
   + a regular and bipartite graph,
   + a 3-regular graph with 9 vertices,
@@ -602,7 +598,7 @@
     ).
   $
   Answer the following questions using arguments based solely on the matrix $A_G$ (without using any graphical representation of $G$ that can be obtained from $A_G$):
-  + Tell whether $G$ is a simple graph, a multi-graph, or a pseudo-graph.
+  + What kind of graph is $G$?
   + How many vertices and edges does $G$ contain?
   + Is $G$ a regular graph? If yes, tell the common degree, and if not, give the degree sequence of $G$.
   + Let $i eq.not j$ be two distinct vertices of $G$ ($i, j in V$). Let $n_(i j)$ be the number of walks from $i$ to $j$ of length 3. Find all the possible values of $n_(i j)$ for $G$.
@@ -733,7 +729,7 @@
   + Compute the minimum weight (or shortest) path from vertex A to vertex M. Compute the total weight of such path.
   + Find a minimum-weight spanning tree and give its weight.
 
-+ Let $G = (V, E, omega)$ be the following weighted graph (with the weight of the edge ${f, h}$ equal to $x in RR$). Compute the range of values of the weight $x in RR$, so that the minimum-length path from a to h goes through the edge ${F, H}$.
++ Let $G = (V, E, omega)$ be the following weighted graph (with the weight of the edge ${f, h}$ equal to $x in RR$). Compute the range of values of the weight $x in RR$, so that the minimum-length path from a to h goes through the edge ${f, h}$.
   #figure(
     raw-render(
       ```dot
@@ -761,7 +757,7 @@
     ),
   )
 
-  // + A constructor is planning a new urban development formed by 9 family houses, and now he is designing the water supply. As he knows some graph theory, he defines a weighted graph $G = (V, E, omega)$, where the vertices $V = {a, b, c, d, e, f, g, h, i}$ correspond to the houses, two vertices are adjacent if the houses can be connected by a water pipe, and the weight of each edge is the cost (in thousands of euros) of placing the corresponding water pipe. The graph $G$ is given by
++ A constructor is planning a new urban development formed by 9 family houses, and now he is designing the water supply. As he knows some graph theory, he defines a weighted graph $G = (V, E, omega)$, where the vertices $V = {a, b, c, d, e, f, g, h, i}$ correspond to the houses, two vertices are adjacent if the houses can be connected by a water pipe, and the weight of each edge is the cost (in thousands of euros) of placing the corresponding water pipe. The graph $G$ is given by
   #figure(
     raw-render(
       ```dot
@@ -786,8 +782,8 @@
       width: 5cm,
     ),
   )
-  - If the constructor places the water supply on house a, compute using Dijsktra's algorithm the minimum-cost path to reach house i (where he will live). As a side result, compute the total cost of the rooted (at a) spanning tree that connects A to all the other vertices.
-  - When they heard this idea, the other neighbors complained about the price. They preferred to place the pipes using a minimum-cost spanning tree. Find one of these subgraphs using Prim's algorithm, and compute the total cost of the pipes.
+  + If the constructor places the water supply on house a, compute using Dijsktra's algorithm the minimum-cost path to reach house i (where he will live). As a side result, compute the total cost of the rooted (at a) spanning tree that connects A to all the other vertices.
+  + When they heard this idea, the other neighbors complained about the price. They preferred to place the pipes using a minimum-cost spanning tree. Find one of these subgraphs using Prim's algorithm, and compute the total cost of the pipes.
 
 
 + Let $G$ be the following weighted graph, let $H$ be the simple graph obtained by erasing the weights of $G$.

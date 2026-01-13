@@ -499,8 +499,6 @@
   3. True for any $n >= 3$.
   4. True for any even $n >= 4$.
 
-+ Hint: Use the pigeon-hole principle.
-
 + $|V|_"min" = 5$.
 
 + The adjacency matrices $A_1$ (with the vertex ordering $(v_1, v_2, v_3, v_4)$) and $A_2$ (with the vertex ordering $(u_1, u_2, u_3, u_4)$), and the permutation matrix $P$ are:
@@ -538,72 +536,69 @@
 +
   + $|A| = 16$.
   + There are 6 equivalence classes (for simplicity let us denote them $C_j$):
+    #let c0 = cetz.canvas({
+      import cetz.draw: *
+      circle((0, 0), radius: 0.05, fill: black, name: "b")
+      circle((0.3, 0), radius: 0.05, fill: black, name: "c")
+      circle((0, 0.3), radius: 0.05, fill: black, name: "a")
+      circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
+    })
+    #let c1 = cetz.canvas({
+      import cetz.draw: *
+      circle((0, 0), radius: 0.05, fill: black, name: "b")
+      circle((0.3, 0), radius: 0.05, fill: black, name: "c")
+      circle((0, 0.3), radius: 0.05, fill: black, name: "a")
+      circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
+      line("a", "b")
+    })
+    #let c2b = cetz.canvas({
+      import cetz.draw: *
+      circle((0, 0), radius: 0.05, fill: black, name: "b")
+      circle((0.3, 0), radius: 0.05, fill: black, name: "c")
+      circle((0, 0.3), radius: 0.05, fill: black, name: "a")
+      circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
+      line("a", "b")
+      line("d", "a")
+    })
+    #let c2a = cetz.canvas({
+      import cetz.draw: *
+      circle((0, 0), radius: 0.05, fill: black, name: "b")
+      circle((0.3, 0), radius: 0.05, fill: black, name: "c")
+      circle((0, 0.3), radius: 0.05, fill: black, name: "a")
+      circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
+      line("a", "b")
+      line("c", "d")
+    })
+    #let c3 = cetz.canvas({
+      import cetz.draw: *
+      circle((0, 0), radius: 0.05, fill: black, name: "b")
+      circle((0.3, 0), radius: 0.05, fill: black, name: "c")
+      circle((0, 0.3), radius: 0.05, fill: black, name: "a")
+      circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
+      line("a", "b")
+      line("c", "d")
+      line("a", "d")
+    })
+    #let c4 = cetz.canvas({
+      import cetz.draw: *
+      circle((0, 0), radius: 0.05, fill: black, name: "b")
+      circle((0.3, 0), radius: 0.05, fill: black, name: "c")
+      circle((0, 0.3), radius: 0.05, fill: black, name: "a")
+      circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
+      line("a", "b")
+      line("c", "b")
+      line("c", "d")
+      line("a", "d")
+    })
+    - $C_0 = [#c0]_R = {H = (V_4, emptyset)}$.
+    - $C_1 = [#c1]_R = {H = (V_4, E) : |E| = 1}$.
+    - $C_(2a) = [#c2a]_R = {H = (V_4, E) : |E| = 2 "and" H "is a p.m. of" C_4}$.
+    - $C_(2b) = [#c2b]_R = {H = (V_4, E) : |E| = 2 "and" H "is not a p.m. of" C_4}$.
+    - $C_3 = [#c3]_R = {H = (V_4, E) : |E| = 3}$.
+    - $C_4 = [#c4]_R = {H = (V_4, E) : |E| = 4}$.
+    where p.m. means perfect matching.
 
-  #let c0 = cetz.canvas({
-    import cetz.draw: *
-    circle((0, 0), radius: 0.05, fill: black, name: "b")
-    circle((0.3, 0), radius: 0.05, fill: black, name: "c")
-    circle((0, 0.3), radius: 0.05, fill: black, name: "a")
-    circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
-  })
-  #let c1 = cetz.canvas({
-    import cetz.draw: *
-    circle((0, 0), radius: 0.05, fill: black, name: "b")
-    circle((0.3, 0), radius: 0.05, fill: black, name: "c")
-    circle((0, 0.3), radius: 0.05, fill: black, name: "a")
-    circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
-    line("a", "b")
-  })
-  #let c2b = cetz.canvas({
-    import cetz.draw: *
-    circle((0, 0), radius: 0.05, fill: black, name: "b")
-    circle((0.3, 0), radius: 0.05, fill: black, name: "c")
-    circle((0, 0.3), radius: 0.05, fill: black, name: "a")
-    circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
-    line("a", "b")
-    line("d", "a")
-  })
-  #let c2a = cetz.canvas({
-    import cetz.draw: *
-    circle((0, 0), radius: 0.05, fill: black, name: "b")
-    circle((0.3, 0), radius: 0.05, fill: black, name: "c")
-    circle((0, 0.3), radius: 0.05, fill: black, name: "a")
-    circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
-    line("a", "b")
-    line("c", "d")
-  })
-  #let c3 = cetz.canvas({
-    import cetz.draw: *
-    circle((0, 0), radius: 0.05, fill: black, name: "b")
-    circle((0.3, 0), radius: 0.05, fill: black, name: "c")
-    circle((0, 0.3), radius: 0.05, fill: black, name: "a")
-    circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
-    line("a", "b")
-    line("c", "d")
-    line("a", "d")
-  })
-  #let c4 = cetz.canvas({
-    import cetz.draw: *
-    circle((0, 0), radius: 0.05, fill: black, name: "b")
-    circle((0.3, 0), radius: 0.05, fill: black, name: "c")
-    circle((0, 0.3), radius: 0.05, fill: black, name: "a")
-    circle((0.3, 0.3), radius: 0.05, fill: black, name: "d")
-    line("a", "b")
-    line("c", "b")
-    line("c", "d")
-    line("a", "d")
-  })
-
-  + $C_0 = [#c0]_R = {H = (V_4, emptyset)}$.
-  + $C_1 = [#c1]_R = {H = (V_4, E) : |E| = 1}$.
-  + $C_(2a) = [#c2a]_R = {H = (V_4, E) : |E| = 2 "and" H "is a p.m. of" C_4}$.
-  + $C_(2b) = [#c2b]_R = {H = (V_4, E) : |E| = 2 "and" H "is not a p.m. of" C_4}$.
-  + $C_3 = [#c3]_R = {H = (V_4, E) : |E| = 3}$.
-  + $C_4 = [#c4]_R = {H = (V_4, E) : |E| = 4}$.
-
-  where p.m. means perfect matching.
-
-  + $C = A\/R = {C_0, C_1, C_(2a), C_(2b), C_3, C_4}$.
+    - $C = A\/R = {C_0, C_1, C_(2a), C_(2b), C_3, C_4}$.
 
   + The Hasse diagram is: // TODO
     #align(center)[
@@ -620,20 +615,16 @@
       ```
     ]
 
-  + It is not a totally ordered set.
+    It is not a totally ordered set.
 
   + $sup(Z) = C_3$ and $inf(Z) = C_1$.
 
 
 + Hint: Use that $V = V_1 union V_3$ where $V_1$ (resp. $V_3$) is the set of vertices of degree 1 (resp. 3).
 
-+ Hint: Use the hand-shake lemma and Euler's theorem.
-
-+ They are not isomorphic.
-
 +
   1. $C_(2n)$.
-  2. There does not exist such graph.
+  2. There is no such graph.
   3. A graph with two connected components: $K_(n-1)$ and an isolated vertex.
   4. Two vertices joined by four edges.
   5. $P_4$.
@@ -644,7 +635,6 @@
 +
   - $|V| = 8$ and $|E| = 19$.
   - $d(emptyset) = d(X) = 7$. The other vertices have $d(v) = 4$. $G$ is not regular.
-  - $G$ is not planar.
   - $G$ is not bipartite.
 
 + Hint: Which is the simple graph with $n$ vertices and $binom(n, 2)$ edges?
@@ -654,21 +644,21 @@
   Use also the following result: Let $G$ be a connected graph containing a cycle. Then, if we remove any edge of that cycle, the resulting graph is also connected.
 
 +
-  a) $G$ is simple.
-  b) $|V| = 8$ and $|E| = 12$.
-  c) $G$ is regular with $d = 3$.
-  d) $n_(i j) in {0, 6, 7}$.
-  e) The length of the shortest cycle in $G$ is $ell_"min" = 4$.
+  + $G$ is simple.
+  + $|V| = 8$ and $|E| = 12$.
+  + $G$ is regular with $d = 3$.
+  + $n_(i j) in {0, 6, 7}$.
+  + The length of the shortest cycle in $G$ is $ell_"min" = 4$.
 
 
 +
-  1. It is not bipartite, but it is planar.
+  1. It is not bipartite.
   2. There are no spanning trees.
 
 + There is no spanning tree of weight $<= 12$.
 
 +
-  1. The path is $(A, B, E, G)$ with length 78.
+  1. The path is $(a, b, e, g)$ with length 78.
   2. The same as above.
 
 + $d(a, h) = 16$, $d(a, e) = 17$, $d(d, a) = 19$, $d(d, g) = 11$, and $d(b, e) = 13$.
@@ -682,39 +672,13 @@
 + $0 < x <= 3$.
 
 +
-  - The minimum cost from $A$ to $I$ is equal to 19. The total cost of the constructor's design depends on the found tree: it can be in the range from 40 to 43.
-  - The cost of the alternative design is 39.
+  + The minimum cost from $a$ to $i$ is equal to 19. The total cost of the constructor's design depends on the found tree: it can be in the range from 40 to 43.
+  + The cost of the alternative design is 39.
 
 
 +
   1. Using Kruskal's algorithm, a spanning tree $T = (V, E)$ would be given by $E = {{a, b}, {e, g}, {b, e}, {e, c}, {f, g}, {f, d}}$ with weight $omega = 10$.
   2. It is not bipartite.
-  3. There are no Euler tours/trails, and there is a Hamilton cycle.
-  4. A possible example is:
-    #figure(
-      raw-render(
-        ```dot
-        graph {
-          layout=neato
-          node[shape=point margin=0]
-          x -- {a,b,c,d}
-          a -- {b, c}
-          d -- {b, c}
-          y -- z;
-          z -- y;
-          }
-        ```,
-        width: 5cm,
-      ),
-    )
-
-+ From left to right:
-  1. It not an Eulerian/Hamiltonian graph. It contains an Euler trail and a Hamilton path.
-  2. It does not have any Euler tour/trail. It does not have any Hamilton cycle/path.
-  3. It does not have any Euler tour/trail. It is a Hamiltonian graph.
-
-+ It contains an Euler trail. One Euler trail would be:
-  $ (h, d, e, h, i, e, a, d, f, g, c, f, b, e, f, i) . $
 
 + 6 hours.
 
