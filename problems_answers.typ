@@ -357,6 +357,10 @@
 
 + $binom(2 n, n + 1) + binom(2 n, n) = binom(2 n + 1, n + 1) = 1/2 (binom(2 n + 1, n + 1) + binom(2 n + 1, n + 1)) = 1/2 (binom(2 n + 1, n + 1) + binom(2 n + 1, n)) = 1/2 binom(2 n + 2, n+1)$
 
++
+  + From the definition of binomial coefficients we can get that $binom(n, k-1) = k / (n_k+1) binom(n, k)$, hence the less than inequalities. The "greater than" ones follow by symmetry of the coefficients.
+  + The previous question tells us that $binom(n, floor(n/2))$ is the largest of the coefficients $binom(1, n), dots, binom(n, n-1)$, so it's greater than or equal to their average, which is $(2^n - 2) / (n-1) >= 2^n / (n-1) >= 2^n / n$.
+
 
 = Sequences
 

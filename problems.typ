@@ -396,6 +396,19 @@
     forall n in NN, binom(2 n, n) + binom(2 n, n - 1) = 1/2 binom(2 n + 2, n + 1)
   $
 
+// R 6.4.18-20
++
+  + Show that for all positive integers $n$,
+    $
+      binom(n, 0) < binom(n, 1) < dots < binom(n, floor(n/2)),\
+      binom(n, ceil(n/2)) > dots > binom(n, n-1) > binom(n, n).
+    $
+  + Show that if $n$ is greater than $1$, then
+    $
+      binom(n, floor(n/2)) >= 2^n / n.
+    $
+
+
 = Sequences
 
 + For each integer $n in NN$, let us consider the set of $n$ lines in the plane with the following properties:
