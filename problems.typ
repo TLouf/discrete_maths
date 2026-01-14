@@ -1,4 +1,5 @@
 #import "assets/base_template.typ": *
+#import "@preview/subpar:0.2.2"
 #show: base
 
 #set document(title: "Discrete Mathematics @ UC3M - Exercises")
@@ -77,6 +78,14 @@
 // R 2.1.31
 + What is the Cartesian product $A times B times C$, where $A$ is the set of all airlines and $B$ and $C$ are both the set of all cities in Europe? What could this Cartesian product represent, in plain words?
 
++ A dictionary is a data structure that is equivalent to a function $d: K -> V$ which assigns values ($in V$) to keys ($in K$).
+  Explain, in terms of relations and functions, what a collision (when one key is repeated in the dictionary) represents.
+
++ In a relational database, a table with $n$ columns is a data structure that is equivalent to a relation $R subset.eq C_1 times C_2 times dots times C_n$, where the sets $C_i$ correspond to the possible values in each column.
+  It is strongly recommended to add a primary key --which is a column or a set of columns which uniquely identify each row-- to such tables.
+  How does adding a primary key change the underlying relation, in mathematical terms?
+  Can you guess why this is recommended?
+
 + Determine if the functions $f, g : RR arrow RR$ below are injective or not:
   $
     f(x) & = cases(
@@ -126,6 +135,12 @@
 // R 9.5.4
 + Define three equivalence relations on the set of students in your group, different from the relations we already presented.
   Determine the equivalence classes for each of these equivalence relations.
+
++ Let $A = {"foo", "bar", "baz", "xyz", "spam"}$ a set of character strings, and $R subset.eq A times A$ such that $x rel y$ for $x,y in A$ iff $x$ and $y$ have the same number of characters.
+  + Describe $R$ using a directed graph, and say which properties it satisfies ((anti)reflexivity, (anti)symmetry, transitivity).
+  + Let us now consider $B = limits(times.big)_(i=1)^N {0, 1}$ for a given $N in NN$, and $R subset.eq B times B$ with the same notion of relation as above. Interpret the set $B$ in computer science terms, and determine which properties $R$ satisfies.\
+    _Note:_ $limits(times.big)_(i=1)^N C$ denotes the cartesian product of $C$ with itself $N$ times: $C times C times dots times C$.
+
 
 + Let $A$ and $B$ be two sets, and let $f: A -> B$ be a certain function. Show that any binary relation defined on $A$ of the form
   $ a rel b <==> f(a) = f(b), quad a, b in A $
@@ -412,6 +427,12 @@
 + Solve the equation:
   $ a_n = -a_(n-1) + 3 dot 2^(n-1), quad n >=2, quad a_1 = 0. $
 
+// R 8.2.25
++ Let us consider the recurrence relation $a_n = 2 a_(n−1) + n + 5$
+  + Determine values of the constants $A$ and $B$ such that $a_n = A n + B$ is a solution of this recurrence relation.
+  + Find all solutions of this recurrence relation.
+  + Find the solution of this recurrence relation when $a_0 = 4$.
+
 + Let us consider the following recursive algorithm to compute the exponential $a^n$ with $n in NN$:
   ```
   procedure exp1(a,n)
@@ -561,6 +582,151 @@
   + We now define the order relation $prec.eq.curly$ on the quotient set $C$ as follows: $[A]_R prec.eq.curly [B]_R$ if and only if there exist graphs $G_1 = (V_4, E_1) in [A]_R$ and $G_2 = (V_4, E_2) in [B]_R$ such that $E_1 subset.eq E_2$. Find the Hasse diagram associated to the set $(C, prec.eq.curly)$. Is $(C, prec.eq.curly)$ a totally ordered set?
   + Let $Z subset C$ be the subset of $C$ containing the classes of equivalence that contain at least one representative with two edges. Compute $sup(Z)$ and $inf(Z)$.
 
++ Which of these graphs are trees?
+  #subpar.grid(
+    columns: (1fr, 1fr),
+    numbering-sub: "(i)",
+    figure(
+      cetz.canvas({
+        import cetz.draw: *
+        circle((0, 1), radius: 0.1, fill: black, name: "a")
+        circle((1, 1), radius: 0.1, fill: black, name: "b")
+        circle((2, 1), radius: 0.1, fill: black, name: "c")
+        circle((0, 0), radius: 0.1, fill: black, name: "1")
+        circle((1, 0), radius: 0.1, fill: black, name: "2")
+        circle((2, 0), radius: 0.1, fill: black, name: "3")
+        line("a", "1")
+        line("b", "2")
+        line("c", "3")
+        line("b", "1")
+        line("c", "2")
+      }),
+      caption: [],
+    ),
+    figure(
+      cetz.canvas({
+        import cetz.draw: *
+        circle((0, 1), radius: 0.1, fill: black, name: "a")
+        circle((1, 1), radius: 0.1, fill: black, name: "b")
+        circle((2, 1), radius: 0.1, fill: black, name: "c")
+        circle((0, 0), radius: 0.1, fill: black, name: "1")
+        circle((1, 0), radius: 0.1, fill: black, name: "2")
+        circle((2, 0), radius: 0.1, fill: black, name: "3")
+        line("a", "1")
+        line("b", "2")
+        line("c", "3")
+        line("b", "1")
+        line("c", "2")
+        line("1", "2")
+      }),
+      caption: [],
+    ),
+
+    figure(
+      cetz.canvas({
+        import cetz.draw: *
+        circle((0, 1), radius: 0.1, fill: black, name: "a")
+        circle((1, 1), radius: 0.1, fill: black, name: "b")
+        circle((2, 1), radius: 0.1, fill: black, name: "c")
+        circle((0, 0), radius: 0.1, fill: black, name: "1")
+        circle((1, 0), radius: 0.1, fill: black, name: "2")
+        circle((2, 0), radius: 0.1, fill: black, name: "3")
+        line("a", "1")
+        line("c", "3")
+        line("b", "1")
+        line("c", "2")
+      }),
+      caption: [],
+    ),
+    figure(
+      cetz.canvas({
+        import cetz.draw: *
+        circle((0, 0.8), radius: 0.1, fill: black, name: "a")
+        circle((1, 1), radius: 0.1, fill: black, name: "b")
+        circle((2, 1), radius: 0.1, fill: black, name: "c")
+        circle((0, 0), radius: 0.1, fill: black, name: "1")
+        circle((1, 0.15), radius: 0.1, fill: black, name: "2")
+        circle((2, 0.1), radius: 0.1, fill: black, name: "3")
+        line("a", "2")
+        line("b", "1")
+        line("b", "c")
+        line("c", "3")
+        line("1", "2")
+      }),
+      caption: [],
+    ),
+
+    figure(
+      cetz.canvas({
+        import cetz.draw: *
+        circle((0, 1), radius: 0.1, fill: black, name: "a")
+        circle((1, 1), radius: 0.1, fill: black, name: "b")
+        circle((2, 1), radius: 0.1, fill: black, name: "c")
+        circle((0, 0), radius: 0.1, fill: black, name: "1")
+        circle((1, 0), radius: 0.1, fill: black, name: "2")
+        circle((2, 0), radius: 0.1, fill: black, name: "3")
+        line("a", "1")
+        line("b", "2")
+        line("c", "3")
+        line("b", "1")
+        line("c", "2")
+        line("a", "3")
+      }),
+      caption: [],
+    ),
+    figure(
+      cetz.canvas({
+        import cetz.draw: *
+        circle((0, 1), radius: 0.1, fill: black, name: "a")
+        circle((1, 1), radius: 0.1, fill: black, name: "b")
+        circle((2, 1), radius: 0.1, fill: black, name: "c")
+        circle((0, 0), radius: 0.1, fill: black, name: "1")
+        circle((1, 0), radius: 0.1, fill: black, name: "2")
+        circle((2, 0), radius: 0.1, fill: black, name: "3")
+        line("a", "2")
+        line("b", "3")
+        line("c", "2")
+        line("b", "1")
+      }),
+      caption: [],
+    ),
+  )
+
++ Suppose 1000 players enter a chess tournament. Use a rooted tree model of the tournament to determine how many games must be played to determine a champion, if a player is eliminated after one loss and games are played until only one entrant has not lost. (Assume there are no ties.)
+
+// R 11.4.13-16 833 1064
++ Let's consider the following graph.
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato;
+        concentrate=true;
+        node[shape=circle margin=0 fontsize=24]
+        a[pos="0,1!"]
+        b[pos="0,0!"]
+        c[pos="1,0.5!"]
+        d[pos="2,0.5!"]
+        e[pos="3,1!"]
+        f[pos="3,0!"]
+        g[pos="4,0!"]
+        h[pos="4,1!"]
+        i[pos="5,1!"]
+        j[pos="5,0!"]
+        a -- b;
+        c -- {a, b, d};
+        d -- {e, f};
+        e -- f;
+        g -- {h, f, j};
+        h -- {e, i};
+      }
+      ```,
+      width: 7cm,
+    ),
+  )
+  + Use breadth-first search to produce a spanning tree of this graph, choosing $a$ as its root, and assuming that vertices are ordered alphabetically.
+  + Do the same using breadth-first search.
+
 + Prove that in a rooted tree such that all vertices that are not leaves have degree 3, then the tree has an even number of vertices.
 
 + Give an example (if any) of
@@ -648,6 +814,12 @@
       width: 5cm,
     ),
   )
+
+// R 10.6.1
++ For each of these problems about a subway system, describe a weighted graph model that can be used to solve the problem.
+  + What is the least amount of time required to travel between two stops?
+  + What is the minimum distance that can be traveled to reach a stop from another stop?
+  + What is the least fare required to travel between two stops if fares between stops are added to give the total fare?
 
 + Let us consider the following directed graph.
   #figure(
@@ -754,6 +926,50 @@
       }
       ```,
       width: 6cm,
+    ),
+  )
+
+// R 11.4.23
++ Suppose that an airline must reduce its flight schedule to save money. If its original routes are as illustrated here, which flights can be discontinued to retain service between all pairs of cities (where it may be necessary to combine flights to fly from one city to another)?
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato;
+        start=11;
+        concentrate=true;
+        splines=true;
+        node[shape=point margin=0 width=0.2]
+        sf[xlabel="San Francisco"];
+        sea[xlabel="Seattle"];
+        chi[xlabel="Chicago"];
+        la[xlabel="Los Angeles"];
+        sd[xlabel="San Diego"];
+        ny[xlabel="New York"];
+        den[xlabel="Denver"];
+        dal[xlabel="Dallas"];
+        det[xlabel="Detroit"];
+        bos[xlabel="Boston"];
+        stl[xlabel="St Louis"];
+        atl[xlabel="Atlanta"];
+        was[xlabel="Washington"];
+        ban[xlabel="Bangor"];
+        sea -- {sf} ;
+        chi -- {sea, stl, den, det, bos, ny, was, atl};
+        den -- {sf, la, sd, dal, stl};
+        det -- {bos, ny, stl};
+        bos -- {ban, was, ny, chi, det};
+        la -- {dal, atl}[len=2];
+        la -- {sd,sf}[len=0.5]
+        atl -- {dal, stl, chi};
+        atl -- was[len=0.5];
+        ny -- {was, bos}[len=0.5]
+        ny -- {det, chi};
+        stl -- {chi, det, atl, den, dal};
+        dal -- {sd, la, sf, den, stl, atl};
+      }
+      ```,
+      width: 9cm,
     ),
   )
 

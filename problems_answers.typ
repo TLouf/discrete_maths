@@ -60,6 +60,11 @@
 
 + The set of triples $(a, b, c)$, where $a$ is an airline and $b$ and $c$ are cities. It can thus represent all the possible combinations of air trips between European cities.
 
++ A collision is when $d$ is a relation, but not a function.
+
++ Setting a primary key makes the relation a function.
+  Rows can then be uniquely identified and thus queried faster, and unintended duplicates cannot appear, avoiding unexpected behaviours.
+
 +
   - $f$ is not injective nor surjective.
   - $g$ is injective; but it is not surjective.
@@ -90,6 +95,9 @@
 
 + Can be being from the same city, went to the same highschool, will get the same mark...
 
++
+  + It is an equivalence relation (so reflexive, symmetric and transitive).
+  + $B$ is the set of bit strings. $R$ is still an equivalence relation.
 
 + The quotient set is isomorphic to $op("Im")(f)$. #let rel-same-function-image = [Question *2.1*] //#el.elabel("lab") <rel-same-function-image>
 
@@ -371,6 +379,11 @@
 + $a_n = 2^n + 2(-1)^n$ for all $n >= 1$.
 
 +
+  + $A=-1, B=-7$
+  + $a_n = alpha 2^n - n - 7$
+  + $alpha=11$
+
++
   - $b_1 = 0$, $b_2 = 1$, $b_3 = 2$ and $b_4 = 3$.
   - If $n = 2p$ is even $(p >= 1)$, $b_(2p) = 2b_p + 1$. If $n = 2p - 1$ is odd $(p >= 1)$, $b_(2p-1) = b_p + b_(p-1) + 1$.
   - $b_(2^k) = 2^k - 1$ for all $k >= 0$.
@@ -619,6 +632,75 @@
 
   + $sup(Z) = C_3$ and $inf(Z) = C_1$.
 
++
+  + Yes
+  + No (cycle)
+  + No (forest)
+  + Yes
+  + No (cycle)
+  + No (forest)
+
++ $999$.
+
++
+  + #figure(
+      raw-render(
+        ```dot
+        graph {
+          layout=neato;
+          concentrate=true;
+          node[shape=circle margin=0 fontsize=24]
+          a[pos="0,1!"]
+          b[pos="0,0!"]
+          c[pos="1,0.5!"]
+          d[pos="2,0.5!"]
+          e[pos="3,1!"]
+          f[pos="3,0!"]
+          g[pos="4,0!"]
+          h[pos="4,1!"]
+          i[pos="5,1!"]
+          j[pos="5,0!"]
+          a -- b;
+          c -- {b, d};
+          d -- {e};
+          e -- f;
+          g -- {h, f, j};
+          h -- {i};
+        }
+        ```,
+        width: 7cm,
+      ),
+    )
+  + #figure(
+      raw-render(
+        ```dot
+        graph {
+          layout=neato;
+          concentrate=true;
+          node[shape=circle margin=0 fontsize=24]
+          a[pos="0,1!"]
+          b[pos="0,0!"]
+          c[pos="1,0.5!"]
+          d[pos="2,0.5!"]
+          e[pos="3,1!"]
+          f[pos="3,0!"]
+          g[pos="4,0!"]
+          h[pos="4,1!"]
+          i[pos="5,1!"]
+          j[pos="5,0!"]
+          a -- {b,c};
+          c -- {d};
+          d -- {e, f};
+          e -- h;
+          h -- i;
+          f -- g;
+          g -- j;
+        }
+        ```,
+        width: 7cm,
+      ),
+    )
+
 
 + Hint: Use that $V = V_1 union V_3$ where $V_1$ (resp. $V_3$) is the set of vertices of degree 1 (resp. 3).
 
@@ -657,6 +739,11 @@
 
 + There is no spanning tree of weight $<= 12$.
 
++ All graph models are weighted graphs whose vertices are the metro stops. Then edges are drawn between connected stops and their weights are:
+  + travel times,
+  + distances,
+  + fares.
+
 +
   1. The path is $(a, b, e, g)$ with length 78.
   2. The same as above.
@@ -670,6 +757,8 @@
     Its weight is $omega = 43$.
 
 + $0 < x <= 3$.
+
++ This problem is about finding a spanning tree. A possible set of flights to discontinue are: Boston–New York, Detroit–Boston, Boston–Washington, New York–Washington, New York–Chicago, Atlanta–Washington, Atlanta–Dallas, Atlanta–Los Angeles, Atlanta–St. Louis, St. Louis–Dallas, St. Louis–Detroit, St. Louis–Denver, Dallas–San Diego, Dallas–Los Angeles, Dallas–San Francisco, San Diego–Los Angeles, Los Angeles–San Francisco, San Francisco–Seattle.
 
 +
   + The minimum cost from $a$ to $i$ is equal to 19. The total cost of the constructor's design depends on the found tree: it can be in the range from 40 to 43.
