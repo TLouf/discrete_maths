@@ -51,7 +51,7 @@
 + Hint: use Venn diagrams or truth tables.
 
 +
-  + $B$.
+  + $A$.
   + $B inter C$.
 
 +
@@ -75,7 +75,7 @@
 +
   1. The graphics are [floor and ceiling function graphs]
   2. $floor(1\/2) = 0$. $ceil(1\/2) = 1$. $floor(-1\/2) = -1$. $ceil(-1\/2) = 0$. $floor(pi) = 3$. $ceil(pi) = 4$. $floor(1\/2 + ceil(1\/2)) = 1$. $ceil(floor(1\/2) + ceil(1\/2) + 1\/2) = 2$.
-  3. $72 452$ groups.
+  3. $70754$ groups.
 
 +
   1. Injective, not surjective, and not bijective.
@@ -359,7 +359,7 @@
 
 +
   + From the definition of binomial coefficients we can get that $binom(n, k-1) = k / (n_k+1) binom(n, k)$, hence the less than inequalities. The "greater than" ones follow by symmetry of the coefficients.
-  + The previous question tells us that $binom(n, floor(n/2))$ is the largest of the coefficients $binom(1, n), dots, binom(n, n-1)$, so it's greater than or equal to their average, which is $(2^n - 2) / (n-1) >= 2^n / (n-1) >= 2^n / n$.
+  + The previous question tells us that $binom(n, floor(n/2))$ is the largest of the coefficients $binom(1, n), dots, binom(n, n-1)$, so it's greater than or equal to their average, which is $(2^n - 2) / (n-1)$, and $(2^n - 2) / (n-1) - 2^n / n = (2^n - 2n) / (n (n-1)) >= 0$ for $n>=2$, hence the result.
 
 
 = Sequences

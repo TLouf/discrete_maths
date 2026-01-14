@@ -66,9 +66,9 @@
   + $A without B = A triangle.t (A inter B)$
   + $overline((A triangle.t B)) = overline(A) triangle.t B = A triangle.t overline(B)$
 
-+ Simplify the following expressions:
-  + $[overline(B) inter (A union C) inter D] union [(A union B) inter overline(B)]$ #v(0.5em)
-  + $overline(([(A union B) inter C] union overline(B)))$
++ Simplify the following expressions:#v(0.2em)
+  + $overline((overline(A) union overline(B))) union overline((overline(A) union B))$ #v(0.5em)
+  + $overline((overline([(A union B) inter C]) union overline(B)))$
 
 // R 2.2.54
 + Determine $union_(i=0)^(+ oo) A_i$ and $inter_(i=0)^(+ oo) A_i$ for
