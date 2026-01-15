@@ -252,7 +252,7 @@ You can represent these operations with a Venn diagram too. For instance:
 ]
 
 #property[
-  - *Distributiveee laws*:
+  - *Distributive laws*:
     - $A union (B inter C) = (A union B) inter (A union C)$
     - $A inter (B union C) = (A inter B) union (A inter C)$
   - *De Morgan's laws*:
@@ -388,7 +388,26 @@ Here we'll see three options, which are the directed graph, Cartesian and adjace
 ]
 // Give more examples with non one-to-one,, show how full cartesian product looks like...
 
-#definition(title: [Inverse relations])[
+#slidebreak()
+
+To be more formal:
+
+#definition(title: [Adjacency matrix], slide-break: false)[
+  Let's consider a relation $R$ from the set $A$ to the set $B$, and the orderings $a_1, a_2, ..., a_(|A|)$ and $b_1, b_2, ..., b_(|B|)$ of these two sets.
+  The *adjacency matrix* of $R$ associated to these orderings is the $|A| times |B|$ matrix $M$ whose entries satisfy
+  $
+    M_(i j) = cases(
+      1 "if" a_i rel b_j,
+      0 "if" a_i cancel(rel) b_j,
+    )
+  $
+]
+
+#slidebreak()
+
+We clearly saw graphically that relations have a direction, that one can naturally reverse.
+
+#definition(title: [Inverse relations], slide-break: false)[
   Let $R$ be a relation from the set $A$ to the set $B$.
   The inverse relation of $R$ is the relation that assigns to each element $b in B$ an element $a in A$.
   We denote the inverse by $R^(-1)$, so that
