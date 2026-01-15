@@ -99,30 +99,32 @@
   + It is an equivalence relation (so reflexive, symmetric and transitive).
   + $B$ is the set of bit strings. $R$ is still an equivalence relation.
 
-+ The quotient set is isomorphic to $op("Im")(f)$. #let rel-same-function-image = [Question *2.1*] //#el.elabel("lab") <rel-same-function-image>
++ The quotient set is isomorphic to $op("Im")(f)$. #let rel-same-function-image = [Question *2.4*] //#el.elabel("lab") <rel-same-function-image>
 
 +
-  + Use #rel-same-function-image.
+  + Derives directly from the fact that equality is an equivalence..
   + $cal(P)(A)\/R = {[C]_R : C in cal(P)(B)}$, and it is isomorphic to $cal(P)(B)$.
 
 +
-  + Use #rel-same-function-image.
-  + $NN times NN\/R = {[(N, 1)]_R : N >= 1}$, and it is isomorphic to $NN$. $NN$ is obviously isomorphic to $NN without {1}$: use the bijective function $f : NN -> NN without {1}$ such that $f(n) = n + 1$.
+  + Use #rel-same-function-image with $f(a,b) = a+b$.
+  + $NN times NN\/R = {[(n, 0)]_R | n in NN}$, and it is isomorphic to $NN$. $NN$ is obviously isomorphic to $NN$: use the bijective function $f : NN -> NN$ such that $f(n) = n$.
 
 +
-  + Use #rel-same-function-image.
+  + Use #rel-same-function-image with $f(a)=floor(sqrt(a))$.
   + The equivalence classes are $[1]_R = {1, 2, 3}$, $[4]_R = {4, 5, 6, 7, 8}$, and $[9]_R = {9, 10, 11, 12, 13, 14, 15}$.
   + $A\/R = {[1]_R, [4]_R, [9]_R}$.
 
 +
-  + Use #rel-same-function-image.
+  + Use #rel-same-function-image with $f(a,b) = a/b$.
   + $RR times (RR without {0}) \/ R = {[(K, 1)]_R : K in RR}$.
 
 + You have to show the implications in both directions:
   + If $R$ is an equivalence relation, then $R$ is circular and reflexive.
   + If $R$ is a circular and reflexive relation, then $R$ is an equivalence relation.
 
-+ 1) False. 2) True.
++
+  + False: take any set with three elements, it can be shown to be necessarily weakly transitive by vacuous proof.
+  + True.
 
 + $a = b = 0$, and $c = 1$.
 
@@ -133,7 +135,7 @@
     and the quotient set is
     $ ZZ\/R = {[0]_R, [1]_R}. $
 
-  + It is an equivalence relation by #rel-same-function-image with $f : ZZ -> ZZ$ defined by $f(x) = x^2 - x$. If $v, w$ belongs to the same equivalence class, they should satisfy
+  + It is an equivalence relation by #rel-same-function-image with $f : ZZ -> ZZ$ defined by $f(x) = x^2 - x$. If $v, w$ belong to the same equivalence class, they should satisfy
     $ v^2 - w^2 = (v - w)(v + w) = v - w ==> cases(v = w, v + w = 1 "if" v != w) $
     Therefore, the equivalence classes have two elements:
     $ [n]_R = {n, 1 - n}. $
@@ -142,20 +144,20 @@
     and it is isomorphic to $NN$. The equivalence class containing 2005 is
     $ [2005]_R = {2005, -2004}. $
 
-  + It is an equivalence relation by #rel-same-function-image with $f : RR^2 -> RR^2$ defined by $f(x, y) = x y$. The equivalence classes are given by those points in $RR^2$ satisfying $x y = alpha$, where $alpha$ is a constant: each equivalence class is a $45°$-rotated standard hyperbola. In particular, $alpha > 0$ corresponds to a hyperbola on the first and third quadrants; $alpha = 0$ to the coordinate axes; and $alpha < 0$ to a hyperbola on the second and fourth quadrants. The equivalence classes are:
+  + It is an equivalence relation by #rel-same-function-image with $f : RR^2 -> RR$ defined by $f(x, y) = x y$. The equivalence classes are given by those points in $RR^2$ satisfying $x y = alpha$, where $alpha$ is a constant: each equivalence class is a $45°$-rotated standard hyperbola. In particular, $alpha > 0$ corresponds to a hyperbola on the first and third quadrants; $alpha = 0$ to the coordinate axes; and $alpha < 0$ to a hyperbola on the second and fourth quadrants. The equivalence classes are:
     $ [(1, alpha)]_R = {(x, y) in RR^2 : x y = alpha}. $
     The quotient set is:
     $ RR^2\/R = {[(1, alpha)]_R : alpha in RR}, $
     therefore, such set is isomorphic to $RR$.
 
-  + It is an equivalence relation by #rel-same-function-image with $f : RR^2 -> RR^2$ defined by $f(x, y) = x^2 - y^2$. The equivalence classes are given by those points in $RR^2$ satisfying $x^2 - y^2 = alpha$, where $alpha$ is a constant. The equivalence classes are standard hyperbolas with asymptotes $y = plus.minus x$. In particular, $alpha > 0$ corresponds to a hyperbola that crosses the $x$-axis at $plus.minus sqrt(alpha)$. If $alpha = 0$, the equivalence class consists precisely in the lines $y = plus.minus x$. Finally, if $alpha < 0$, we have a $90°$-rotated hyperbola that crosses the $y$-axis at $y = plus.minus sqrt(-alpha)$. The equivalence classes are:
+  + It is an equivalence relation by #rel-same-function-image with $f : RR^2 -> RR$ defined by $f(x, y) = x^2 - y^2$. The equivalence classes are given by those points in $RR^2$ satisfying $x^2 - y^2 = alpha$, where $alpha$ is a constant. The equivalence classes are standard hyperbolas with asymptotes $y = plus.minus x$. In particular, $alpha > 0$ corresponds to a hyperbola that crosses the $x$-axis at $plus.minus sqrt(alpha)$. If $alpha = 0$, the equivalence class consists precisely in the lines $y = plus.minus x$. Finally, if $alpha < 0$, we have a $90°$-rotated hyperbola that crosses the $y$-axis at $y = plus.minus sqrt(-alpha)$. The equivalence classes are:
     $ [(sqrt(alpha), 0)]_R = {(x, y) in RR^2 : x^2 - y^2 = alpha}, quad alpha >= 0 $
     $ [(0, sqrt(-alpha))]_R = {(x, y) in RR^2 : x^2 - y^2 = alpha}, quad alpha < 0 $
     The quotient set is:
     $ RR^2\/R = {[(sqrt(alpha), 0)]_R : alpha >= 0} union {[(0, sqrt(-alpha))]_R : alpha < 0}, $
     therefore, such set is isomorphic to $RR$.
 
-  + It is an equivalence relation by #rel-same-function-image with $f : RR^2 -> RR^2$ defined by $f(x, y) = x^2 + y^2$. The equivalence classes are given by those points in $RR^2$ satisfying $x^2 + y^2 = alpha^2 >= 0$, where $alpha$ is a constant. Therefore, the equivalence classes are circumferences of radius $alpha >= 0$:
+  + It is an equivalence relation by #rel-same-function-image with $f : RR^2 -> RR$ defined by $f(x, y) = x^2 + y^2$. The equivalence classes are given by those points in $RR^2$ satisfying $x^2 + y^2 = alpha^2 >= 0$, where $alpha$ is a constant. Therefore, the equivalence classes are circumferences of radius $alpha >= 0$:
     $ [(alpha, 0)]_R = {(x, y) in RR^2 : x^2 + y^2 = alpha^2 "and" alpha >= 0}. $
     The quotient set is
     $ RR^2\/R = {[(alpha, 0)]_R : alpha >= 0}, $
@@ -175,16 +177,15 @@
   + The Hasse diagram is:
     #align(center)[
       ```
-      4
+      d
       │
-      3 ─────┐
+      c ─────┐
       │      │
-      2      5
+      b      e
       │
-      1
+      a
       ```
     ]
-// + $1 prec.eq 2 prec.eq 5 prec.eq 3 prec.eq 4$.
 
 +
   + Set of maximal elements = ${(1, 8), (1, 5), (0, 8), (2, 8), (2, 5)}$.

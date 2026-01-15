@@ -174,7 +174,7 @@
   + Every reflexive, symmetric, and weakly transitive relation is an equivalence relation.
 
 + The adjacency matrix of a binary relation $R$ is given by
-  $ A_R = mat(1, 0, 1; 0, 1, b; 1, a, c) $
+  $ M_R = mat(1, 0, 1; 0, 1, b; 1, a, c) $
   where $a, b, c = 0, 1$. Which conditions should $a$, $b$, and $c$ satisfy so that $R$ becomes an equivalence relation?
 
 + Show that the following relations are equivalence relations. Find the corresponding classes of equivalence and the quotient set $V\/R$:
@@ -186,8 +186,8 @@
 
 // R 9.5.48
 + List the equivalence relations produced by these partitions of ${a, b, c, d, e, f, g}$.
-  + ${a, b}, {c, d}, {e, f, g}$
-  + ${a}, {b}, {c, d}, {e, f}, {g}$
+  + ${{a, b}, {c, d}, {e, f, g}}$
+  + ${{a}, {b}, {c, d}, {e, f}, {g}}$
 
 // R 9.5.45
 + Which of these are partitions of the set $ZZ times ZZ$ of ordered pairs of integers?
@@ -210,12 +210,12 @@
   $ C = {(x, y) in RR^2 | x^2 + y^2 = 1} $
   Find $sup(C)$ and $inf(C)$ by considering $C$ as a subset of $RR^2$.
 
-+ Let us consider two binary relations on the set $NN$.
-  $ a rel_1 b <==> exists n in NN "such that" a = b^n $
-  $ a rel_2 b <==> exists n in NN union {0} "such that" a = b^n $
++ Let us consider two binary relations on the set $NN^*$.
+  $ a rel_1 b <==> exists n in NN^* "such that" a = b^n $
+  $ a rel_2 b <==> exists n in NN "such that" a = b^n $
   + Show that $R_1$ is an order relation. Is $R_2$ also an order relation? Is $R_1$ a total order?
-  + Find the Hasse diagram of both relations on the set $A = {n in NN | 1 <= n <= 9}$.
-  + Find for $R_1$ and $R_2$ the maximal, minimal, maximum, and minimum elements on $A$. Find also the supremum and infimum of $A$ as a subset of $NN$.
+  + Find the Hasse diagram of both relations on the set $A = {n in NN^* | 1 <= n <= 9}$.
+  + Find for $R_1$ and $R_2$ the maximal, minimal, maximum, and minimum elements on $A$. Find also the supremum and infimum of $A$ as a subset of $NN^*$.
 
 + A polygon $P$ is convex if, for any two points $a, b in P$, the segment $overline(a b)$ joining both points is totally contained inside the polygon.
   Prove that the sum of the interior angles of a convex polygon of $n >= 3$ sides is $(n - 2)pi$.\
