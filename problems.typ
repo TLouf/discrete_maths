@@ -241,17 +241,27 @@
   + 40 hours before it reads 12:00?
   + 100 hours after it reads 6:00?
 
++ Prove that $6 | a(a + 1)(2a + 1)$ for any $a in ZZ$.
+
 + Given $a = 92$ and $b = 84$, use Euclid's algorithm to compute $d = gcd(a, b)$. Find integers $x, y in ZZ$ such that $a x + b y = d$.
 
-+ The product of two natural numbers is 1260, and their lcm is 630. Find those numbers.
+// 13.7
++ Prove that for all $n in NN^*$ the following equation holds:
+  $ 3 | (4^n - 1) $
 
-+ How many positive divisors does the number $29338848000 = 2^8 dot 3^5 dot 5^3 dot 7^3 dot 11$ have? How many of them are multiple of 99? And how many of them are multiple of 39?
+// 13.11
++ Given their form provided below, prove by induction that the Fibonacci numbers $F_n$ and $F_(n+1)$ are relatively prime for all integer $n >= 0$:
+  $
+    F_n = F_(n-1) + F_(n-2), quad n >= 2, quad F_0 = 0, quad F_1 = 1
+  $
 
 + Prove that $log_2 3$ is an irrational number.
 
 + Prove that 101 is a prime number.
 
-+ Prove that $6 | a(a + 1)(2a + 1)$ for any $a in ZZ$.
++ How many positive divisors does the number $29338848000 = 2^8 dot 3^5 dot 5^3 dot 7^3 dot 11$ have? How many of them are multiple of 99? And how many of them are multiple of 39?
+
++ The product of two natural numbers is 1260, and their lcm is 630. Find those numbers.
 
 // R 4.4.6.b)
 + Find an inverse of $a$ modulo $m$ for $a=34$ and $m=89$.
@@ -261,8 +271,6 @@
   + $8 x equiv 2 space (mod 10)$.
   + $5 x equiv 7 space (mod 15)$.
   + $3 x equiv 9 space (mod 15)$.
-
-+ Prove that $30 | (a^25 - a)$ for any $a in ZZ$.
 
 // R 4.4.17
 + Show that if $p$ is prime, the only solutions of $x^2 equiv 1 (mod p)$ are integers $x$ such that $x equiv 1 (mod p)$ or $x equiv −1 (mod p)$.
@@ -276,16 +284,6 @@
 + Let $A = {n in ZZ | 2 <= n <= 12}$, and let us define on $A$ the order relation $R$ given by
   $ n rel m <==> n | m, "or" n "is prime and" n <= m $
   Give the maximal, minimal, maximum, and minimum elements of the poset $(A, R)$.
-
-// 13.7
-+ Prove that for all $n in NN$ the following equation holds:
-  $ 3 | (4^n - 1) $
-
-// 13.11
-+ Given their form provided below, prove by induction that the Fibonacci numbers $F_n$ and $F_(n+1)$ are relatively prime for all integer $n >= 0$:
-  $
-    F_n = F_(n-1) + F_(n-2), quad n >= 2, quad F_0 = 0, quad F_1 = 1
-  $
 
 
 = Counting

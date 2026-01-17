@@ -240,44 +240,43 @@
   + 8:00
   + 10:00
 
++ As any integer $a$ can be written as $a = 6q + r$ with $r in {0, 1, 2, 3, 4, 5}$, it suffices to prove the statement for each possible remainder $r$.
+
 + $gcd(92, 84) = 4 = 11 dot 84 - 10 dot 92$.
 
-+ The set of solutions is:
-  $ {(2, 630), (10, 126), (14, 90), (18, 70), (630, 2), (126, 10), (90, 14), (70, 18)}. $
++ Note: this statement can be proven by using modular arithmetic directly and by mathematical induction.
+
++ In the inductive step, it is easier to use a proof by contradiction.
+
++ Prove it by contradiction using the fundamental theorem of arithmetic.
+
++ You only need to prove that $p divides.not 101$ for $p = 2, 3, 5, 7$. Why?
 
 +
   + $1728$.
   + $576$.
   + $0$.
 
-+ Prove it by contradiction using the fundamental theorem of arithmetic.
++ The set of solutions is:
+  $ {(2, 630), (10, 126), (14, 90), (18, 70), (630, 2), (126, 10), (90, 14), (70, 18)}. $
 
-+ You only need to prove that $p divides.not 101$ for $p = 2, 3, 5, 7$. Why?
-
-+ As any integer $a$ can be written as $a = 6q + r$ with $r in {0, 1, 2, 3, 4, 5}$, it suffices to prove the statement for each possible remainder $r$.
-
-+ 55.
++ $55$.
 
 +
   + $x equiv 6 (mod 13)$.
-  + There are two solutions: $x equiv 4 (mod 10)$ and $x equiv 9 (mod 10)$.
+  + $x equiv 4 (mod 5)$.
   + There are no solutions.
-  + There are three solutions: $x equiv 3 (mod 15)$, $x equiv 8 (mod 15)$, and $x equiv 13 (mod 15)$.
-
-+ Hint: First prove that $p | (a^25 - a)$ for $p = 2, 3, 5$.
+  + $x equiv 3 (mod 5)$.
 
 + Suppose that $x^2 equiv 1 (mod p)$. Then $p$ divides $x^2 − 1 = (x + 1)(x − 1)$. So $p ∣ x + 1$ or $p ∣ x − 1$, so $x equiv −1 (mod p)$ or $x equiv 1 (mod p)$.
 
-+ It is an equivalence relation (use #rel-same-function-image), and the equivalence classes are $[6]_R = {6, 12, 18}$, $[10]_R = {10, 40}$, and $[21]_R = {21, 441, 1323}$.
++ It is an equivalence relation, and the equivalence classes are $[6]_R = {6, 12, 18}$, $[10]_R = {10, 40}$, and $[21]_R = {21, 441, 1323}$.
 
 +
   + Set of maximal elements = ${8, 9, 10, 12}$.
   + Set of minimal elements = ${2}$.
   + $max(A)$ does not exist; but $min(A) = 2$.
 
-+ Note: this statement can be proven by using modular arithmetic (without induction); but we look for a proof that makes explicit use of mathematical induction.
-
-+ In the inductive step, it is easier to use a proof by contradiction.
 
 = Counting
 

@@ -464,7 +464,8 @@ And as a direct consequence, to redefine relatively-prime integers through the f
 
 #remark[
   - This theorem allows us to divide by a common factor $c$ both sides of the sign $equiv$ whenever $c$ and the modulus $m$ are relatively prime.
-  - If $c$ and $m$ are not relatively prime, then the correct result is: Let us write $m = p dot c$ for positive integers $p, c$, and let $a, b$ be integers. If $a dot c equiv b dot c (mod p dot c)$, then $a equiv b (mod p)$.
+  - If $c$ and $m$ are not relatively prime, then the correct result is:\
+    Let us write $m = p dot c$ for positive integers $p, c$, and let $a, b$ be integers. If $a dot c equiv b dot c (mod p dot c)$, then $a equiv b (mod p)$.
 ]
 
 
@@ -568,7 +569,11 @@ Here's why we stopped right after introducing multiplicative inverses above: we 
 
 #remark[
   For small values of $m$ finding a multiplicative inverse is straightforward: we can simply multiply $a$ by $2, dots, m-1$ until the result exceeds a multiple of $m$ by $1$.
-  For higher $m$, we can rather use Bézout (@thm-bezout) to find coefficients $x$ and $y$ such that $gcd(a, m) = 1 = x dot a + y dot m$.
+
+  For higher $m$, we can rather use Bézout (@thm-bezout) to find coefficients $x$ and $y$ such that
+  $
+    gcd(a, m) = 1 = a dot x + m dot y <=> a dot x equiv 1 (mod m)
+  $
   It will then follow that $x$ is an inverse of $a$ modulo $m$.
 ]
 
