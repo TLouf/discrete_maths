@@ -40,7 +40,7 @@
 
 #let important = important-box
 #let notation = remark.with(title: "Notation", icon-name: "pencil")
-#let home = tip-box.with(title: "Try at home", icon-name: "home")
+#let home = tip-box.with(title: "Check at home", icon-name: "home")
 
 #let question-box = note-box.with(
   fill: rgb("#BA0865"),
