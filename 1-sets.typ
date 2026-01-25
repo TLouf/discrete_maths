@@ -120,7 +120,7 @@ Most of the time, and in the following of this course, $x in U$ can be omitted f
 
 
 #definition(title: [Set finiteness and cardinality])[
-  Let $S$ be a set. If there are exactly $n in NN$ distinct elements in $S$, we say that $S$ is a *finite set*, and that $|S| = n$ is the *cardinality* of $S$.
+  If there are exactly $n in NN$ distinct elements in a set $S$, we say that $S$ is a *finite set*, and that $|S| = n$ is the *cardinality* of $S$.
 ]
 
 
@@ -137,7 +137,7 @@ Most of the time, and in the following of this course, $x in U$ can be omitted f
 #remark[
   - Some define the natural numbers starting from one, thus excluding zero.
     To avoid any ambiguity, one can respectively use the terms "non-negative" or "positive" integers to distinguish between the definition of natural numbers including or excluding zero.
-    Here, we will denote the set $NN without {0}$ as $NN^*$.
+    Here, we will denote the set ${n in NN | n != 0}$ as $NN^*$.
   - We can informally "define" the following sets of numbers:
     - Integer numbers: $ZZ = {0, plus.minus 1, plus.minus 2, ...}$
     - Rational numbers: $QQ = {p/q | p, q in ZZ, q != 0}$
@@ -148,14 +148,20 @@ Most of the time, and in the following of this course, $x in U$ can be omitted f
 === Subsets
 
 #definition(title: [Subset], slide-break: false)[
-  The set $A$ is a *subset* of the set $B$ ($A subset.eq B$) if and only if every element of $A$ is also an element of $B$.a
+  The set $B$ is a *subset* of the set $A$ ($B subset.eq A$) if and only if every element of $B$ is also an element of $A$:
+  $
+    B subset.eq A <=> (b in B => b in A).
+  $
 
-  The set $A$ is a *proper subset* of $B$ ($A subset B$) if $A$ is a subset of $B$, and $B$ contains at least an element not in $A$.
+  The set $B$ is a *proper subset* of $A$ ($B subset A$) if $B$ is a subset of $A$, and $A$ contains at least an element not in $B$:
+  $
+    B subset A <=> (b in B => b in A) and (exists a in A, a in.not B).
+  $
 ]
 
 #slidebreak()
 
-We can represent $A subset.eq B$, or $A subset B$ here to be precise, with a *Venn diagram*:
+We can represent $B subset.eq A$, with a *Venn diagram*:
 #figure(
   image("assets/A_sub_B.svg", height: 6em),
 )
@@ -232,9 +238,11 @@ Given two sets $A$ and $B$ we can define a number of operations.
   $
 ]
 
+#slidebreak()
+
 A set can therefore be defined as the result of operations involving other sets. For instance,
 $
-  ZZ = NN union {-n | n in NN}, quad ZZ^+ = NN without {0}
+  ZZ = NN union {-n | n in NN}, quad NN^* = NN without {0}
 $
 
 You can represent these operations with a Venn diagram too. For instance:
@@ -246,10 +254,23 @@ You can represent these operations with a Venn diagram too. For instance:
   ),
 )
 
+#slidebreak()
+
 #question-box[
   How would you represent the other operations?
   Then, using these representations, how would you write the difference operations as combinations of the union, intersection and complement operations?
 ]
+
+#pause
+
+#solution[
+  $
+       A without B & = A inter (overline(B)), \
+    A triangle.t B & = (A union B) without (A inter B).
+  $
+]
+
+#slidebreak()
 
 #property[
   - *Distributive laws*:
@@ -321,15 +342,18 @@ Thus, while ${a_1, a_2} = {a_2, a_1}$, for tuples $(a_1, a_2) != (a_2, a_1)$ if 
   Then, you used the notation $RR^2 = RR times RR$.
 ]
 
+The Cartesian product allows us to introduce a fundamental concept of discrete mathematics: relations.
+
 #definition(title: [Binary relations])[
   A *binary relation* $R$ from the set $A$ to the set $B$ is a set of ordered pairs from the two sets. Said differently, $R$ is a subset of $A times B$, so:
   $
     R subset.eq A times B.
   $
 
-  The set $A$ is then called the *domain* of $R$ while $B$ is called its *codomain*.
+  $A$ is then called the *domain* of $R$, while $B$ is called its *codomain*.
 
-  If $a in A$ is related to $b in B$ by $R$, we therefore have $(a, b) in R$, which we can also write $a rel b$. If they are not related, we have $(a, b) in.not R$, which we can also write $a cancel(rel) b$.
+  If $a in A$ is related to $b in B$ by $R$, we therefore have $(a, b) in R$, which we can also write $a rel b$.
+  If they are not related, we have $(a, b) in.not R$, which we can also write $a cancel(rel) b$.
 ]
 
 // TODO: examples
@@ -337,6 +361,7 @@ Thus, while ${a_1, a_2} = {a_2, a_1}$, for tuples $(a_1, a_2) != (a_2, a_1)$ if 
 #slidebreak()
 
 How can we represent binary relations graphically?
+
 What we want is to show each set on a separate "side", and link related elements together.
 Here we'll see three options, which are the directed graph, Cartesian and adjacency matrix representations.
 
@@ -422,18 +447,20 @@ We clearly saw graphically that relations have a direction, that one can natural
 
 #definition(title: [Composition of relations])[
   Let $R$ be a relation from the set $A$ to the set $B$, and let $S$ be a relation from the set $B$ to the set $C$.
-  The composition of the relation $S$ and $R$ is a relation from $A$ to $C$ denoted as $S circle R$.
-  In particular, $S circle R$ is a subset of the Cartesian product $A times C$ such that, given any $a in A$ and $c in C$, $a (S circle R) c$ if and only if there exists some $b in B$ satisfying $a rel b$ and $b "" S "" c$.
+  The composition of the relation $S$ and $R$ is a relation from $A$ to $C$ denoted as $S circle.small R$.
+  In particular, $S circle.small R$ is a subset of the Cartesian product $A times C$ such that, given any $a in A$ and $c in C$, $a (S circle.small R) c$ if and only if there exists some $b in B$ satisfying $a rel b$ and $b op("" S "") c$.
+  // is read as "S composed with R", or "S of R" (more for functions)
 ]
+// example: uncle, brother of parent
 
 #proposition[
-  Let $A_R$ be the adjacency matrix of the relation $R$ from the set $A$ to the set $B$, and let $A_S$ be the adjacency matrix of the relation $S$ from the set $B$ to the set $C$.
-  Then, the adjacency matrix $A_(S circle R)$ of the composition of the relations $S circle R$ from $A$ to $C$ is given by:
-  $ A_(S circle R) = A_R dot.o A_S $
+  Let $M_R$ be the adjacency matrix of the relation $R$ from the set $A$ to the set $B$, and let $M_S$ be the adjacency matrix of the relation $S$ from the set $B$ to the set $C$.
+  Then, the adjacency matrix $M_(S circle.small R)$ of the composition of the relations $S circle.small R$ from $A$ to $C$ is given by:
+  $ M_(S circle.small R) = M_R dot.o M_S $
   where the product $dot.o$ is the Boolean product of matrices.
 ]
 
-Using Boolean operations (instead of regular ones) guarantees that $A_(S circle R)$ is an adjacency matrix associated to a binary relation.
+Using Boolean operations (instead of regular ones) guarantees that $M_(S circle.small R)$ is an adjacency matrix associated to a binary relation.
 
 
 == Defining functions as relations
@@ -467,7 +494,7 @@ Using Boolean operations (instead of regular ones) guarantees that $A_(S circle 
   - $f$ is *bijective* if it is injective and surjective.
 ]
 
-// summary: is function by drawing vertical lines and checking never intersect two points, is injective if drawing horizontal lines they never intersect two points, and is surjective if all values of y are covered.
+// summary: is function by drawing vertical lines and checking intersect exactly one point, is injective if drawing horizontal lines they never intersect two points, and is surjective if all values of y are covered.
 
 // TODO (graphical) examples
 
