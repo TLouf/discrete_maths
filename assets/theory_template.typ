@@ -4,7 +4,6 @@
   assert(value in valid-values)
   value
 }
-// #let format = "slides"
 
 #let format-file = {
   if format == "slides" {
@@ -24,6 +23,7 @@
   valid-values.at(value)
 }
 
+// TODO: something that from context, does not include slidebreak if content preceding box is "basic" content (introductory sentences)
 #let theorion-render-fn = render-fn
 #let render-fn(
   fill: red,
