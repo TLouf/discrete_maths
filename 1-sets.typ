@@ -451,7 +451,20 @@ We clearly saw graphically that relations have a direction, that one can natural
   In particular, $S circle.small R$ is a subset of the Cartesian product $A times C$ such that, given any $a in A$ and $c in C$, $a (S circle.small R) c$ if and only if there exists some $b in B$ satisfying $a rel b$ and $b op("" S "") c$.
   // is read as "S composed with R", or "S of R" (more for functions)
 ]
-// example: uncle, brother of parent
+
+#example[
+  We can consider a set $A$ corresponding to the members of your family from your generation, a set $B$ corresponding to the previous generation, and $C$ to two generation ago.
+  We can introduce the relations
+  $
+    R & = { (a,b) in A times B | a "is the child of" b}, \
+    S & = { (b,c) in B times C | b "is the child of" c},
+  $
+  whose composition gives
+  $
+    S circle.small R & = {(a,c) in A times C | "a parent of" a "is the child of" c} \
+                     & = {(a,c) in A times C | a "is the grandchild of" c}.
+  $
+]
 
 #proposition[
   Let $M_R$ be the adjacency matrix of the relation $R$ from the set $A$ to the set $B$, and let $M_S$ be the adjacency matrix of the relation $S$ from the set $B$ to the set $C$.
