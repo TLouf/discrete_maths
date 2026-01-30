@@ -217,17 +217,17 @@ Given two sets $A$ and $B$ we can define a number of operations.
   These two notations are the respective equivalents of the sum $sum$ and product $product$ notations that you already knew.
 ]
 
-#definition(title: [Set complement])[
-  The complement of a set $A$ is the set of all elements that are not in $A$:
-  $
-    overline(A) = {x | x in.not A} = U without A
-  $
-]
-
 #definition(title: [Sets difference])[
   The difference of two sets $A$ and $B$ is the set of all elements that are in $A$ but not in $B$:
   $
     A without B = {x | (x in A) and (x in.not B)}
+  $
+]
+
+#definition(title: [Set complement])[
+  The complement of a set $A$ is the set of all elements that are not in $A$:
+  $
+    overline(A) = {x | x in.not A} = U without A
   $
 ]
 
