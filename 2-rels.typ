@@ -21,6 +21,10 @@ While we previously introduced relations $R$ from a set $A$ to a set $B$, here w
 
 In the following, unless otherwise specified, "a relation $R$" refers to a relation on a single set $A$.
 
+---
+
+Let's now see some properties which will allow us to define two particular kinds of relations which are useful to compare elements of a set.
+
 #definition(title: [Reflexive relations])[
   A relation $R$ is reflexive if all elements of $A$ are related to themselves:
   $
@@ -56,17 +60,18 @@ In the following, unless otherwise specified, "a relation $R$" refers to a relat
 
 #proposition[
   A relation $R$ is transitive if and only if $R^n subset.eq R$ for all $n in NN$. The $n$-th power $R^n$ of the relation $R$ is recursively defined as follows:
-  $ R^1 = R, quad R^n = R circle R^(n-1) $
+  $ R^1 = R, quad R^n = R circle.small R^(n-1) $
 ]
 // proof that uses induction in Rosen p.608
 
 #slidebreak()
 
 #corollary[
-  A relation $R$ is transitive if and only if $R^2 subset.eq R$. In other words, $R$ is transitive if and only if for each nonzero entry $(A_(R^2))_(i,j) = 1$ of the adjacency matrix of $R^2$, the corresponding entry of the adjacency matrix of $R$ is also nonzero $(A_R)_(i,j) = 1$.
+  A relation $R$ is transitive if and only if $R^2 subset.eq R$. In other words, $R$ is transitive if and only if for each nonzero entry $(M_(R^2))_(i,j) = 1$ of the adjacency matrix of $R^2$, the corresponding entry of the adjacency matrix of $R$ is also nonzero: $(M_R)_(i,j) = 1$.
 ]
 
-All these properties will now allow us to define two kinds of relations which are useful to compare elements of a set.
+#slidebreak()
+
 
 == Equivalence relations
 <sec-equiv-rels>
@@ -92,6 +97,7 @@ All these properties will now allow us to define two kinds of relations which ar
     R_P = {(a,b) in P^2 | a "is the brother of" b}
   $
   If not, what's the closest relation you can think of that's actually an equivalence?
+  // no because if $b$ is female, then no symmetry: need to replace brother with sibling
 ]
 
 #definition(title: [Equivalence classes])[
@@ -101,14 +107,17 @@ All these properties will now allow us to define two kinds of relations which ar
   $ [a]_R = {b in A | a rel b} $
   Any element $b in [a]_R$ is called a *representative* of the equivalence class of $a$.
 ]
-// mention why we use the word representative: because all elements in the class are equivalent
+// mention why we use the word representative: because all elements in the class are equivalent. and some representatives are better than others!
 
 #theorem[
   Let $R$ be an equivalence relation on $A$. Then,
   1. $[a]_R$ is non-empty for all $a in A$.
   2. For any two elements $a, b in A$, either $[a]_R = [b]_R$ (and $a rel b$), or $[a]_R inter [b]_R = emptyset$.
+  // simply saying: either they are related, or not
   3. The equivalence classes determine the relation uniquely.
 ]
+
+---
 
 Equivalence classes are useful because they allow us to partition a set.
 But first, what does that even mean?
@@ -130,9 +139,9 @@ But first, what does that even mean?
 
 
 #theorem[
-  Let $R$ be an equivalence relation on $A$.
-  Then the set of all equivalence classes of $R$ form a partition of $A$.
-  Conversely, given a partition ${A_1, A_2, ...}$ of $A$, there exists an equivalence relation $R$ such that its equivalence classes are the sets $A_i$.
+  Let $R$ be an equivalence relation on $A$.\
+  Then the set of all equivalence classes of $R$ form a partition of $A$.\
+  Conversely, given a partition ${A_i}$ of $A$, there exists an equivalence relation $R$ such that its equivalence classes are the sets $A_i$.
 ] <thm-equiv-classes-partition>
 
 #slidebreak()
@@ -146,7 +155,7 @@ But first, what does that even mean?
 #slidebreak()
 
 #example[
-  From the equivalence relation you defined in the example above. translate in plain words what its associated equivalence classes represent.
+  From the equivalence relation you defined in the example above, translate in plain words what its associated equivalence classes represent.
   Then also explain in plain words why they do form a partition of the set of all people, that is how they fulfill each condition of @def-partition.
 ]
 
@@ -176,8 +185,11 @@ But first, what does that even mean?
 #example[
   Are the following posets?
   + $(ZZ, >=)$
-  + $(NN, divides)$, where $divides$ is the "divides" relation: $a divides b <=> exists q in NN "such that" b = q dot a$.
-  + $(P, {(a,b) in P | a "is older than" b}$, where $P$ is the set of all people.
+  + $(NN^*, divides)$, where $divides$ is the "divides" relation:
+    $ a divides b <=> exists q in NN "such that" b = q dot a. $
+  // a divides itself: q=1, a divides b and b divides c implies a divides c, and a divides b implies b does not divide a, except if a=b, because a <= b, so antisym
+  // + $(P, {(a,b) in P | a "is older than" b})$, where $P$ is the set of all people.
+  // yes!
 ]
 
 #slidebreak()
@@ -188,7 +200,6 @@ It is therefore useful to distinguish between elements which can be compared usi
 #definition(title: [Comparability])[
   Let $(A, prec.curly.eq)$ be a partially ordered set.
   Two elements $a, b in A$ are said to be *comparable* if either $a prec.curly.eq b$ or $b prec.curly.eq a$.
-  This is basically just another word for "related", but which makes more intuitive sense in the context of orderings.
   If neither of these conditions holds, such elements are said to be incomparable.
 ]
 
@@ -221,16 +232,10 @@ A poset can therefore also be represented as a directed graph, but with several 
 All these lead to a representation known as a *Hasse diagram*.
 
 #slidebreak()
-// TODO: example or by hand? with 1,2,3,4 like in Rosen
-// #figure(
-//   grid(
-//     columns: 3,
-//     cetz.canvas({
-//       import cetz.draw: *
 
-//     })
-//   ),
-// )
+#example[
+  Draw the Hasse diagram of $({1,2,3,4}, <=)$.
+]
 
 
 === Extremal elements
@@ -252,22 +257,25 @@ All these lead to a representation known as a *Hasse diagram*.
 
 #definition(title: [The maximum and minimum])[
   Let $(A, prec.curly.eq)$ be a partially ordered set.
-  - $M^star in A$ is *the maximum (or greatest element)* of $A$ if all elements precede or are equal to it:
+  - $M^* in A$ is *the maximum (or greatest element)* of $A$ if all elements precede or are equal to it:
     $
-      forall a in A, a prec.curly.eq M^star
+      forall a in A, a prec.curly.eq M^*
     $
-  - $m^star in A$ is *the minimum (or least element)* if it precedes or is equal to all elements:
+  - $m^* in A$ is *the minimum (or least element)* if it precedes or is equal to all elements:
     $
-      forall a in A, m^star prec.curly.eq a
+      forall a in A, m^* prec.curly.eq a
     $
-  In other words, in the Hasse diagram associated to $(A, prec.curly.eq)$, $M^star$ is above all the elements of $A$, and $m^star$ is below all elements of $A$.
+  In other words, in the Hasse diagram associated to $(A, prec.curly.eq)$, $M^*$ is above all the others, and $m^*$ is below them.
+]
+
+#notation[
   The maximum and minimum of $(A, prec.curly.eq)$ are denoted by $max(A)$ and $min(A)$, respectively.
 ]
 
 #slidebreak()
 
 #remark[
-  The maximal, minimal, greatest and least elements of $(A, prec.curly.eq)$ might not exist.
+  The greatest (maximum) and least (minimum) elements might not exist for a given $(A, prec.curly.eq)$.
 ]
 
 #example[
@@ -279,7 +287,7 @@ All these lead to a representation known as a *Hasse diagram*.
 ]
 
 #theorem[
-  The maximum $M^star$ of a partially ordered set $(A, prec.curly.eq)$, if it exists, is unique. In addition, the maximum of $(A, prec.curly.eq)$ is also a maximal element of it.
+  The maximum $M^*$ of a partially ordered set $(A, prec.curly.eq)$, if it exists, is unique. In addition, the maximum of $(A, prec.curly.eq)$ is also a maximal element of it.
 ]
 
 #remark[
@@ -313,30 +321,37 @@ All these lead to a representation known as a *Hasse diagram*.
 === Well-ordering and induction
 
 #definition(title: [Well-ordered sets], slide-break: false)[
-  $(A, prec.curly.eq)$ is a well-ordered set if $(A, prec.curly.eq)$ is a total order and all nonempty subsets of $A$ have a minimum.
+  $(A, prec.curly.eq)$ is a well-ordered set if it is totally ordered and all nonempty subsets of $A$ have a minimum.
 ]
 
 #slidebreak()
 
-#remark[
+#proposition[
   - The set of natural numbers with the usual order $(NN, <=)$ is a well-ordered set.
   - The totally-ordered set $(ZZ, <=)$ is not a well-ordered set; but as $ZZ$ is isomorphic to $NN$, we can choose another order $prec.curly.eq$ such that $(ZZ, prec.curly.eq)$ is a well-ordered set.
+  // why not: because any subset that goes to -infinity does not have a minimum. well-ordered with $prec.curly$ such that $0 prec.curly 1 prec.curly -1 prec.curly 2 prec.curly -2 prec.curly dots$
 ]
+
+#slidebreak()
 
 The well-ordering of natural numbers then explains the validity of proofs by induction!
 
-#theorem(title: "Induction principle: weak version")[
-  Let $P$ be some predicate on the positive integers. Under the following conditions:
+#theorem(title: "Induction principle: weak version", slide-break: false)[
+  Let $P$ be some predicate on the positive integers.
+  If the following conditions are fulfilled:
   / Basis step: We can show that $P(n_0)$ is true for a fixed $n_0 in NN$.
   / Inductive step: If we assume that $P(k)$ is true for some unspecified $k >= n_0$, then we can show that $P(k + 1)$ is true.
-  $P(n)$ is true for every $n >= n_0$.
+
+  Then $P(n)$ is true for every $n >= n_0$.
 ]
 
 #theorem(title: "Induction principle: strong version")[
-  Let $P$ be some predicate on the positive integers. Under the following conditions:
+  Let $P$ be some predicate on the positive integers.
+  If the following conditions are fulfilled:
   / Basis step: We can show that $P(n_0)$ is true for a fixed $n_0 in NN$.
   / Inductive step: If we assume that for some unspecified $k >= n_0$, $P(j)$ is true for any $n_0 <= j <= k$, then we can show that $P(k + 1)$ is true.
-  $P(n)$ is true for every $n >= n_0$.
+
+  Then $P(n)$ is true for every $n >= n_0$.
 ] <thm-strong-induction>
 
 #remark[
