@@ -21,7 +21,7 @@ While we previously introduced relations $R$ from a set $A$ to a set $B$, here w
 
 In the following, unless otherwise specified, "a relation $R$" refers to a relation on a single set $A$.
 
----
+#slidebreak()
 
 Let's now see some properties which will allow us to define two particular kinds of relations which are useful to compare elements of a set.
 
@@ -58,17 +58,23 @@ Let's now see some properties which will allow us to define two particular kinds
   $
 ]
 
-#proposition[
-  A relation $R$ is transitive if and only if $R^n subset.eq R$ for all $n in NN$. The $n$-th power $R^n$ of the relation $R$ is recursively defined as follows:
-  $ R^1 = R, quad R^n = R circle.small R^(n-1) $
+#slidebreak()
+
+This looks a lot like what we saw in compositions: in fact if $(a,b) in R$ and $(b,c) in R$, then by @def-rel-compo, $(a,c) in rel circle.small rel$, hence:
+
+#lemma(slide-break: false)[
+  A relation $R$ is transitive if and only if $(rel circle.small rel) subset.eq rel$.
 ]
-// proof that uses induction in Rosen p.608
 
 #slidebreak()
 
-#corollary[
-  A relation $R$ is transitive if and only if $R^2 subset.eq R$. In other words, $R$ is transitive if and only if for each nonzero entry $(M_(R^2))_(i,j) = 1$ of the adjacency matrix of $R^2$, the corresponding entry of the adjacency matrix of $R$ is also nonzero: $(M_R)_(i,j) = 1$.
+This lemma can then be used to prove the following by induction.
+
+#theorem(slide-break: false)[
+  A relation $R$ is transitive if and only if $R^n subset.eq R$ for all $n in NN$. The $n$-th power $R^n$ of the relation $R$ is recursively defined as follows:
+  $ R^1 = R, quad R^n = rel circle.small rel^(n-1) $
 ]
+// proof that uses induction in Rosen p.608
 
 #slidebreak()
 
@@ -117,7 +123,7 @@ Let's now see some properties which will allow us to define two particular kinds
   3. The equivalence classes determine the relation uniquely.
 ]
 
----
+#slidebreak()
 
 Equivalence classes are useful because they allow us to partition a set.
 But first, what does that even mean?
@@ -160,10 +166,11 @@ But first, what does that even mean?
 ]
 
 #definition(title: [Quotient set])[
-  Let $R$ be an equivalence relation on $A$. The set of all the equivalence classes of $R$ is called the quotient set of $A$ by $R$, and it is denoted by $A\/R$:
+  Let $R$ be an equivalence relation on $A$. The set of all the equivalence classes of $R$ is called the *quotient set* of $A$ by $R$, and it is denoted by $A\/R$:
   $ A\/R = {[a]_R | a in A} $
 ] <def-quotient-set>
 
+Following @thm-equiv-classes-partition, the quotient set $A \/ R$ can also be called the *partition* of $A$ by $R$.
 
 == Order relations
 
@@ -279,7 +286,7 @@ All these lead to a representation known as a *Hasse diagram*.
 ]
 
 #example[
-  Do the following posets have extremal elements and a maximum and minimum?
+  What extremal elements do the following posets have? Do they have a maximum and minimum?
   + $({2, 5, 3, 7}, divides)$, // nothing because all unrelated
   + $({2, 3, 4, 9}, divides)$, // only extremal elements
   + $({2, 4, 6, 8}, divides)$, // no maximum because 6 divides.not 8

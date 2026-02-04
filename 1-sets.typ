@@ -450,7 +450,7 @@ We clearly saw graphically that relations have a direction, that one can natural
   The composition of the relation $S$ and $R$ is a relation from $A$ to $C$ denoted as $S circle.small R$.
   In particular, $S circle.small R$ is a subset of the Cartesian product $A times C$ such that, given any $a in A$ and $c in C$, $a (S circle.small R) c$ if and only if there exists some $b in B$ satisfying $a rel b$ and $b op("" S "") c$.
   // is read as "S composed with R", or "S of R" (more for functions)
-]
+] <def-rel-compo>
 
 #example[
   We can consider a set $A$ corresponding to the members of your family from your generation, a set $B$ corresponding to the previous generation, and $C$ to two generation ago.
