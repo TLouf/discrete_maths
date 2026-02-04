@@ -10,16 +10,26 @@
 
 == Integer divisibility
 
+#slidebreak()
+
 The set of integers $ZZ$ is closed with respect to the operations of sum, subtraction, and product.
-In other words, for every $a, b in ZZ$, $a plus.minus b in ZZ$ and $a dot b in ZZ$. They also satisfy:
+In other words, for every $a, b in ZZ$, $a plus.minus b in ZZ$ and $a dot b in ZZ$. #pause They also satisfy:
 - $0$ is the identity with respect to the sum: $a + 0 = a$ for every $a in ZZ$.
+#pause
 - $1$ is the identity with respect to the product: $a dot 1 = a$ for every $a in ZZ$.
+#pause
 - For every $a in ZZ$, there exists a unique inverse element $-a in ZZ$ such that $a + (-a) = 0$.
+#pause
 
 However, the result of dividing two integers is not necessarily an integer!
 
+#slidebreak()
+
 #definition(title: [Divisibility])[
-  Given two integers $a != 0$ and $b$, we say that $a$ *divides* $b$ if there exists a *quotient* $q in ZZ$ such that $b = a dot q$. If $a$ divides $b$, we say that $a$ is a *factor* or *divisor* of $b$ and that $b$ is a *multiple* of $a$. We denote $a divides b$ when $a$ divides $b$, and we write $a divides.not b$ when $a$ does not divide $b$.
+  Given two integers $a != 0$ and $b$, we say that $a$ *divides* $b$ if there exists a *quotient* $q in ZZ$ such that $b = a dot q$. If $a$ divides $b$, we say that $a$ is a *factor* or *divisor* of $b$ and that $b$ is a *multiple* of $a$. We denote $a divides b$ when $a$ divides $b$, and we write $a divides.not b$ when $a$ does not divide $b$. So, in summary:
+  $
+    a divides b <=> exists q in ZZ, b = a dot q
+  $
 ]
 
 #slidebreak()
@@ -118,7 +128,7 @@ However, this shared notation comes from the fact that the relation and the oper
   $
 ]
 
-The congruence modulo $m$ between two integers thus indicates that they have the same remainder when they are divided by the modulus $m$.
+#slidebreak()
 
 #question-box[
   - Can you now translate "What day of the week will we be 10 days from now?" in modular arithmetic terms? Start with wondering: how can I represent days of the week numerically? Then, what is the modulus, here?
@@ -133,9 +143,11 @@ From the definition of divisibility, we can directly get that:
   Let $a,b in ZZ$ and $m in NN^*$.
   $a$ and $b$ are congruent modulo $m$ if and only if there is an integer $k$ such that $a = b + k m$, that is:
   $
-    a equiv b (mod m) <=> exists k in ZZ, a = b + k dot m.
+    a equiv b (mod m) <=> exists k in ZZ, a = k dot m + b.
   $
 ] <thm-congruence-remainder>
+#pause
+...so a congruence is just another way of writing the division algorithm @thm-division-algo, where the quotient is disregarded.
 
 #slidebreak()
 
@@ -258,18 +270,20 @@ It follows from @thm-mod-is-equiv that congruence classes are equivalence classe
 Thus, to a given modulo $m$ correspond $m$ distinct equivalence classes.
 And from @thm-equiv-classes-partition follows that:
 #theorem(slide-break: false)[
-  For any positive integer $m$, the congruence class modulo $m$ forms a partition of $ZZ$.
+  For any positive integer $m$, the congruence classes modulo $m$ form a partition of $ZZ$.
 ]
 
 #slidebreak()
 
-Also, following @def-quotient-set:
-#theorem(slide-break: false)[
-  For any positive integer $m$, the quotient set $ZZ_m = ZZ \/ (equiv (mod m))$ is given by
-  $ ZZ_m = {[r]_m | 0 <= r <= m - 1} = {0, 1, dots, m - 1} $
+We can then define the set of the "simplest" representatives of these congruence classes.
+#definition(slide-break: false)[
+  For any positive integer $m$, we define
+  $ ZZ_m = {r in ZZ | 0 <= r <= m - 1} = {0, 1, dots, m-1} $
 ]
+#pause
+We know that any congruence modulo $m$ can be performed the same way on these representatives as on all members of their respective classes: we can thus define an *arithmetic modulo $m$* on $ZZ_m$.
 
-This is simply the set of possible remainders of divisions by $m$.
+#slidebreak()
 
 Arithmetic on $ZZ_m$, however, can be distinct from the one you know on $ZZ$.
 Still, we know from @cor-mod-add-mult that they share similarities, which allows us to provide the following definitions.
@@ -280,12 +294,12 @@ Still, we know from @cor-mod-add-mult that they share similarities, which allows
     $
       x +_m y = (x + y) mod m,
     $
-    where the addition on the right-hand side is the addition on $ZZ$,
+  // where the addition on the right-hand side is the addition on $ZZ$,
   - and the multiplication $dot_m$:
     $
-      x dot_m y = (x dot y) mod m.
+      x dot_m y = (x dot y) mod m,
     $
-    where the multiplication on the right-hand side is the multiplication on $ZZ$.
+  where the operations on the right-hand side are the ones on $ZZ$.
 ]
 
 #slidebreak()
@@ -452,13 +466,13 @@ And as a direct consequence, to redefine relatively-prime integers through the f
   If $a, b$ are two relatively-prime integers, then:
   1. If $a divides c$ and $b divides c$, then $(a dot b) divides c$.
   2. If $a divides (b dot c)$, then $a divides c$.
-]
+] <cor-rel-prime-div>
 // TODO: proofs?
 
 #theorem[
   Let $m$ be a positive integer, and let $a, b, c$ be integers.
   If $a dot c equiv b dot c (mod m)$ and $c$ and $m$ are relatively prime, then $a equiv b (mod m)$.
-]
+] <thm-factor-congruence>
 
 #slidebreak()
 
@@ -474,39 +488,84 @@ And as a direct consequence, to redefine relatively-prime integers through the f
 === Definition
 
 #definition(title: "Prime numbers", slide-break: false)[
-  A natural number $p > 1$ is called a *prime number* if the only positive divisors of $p$ are $1$ and $p$. A natural number $p > 1$ that is not prime is called *composite*.
+  A natural number $p > 1$ is called a *prime number* if its only positive divisors are $1$ and itself.
+
+  A natural number $p > 1$ that is not prime is called *composite*.
 ]
 
 #remark[
-  The natural number $1$ is not prime. The first prime number is $2$, and the other prime numbers are odd natural numbers $(3, 5, 7, 11, ...)$.
+  The natural number $1$ is not prime.
+  The first prime number is $2$, and the other prime numbers are odd natural numbers $(3, 5, 7, 11, ...)$.
 ]
 
 #theorem(title: "Euclid")[
   There are infinitely many prime numbers.
 ]
 
+#home[
+  How primes are distributed is a topic that has attracted interest and fascination for centuries.
+  You can check out this #link("https://www.youtube.com/watch?v=EK32jo7i5LQ")[cool video on prime numbers] (and this cool channel in general!) for an example of how it can connect to other problems.
+]
+
 === Primes as building blocks
 
-#theorem(title: "The Fundamental Theorem of Arithmetic", slide-break: false)[
+Since primes are relatively prime to all other integers, from @cor-rel-prime-div we can directly get that:
+
+#lemma(slide-break: false)[
+  If $p$ is prime and $p | display(product_(i=1)^n) a_i$, where each $a_i$ is an integer, then $p divides a_i$ for some $i$.
+] <lm-prime-div-prod>
+which leads us to a crucial result...
+
+#theorem(title: "The Fundamental Theorem of Arithmetic")[
   Every natural number $n > 1$ can be written uniquely as a product of primes
   $ n = p_1^(n_1) dot p_2^(n_2) dot p_3^(n_3) dot ... dot p_k^(n_k) $
   where the $p_i$ are distinct prime numbers written in increasing order, and the exponents $n_i$ are natural numbers $n_i >= 1$.
+] <thm-fundamental-arithmetic>
+
+#slidebreak()
+
+#proof[
+  / Existence of the factorization: This can be proven by induction.
+    / Basis step: For $n=2$, the factorization exists since $2$ itself is prime.
+
+    / Inductive step: Let us assume that for a given $n$, all integers $2 <= j <= n$ have a prime factorization.
+
+      - First, if $n+1$ is prime, its prime factorization is simply itself, hence its existence.
+      - If it is composite, it means it can be written as $n+1 = a dot b$, where $2 <= a <= b <= n$.
+        By the inductive hypothesis, both $a$ and $b$ have prime factorizations, so $n+1$ can also be factorized, by combining these two.
+
+    We thus just proved the existence of the factorization for any $n >= 2$.
+
+  / Uniqueness: This can be proven by contradiction.
+    Let's suppose that $n in NN$ admits two distinct factorizations, so there exist $s >= 1$ primes $p_i$ and $t >= 1$ primes $q_j$ such that
+    $
+      n = product_(i=1)^s p_i = product_(j=1)^t q_j,
+    $
+    and such that we can simplify the equality above by the common factors, and get
+    $
+      product_(k=1)^u p_(i_k) = product_(l=1)^v q_(j_l),
+    $
+    with $u,v >= 1$.
+    For each $k$, by @lm-prime-div-prod, necessarily $p_(i_k) divides q_(j_l)$ for some $l$.
+    Since these numbers are primes, this is impossible, by definition.
+    Hence the uniqueness of the factorization.
 ]
 
 #slidebreak()
 
 #remark[If you're curious as to why this theorem is _fundamental_, you can check out #link("https://www.youtube.com/watch?v=46E0-XJuAXs")[this nice video].]
 
-#theorem[
+#slidebreak()
+
+This theorem first allows us to prove another that makes it easier to determine if an integer is prime.
+
+#theorem(slide-break: false)[
   The positive integer $n$ is a composite number if and only if $n$ can be divided by some prime number $p <= sqrt(n)$.
 ]
 
-#lemma[
-  Let $p$ be a prime number, and let $a, b$ be integers. Then:
-  + Either $p divides a$, or $p$ and $a$ are relatively prime.
-  + If $p divides (a dot b)$, then either $p divides a$ or $p divides b$.
-]
-// can be used to prove Fermat's little theorem
+#example[See Exercise 3.7]
+
+The prime factorization also helps obtaining the $gcd$ and $lcm$ of two integers.
 
 #proposition[
   If the integers $a, b > 1$ can be factorized in the form
@@ -523,10 +582,31 @@ And as a direct consequence, to redefine relatively-prime integers through the f
 
 #slidebreak()
 
-#home[
-  How primes are distributed is a topic that has attracted interest and fascination for centuries.
-  You can check out this #link("https://www.youtube.com/watch?v=EK32jo7i5LQ")[cool video on prime numbers] (and this cool channel in general!) for an example of how it can connect to other problems.
+As a third example, this lemma also follows directly from @thm-fundamental-arithmetic.
+
+#lemma(slide-break: false)[
+  Let $p$ be a prime number, and let $a, b$ be integers. Then:
+  + Either $p divides a$, or $p$ and $a$ are relatively prime.
+  + If $p divides (a dot b)$, then either $p divides a$ or $p divides b$.
 ]
+
+#theorem(title: "Fermat's Little Theorem")[
+  Let $p$ be a prime number and $y$ any integer. Then, if $y equiv.not 0 (mod p)$, we have
+  $ y^(p-1) equiv 1 (mod p) $
+] <thm-fermat-little>
+
+#proof[
+  See exercises: relies on @thm-factor-congruence and @lm-prime-div-prod.
+]
+
+#slidebreak()
+
+#corollary[
+  If $p$ is a prime number, then $y^p equiv y (mod p)$ for any integer $y$.
+]
+
+This can be used to compute the remainder of divisions of some very high numbers, even when they can't be stored in a computer's memory (see exercises).
+
 
 == Linear congruence equations
 
@@ -603,8 +683,11 @@ We can thus provide the following way to solve linear congruence equations.
 === Random number generators
 
 Many algorithms need to draw random numbers to work, for instance in statistical sampling, cryptography or to train machine-learning models.
-Because generating actually random numbers needs a natural source of randomness, such as complex atmospheric phenomena, it is limited by the "rate of randomness" that these sources can provide.
+Because generating actually-random numbers needs a natural source of randomness, such as complex atmospheric phenomena, it is limited by the "rate of randomness" that these sources can provide.
 Most often we thus rather generate _pseudorandom_ numbers in computers.
+
+#slidebreak()
+
 A popular procedure to do so is called the *linear congruential method*.
 It consists in first choosing four integers: the modulus $m$, multiplier $a$, increment $c$, and *seed* $x_0$ , with $2 <= a < m$, $0 <= c < m$, and $0 <= x_0 < m$.
 Using these, a sequence of pseudorandom numbers can be generated by successively applying
@@ -617,8 +700,11 @@ $
 Number theory, and particularly modular arithmetic, is the basis for many cryptography techniques.
 Perhaps the simplest example is Caesar's encryption process.
 It maps each letter of the latin alphabet to a number in $ZZ_26$, and shifts them by an arbitrary $k$ modulo $26$.
-It can thus be written as the function $f: ZZ_26 -> ZZ_26$ such that $f(l) = (l + k) mod 26$.
+It can thus be written as the function
+$
+  f: ZZ_26 -> ZZ_26, f(l) = (l + k) mod 26.
+$
 
 // RSA requires Chinese remainder, Fermat's, fast modular exponentiation... a bit too much.
-More complex techniques which are actually widely used nowadays also involve modular arithmetic, such as the RSA system.
+More complex techniques which are actually widely used nowadays also involve modular arithmetic, such as the RSA system, which is based on Fermat's Little Theorem (@thm-fermat-little).
 For more information, see section 4.6 of Rosen.
