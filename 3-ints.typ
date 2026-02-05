@@ -4,7 +4,7 @@
 
 = Elementary number theory
 
-#fa-book() This chapter overlaps with sections 4.1, 4.3, 4.5 and 4.6 of Rosen.
+#fa-book() This chapter overlaps with sections 4.1, 4.3, 4.4, 4.5 and 4.6 of Rosen.
 
 #slidebreak()
 
@@ -26,7 +26,11 @@ However, the result of dividing two integers is not necessarily an integer!
 #slidebreak()
 
 #definition(title: [Divisibility])[
-  Given two integers $a != 0$ and $b$, we say that $a$ *divides* $b$ if there exists a *quotient* $q in ZZ$ such that $b = a dot q$. If $a$ divides $b$, we say that $a$ is a *factor* or *divisor* of $b$ and that $b$ is a *multiple* of $a$. We denote $a divides b$ when $a$ divides $b$, and we write $a divides.not b$ when $a$ does not divide $b$. So, in summary:
+  Given two integers $a != 0$ and $b$, we say that $a$ *divides* $b$ if there exists a *quotient* $q in ZZ$ such that $b = a dot q$.
+
+  Then $a$ is called a *factor* or *divisor* of $b$, and $b$ a *multiple* of $a$.
+
+  We denote $a divides b$ when $a$ divides $b$, and we write $a divides.not b$ when $a$ does not divide $b$. So, in summary:
   $
     a divides b <=> exists q in ZZ, b = a dot q
   $
@@ -35,7 +39,7 @@ However, the result of dividing two integers is not necessarily an integer!
 #slidebreak()
 
 #remark[
-  - Every non-zero integer divides $0$:
+  - Every nonzero integer divides $0$:
     $
       forall a in ZZ without {0}, 0 = a dot 0 #h(1em) (q = 0).
     $
@@ -141,13 +145,13 @@ However, this shared notation comes from the fact that the relation and the oper
 From the definition of divisibility, we can directly get that:
 #theorem(slide-break: false)[
   Let $a,b in ZZ$ and $m in NN^*$.
-  $a$ and $b$ are congruent modulo $m$ if and only if there is an integer $k$ such that $a = b + k m$, that is:
+  $a$ and $b$ are congruent modulo $m$ if and only if there is an integer $q$ such that $a = q dot m + b$, that is:
   $
-    a equiv b (mod m) <=> exists k in ZZ, a = k dot m + b.
+    a equiv b (mod m) <=> exists q in ZZ, a = q dot m + b.
   $
 ] <thm-congruence-remainder>
 #pause
-...so a congruence is just another way of writing the division algorithm @thm-division-algo, where the quotient is disregarded.
+...so a congruence is just another way of writing the division algorithm (@thm-division-algo), where the quotient is disregarded.
 
 #slidebreak()
 
@@ -178,6 +182,8 @@ Let's now see how operations between congruent integers go.
   Let $m, k in NN^*$ and $a, b in ZZ$. If $a equiv b (mod m)$, then $a^k equiv b^k (mod m)$.
 ]
 
+#pause
+
 Also since $a equiv (a mod m) (mod m)$, we get that:
 #corollary[
   Let $a,b in ZZ$ and $m in NN^*$.
@@ -190,15 +196,17 @@ Also since $a equiv (a mod m) (mod m)$, we get that:
   $
 ] <cor-mod-add-mult>
 
+#slidebreak()
+
 #important[
   Some operations may not go as expected!
   For instance, while
   $
-    a equiv b (mod m) => forall c in ZZ, a c equiv b c (mod m),
+    a equiv b (mod m) => forall c in ZZ, a dot c equiv b dot c (mod m),
   $
   the converse is not necessarily true, meaning:
   $
-    a c equiv b c (mod m) cancel(=>) a equiv b (mod m).
+    a dot c equiv b dot c (mod m) cancel(=>) a equiv b (mod m).
   $
   For instance: can you divide both sides of the equivalence by $3$ in $12 equiv 6 (mod 3)$?
 ]
@@ -261,7 +269,7 @@ This is equivalent to defining the quotient set we'll introduce below!
 
 #definition(title: "Congruence classes")[
   We define the congruence classes modulo $m$ as
-  $ [r]_m = {b in ZZ | b equiv r (mod m)} = {m k + r | k in ZZ} $
+  $ [r]_m = {b in ZZ | b equiv r (mod m)} = {q dot m + r | q in ZZ} $
 ]
 
 #slidebreak()
@@ -280,13 +288,17 @@ We can then define the set of the "simplest" representatives of these congruence
   For any positive integer $m$, we define
   $ ZZ_m = {r in ZZ | 0 <= r <= m - 1} = {0, 1, dots, m-1} $
 ]
-#pause
-We know that any congruence modulo $m$ can be performed the same way on these representatives as on all members of their respective classes: we can thus define an *arithmetic modulo $m$* on $ZZ_m$.
 
 #slidebreak()
 
+We know that any congruence modulo $m$ can be performed the same way on these representatives as on all members of their respective classes: we can thus define an *arithmetic modulo $m$* on $ZZ_m$.
+
+#pause
+
 Arithmetic on $ZZ_m$, however, can be distinct from the one you know on $ZZ$.
 Still, we know from @cor-mod-add-mult that they share similarities, which allows us to provide the following definitions.
+
+#slidebreak()
 
 #definition[
   For a given $m in NN^*$ and $x, y in ZZ_m$, we define:
@@ -321,6 +333,8 @@ That is, for any $x,y in ZZ_m$:
   What are $0_m$, $1_m$ and $(-x_m)$ with regards to their counterparts in $ZZ$?
   // TODO: make this an exercise?
 ]
+
+#slidebreak()
 
 Multiplicative inverses do not appear here, simply because they do not always exist in $ZZ_m$.
 For instance, there is no multiplicative inverse of 2 modulo 6, as you can verify.
@@ -368,6 +382,8 @@ The $gcd$ can be obtained systematically using the following lemma.
 ] <lma-euclid-algo>
 // proof using @thm-divides
 
+#slidebreak()
+
 But how? Let's write $r_0 = |a|$, $r_1 = |b|$, $r_2 = r$ and $q_1 = q$ and apply the lemma successively:
 $
       r_0 & = q_1 r_1 + r_2                   & 0 & <= r_2 < r_1, \
@@ -376,9 +392,15 @@ $
   r_(n-2) & = q_(n-1) r_(n-1) + r_(n) #h(2em) & 0 & <= r_n < r_(n-1), \
   r_(n-1) & = q_n r_n.
 $
-Since we have by @thm-division-algo that $|a| = r_0 > r_1 > dots > r_n >= 0$, this sequence of remainders cannot contain more than $|a|$ terms, so it has a finite size $n$. This means that there exists an $n$ such that $r_n divides r_(n-1)$. It then follows from @lma-euclid-algo that
+
+#slidebreak()
+
+Since we have by @thm-division-algo that $|a| = r_0 > r_1 > dots > r_n >= 0$, this sequence of remainders cannot contain more than $|a|$ terms, so it has a finite size $n$. This means that there exists an $n$ such that $r_n divides r_(n-1)$.
+
+It then follows from @lma-euclid-algo that
 $
-  gcd(a, b) = gcd(|a|, |b|) = gcd(r_0, r_1) = gcd(r_1, r_2) = dots = gcd(r_(n-1), r_n) = r_n
+  gcd(a, b) &= gcd(|a|, |b|) = gcd(r_0, r_1) = gcd(r_1, r_2) = dots \ &= gcd(r_(n-1), r_n) \ &
+  = r_n
 $
 
 #slidebreak()
@@ -400,8 +422,8 @@ The $lcm$ is then straightforward to compute since we can use the following theo
 === How to use them in modular arithmetic
 
 #theorem(title: "Bézout's Identity", slide-break: false)[
-  If $a$ and $b$ are two integers not simultaneously zero, then there exist integers $x, y$ such that
-  $ gcd(a, b) = a dot x + b dot y $
+  If $a$ and $b$ are two integers not simultaneously zero, then their $gcd$ can be written as a linear combination of these two integers. In other words:
+  $ exists (x, y) in ZZ^2, gcd(a, b) = a dot x + b dot y $
 ] <thm-bezout>
 
 #slidebreak()
@@ -470,8 +492,10 @@ And as a direct consequence, to redefine relatively-prime integers through the f
 // TODO: proofs?
 
 #theorem[
-  Let $m$ be a positive integer, and let $a, b, c$ be integers.
-  If $a dot c equiv b dot c (mod m)$ and $c$ and $m$ are relatively prime, then $a equiv b (mod m)$.
+  Let $a, b, c$ be integers, and $m$ a positive integer relatively prime to $c$. Then
+  $
+    a dot c equiv b dot c (mod m) => a equiv b (mod m).
+  $
 ] <thm-factor-congruence>
 
 #slidebreak()
@@ -565,6 +589,8 @@ This theorem first allows us to prove another that makes it easier to determine 
 
 #example[See Exercise 3.7]
 
+#slidebreak()
+
 The prime factorization also helps obtaining the $gcd$ and $lcm$ of two integers.
 
 #proposition[
@@ -573,10 +599,10 @@ The prime factorization also helps obtaining the $gcd$ and $lcm$ of two integers
     a & = p_1^(n_1) dot p_2^(n_2) ... p_k^(n_k) \
     b & = p_1^(m_1) dot p_2^(m_2) ... p_k^(m_k)
   $
-  with $n_i, m_i >= 0$ and all prime factors of $a$ and $b$ appear in both decompositions, then
+  with $n_i, m_i >= 0$, then
   $
-      gcd(a, b) & = p_1^(min(n_1, m_1)) dot p_2^(min(n_2, m_2)) ... p_k^(min(n_k, m_k)) \
-    "lcm"(a, b) & = p_1^(max(n_1, m_1)) dot p_2^(max(n_2, m_2)) ... p_k^(max(n_k, m_k))
+      gcd(a, b) & = p_1^(min(n_1, m_1)) dot p_2^(min(n_2, m_2)) dot dots dot p_k^(min(n_k, m_k)) \
+    "lcm"(a, b) & = p_1^(max(n_1, m_1)) dot p_2^(max(n_2, m_2)) dot dots dot p_k^(max(n_k, m_k))
   $
 ]
 
@@ -590,7 +616,15 @@ As a third example, this lemma also follows directly from @thm-fundamental-arith
   + If $p divides (a dot b)$, then either $p divides a$ or $p divides b$.
 ]
 
-#theorem(title: "Fermat's Little Theorem")[
+
+== Solving congruences
+
+=== Congruences involving very large numbers
+
+Results on primes can also be used to compute the remainder of divisions of some very high numbers, even when they can't be stored in a computer's memory.
+How? Using the following.
+
+#theorem(title: "Fermat's Little Theorem", slide-break: false)[
   Let $p$ be a prime number and $y$ any integer. Then, if $y equiv.not 0 (mod p)$, we have
   $ y^(p-1) equiv 1 (mod p) $
 ] <thm-fermat-little>
@@ -605,10 +639,28 @@ As a third example, this lemma also follows directly from @thm-fundamental-arith
   If $p$ is a prime number, then $y^p equiv y (mod p)$ for any integer $y$.
 ]
 
-This can be used to compute the remainder of divisions of some very high numbers, even when they can't be stored in a computer's memory (see exercises).
+But what if the divisor is not prime?
+Then, @thm-fundamental-arithmetic comes to the rescue, paired with the following.
+
+#theorem(title: [Chinese remainder theorem])[
+  Let $m_1, m_2, dots, m_n in NN without {0,1}$ be pairwise relative primes, and $a_1, a_2, dots, a_n in NN$. Then the system
+  $
+    cases(
+      x equiv a_1 (mod m_1),
+      x equiv a_2 (mod m_2),
+      quad dots.v,
+      x equiv a_n (mod m_n),
+    )
+  $
+  has a unique solution modulo $m = display(product_(i=1)^n m_i)$.
+] <thm-chinese-remainder>
+
+#slidebreak()
+
+Then, to solve $y^n equiv x (mod m)$, we factor $m$ into primes $m_i$, and then solve the system from @thm-chinese-remainder.
 
 
-== Linear congruence equations
+=== Linear congruence equations
 
 Being able to solve linear equations is fundamental to many problems of calculus or linear algebra, and the same is true for linear _congruence_ equations in number theory.
 
