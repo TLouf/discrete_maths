@@ -303,6 +303,19 @@
   7. $2^(ceil(n\/2))$.
 
 +
+  + $217 s$
+  + $2684 s$
+  + $369 307 s$
+  + No, if add $k$ characters to the 26 base letters for instance, to increase the number of possible passwords, $k$ must satisfy
+    $
+      k >= 26 (2^(1/n) - 1)
+    $
+
++
+  + $frac(20!, (4!)^5)$.
+  + $frac(20!, (4!)^5 5!)$.
+
++
   1. $P(9,5) dot 6 = 90 720$.
   2. $P(8,4) dot 6 dot 5 = 50 400$.
   3. $8^2 dot 7 dot 6^2 dot 5 = 80 640$.
@@ -319,6 +332,12 @@
   + $1884$.
 
 + $binom(8, 3)$.
+
++
+  + Relation is subset of $A times A$ of cardinality $n^2$, so $2^(n^2)$.
+  + $2^(n^2 - n)$ (like removing diagonal elements of matrix).
+  + $2^(n (n+1) / 2)$. See as independent binary choices to include ordered pair in relation or not. Two kinds of choices: for diagonal elements, have $2^n$ valid choices. For off-diagonal: $n (n-1) / 2$ unordered pairs: for each, can either include both $(a,b)$ and $(b,a)$ only, or neither, because of symmetry, which leads to $2^(n (n-1) / 2)$ valid choices. Since choices are independent, multiply the two to get the result.
+  + $2^n dot 3^(n (n-1) / 2)$. Here again two cases: diagonal: $2^n$ choices and off-diagonal: $n (n-1) / 2$ unordered pairs: for each, can include $(a,b)$ only, $(b,a)$ only, or neither, because of antisymmetry, which leads to $3^(n (n-1) / 2)$ possible choices.
 
 +
   + $360$.
@@ -342,8 +361,6 @@
 
 + $binom(a+1, k+1) binom(b-1, k)$.
 
-+ $binom(12, 4)$.
-
 + $binom(n-p+1, p)$.
 
 +
@@ -353,19 +370,10 @@
 
 + $binom(17, 6) - 7 binom(12, 6) + binom(7, 2) binom(7, 1) = 6055$.
 
-+
-  1. $4^8$.
-  2. $binom(r-1, n-1)$.
-  3. $binom(19, n-1)$.
-
-+
-  1. $frac(20!, (4!)^5 5!)$.
-  2. $frac(20!, (4!)^5)$.
-
 + $binom(2 n, n + 1) + binom(2 n, n) = binom(2 n + 1, n + 1) = 1/2 (binom(2 n + 1, n + 1) + binom(2 n + 1, n + 1)) = 1/2 (binom(2 n + 1, n + 1) + binom(2 n + 1, n)) = 1/2 binom(2 n + 2, n+1)$
 
 +
-  + From the definition of binomial coefficients we can get that $binom(n, k-1) = k / (n_k+1) binom(n, k)$, hence the less than inequalities. The "greater than" ones follow by symmetry of the coefficients.
+  + From the definition of binomial coefficients we can get that $binom(n, k-1) = k / (n-k+1) binom(n, k)$, hence the less than inequalities. The "greater than" ones follow by symmetry of the coefficients.
   + The previous question tells us that $binom(n, floor(n/2))$ is the largest of the coefficients $binom(1, n), dots, binom(n, n-1)$, so it's greater than or equal to their average, which is $(2^n - 2) / (n-1)$, and $(2^n - 2) / (n-1) - 2^n / n = (2^n - 2n) / (n (n-1)) >= 0$ for $n>=2$, hence the result.
 
 

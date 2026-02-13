@@ -311,12 +311,6 @@
 
 = Counting
 
-+ Let $A$ be a set with cardinality $n$.
-  + How many different relations are there on $A$?
-  + How many of them are reflexive?
-  + How many of them are symmetric?
-  + How many of them are antisymmetric?
-
 + Computers represent information using bits. A bit has two possible values: 0 or 1. A bit string of length $n$ is a sequence of $n$ bits $b_1 b_2 b_3 ... b_n$.
   + How many different bit strings are there of length $n$?
   + How many bit strings of length $n >= 2$ start and end with 1?
@@ -325,6 +319,17 @@
   + How many bit strings of length $n >= 6$ contain at least three 0's and three 1's?
   + How many bit strings of length $n >= 5$ either start with 00 or end with three 1's?
   + A palindrome is a bit string such its inverse is identical to itself (e.g., 0010110100). How many bit strings of length $n$ are palindromes?
+
++ A hacker with access to your computer can try $10^9$ passwords per second.
+  Assuming a hacker knows your password is $6$, $7$ or $8$ characters long, how long would it take them (at most) to crack it by brute force, if they also know that your password...
+  + ...only contains the 26 characters from the latin alphabet?
+  + ...also contains at least one digit?
+  + ...also contains at least one special character (33 distinct ones)?
+  + Is it always good to add a constraint such as "the password must contain at least one character from this set of characters"?
+
++ A sales company wants to audit the results in 20 cities, and there are 5 employees willing to do that job; each of them will be in charge of 4 cities.
+  + In how many distinct ways can the company manager assign the cities to the 5 employees?
+  + In how many distinct ways can the company manager split the 20 cities in 5 groups of 4 cities each?
 
 + A wedding photographer likes to make pictures of the 10 people present in the banquet (including the groom and the bride) in groups of 6 persons. How many distinct pictures can the photographer take if
   + the bride is in the picture?
@@ -343,6 +348,12 @@
   + How many distinct circumstances using at least one flag could be described if there were three equal sets of the above-mentioned 12 flags?
 
 + Find in how many ways we can put three letters A and seven letters B such that there are no two consecutive A's.
+
++ Let $A$ be a set with cardinality $n$.
+  + How many different relations are there on $A$?
+  + How many of them are reflexive?
+  + How many of them are symmetric?
+  + How many of them are antisymmetric?
 
 + We have a three-dimensional space and we are allowed to move with jumps of length 1 unit in the direction of three coordinate axis. In other words, each trajectory is composed by moves of the following three types:
   - (H) $(x, y, z) arrow (x + 1, y, z)$,
@@ -374,20 +385,17 @@
 
 + If we simultaneously toss 6 identical dice, how many distinct results are possible?
 
-+ In how many ways can a card player extract 5 cards from a poker deck (i.e., four suits, each with 13 cards 2, 3, . . . , 9, 10, J, Q, K, A) and obtain
++ In how many ways can a player extract 5 cards from a poker deck (i.e., four suits, each with 13 cards 2, 3, . . . , 9, 10, J, Q, K, A) and obtain
   + a flush (five cards from the same suit)?
   + four aces?
   + a four of a kind (four cards with the same number)?
   + three aces and two Js?
   + three aces and a pair (two cards with the same number)?
-  + full house (a three of a kind1 and a pair)?
+  + full house (a three of a kind and a pair)?
   What are then the associated probabilities?
 
-// TODO: R 6.4.18-20
 + We want to line up $a$ white balls and $b$ black balls. In how many distinct ways can we arrange these balls such that there are exactly $k + 1$ groups of black balls?\
   _Note: A group of equal balls may consist in a single ball._
-
-+ Find the number of 4-element subsets taken from the set ${1, 2, 3, ..., 15}$, and such that they do not contain consecutive integers.
 
 + Find the number of $p$-element subsets taken from the $n$-element set ${a_1, a_2, ..., a_n}$, and such that they do not contain consecutive elements.
 
@@ -398,23 +406,10 @@
 
 + We have 7 distinct object types, and we want to choose 25 objects in such a way that there are always at least 2 objects and at most six objects of each type. In how many distinct ways can we achieve this task?
 
-+ #[
-    + Eight people go out for dinner and on the dessert menu there are four distinct desserts. How many distinct orders can the waiter have?
-    + How many distinct solutions exist of the equation
-      $ x_1 + x_2 + x_3 + ... + x_n = r, $
-      with $x_i in NN$?
-    + How many distinct positive integer solutions exist of the equation
-      $ x_1 + x_2 + x_3 + ... + x_n = 21, $
-      with the constraint $x_1 > 1$?
-  ]
-
-+ A sales company wants to audit the results in 20 cities, and there are 5 employees willing to do that job; each of them will be in charge of 4 cities.
-  + In how many distinct ways can the company manager split the 20 cities in 5 groups of 4 cities each?
-  + In how many distinct ways can the company manager assign the cities to the 5 employees?
-
+// R 6.4.29
 + Show that
   $
-    forall n in NN, binom(2 n, n) + binom(2 n, n - 1) = 1/2 binom(2 n + 2, n + 1)
+    forall n in NN, binom(2 n, n+1) + binom(2 n, n) = 1/2 binom(2 n + 2, n + 1)
   $
 
 // R 6.4.18-20
