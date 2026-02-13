@@ -1,0 +1,17 @@
+// Project tasks configuration. See https://zed.dev/docs/tasks for documentation.
+//
+// Example:
+[
+  {
+    "label": "Build theory",
+    "command": "typst compile --input format=notes notes.typ notes.pdf;typst compile --input format=slides notes.typ notes_slides.pdf",
+    "reveal": "always",
+    "hide": "never",
+  },
+  {
+    "label": "Watch slides",
+    "command": "typst watch --input format=slides notes.typ notes_slides.pdf",
+    "reveal": "always",
+    "hide": "never",
+  },
+]
