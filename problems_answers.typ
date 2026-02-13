@@ -277,14 +277,21 @@
   + Set of minimal elements = ${2}$.
   + $max(A)$ does not exist; but $min(A) = 2$.
 
++ $6$
 
-= Counting
++ $1$
 
 +
-  + Relation is subset of $A times A$ of cardinality $n^2$, so $2^(n^2)$.
-  + $2^(n^2 - n)$ (like removing diagonal elements of matrix).
-  + $2^(n (n+1) / 2)$. See as independent binary choices to include ordered pair in relation or not. Two kinds of choices: for diagonal elements, have $2^n$ valid choices. For off-diagonal: $n (n-1) / 2$ unordered pairs: for each, can either include both $(a,b)$ and $(b,a)$ only, or neither, because of symmetry, which leads to $2^(n (n-1) / 2)$ valid choices. Since choices are independent, multiply the two to get the result.
-  + $2^n dot 3^(n (n-1) / 2)$. Here again two cases: diagonal: $2^n$ choices and off-diagonal: $n (n-1) / 2$ unordered pairs: for each, can include $(a,b)$ only, $(b,a)$ only, or neither, because of antisymmetry, which leads to $3^(n (n-1) / 2)$ possible choices.
+  + Proof by contradiction using the fact that $gcd(a, p) = 1$.
+  + Apply $p-1$ times theorem saying that
+    $
+      (a_1 equiv b_1 (mod m)) and (a_2 equiv b_2 (mod m)) => a_1 a_2 equiv b_1 b_2 (mod m).
+    $
+  + Notice that any multiplicative term of $(p-1)!$ is relatively prime with $p$.
+  + Don't forget the case where $p divides a$!
+
+
+= Counting
 
 +
   1. $2^n$.

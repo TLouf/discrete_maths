@@ -246,7 +246,7 @@
 + Given $a = 92$ and $b = 84$, use Euclid's algorithm to compute $d = gcd(a, b)$. Find integers $x, y in ZZ$ such that $a x + b y = d$.
 
 // 13.7
-+ Prove that for all $n in NN^*$ the following equation holds:
++ Prove that the following equation holds for all $n in NN^*$:
   $ 3 | (4^n - 1) $
 
 // 13.11
@@ -285,6 +285,29 @@
   $ n rel m <==> n | m, "or" n "is prime and" n <= m $
   Give the maximal, minimal, maximum, and minimum elements of the poset $(A, R)$.
 
++ Find the remainder of the integer $2^68$ when divided by 19.
+
++ Compute the last digit of the integer $3^1492$.
+
++ Let's prove Fermat's little theorem.
+  Let's consider an integer $a$ and a prime $p$ such that $p divides.not a$.
+  + Show that no two of the integers $a, 2 a, dots, (p-1)a$ are congruent modulo $p$.
+  + Show that this implies that
+    $
+      product_(i=1)^(p-1) i equiv product_(i=1)^(p-1) i dot a space (mod p),
+    $
+    which is equivalent to
+    $
+      (p-1)! equiv a^(p-1) (p-1)! space (mod p).
+    $
+  + Show that it then follows that
+    $
+      a^(p-1) equiv 1 (mod p).
+    $
+  + Finally, show that for all integers $a$:
+    $
+      a^p equiv a (mod p).
+    $
 
 = Counting
 
