@@ -9,7 +9,8 @@
 #slidebreak()
 
 The *goal of counting* is basically to determine the cardinality of certain finite sets.
-This is much more useful than it sounds: a fundamental way to compute discrete probabilities is to count in how many ways a given event can occur, and divide it by the total number of possible alternatives.
+This is much more useful than it sounds.
+For instance, a fundamental way to compute discrete probabilities is to count in how many ways a given event can occur, and divide it by the total number of possible alternatives.
 
 #definition[
   Two sets $A$ and $B$ have the same cardinality if and only if there exists a bijective function $f : A -> B$.
@@ -20,9 +21,9 @@ This is much more useful than it sounds: a fundamental way to compute discrete p
 ]
 
 
-== Basic counting principles
+== Fundamental counting principles
 
-=== The product principle
+=== The product rule
 
 Suppose that a meal can be broken down into a first and second course.
 Let's assume we have $n_1$ recipes for the first course and $n_2$ for the second.
@@ -38,60 +39,88 @@ If any combination of first and second course is deemed acceptable, then we have
   This is no coincidence!
 ]
 
-This is the idea behind the product principle stated below.
+#slidebreak()
 
-#proposition(title: "The basic product principle")[
+The recipes for the first and second course can be seen as the members of two sets, which can be combined together through the Cartesian product of these two sets.
+This is the idea behind the product rule stated below.
+
+#proposition(title: "The basic product rule")[
   If $A$ and $B$ are two finite sets, then
   $ abs(A times B) = abs(A) dot abs(B) $
 ]
 
 This can be directly generalised to an arbitrary number of sets.
 
-#proposition(title: "The generalised product principle")[
+#proposition(title: "The generalised product rule")[
   If $A_1, A_2, ..., A_m$ are finite sets, then
   $ abs(A_1 times A_2 times ... times A_m) = abs(A_1) dot abs(A_2) dot dots dot abs(A_m) = product_(k=1)^m abs(A_k) $
 ]
 
+#slidebreak()
+
 #example[
-  TODO
+  How many functions are there from a set with $m$ elements to a set with $n$ elements?
+  // draw graph, for each $m$ can choose $n$ options, so result is $n^m$.
 ]
 
-=== The sum principle
+=== The division rule
+
+Still with our recipes, imagine that to prepare the same meal, you have $N$ different recipes, but for each of those, you find $d-1$ others which taste the same.
+Then the number of actually different recipes you can taste is $N / d$.
+In terms of sets, this gives
+
+#proposition(title: "The division rule")[
+  If a finite set $A$ is the union of $n$ pairwise disjoint subsets, each of cardinality $d$, then $abs(A) = n dot d$.
+]
+
+which is called the division rule as most often, the unknown is $n = abs(A) / d$, as we'll see later on.
+
+#slidebreak()
+
+#example[
+  How many different ways are there to seat four people around a circular table, where two seatings are considered the same when each person has the same neighbors?
+]
+
+// We arbitrarily select a seat at the table and label it seat 1. We number the rest of the seats in numerical order, proceeding clockwise around the table. Note that are four ways to select the person for seat 1, three ways to select the person for seat 2, two ways to select the person for seat 3, and one way to select the person for seat 4. Thus, by the product rule there are 4! = 24 ways to order the given four people for these seats.
+// better than below: start choosing neighbours at seat 2, doesn't matter what choice we make for seat 1
+// However, each of the four choices for seat 1 leads to the same arrangement, as we distinguish two arrangements only when one of the people has a different immediate left or immediate right neighbor. Because there are four ways to choose the person for seat 1, by the division rule there are 24∕4 = 6 different seating arrangements of four people around the circular table.
+
+=== The sum rule
 
 Let's consider the cuisines of two different countries.
 Let's assume a given ingredient can be prepared in $n_1$ recipes in the first, and in $n_2$ recipes in the second.
-If the two countries do not share a single recipe in common, then when one considers the two cuisines as a whole, they can prepare $n_1 + n_2$ different recipes.
+If the two countries do not share a single recipe in common, then someone who knows both cuisines can prepare $n_1 + n_2$ different recipes with this ingredient.
 
-#proposition(title: "The basic sum principle")[
+#proposition(title: "The basic sum rule")[
   If $A$ and $B$ are two finite and disjoint sets ($A inter B = emptyset$), then
   $ abs(A union B) = abs(A) + abs(B) $
 ]
 
 This can be directly generalised to an arbitrary number of sets.
 
-#proposition(title: "The generalised sum principle")[
+#proposition(title: "The generalised sum rule")[
   If $A_1, A_2, ..., A_m$ are a sequence of finite and pairwise disjoint sets $A_i inter A_j = emptyset$ for all $i != j$, then
   $
     abs(limits(union.big)_(i=1)^m A_i) = abs(A_1 union A_2 union ... union A_m) = abs(A_1) + abs(A_2) + ... + abs(A_m) = sum_(i=1)^m abs(A_i)
   $
 ]
 
-#example[
-  TODO
-]
 
-=== The inclusion-exclusion principle
+=== The principle of inclusion-exclusion
 
-We can generalise the sum principle by relaxing the assumption we made that the two cuisines do not share a single recipe in common.
+We can generalise the sum rule by relaxing the assumption we made that the two cuisines do not share a single recipe in common.
 So let's be more agnostic and consider the possibility that they might.
-This leads to the inclusion-exclusion principle.
+This leads to the principle of inclusion-exclusion.
 
-#proposition(title: "The basic inclusion-exclusion principle")[
+#proposition(title: "The basic principle of inclusion-exclusion")[
   If $A$ and $B$ are two finite sets, then
   $ abs(A union B) = abs(A) + abs(B) - abs(A inter B) $
 ]
 
 You may see this graphically by drawing a Venn diagram.
+
+#slidebreak()
+
 #question-box[
   Now, what happens if we add another set $C$ to the mix?
   Try to answer by drawing another diagram.
@@ -99,9 +128,9 @@ You may see this graphically by drawing a Venn diagram.
 
 #slidebreak()
 
-The generalisation is less straightforward than before, but as hinted by our iterative approach of adding one subset at a time, the following can be proven by induction.
+The generalisation is less obvious than before, but as hinted by our iterative approach of adding one subset at a time, by induction we get
 
-#proposition(title: "The generalised inclusion-exclusion principle", slide-break: false)[
+#proposition(title: "The generalised principle of inclusion-exclusion", slide-break: false)[
   If $A_1, A_2, ..., A_m$ are finite sets, then
   $
     abs(limits(union.big)_(i=1)^m A_i) & = sum_(1 <= i <= m) abs(A_i) - sum_(1 <= i < j <= m) abs(A_i inter A_j) + sum_(1 <= i < j < k <= m) abs(A_i inter A_j inter A_k) \
@@ -113,7 +142,47 @@ The generalisation is less straightforward than before, but as hinted by our ite
   $
 ]
 
+=== The pigeonhole principle
+
+Imagine that $n$ pigeons try to land into $n-1$ pigeonholes.
+Clearly, there are not enough pigeonholes for every pigeon to have its own, which implies that at least two of them will share a pigeonhole.
+In terms of objects and boxes, this gives
+
 // TODO: trees as in end of 6.1?
+#proposition(title: [The pigeonhole principle])[
+  If $k + 1$ or more objects are placed into $k$ boxes, then there is at least one box containing two or more of the objects.
+]
+
+Apart from its funny name, the pigeonhole principle has useful implications, especially when generalised.
+
+#slidebreak()
+
+#proposition(title: [The generalised pigeonhole principle])[
+  If $N$ objects are placed into $k$ boxes, then there is at least one box containing at least $ceil(N∕k)$ objects.
+]
+
+#pause
+
+#proof[
+  Suppose that none of the boxes contains more than $ceil(N∕k) − 1$ objects. Then, the total number of objects is at most
+  $
+    k (ceil(N / k) - 1) < k ((N / k + 1) - 1) = N.
+  $
+  This proves the principle by contraposition.
+]
+
+#slidebreak()
+
+#example[
+  Among $100$ people, how many are born in the same month?
+]
+
+#slidebreak()
+
+#example[
+  How many cards must be selected from a standard deck of 52 cards to guarantee that at least three cards of the same suit are selected?
+  // $N$ such that $ceil(N / 4) >= 3$, which gives $N=9$.
+]
 
 == Combinatorics
 // https://www.youtube.com/watch?v=VJkvPTY6kZw
@@ -155,7 +224,7 @@ We just involved the factorial, that we now properly define.
 #definition(title: [Factorial], slide-break: false)[
   For all $n in NN$, we define the *factorial* of $n$ as
   $
-    n! = n dot (n-1) dot (n-2) dots 2 dot 1 = product_(k=1)^n k
+    n! = n dot (n-1) dot (n-2) dot dots dot 2 dot 1 = product_(k=1)^n k
   $
 ]
 
@@ -166,7 +235,7 @@ We just involved the factorial, that we now properly define.
 Let us generalise the concept of a permutation by also considering we want to form orderings of size $r <= n$.
 
 #definition(title: [Permutation])[
-  Given a set of cardinality $n$ and a natural number $r <= n$, an $r$-permutation of elements of this set is an ordered arrangement of $r$ elements of this set.
+  Given a set of cardinality $n$ and a natural number $r <= n$, an *$r$-permutation* of elements of this set is an ordered arrangement of $r$ elements of this set.
 ]
 
 #notation[
@@ -222,7 +291,7 @@ Let's say we now want to know in how many ways we can the shuffle the string $A 
 
 #proposition(title: "Permutations with indistinguishable objects")[
   Given $n$ objects that can classified into $k$ groups of indistinguishable elements, and such that the first group contains $n_1$ indistinguishable elements of type 1, the second group contains $n_2$ indistinguishable elements of type 2, etc, then the number of distinct ordered arrangements of these objects is
-  $ n! / (n_1 ! n_2 ! dots n_k !) $
+  $ n! / (n_1 ! dot n_2 ! dot dots dot n_k !) $
 ] <prop-permut_w_rep>
 
 #slidebreak()
@@ -241,7 +310,7 @@ If we simply combine all the elements from a set with $n$ elements, by definitio
 What's interesting is if we wonder how many combinations of $r < n$ elements from this set of $n$ elements we can form.
 
 #definition(title: [Combination])[
-  Given a set of cardinality $n$ and $r <= n$, an $r$-combination of elements of this set is one of its subsets of cardinality $r$.
+  Given a set of cardinality $n$ and $r <= n$, an *$r$-combination* of elements of this set is one of its subsets of cardinality $r$.
 ] <def-combination>
 
 #notation[
@@ -252,7 +321,7 @@ What's interesting is if we wonder how many combinations of $r < n$ elements fro
 
 As we've seen above, a set of size $n$ admits $n! / (n-r)!$ permutations of size $r$.
 But, once we have an $r$-permutation, this new arrangement itself can be permuted in $P(r,r) = r!$ ways, each of which corresponds to the same subset.
-That's how we can see that
+That's how we can see by the division rule that
 
 #proposition(slide-break: false)[
   Given a set of cardinality $n$ and a natural number $r <= n$, the number of $r$-combinations we can form from this set is:
@@ -288,8 +357,10 @@ This leads us to introduce some particular integers: the binomial coefficients.
 === Distributions
 
 Many counting problems can be solved by mapping them to a process of distributing objects into boxes.
-Same as above, the objects can be considered distinguishable, or labeled.
+Same as above, the objects can be considered distinguishable ($~$ labeled), or not.
 The distinction could also be made for the boxes, but in this course we will only consider distinguishable boxes.
+
+#slidebreak()
 
 Let's first consider $n$ distinguishable objects to be placed into $k$ boxes through an example.
 
@@ -319,7 +390,7 @@ We thus get the same result as in @prop-permut_w_rep.
 #proposition(title: "Distributions of distinguishable objects")[
   The number of distributions of $n$ distinguishable objects into $k$ distinguishable boxes so that each box $i$ receives $n_i$ objects is
   $
-    n! / (n_1 ! n_2 ! dots n_k !)
+    n! / (n_1 ! dot n_2 ! dot dots dot n_k !)
   $
 ]
 
@@ -555,7 +626,7 @@ Finally, the binomial theorem together with @prop-r-comb-count enables us the de
 
 
 // // Now what if we remove the constraint on the exact size of each subset, and only consider how many partitions of size $k$ we can form?
-// // The sizes of each subset ${n_i}$ are now free, but from the sum principle we still have the marginal constraint:
+// // The sizes of each subset ${n_i}$ are now free, but from the sum rule we still have the marginal constraint:
 // // $
 // //   sum_(i=1)^k n_i = n
 // // $
