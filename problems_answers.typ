@@ -311,6 +311,12 @@
       k >= 26 (2^(1/n) - 1)
     $
 
++ Considering an individual $A$, out of the other 5 individuals, by the generalised pigeonhole principle, either $ceil(5/2) = 3$ or more of them are $A$'s friends, or $3$ or more of them are $A$'s enemies.
+  - In the former case:
+    - If among these $>= 3$ friends of $A$ there's a pair of friends, then together with $A$ they form a group of $3$ mutual friends.
+    - Else, these $>= 3$ friends of $A$ are all enemies, so they form a group of $3$ mutual enemies.
+  - A symmetric reasoning can be used in the other case.
+
 +
   + $frac(20!, (4!)^5)$.
   + $frac(20!, (4!)^5 5!)$.

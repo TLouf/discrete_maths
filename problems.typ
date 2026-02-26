@@ -27,8 +27,6 @@
 }
 #set heading(numbering: "1")
 
-// TODO: all drawings!
-
 = Set theory
 
 + Let $A = {x in ZZ | x^2 < 16}$. For each of the following statements, determine whether it is true or not:
@@ -266,6 +264,10 @@
 // R 4.4.6.b)
 + Find an inverse of $a$ modulo $m$ for $a=34$ and $m=89$.
 
+// TODO:
+// You run a bakery that sells cookies in packs of 12. However, your shipping crates only fit 10 packs perfectly. You have a customer who doesn't want a full crate; they specifically want a delivery that results in 4 loose packs left over for their display counter.
+// How many cookies (x) do you need to bake (in multiples of 12) to ensure that after filling as many 10-pack crates as possible, you have exactly 4 packs left?
+
 + Solve the following congruence equations:
   + $3 x equiv 5 space (mod 13)$.
   + $8 x equiv 2 space (mod 10)$.
@@ -326,6 +328,8 @@
   + ...also contains at least one digit?
   + ...also contains at least one special character (33 distinct ones)?
   + Is it always good to add a constraint such as "the password must contain at least one character from this set of characters"?
+
++ Consider a group of six people, in which individuals can either be friends or enemies with each other. Show that there are either three mutual friends or three mutual enemies in the group.
 
 + A sales company wants to audit the results in 20 cities, and there are 5 employees willing to do that job; each of them will be in charge of 4 cities.
   + In how many distinct ways can the company manager assign the cities to the 5 employees?
