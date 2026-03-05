@@ -21,8 +21,8 @@ Sequences are basically indexed collections of elements, or, to be more formal:
 
 #remark[
   There are many ways to represent sequences in computers.
-  In python for instance, there are `bytes` (bytes sequences), `str` (text sequences), `list`, `tuple`, or even `range` which #link("https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range")[are sequence types].
-  Note how #link("https://docs.python.org/3/library/collections.abc.html#collections-abstract-base-classes")[even in python] the difference is made between sequences and sets: the `Sequence`'s central method is `__getitem__` ---which allows you to retrieve their $n"th"$ element---, which doesn't exist for `Set`, whose central method is `__contains__`, to check if an element is inside the set.
+  In python for instance, there are `bytes` (bytes sequences), `str` (character sequences), `list`, `tuple`, or even `range` which #link("https://docs.python.org/3/library/stdtypes.html#sequence-types-list-tuple-range")[are sequence types].
+  Note how #link("https://docs.python.org/3/library/collections.abc.html#collections-abstract-base-classes")[even in python] the difference is made between sequences and sets: the `Sequence`'s central method is `__getitem__` --which allows you to retrieve their $n"th"$ element--, which doesn't exist for `Set`, whose central method is `__contains__`, to check if an element is inside the set.
 ]
 
 #slidebreak()
@@ -39,7 +39,7 @@ They may also be defined recursively, that is, providing some initial terms toge
 
 #definition(title: [Recurrence relation])[
   A *recurrence relation* for the sequence $(a_n)_(n in NN)$ is an equation that expresses $a_n$ in terms of one or more previous terms $a_(n-1), a_(n-2), ..., a_(n-k)$, and possibly $n$.
-  The *initial conditions* are the first $k$ terms in the sequence $(a_1, ..., a_k)$, which are necessary to be able to determine all terms of such a sequence.
+  The *initial conditions* are the first $k$ terms in the sequence $(a_0, ..., a_(k-1)$, which are necessary to be able to determine all terms of such a sequence.
 ]
 
 #example[
@@ -214,11 +214,11 @@ Putting everything together, we get the following general result.
   $
     P(x) = x^k - c_1 x^(k-1) - c_2 x^(k-2) - dots - c_(k-1) x - c_k
   $
-  has $r$ distinct roots $x_1, dots, x_r$ with multiplicities $k_1, dots, k_r$.
+  has $r$ distinct roots $x_1, dots, x_r$ with multiplicities $m_1, dots, m_r$.
 
   Then, a sequence $(a_n)$ is a solution of the recurrence relation iff
   $
-    forall n in NN, a_n = sum_(i=1)^r (sum_(j=0)^(m_i-1) alpha_(i, j) n^(j) ) x_i^n
+    forall n in NN, a_n = sum_(i=1)^r (sum_(j=1)^(m_i) alpha_(i, j) n^(j-1) ) x_i^n
   $
   where $alpha_(i,j)$ are constants to be fixed according to initial conditions.
 ]
@@ -331,7 +331,7 @@ A summary of known series which can be identified when determining a closed form
     table.hline(),
     [$ sum_(n=0)^(k) binom(k, n) x^n $], [$ (1 + x)^k $], [@thm-binomial],
     [$ sum_(n=0)^(k) x^n $], [$ (1 - x^(k+1)) / (1 - x) $], [@prop-arithm-geo-sums],
-    [$ sum_(n=0)^(+ oo) x^n $], [$ 1 / (1 - x) $], [Taylor],
+    [$ sum_(n=0)^(+ oo) a^n x^n $], [$ 1 / (1 - a x) $], [Taylor],
     [$ sum_(n=0)^(+ oo) x^n / (n!) $], [$ e^x $], [Taylor],
     [$ sum_(n=1)^(+ oo) (-1)^(n+1) / n x^n $], [$ log(1+x) $], [Taylor],
     table.hline(),
@@ -347,21 +347,27 @@ An example of the power of generating functions is how they can be used to solve
 2. Solve this equation and obtain a closed form for $G(x)$.
 3. Compute the coefficients $a_n$ by performing the Taylor expansion of $G$ around $x = 0$.
 
+#slidebreak()
+
 #example[
-  Solve the recurrence relation $forall n in NN^*, a_n = 3 a_(n-1)$, with initial condition $a_0 = 2$.
+  Solve the recurrence relation $forall n in NN^*, a_n = 3 a_(n-1)$, with $a_0 = 2$.
 ]
 
 
 === Solving counting problems
 
 A generating series can encode a specific kind of sequence: namely, the sequence $(a_n)$ of number of ways to select some object $n$ times from a set.
-So for instance, the series $(1 + 2 x + 3 x^2)$ can encode the fact that we have a single way to not select the object, two to select it once, and three to select it three times.
+So for instance, the series $(1 + 2 x + 3 x^2)$ can encode the fact that we have a single way to not select the object, two to select it once, and three to select it twice.
 
 #slidebreak()
 
 #example[
-  Let's see this with the following example: let's say we want to determine the number of ways to insert tokens worth $1 euro$, $2 euro$ and $5 euro$ into a vending machine to pay for an item that costs $r$ euros, when the order in which the tokens are inserted does not matter.
+  Let's say we want to determine the number of ways to insert tokens worth $1 euro$, $2 euro$ and $5 euro$ into a vending machine to pay for an item that costs $r$ euros, when the order in which the tokens are inserted does not matter.
+]
 
+#slidebreak()
+
+#solution[
   The number of euros produced by picking $n$ tokens worth $i$ euros can be seen as the exponent in $(x^(i))^n = x^(i n)$ within the formalism of generating functions.
   Besides, we might pick any number of tokens of each type, so for each type we need to sum over all possible number of picks $n$.
   Then the answer is the coefficient in front of $x^r$ in the following generating function:
@@ -380,6 +386,8 @@ So for instance, the series $(1 + 2 x + 3 x^2)$ can encode the fact that we have
 
   In both cases, the answer might seem complicated to get by hand for large $r$, but it is relatively straightforward using a computer.
 ]
+
+#slidebreak()
 
 #remark[
   In generating functions representing combinatorial problems, you can think of additions as logical "or", and products as logical "and".
