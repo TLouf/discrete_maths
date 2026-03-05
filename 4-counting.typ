@@ -4,7 +4,7 @@
 
 = Counting
 
-#fa-book() This chapter overlaps with sections 6.1, 6.3, 6.4, 6.5 of Rosen.
+#fa-book() This chapter overlaps with sections 6.1, 6.2, 6.3, 6.4, 6.5 of Rosen.
 
 #slidebreak()
 
@@ -73,7 +73,7 @@ In terms of sets, this gives
   If a finite set $A$ is the union of $n$ pairwise disjoint subsets, each of cardinality $d$, then $abs(A) = n dot d$.
 ]
 
-which is called the division rule as most often, the unknown is $n = abs(A) / d$, as we'll see later on.
+which is called the division rule, because most often, the unknown is $n = abs(A) / d$, as we'll see later on.
 
 #slidebreak()
 
@@ -158,7 +158,7 @@ Apart from its funny name, the pigeonhole principle has useful implications, esp
 #slidebreak()
 
 #proposition(title: [The generalised pigeonhole principle])[
-  If $N$ objects are placed into $k$ boxes, then there is at least one box containing at least $ceil(N∕k)$ objects.
+  If $N$ or more objects are placed into $k$ boxes, then there is at least one box containing at least $ceil(N∕k)$ objects.
 ]
 
 #pause
@@ -175,6 +175,7 @@ Apart from its funny name, the pigeonhole principle has useful implications, esp
 
 #example[
   Among $100$ people, how many are born in the same month?
+  // $ceil(100 / 12) = 9$
 ]
 
 #slidebreak()
@@ -372,9 +373,9 @@ Let's first consider $n$ distinguishable objects to be placed into $k$ boxes thr
 
 #solution[
   This problem does correspond to the general one stated above, because all cards and players are distinct.
-  We can notice that once we dealt cards to a player $i$, it is as if we created a group of $n_i=5$ indistinguishable cards, because once in their hands, the order in which they arrived does not matter, only which cards they received.
+  We can notice that once we dealt cards to a player $i$, it is as if we created a group, or box, of $n_i=5$ cards.
   We thus create one of these groups for each of the four players, and a final group with the remaining $52 - 4 dot 5 = 32$ cards.
-  This amounts to creating $k=5$ groups, each of which contains $n_i$ elements of the same type.
+  This amounts to creating $k=5$ groups, within each of which we can shuffle the cards without changing the distribution.
 
   #slidebreak()
 
@@ -397,9 +398,9 @@ We thus get the same result as in @prop-permut_w_rep.
 #slidebreak()
 
 Let's now consider we have $n$ indistinguishable objects.
-Let's use the stars and bars methods to derive the corresponding count.
-Since objects are indistinguishable, they can be represented by any same symbol, such as a star $*$, which is conventionally used as a placeholder.
-The assignment to $k$ boxes can then be represented by separating these stars with $k-1$ bars.
+- Since objects are indistinguishable, they can be represented by any same symbol, such as a star $*$, which is conventionally used as a placeholder.
+- The assignment to $k$ boxes can then be represented by separating these stars with $k-1$ bars.
+We thus use a *"stars and bars"* representation, which is very commonly used to solve this kind of problems.
 
 #slidebreak()
 
@@ -411,7 +412,7 @@ The assignment to $k$ boxes can then be represented by separating these stars wi
   So the $n+k-1 = 10$ stars and bars are to be arranged in as many slots, so we may for instance choose $k-1$ of these to contain bars, and then fill the rest with stars.
 ]
 
-This is thus a "$k-1$ choose $n+k-1$" combination!
+This is thus a "$(n + k - 1)$ choose $(k-1)$" combination!
 
 #proposition(title: "Distributions of indistinguishable objects")[
   The number of distributions of $n$ indistinguishable objects into $k$ distinguishable boxes is
@@ -433,14 +434,14 @@ The processes behind the distribution and the combination with repetition can be
 #proposition(title: [$r$-combinations with repetition])[
   Given a set of cardinality $n$ and a natural number $r <= n$, the number of $r$-combinations with repetition that we can form from this set is:
   $
-    binom(n+r-1, n-1)
+    binom(r+n-1, n-1)
   $
 ]
 
 === Binomial coefficients
 
 There are many useful identities related to these coefficients.
-One of the most important is Pascal's identity.
+One of the most important is Pascal's.
 
 #theorem(title: "Pascal's identity", slide-break: false)[
   $ forall r in ZZ^+, n >= r,binom(n+1, r) = binom(n, r) + binom(n, r-1) $
@@ -522,7 +523,8 @@ The binomial coefficients also appear in the expansion of some polynomials.
   #slidebreak()
 
   This gives us $2^3$ products of the form $x^alpha y^beta$ with $0<= alpha, beta <= 3$, which we then sum.
-  We can thus simply count the number of ways to choose $alpha$ times $x$ (then $beta = 3 - alpha$) from the three parenthesised terms, which is $binom(3, alpha)$!
+  We can thus simply count the number of ways to choose $alpha$ times $x$  from the 3 parenthesised terms, which is $binom(3, alpha)$!
+  Then, $beta = 3 - alpha$.
   Explicitly, here:
   // @typstyle off
   $
