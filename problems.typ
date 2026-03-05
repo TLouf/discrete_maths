@@ -431,6 +431,31 @@
 
 = Sequences
 
++ A data ingestion pipeline is managed using a queue of tasks to be performed.
+  At every time step $n$, $k$ tasks are added to the queue, but the system only manages to process half of the tasks present in the queue at the start of the the time step.
+  + Write the recurrence relation satisfied by $Q_n$, the queue length at step $n$.
+  + Solve the recurrence.
+  + What will the queue's length eventually converge to?
+
++ Your company wants to design a model to forecast the sales it makes every day.
+  To simplify, you choose to make only two predictions per week: one for an average weekday, and another for an average weekend day.
+  The model should then take into account that the sales tend to grow exponentially with time, that there is a correlation between two days if they are both weekdays or both weekend days, and that, if the sales volume was high during the weekend, it removes potential sales from the weekdays, and vice versa.
+  The following model is thus proposed:
+  $
+    s_n = -1/3 s_(n−1) + 1/5 s_(n−2) + 1.1^n
+  $
+  + Identify the terms related to each effect described above, and interpret $n$.
+  + Solve the recurrence relation.
+  + Which effect will end up dominating the others?
+
++ A distributed database can be seen as a network of $N$ instances which communicate with one another in a decentralised way.
+  To synchronise data between instances, some systems such as Cassandra use the "gossip protocol": every second, each up-to-date instance randomly selects another out-dated instance to share the update with.
+  We also assume that every second, two instances do not receive the update correctly because of connection timeouts.
+  + If $u_t$ denotes the number of nodes which have received a given update after $t$ seconds, what recurrence relation does it satisfy?
+  + Solve the recurrence with a sensible choice of $u_0$.
+  + How long would it take to update a million instances?
+  + Assuming that an instance doesn't know which others are updated when selecting one to gossip with, how does the recurrence relation for $u_t$ change? Can you define two broad phases of $u_t$'s growth, and determine to which value it should converge?
+
 + For each integer $n in NN$, let us consider the set of $n$ lines in the plane with the following properties:
   - P1. There are no parallel lines.
   - P2. At each intersection point, only two lines meet.
@@ -444,7 +469,7 @@
 + A software company is trying to solve a very complicated problem. They say they are in the $n$-th phase of the project when there are $n$ steps left to finish it. Let us suppose that in each phase there are five options. Two of them, lead to the $(n - 1)$-th phase; but the other three options are better in the sense that they lead directly to the $(n - 2)$-th phase. Let us denote by $a_n$ the number of ways of achieving the solution of the project from the $n$-th phase. If $a_1 = 2$, check that $a_2 = 7$, and obtain a recurrence equation for $a_n$. Prove that
   $ a_n = 1/4 [3^(n+1) + (-1)^n]. $
 
-+ Compute the number of bit strings of length $n >= 1$ such that they do not have two consecutive zeros.
++ Compute the number of bit strings of length $n >= 1$ which do not have two consecutive zeros.
 
 + There are $3^n$ strings of length $n$ formed by ${0, 1, 2}$. Compute the number of those strings with an odd number of zeros $a_n$, by first proving that the recurrence equation for $a_n$ is
   $ a_n = a_(n-1) + 3^(n-1), quad n >= 2, quad a_1 = 1, $
@@ -453,7 +478,7 @@
 + Solve the equation:
   $ a_n = 4a_(n-1) - 4a_(n-2), quad n >= 3, quad a_1 = a_2 = 1. $
 
-+ Let $a_n$ be the number of strings of length $n$ which can be formed with ${0, 1, 2}$ in such a way that there are no consecutive 1's nor two consecutive 2's.
++ Let $a_n$ be the number of strings of length $n$ which can be formed with ${0, 1, 2}$ in such a way that there are neither two consecutive 1's nor two consecutive 2's.
   + Show that $a_n = 2a_(n-1) + a_(n-2)$, $n >= 3$.
   + Find an explicit solution for $a_n$.
 
@@ -477,26 +502,17 @@
   ```
   Let $b_n$ be the number of multiplications needed to compute $a^n$:
   + Compute $b_1$, $b_2$, $b_3$, and $b_4$.
-  + Find a recurrence equation for ${b_n}$.
+  + Find a recurrence equation for $(b_n)$.
   + Solve this recurrence when $n$ is a power of 2.
   + Prove that $b_n = n - 1$ for any $n in NN$.
 
-+ Find the number of distinct integer solutions of the linear equation
-  $ x_1 + x_2 + x_3 = 17 $
-  if the variables are constrained as follows:
-  + $x_i in {0, 1, 2, dots, 6}$.
-  + $x_1, x_2 in 2NN$ are even integers, and $x_3 >= 0$ is an odd integer.
-  + $x_i$ are non-negative odd integers.
-
 + Solve the following recurrences using generating functions:
   + $a_(n+1) - a_n = 3^n$, $n >= 0$, $a_0 = 1$.
-  + $a_(n+1) - a_n = n^2$, $n >= 0$, $a_0 = 1$.
+  // + $a_(n+1) - a_n = n^2$, $n >= 0$, $a_0 = 1$.
   + $a_n - a_(n-1) = 5^(n-1)$, $n >= 1$, $a_0 = 1$.
   + $a_(n+2) - 3a_(n+1) + 2a_n = 0$, $n >= 0$, $a_0 = 1$, $a_1 = 6$.
   + $a_(n+2) - 2a_(n+1) + a_n = 2^n$, $n >= 0$, $a_0 = 1$, $a_1 = 2$.
   + $a_(n+2) - 2a_(n+1) - a_n = 2^n$, $n >= 0$, $a_0 = 1$, $a_1 = 2$.
-
-+ Prove that given a positive integer $N$, the number of partitions of $N$ into distinct positive integers is equal to the number of partitions of $N$ into odd positive integers. For instance, the integer $N = 4$ has two partitions into distinct positive integers ($3 + 1$ and $4$), and two partitions into odd positive integers ($1 + 1 + 1 + 1$ and $3 + 1$). The integer $N = 6$ has four partitions into distinct positive integers ($1 + 2 + 3$, $2 + 4$, $1 + 5$, and $6$), and four partitions into odd positive integers ($1 + 1 + 1 + 1 + 1 + 1$, $1 + 1 + 1 + 3$, $3 + 3$, and $1 + 5$).
 
 + Let $F$ be the generating function that solves the following recurrence with $n$-dependent coefficients:
   $
@@ -506,9 +522,10 @@
   Find the equation satisfied by $F$. \
   _Hint:_ The equation may involve $F'$.
 
-+ Find, using generating functions, the number of distinct integer solutions of the equation
-  $ x_1 + x_2 + x_3 = N $
-  with $x_i >= 0$.
+// Uses generalized binomial theorem
+// + Find, using generating functions, the number of distinct integer solutions of the equation
+//   $ x_1 + x_2 + x_3 = N $
+//   with $x_i >= 0$.
 
 
 = Graph theory

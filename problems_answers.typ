@@ -386,20 +386,38 @@
 = Sequences
 
 +
-  - $a_n = a_(n-1) + n$ for all $n >= 2$ and $a_1 = 2$.
-  - $a_n = (n^2 + n + 2)\/2$ for all $n >= 1$.
+  + $Q_n = 1/2 Q_(n-1) + k$
+  + $Q_n = alpha (1/2)^n + 2 k$
+  + It will converge to $2 k$.
 
-+ $29525$.
++
+  + $n=2 p$ corresponds to the weekdays of the $p^"th"$ week, and $n=2 p + 1$ to the weekends of that same week (or inversely). $-1/3 s_(n-1)$ corresponds to the weekend / weekdays anticorrelation, $1/5 s_(n-2)$ to the seasonality, and $1.1^n$ to the exponential growth.
+  + $s_n = alpha_1 ( (-1 + sqrt(5)) / 4 )^n + alpha_2 ((-1 - sqrt(5)) / 4)^n + A dot 1.1^n$, with $A approx 0.88$.
+  + The exponential growth because $1.1 > x_1 > abs(x_2)$.
+
++
+  + $u_t = 2 u_(t-1) - 2$.
+  + $u_t = alpha 2^t + 2$, and $alpha=1$ for $u_0 = 1$.
+  + $t = 20 s$
+  + $u_t = u_(t-1) + u_(t-1) ( 1 - u_(t-1) / N) - 2 (1 - u_(t-1) / N)$: first phase of growth similar to above for $u_t << N$, and second of saturation where $u_t ~ u_(t-1)$ when $u_t lt.tilde N$. It converges to $N$.
+
++
+  + $a_n = a_(n-1) + n$ for all $n >= 2$ and $a_1 = 2$.
+  + $a_n = (n^2 + n + 2)\/2$ for all $n >= 1$.
+
++ Recurrence is $e_(n+1) = e_n + 3^n$, sequence is $e_n = (3^n + 1) / 2$, result is $e_10 = 29525$.
 
 + $a_n = 2a_(n-1) + 3a_(n-2)$ for all $n >= 2$ with $a_0 = 1$ and $a_1 = 2$.
 
-+ $a_n = 1/sqrt(5) [(frac(1 + sqrt(5), 2))^(n+2) - (frac(1 - sqrt(5), 2))^(n+2)]$ for all $n >= 1$.
++ Recurrence is $a_n = a_(n-1) + a_(n-2)$, sequence is $a_n = 1/sqrt(5) [(frac(1 + sqrt(5), 2))^(n+2) - (frac(1 - sqrt(5), 2))^(n+2)]$ for all $n >= 1$.
 
-+ $a_n = 1/2 (3^n - 1)$ for all $n >= 1$.
++ Recurrence is $a_n = a_(n-1) + 3^(n-1)$, sequence is $a_n = 1/2 (3^n - 1)$ for all $n >= 1$.
 
 + $a_n = (3 - n) 2^(n-2)$ for all $n >= 1$.
 
-+ $a_n = 1/2 [(1 + sqrt(2))^(n+1) + (1 - sqrt(2))^(n+1)]$ for all $n >= 1$.
++
+  + Write as $cal(S)_n^((i))$ the set of strings which comply with the condition and end with the digit $i in {0,1,2}$, then get that $abs(cal(S)_n^((0))) = a_(n-1)$, and by the sum rule that $abs(cal(S)_n^((1)) union cal(S)_n^((2))) = a_(n-2) + a_(n-1)$.
+  + $a_n = 1/2 [(1 + sqrt(2))^(n+1) + (1 - sqrt(2))^(n+1)]$ for all $n >= 1$.
 
 + $a_n = 2^n + 2(-1)^n$ for all $n >= 1$.
 
@@ -409,31 +427,22 @@
   + $alpha=11$
 
 +
-  - $b_1 = 0$, $b_2 = 1$, $b_3 = 2$ and $b_4 = 3$.
-  - If $n = 2p$ is even $(p >= 1)$, $b_(2p) = 2b_p + 1$. If $n = 2p - 1$ is odd $(p >= 1)$, $b_(2p-1) = b_p + b_(p-1) + 1$.
-  - $b_(2^k) = 2^k - 1$ for all $k >= 0$.
-  - You need to use the strong version of the induction principle you have seen in Calculus. However, you can go back to this problem after Section 13 (order relations).
-
-+
-  - $binom(19, 2) - 3 binom(12, 2) + 3 binom(5, 2) = 3$.
-  - $binom(8, 2) = 28$.
-  - $binom(9, 2) = 36$.
+  + $b_1 = 0$, $b_2 = 1$, $b_3 = 2$ and $b_4 = 3$.
+  + If $n = 2p$ is even $(p >= 1)$, $b_(2p) = 2b_p + 1$. If $n = 2p - 1$ is odd $(p >= 1)$, $b_(2p-1) = b_p + b_(p-1) + 1$.
+  + $b_(2^k) = 2^k - 1$ for all $k >= 0$.
+  + You need to use a strong induction.
 
 +
   1. $a_n = 1/2 (3^n + 1)$, $n >= 0$.
-  2. $a_n = 4 binom(n+1, 1) - 5 binom(n+2, 2) + 2 binom(n+3, 3)$, $n >= 0$.
+  // 2. $a_n = 4 binom(n+1, 1) - 5 binom(n+2, 2) + 2 binom(n+3, 3)$, $n >= 0$.
   3. $a_n = 1/4 (5^n + 3)$, $n >= 0$.
-  4. $a_n = 5 times 2^n - 4$, $n >= 0$.
+  4. $a_n = 5 dot 2^n - 4$, $n >= 0$.
   5. $a_n = 2^n$, $n >= 0$.
   6. $a_n = -2^n - 1/sqrt(2) (1 - sqrt(2))^(n+1) + 1/sqrt(2) (1 + sqrt(2))^(n+1)$, $n >= 0$.
 
-+ The two generating functions are:
-  - $f_1(x) = product_(n=1)^infinity (1 + x^n)$.
-  - $f_2(x) = product_(n=1)^infinity 1/(1 - x^(2n-1))$.
-
 + $F'(x) = 2(1 + x) F(x)$.
 
-+ $binom(2+N, 2)$.
+// + $binom(2+N, 2)$.
 
 
 
