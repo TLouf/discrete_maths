@@ -57,7 +57,7 @@
         }
       )
       exercise_cells.push([
-        Grade #h(1fr) / #all-points.at(<end>).sum()
+        Total #h(1fr) / #all-points.at(<end>).sum()
       ])
       figure(
         table(
