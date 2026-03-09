@@ -248,7 +248,7 @@ The result above can then be directly extended, as we simply stop making choices
 #proposition[
   Given a set of cardinality $n$ and a natural number $r <= n$, the number of $r$-permutations we can form from this set is:
   $
-    P(n,r) = n! dot (n-1)! dot dots dot (n-r+1)! = n! / (n-r)!
+    P(n,r) = n dot (n-1) dot dots dot (n-r+1) = n! / (n-r)!
   $
 ]
 
@@ -382,7 +382,7 @@ Let's first consider $n$ distinguishable objects to be placed into $k$ boxes thr
   We can thus form a bijective function between the distributions of cards to the players and permutations with indistinguishable objects from @prop-permut_w_rep!
   From @def-same-card-bij, we can therefore use the previous result to get that the total number of ways to distribute the hands is
   $
-    52! / (4 dot 5! dot 32!)
+    52! / ((5!)^4 dot 32!)
   $
   // Let's assume we order the 52 cards in some way, assigning them a label that goes from 1 to 52.
 ]
@@ -409,15 +409,15 @@ We thus use a *"stars and bars"* representation, which is very commonly used to 
   $
     underbracket(* * *, A) | underbracket(* * * *, B) | underbracket(*, C) quad quad quad underbracket(, A)| underbracket(* * * *, B) | underbracket(* * * *, C)
   $
-  So the $n+k-1 = 10$ stars and bars are to be arranged in as many slots, so we may for instance choose $k-1$ of these to contain bars, and then fill the rest with stars.
+  So the $n+k-1 = 10$ stars and bars are to be arranged in as many slots, so, for instance, we can first choose $n$ of these spots for our $n$ stars, and fill the remaining ones with bars.
 ]
 
-This is thus a "$(n + k - 1)$ choose $(k-1)$" combination!
+This is thus a "$(n + k - 1)$ choose $n$" combination!
 
 #proposition(title: "Distributions of indistinguishable objects")[
   The number of distributions of $n$ indistinguishable objects into $k$ distinguishable boxes is
   $
-    binom(n+k-1, k-1)
+    binom(n+k-1, n)
   $
 ]
 
