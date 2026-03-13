@@ -39,7 +39,7 @@ They may also be defined recursively, that is, providing some initial terms toge
 
 #definition(title: [Recurrence relation])[
   A *recurrence relation* for the sequence $(a_n)_(n in NN)$ is an equation that expresses $a_n$ in terms of one or more previous terms $a_(n-1), a_(n-2), ..., a_(n-k)$, and possibly $n$.
-  The *initial conditions* are the first $k$ terms in the sequence $(a_0, ..., a_(k-1)$, which are necessary to be able to determine all terms of such a sequence.
+  The *initial conditions* are the first $k$ terms in the sequence: $a_0, ..., a_(k-1)$; which are necessary to be able to determine all terms of such a sequence.
 ]
 
 #example[
@@ -140,7 +140,7 @@ In this case, we want to *solve* the recurrence relation, that is, to find the e
 
 === Linear homogeneous recurrence relations
 
-Let us first study linear recurrence relations, as they often appear in real-world problems, and can be solved systemically.
+Let us first study linear recurrence relations, as they often appear in real-world problems, and can be solved systematically.
 
 #definition(slide-break: false)[
   - A recurrence relation is of *$k^"th"$ order* if $a_n$ can be expressed in terms of its $k$ previous terms $a_(n-1), a_(n-2), ..., a_(n-k)$.
@@ -162,47 +162,62 @@ To gain some intuition on the solution of such recurrence relations, let's start
 #theorem(title: "Solution of a homogeneous first-order recurrence relation")[
   Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
   $ forall n >=1, a_n = c a_(n-1), $
-  where $c in RR$, and we know the initial condition $a_1$. Then, the solution of this relation is given by
+  where $c in RR$, and we know the initial condition $a_0$. Then, the solution of this relation is given by
   $ forall n in NN, a_n = a_0 c^n. $
 ]
 
-Let us now observe that $a_n = alpha x^n$ with $alpha, x in RR^*$ is a solution of such recurrence relations iff
-$
-      & alpha x^n = c_1 alpha x^(n-1) + c_2 alpha x^(n-2) + dots + c_k alpha x^(n-k) \
-  <=> & x^k - c_1 x^(k-1) - c_2 x^(k-2) - dots - c_(k-1) x - c_k = 0 \
-  <=> & P(x) = 0
-$
+Let us now observe that $a_n = alpha x^n$ with $alpha, x in RR^*$ is a solution of $k^"th"$ order recurrence relation iff, for all $n >= k$:
+
+#math.equation(numbering: "(1)", block: true, number-align: end + top)[
+  $
+        & alpha x^n = c_1 alpha x^(n-1) + c_2 alpha x^(n-2) + dots + c_k alpha x^(n-k) \
+    <=> & x^k - c_1 x^(k-1) - c_2 x^(k-2) - dots - c_(k-1) x - c_k = 0 \
+    <=> & P(x) = 0
+  $
+] <eq:homog_rec_sol>
+
 where we introduced the *characteristic polynomial* $P$, whose roots we will call the *characteristic roots*.
-The equivalence above implies that if $x_i$ is a characteristic root, $alpha x_i^n$ is a solution of the recurrence relation.
-The multiplicative $alpha$ cancelled out above, so its value is to be fixed according to the initial conditions.
-The characteristic polynomial of a $k^"th"$ order linear recurrence is of degree $k$, so it admits $k$ characteristic roots, $x_1, dots, x_k$.
 
-Let us first suppose all roots are distinct.
-Then the solution is a linear combination of the form:
-$
-  a_n = sum_(i=1)^k alpha_i x_i^n
-$
+#slidebreak()
 
-Let us now suppose we have a root $x_i$ of multiplicity $k_i > 1$.
-Then the derivative $P'$ of the characteristic polynomial also has $x_i$ as a root, of multiplicity $k_i - 1$!
-So $x_i$ also satisfies
-$
-      & P'(x_i) = 0 \
-  <=> & k x_i^(k-1) - c_1 (k-1) x_i^(k-2) - dots - c_(k-1) = 0 \
-  <=> & k x_i^(k) - c_1 (k-1) x_i^(k-1) - dots - c_(k-1) x_i = 0 \
-$
-which shows that $n x_i^n$ is also a solution.
-Thus, the fact that $x_i$ is a root of the first, second, ..., $(k-1)^"th"$ derivative of the characteristic polynomial $P$ enables us to see that $n x_i^n, n^2 x_i^n, dots, n^(k-1) x_i^n$ are also solutions.
-
-Putting everything together, we get the following general result.
-
-// Second, we can observe that a linear combination of two solutions of such a recurrence relation is also a solution.
+// First, we can observe that a linear combination of two solutions of such a recurrence relation is also a solution.
 // Indeed, let's consider $s_n$ and $t_n$ two solutions of a recurrence relation, and take $b_1, b_2 in RR$, then:
 // $
 //   b_1 s_n + b_2 t_n &= b_1 (c_1 s_(n-1) + dots + c_k s_(n-k)) +  b_2 (c_1 t_(n-1) + dots + c_k t_(n-k))\
 //   &= c_1 (b_1 s_(n-1) + b_2 t_(n-1)) + dots + c_k (b_1 s_(n-k) + b_2 t_(n-k))
 // $
 // which means that $b_1 s_n + b_2 t_n$ is also a solution of the same recurrence relation.
+
+The equivalence above implies that if $x_i$ is a characteristic root, $alpha x_i^n$ is a solution of the recurrence relation.
+The characteristic polynomial of a $k^"th"$ order linear recurrence is of degree $k$, so it admits $k$ characteristic roots: $x_1, dots, x_k$.
+
+- Let us first suppose all roots are distinct.
+  Then the solution is a linear combination of the form:
+  $
+    a_n = sum_(i=1)^k alpha_i x_i^n
+  $
+
+#slidebreak()
+
+- Let us now suppose we have a root $x_i$ of multiplicity $m_i >= 2$.
+  Then the derivative $P'$ of the characteristic polynomial also has $x_i$ as a root, of multiplicity $m_i - 1$.
+
+  Also, we can notice that @eq:homog_rec_sol is equivalent to $x^(n-k) P(x) = 0$, by retracing our steps.
+  Now if we write $Q_1(x) = x^(n-k) P(x)$, then $Q'_1(x_i) = 0$, which we can rewrite as
+  $
+    n x_i^(n-1) = c_1 (n-1) x_i^(n-2) + dots + c_k (n-k) x_i^(n-k-1).
+  $
+  Multiplying both side by $x_i$, we then see that $a_n = n x_i^n$ is a solution of the recurrence.
+
+  Then, if $m_i >= 3$, we can do the same with $Q_2 (x) = x Q'_1 (x)$ and find that $n^2 x^n$ is also a solution, and again with $m_i >= 4$, etc.
+
+  By induction, we can thus get that if $x_i$ is a characteristic root of multiplicity $m_i$, then
+  $
+    n x_i^n, space n^2 x_i^n, space dots space, space n^(m_i-1) x_i^n
+  $
+  are also solutions of the recurrence.
+
+Putting everything together, we get the following general result.
 
 #theorem(title: "Solution of a linear homogeneous recurrence relation")[
   Let $(a_n)$ be a sequence satisfying a recurrence relation of the form:
@@ -223,9 +238,10 @@ Putting everything together, we get the following general result.
   where $alpha_(i,j)$ are constants to be fixed according to initial conditions.
 ]
 // highlight in alpha sub: i = which root, j = which multiplicity
+// total of $k$ alphas by fundamental theorem of algebra
 
 
-Let us see what this gives in practice with Fibonacci-like recurrences.
+Let us see what this gives in a simple case, with Fibonacci-like recurrences.
 
 #corollary(title: "Solution of a homogeneous Fibonacci-like recurrence relation")[
   Let us suppose that the sequence $(a_n)_(n in NN)$ satisfies the recurrence relation
@@ -240,7 +256,7 @@ Let us see what this gives in practice with Fibonacci-like recurrences.
       (alpha_1 + n alpha_2) x_1^n & "if" x_1 = x_2
     )
   $
-  where the constants $alpha_1$ and $alpha_2$ can be obtained using the initial conditions $a_1, a_2$.
+  where the constants $alpha_1$ and $alpha_2$ can be obtained using the initial conditions $a_0, a_1$.
 ]
 
 // #example[
@@ -254,8 +270,9 @@ What if we now add heterogeneity?
 #theorem(title: "Solution of a linear nonhomogeneous recurrence relation")[
   Let us consider the linear nonhomogeneous recurrence relation with constant coefficients:
   $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k) + f(n) $
-  where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_1, ..., a_k$ are known.\
-  Then, the general solution of this linear nonhomogeneous recurrence is equal to $(a_n^((h)) + a_n^((p)))_(n in NN)$, where $(a_n^((h)))$ is the solution of the associated _homogeneous_ recurrence relation
+  where $c_1, c_2, ..., c_k in RR$, and the initial conditions $a_0, ..., a_(k-1)$ are known.\
+
+  Then, the general solution of this linear nonhomogeneous recurrence is $(a_n^((h)) + a_n^((p)))_(n in NN)$, where $(a_n^((h)))$ is the solution of the associated _homogeneous_ recurrence relation
   $ a_n = c_1 a_(n-1) + c_2 a_(n-2) + ... + c_k a_(n-k), $
   and $(a_n^((p)))$ is any _particular_ solution of the nonhomogeneous relation.
 ]
@@ -375,7 +392,7 @@ So for instance, the series $(1 + 2 x + 3 x^2)$ can encode the fact that we have
     (sum_(n=0)^(+ oo) x^n)(sum_(n=0)^(+ oo) x^(2 n))(sum_(n=0)^(+ oo) x^(5 n))
   $
   using the product rule.
-  The independence of picks (so their order) is clearly visible in the generating function.
+  The independence of picks is clearly visible in the generating function.
 
   When the order matters, then using the product rule, the process of picking $n$ tokens successively can be represented by $(x + x^2 + x^5)^n$.
   The number of ways for these $n$ picks to sum up to $r$ euros is then the coefficient of $x^r$.
