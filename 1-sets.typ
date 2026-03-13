@@ -492,7 +492,7 @@ Using Boolean operations (instead of regular ones) guarantees that $M_(S circle.
 
 #definition(title: [Function images and range])[
   Let's consider $f: X -> Y$ and $(x,y) in X times Y$ such that $f(x) = y$.
-  We then say that $y$ is the *image* of $x$ under the function, and that $x$ is the *preimage* of $y$.
+  We then say that $y$ is the *image* of $x$ by $f$, and that $x$ is the *preimage* of $y$ by $f$.
   We also define the *range* of the function as the set of images of every element in the domain $X$, and often write this range as $f(X)$.
   The range is therefore a subset of the codomain: $f(X) subset.eq Y$.
 ]
@@ -502,8 +502,15 @@ Using Boolean operations (instead of regular ones) guarantees that $M_(S circle.
 
 #definition[
   Given a function $f : X -> Y$, we say that
-  - $f$ is *injective* or *one-to-one* if each element of $Y$ is mapped to at most one element of $X$, or equivalently, if $x_1 != x_2$ implies $f(x_1) != f(x_2)$.
-  - $f$ is *surjective* if it maps every element of $Y$ to at least one element of $X$, that is, if for every $y in Y$, there exists at least an element $x in X$ such that $y = f(x)$.
+  - $f$ is *injective* or *one-to-one* if every element of $Y$ is the image of at most one element of $X$ by $f$, that is:
+    $
+      forall x_1, x_2 in X, & f(x_1) = f(x_2) => x_1 = x_2 \
+      // "or, equivalently," & x_1 != x_2 => f(x_1) != f(x_2).
+    $
+  - $f$ is *surjective* if every element of $Y$ is the image of at least one element of $X$ by $f$, that is:
+    $
+      forall y in Y, exists x in X, y = f(x).
+    $
   - $f$ is *bijective* if it is injective and surjective.
 ]
 
