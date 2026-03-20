@@ -530,7 +530,29 @@
 
 = Graph theory
 
-+ Let $V$ be the set of those two-letter words formed with the alphabet ${w, x, y, z}$ and starting with either $y$ or $z$. We define the graph $G = (V, A)$ in such a way that two words in $V$ determine an edge in $A$ if they differ in exactly one letter:
++ For each example, define what the vertices and the edges are. Decide if the graph should be directed and/or weighted, if it contains self-loops, if it is bipartite and whether it's connected.
+  + Metro network of a city.
+  + Physical contacts between people over the course of a day.
+  + An online social network.
+  + A country's highway network.
+  + Economic transactions between banks.
+  + Network of users and movies on a streaming platform (user connected to movie if they have given it a rating).
+
++ Draw examples of graphs that satisfy the following properties.
+  + A graph with 6 vertices and 5 edges that does not contain cycles.
+  + A graph with 6 vertices and 5 edges that contains exactly one cycle.
+  + A connected bipartite graph with 6 vertices that contains a cycle.
+  + A graph with 6 vertices that is not bipartite.
+  + A graph that has a cut edge, a cut vertex and a cycle.
+  + A graph with a cut vertex but no cut edges.
+  + A directed graph with 5 vertices that is weakly connected but not strongly connected.
+  + A directed graph with 4 vertices that is strongly connected, but ceases to be so upon removing a single edge.
+  + A 3-regular graph with 6 vertices.
+  + Two graphs with 6 vertices that have the same degree sequence but are not isomorphic.
+  + A disconnected graph with 7 vertices consisting of exactly two connected components, one of which is a cycle and the other a tree.
+  + A tree with 10 vertices, 4 of which are branches of degree 3 and the rest are leaves.
+
++ Let $V$ be the set of those two-letter words formed with the alphabet ${w, x, y, z}$ and starting with either $y$ or $z$. We define the graph $G = (V, E)$ in such a way that two words in $V$ determine an edge in $E$ if they differ in exactly one letter:
   + How many vertices does $G$ have?
   + Draw the graph $G$.
   + Prove that $G$ is regular and compute its degree.
@@ -543,13 +565,13 @@
   + $G$ is a regular graph with 6 edges.
   + $G$ has 10 edges, 2 vertices of degree 4, and all other vertices have degree 3.
 
-+ Let $K_n$ be the complete graph of $n$ vertices.
++ Let $K_n$ be the complete simple graph of $n$ vertices.
   + Draw $K_1$, $K_2$, $K_3$, $K_4$, and $K_5$.
   + Which is the degree of the vertices of $K_n$?
   + How many edges does $K_n$ have?
   + Prove that $K_n$ is a sub-graph of $K_m$ for all $n < m$.
 
-+ For which values of $n >= 3$ are the graphs $K_n$, $P_n$, $Q_n$, and $C_n$ bipartite?
++ For which values of $n >= 3$ are the graphs $K_n$, $P_n$, and $C_n$ ---respectively the complete simple graph, the path and the cycle of $n$ vertices--- bipartite?
 
 + Find the minimum number of vertices of a graph with 7 edges if every vertex has a degree at most 3.
 
@@ -596,12 +618,8 @@
       ```dot
       graph {
         node[shape=circle margin=0 width=0.2]
-        a -- b;
-        a -- c;
-        a -- d;
-        a -- e;
-        b -- c;
-        b -- d;
+        a -- {b, c, d, e};
+        b -- {c, d, e};
         c -- e;
       }
       ```,
@@ -617,20 +635,153 @@
   Determine which ones are trails, paths, cycles, or circuits, and compute their corresponding lengths.
 
 
-+ Let $K_n$ be the complete graph of $n$ vertices.
++ Let $K_n$ be the complete simple graph of $n$ vertices.
   + How many length-3 cycles does it contain?
   + How many triangles does each edge of $K_n$ belong to?
 
 // 13.6
 + Let us consider the cycle $C_4 = (V_4, E_4)$ with labeled vertices $V_4 = {a, b, c, d}$.
-  + If $A$ is the set of the spanning subgraphs of $C_4$:
-    $ A = {G = (V_4, E) | E subset.eq E_4} $
-    compute the cardinal of $A$.
+  + If $A$ is the following set of subgraphs of $C_4$:
+    $ A = {(V_4, E) | E subset.eq E_4} $
+    compute the cardinality of $A$.
   + We define on $A$ the following equivalence relation $R$: if $G_1, G_2 in A$,
     $ G_1 rel G_2 <==> G_1 "is isomorphic to" G_2 $
     Find the equivalence classes $[G]_R$, and the quotient set $C = A\/R$.
   + We now define the order relation $prec.eq.curly$ on the quotient set $C$ as follows: $[A]_R prec.eq.curly [B]_R$ if and only if there exist graphs $G_1 = (V_4, E_1) in [A]_R$ and $G_2 = (V_4, E_2) in [B]_R$ such that $E_1 subset.eq E_2$. Find the Hasse diagram associated to the set $(C, prec.eq.curly)$. Is $(C, prec.eq.curly)$ a totally ordered set?
   + Let $Z subset C$ be the subset of $C$ containing the classes of equivalence that contain at least one representative with two edges. Compute $sup(Z)$ and $inf(Z)$.
+
++ Let $G_n = (V_n, E_n)$ with $n in NN^*$ be a graph family defined as follows:
+  - Each vertex $v in V_n$ corresponds to a bit string of length $n$ with an even number of ones.
+  - Two vertices $x, y in V_n$ are adjacent (${x, y} in E_n$) if and only if they differ exactly in two bits.
+
+  Compute $|V_n|$ and $|E_n|$.
+
+// 13.10
++ Prove using induction that the number of odd-degree vertices in any graph $G$ is an even number.
+
+
++ Let $X = {A, B, C}$. We define the simple graph $G = (V, E)$ in the following way: the set of vertices is given by the power set of $X$ ($V = cal(P)(X)$), and two vertices $R, S in V$ are adjacent if and only if $R subset S$ or $S subset R$.
+  + How many vertices and edges does $G$ contain?
+  + Determine the degree of each vertex in $V$. Is $G$ regular?
+  + Is $G$ bipartite?
+
++ Show that if $G = (V, E)$ is a simple graph and
+  $ |E| > binom(|V| - 1, 2), $
+  then $G$ is connected.
+
++ If the mean degree of a connected graph is greater than 2, then show that there exist at least two independent cycles.
+
++ Let $G = (V, E)$ be a graph whose adjacency matrix $A_G$ is given by
+  $
+    A_G = mat(
+      0, 1, 0, 1, 0, 0, 1, 0;
+      1, 0, 1, 0, 0, 1, 0, 0;
+      0, 1, 0, 1, 1, 0, 0, 0;
+      1, 0, 1, 0, 0, 0, 0, 1;
+      0, 0, 1, 0, 0, 1, 0, 1;
+      0, 1, 0, 0, 1, 0, 1, 0;
+      1, 0, 0, 0, 0, 1, 0, 1;
+      0, 0, 0, 1, 1, 0, 1, 0;
+    ).
+  $
+  Answer the following questions using arguments based solely on the matrix $A_G$ (without using any graphical representation of $G$ that can be obtained from $A_G$):
+  + What kind of graph is $G$?
+  + How many vertices and edges does $G$ contain?
+  + Is $G$ a regular graph? If yes, tell the common degree, and if not, give the degree sequence of $G$.
+  + Let $i eq.not j$ be two distinct vertices of $G$ ($i, j in V$). Let $n_(i j)$ be the number of walks from $i$ to $j$ of length 3. Find all the possible values of $n_(i j)$ for $G$.
+  + Which is the length of a minimum-length cycle of $G$?
+// R 10.6.1
++ For each of these problems about a subway system, describe a weighted graph model that can be used to solve the problem.
+  + What is the least amount of time required to travel between two stops?
+  + What is the minimum distance that can be traveled to reach a stop from another stop?
+  + What is the least fare required to travel between two stops if fares between stops are added to give the total fare?
+
++ Let us consider the following directed graph.
+  #figure(
+    raw-render(
+      ```dot
+      digraph {
+        layout=neato
+        edge [fontsize=10 labelfloat=true labeldistance=2]
+        node[shape=circle margin=0 width=0.2]
+        a -> b [taillabel="30"]
+        a -> c [label="50"]
+        c -> b [label="19"]
+        c -> d [label="12"]
+        c -> f [headlabel="10"]
+        b -> d [label="6"]
+        b -> e [taillabel="40"]
+        d -> e [taillabel="35"]
+        d -> f [label="23"]
+        e -> f [label="12"]
+        e -> g [label="8"]
+        f -> g [label="20"]
+      }
+      ```,
+      width: 5cm,
+    ),
+  )
+  + Find the shortest path to go from a to g.
+  + Find the shortest path to go from a to g, assuming that the edges cb and ef are not directed (i.e., you can use both directions).
+
++ In the weighted graph shown in the figure below, compute the distances $d(a, h)$, $d(a, e)$, $d(d, a)$, $d(d, g)$, and $d(b, e)$.
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=sfdp
+        start=6
+        splines=true
+        edge [fontsize=10 labelfloat=true labeldistance=1]
+        node[shape=circle margin=0 width=0.2]
+        a -- b [taillabel="6"]
+        a -- f [label="9"]
+        b -- c [label="7"]
+        b -- g [label="8"]
+        b -- f [label="5"]
+        c -- h [headlabel="3"]
+        c -- g [label="5"]
+        c -- d [label="6"]
+        d -- e [taillabel="4"]
+        d -- h [label="10"]
+        e -- f [label="8"]
+        e -- h [label="9"]
+        f -- g [label="4"]
+        f -- h [label="7"]
+        g -- h [label="4"]
+      }
+      ```,
+      width: 7cm,
+    ),
+  )
+
++ Let $G = (V, E, omega)$ be the following weighted graph (with the weight of the edge ${f, h}$ equal to $x in RR$). Compute the range of values of the weight $x in RR$, so that the minimum-length path from a to h goes through the edge ${f, h}$.
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        start=9
+        edge[labeldistance=2]
+        node[shape=circle margin=0 width=0.2]
+        a -- b [label="1"];
+        a -- d [label="3"];
+        a -- c [headlabel="2"];
+        b -- c [label="2"];
+        b -- e [taillabel="5"];
+        c -- d [label="2"];
+        c -- f [taillabel="5"];
+        d -- g [taillabel="4"];
+        e -- f [label="5"];
+        e -- h [label="4"];
+        f -- g [label="3"];
+        f -- h [taillabel="x"];
+        g -- h [label="5"];
+      }
+      ```,
+      width: 6cm,
+    ),
+  )
 
 + Which of these graphs are trees?
   #subpar.grid(
@@ -744,81 +895,9 @@
 
 + Suppose 1000 players enter a chess tournament. Use a rooted tree model of the tournament to determine how many games must be played to determine a champion, if a player is eliminated after one loss and games are played until only one entrant has not lost. (Assume there are no ties.)
 
-// R 11.4.13-16 833 1064
-+ Let's consider the following graph.
-  #figure(
-    raw-render(
-      ```dot
-      graph {
-        layout=neato;
-        concentrate=true;
-        node[shape=circle margin=0 fontsize=24]
-        a[pos="0,1!"]
-        b[pos="0,0!"]
-        c[pos="1,0.5!"]
-        d[pos="2,0.5!"]
-        e[pos="3,1!"]
-        f[pos="3,0!"]
-        g[pos="4,0!"]
-        h[pos="4,1!"]
-        i[pos="5,1!"]
-        j[pos="5,0!"]
-        a -- b;
-        c -- {a, b, d};
-        d -- {e, f};
-        e -- f;
-        g -- {h, f, j};
-        h -- {e, i};
-      }
-      ```,
-      width: 7cm,
-    ),
-  )
-  + Use breadth-first search to produce a spanning tree of this graph, choosing $a$ as its root, and assuming that vertices are ordered alphabetically.
-  + Do the same using breadth-first search.
-
 + Prove that in a rooted tree such that all vertices that are not leaves have degree 3, then the tree has an even number of vertices.
 
-+ Give an example (if any) of
-  + a regular and bipartite graph,
-  + a 3-regular graph with 9 vertices,
-  + a graph with $n$ vertices and $(n - 1)(n - 2)\/2$ edges,
-  + a 4-regular connected multi-graph,
-  + a graph isomorphic to its edge-complement,
-  + a graph isomorphic to its dual.
-
 + How many trees does a forest of 62 vertices and 51 edges contain?
-
-+ Let $X = {A, B, C}$. We define the simple graph $G = (V, E)$ in the following way: the set of vertices is given by the power set of $X$ ($V = cal(P)(X)$), and two vertices $R, S in V$ are adjacent if and only if $R subset S$ or $S subset R$.
-  + How many vertices and edges does $G$ contain?
-  + Determine the degree of each vertex in $V$. Is $G$ regular?
-  + Is $G$ bipartite?
-
-+ Show that if $G = (V, E)$ is a simple graph and
-  $ |E| > binom(|V| - 1, 2), $
-  then $G$ is connected.
-
-+ If the mean degree of a connected graph is greater than 2, then show that there exist at least two independent cycles.
-
-+ Let $G = (V, E)$ be a graph whose adjacency matrix $A_G$ is given by
-  $
-    A_G = mat(
-      0, 1, 0, 1, 0, 0, 1, 0;
-      1, 0, 1, 0, 0, 1, 0, 0;
-      0, 1, 0, 1, 1, 0, 0, 0;
-      1, 0, 1, 0, 0, 0, 0, 1;
-      0, 0, 1, 0, 0, 1, 0, 1;
-      0, 1, 0, 0, 1, 0, 1, 0;
-      1, 0, 0, 0, 0, 1, 0, 1;
-      0, 0, 0, 1, 1, 0, 1, 0;
-    ).
-  $
-  Answer the following questions using arguments based solely on the matrix $A_G$ (without using any graphical representation of $G$ that can be obtained from $A_G$):
-  + What kind of graph is $G$?
-  + How many vertices and edges does $G$ contain?
-  + Is $G$ a regular graph? If yes, tell the common degree, and if not, give the degree sequence of $G$.
-  + Let $i eq.not j$ be two distinct vertices of $G$ ($i, j in V$). Let $n_(i j)$ be the number of walks from $i$ to $j$ of length 3. Find all the possible values of $n_(i j)$ for $G$.
-  + Which is the length of a minimum-length cycle of $G$?
 
 
 + Let $G = (V, E)$ be the graph defined by the following adjacency matrix:
@@ -865,119 +944,38 @@
     ),
   )
 
-// R 10.6.1
-+ For each of these problems about a subway system, describe a weighted graph model that can be used to solve the problem.
-  + What is the least amount of time required to travel between two stops?
-  + What is the minimum distance that can be traveled to reach a stop from another stop?
-  + What is the least fare required to travel between two stops if fares between stops are added to give the total fare?
-
-+ Let us consider the following directed graph.
-  #figure(
-    raw-render(
-      ```dot
-      digraph {
-        layout=neato
-        edge [fontsize=10 labelfloat=true labeldistance=2]
-        node[shape=circle margin=0 width=0.2]
-        a -> b [taillabel="30"]
-        a -> c [label="50"]
-        c -> b [label="19"]
-        c -> d [label="12"]
-        c -> f [headlabel="10"]
-        b -> d [label="6"]
-        b -> e [taillabel="40"]
-        d -> e [taillabel="35"]
-        d -> f [label="23"]
-        e -> f [label="12"]
-        e -> g [label="8"]
-        f -> g [label="20"]
-      }
-      ```,
-      width: 5cm,
-    ),
-  )
-  + Find the shortest path to go from a to g.
-  + Find the shortest path to go from a to g, assuming that the edges cb and ef are not directed (i.e., you can use both directions).
-
-+ In the weighted graph shown in the figure below, compute the distances $d(a, h)$, $d(a, e)$, $d(d, a)$, $d(d, g)$, and $d(b, e)$.
+// R 11.4.13-16 833 1064
++ Let's consider the following graph.
   #figure(
     raw-render(
       ```dot
       graph {
-        layout=sfdp
-        start=6
-        splines=true
-        edge [fontsize=10 labelfloat=true labeldistance=1]
-        node[shape=circle margin=0 width=0.2]
-        a -- b [taillabel="6"]
-        a -- f [label="9"]
-        b -- c [label="7"]
-        b -- g [label="8"]
-        b -- f [label="5"]
-        c -- h [headlabel="3"]
-        c -- g [label="5"]
-        c -- d [label="6"]
-        d -- e [taillabel="4"]
-        d -- h [label="10"]
-        e -- f [label="8"]
-        e -- h [label="9"]
-        f -- g [label="4"]
-        f -- h [label="7"]
-        g -- h [label="4"]
+        layout=neato;
+        concentrate=true;
+        node[shape=circle margin=0 fontsize=24]
+        a[pos="0,1!"]
+        b[pos="0,0!"]
+        c[pos="1,0.5!"]
+        d[pos="2,0.5!"]
+        e[pos="3,1!"]
+        f[pos="3,0!"]
+        g[pos="4,0!"]
+        h[pos="4,1!"]
+        i[pos="5,1!"]
+        j[pos="5,0!"]
+        a -- b;
+        c -- {a, b, d};
+        d -- {e, f};
+        e -- f;
+        g -- {h, f, j};
+        h -- {e, i};
       }
       ```,
       width: 7cm,
     ),
   )
-
-+ Let $V = {A, B, C, D, E, F, G, H, I, J, K, L, M}$ be the set of vertices of the weighted graph $G = (V, E)$. Its weight matrix is given below: e.g., for $(C, D) in E$, its weight is $w(C, D) = 10$.
-  $
-    mat(
-      , 5, , , 7, 14, , , , , , , ;
-      5, , 7, , 1, , 2, , , , , , ;
-      , 7, , 10, , , 6, 6, , , , , ;
-      , , 10, , , , , 4, , , , , ;
-      7, 1, , , , 4, , , , , , , ;
-      14, , , , 4, , 8, , 6, 4, , , ;
-      , 2, 6, , , 8, , 7, 6, 4, , , ;
-      , , 6, 4, , , 7, , , , 1, 2, ;
-      , , , , , 6, 6, , , , , , ;
-      , , , , , 4, 4, , , , 11, 13, ;
-      , , , , , , , 1, , 11, , , 2;
-      , , , , , , , 2, , 13, , , 5;
-      , , , , , , , , , , 2, 5, ;
-    )
-  $
-  + Compute the minimum weight (or shortest) path from vertex A to vertex M. Compute the total weight of such path.
-  + Find a minimum-weight spanning tree and give its weight.
-
-+ Let $G = (V, E, omega)$ be the following weighted graph (with the weight of the edge ${f, h}$ equal to $x in RR$). Compute the range of values of the weight $x in RR$, so that the minimum-length path from a to h goes through the edge ${f, h}$.
-  #figure(
-    raw-render(
-      ```dot
-      graph {
-        layout=neato
-        start=9
-        edge[labeldistance=2]
-        node[shape=circle margin=0 width=0.2]
-        a -- b [label="1"];
-        a -- d [label="3"];
-        a -- c [headlabel="2"];
-        b -- c [label="2"];
-        b -- e [taillabel="5"];
-        c -- d [label="2"];
-        c -- f [taillabel="5"];
-        d -- g [taillabel="4"];
-        e -- f [label="5"];
-        e -- h [label="4"];
-        f -- g [label="3"];
-        f -- h [taillabel="x"];
-        g -- h [label="5"];
-      }
-      ```,
-      width: 6cm,
-    ),
-  )
+  + Use depth-first search to produce a spanning tree of this graph, choosing $a$ as its root, and assuming that vertices are ordered alphabetically.
+  + Do the same using breadth-first search.
 
 // R 11.4.23
 + Suppose that an airline must reduce its flight schedule to save money. If its original routes are as illustrated here, which flights can be discontinued to retain service between all pairs of cities (where it may be necessary to combine flights to fly from one city to another)?
@@ -1095,12 +1093,23 @@
   $
   Find a spanning tree of $G$ (if any).
 
-+ Let $G_n = (V_n, E_n)$ with $n in NN$ be a graph family defined as follows:
-  - Each vertex $v in V_n$ corresponds to a bit string of length $n$ with an even number of ones.
-  - Two vertices $x, y in V_n$ are adjacent (${x, y} in E_n$) if and only if they differ exactly in two bits.
-
-  + If $n$ is a fixed natural number, compute $|V_n|$ and $|E_n|$.
-  + Is $G_n$ a regular graph? If the answer is positive, then give the common degree; and if the answer is negative, then give the degree sequence.
-
-// 13.10
-+ Prove using induction that the number of odd-degree vertices in any graph $G$ is an even number.
++ Let $V = {A, B, C, D, E, F, G, H, I, J, K, L, M}$ be the set of vertices of the weighted graph $G = (V, E)$. Its weight matrix is given below: e.g., for $(C, D) in E$, its weight is $w(C, D) = 10$.
+  $
+    mat(
+      , 5, , , 7, 14, , , , , , , ;
+      5, , 7, , 1, , 2, , , , , , ;
+      , 7, , 10, , , 6, 6, , , , , ;
+      , , 10, , , , , 4, , , , , ;
+      7, 1, , , , 4, , , , , , , ;
+      14, , , , 4, , 8, , 6, 4, , , ;
+      , 2, 6, , , 8, , 7, 6, 4, , , ;
+      , , 6, 4, , , 7, , , , 1, 2, ;
+      , , , , , 6, 6, , , , , , ;
+      , , , , , 4, 4, , , , 11, 13, ;
+      , , , , , , , 1, , 11, , , 2;
+      , , , , , , , 2, , 13, , , 5;
+      , , , , , , , , , , 2, 5, ;
+    )
+  $
+  + Compute the minimum weight (or shortest) path from vertex A to vertex M. Compute the total weight of such path.
+  + Find a minimum-weight spanning tree and give its weight.

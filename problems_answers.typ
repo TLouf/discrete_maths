@@ -449,6 +449,10 @@
 = Graph theory
 
 +
+
++
+
++
   1. $8$.
   2.
     #figure(
@@ -541,10 +545,9 @@
   4. Hint: you have to prove that $V_n subset V_m$ and $E_n subset E_m$ whenever $n < m$.
 
 +
-  1. False for any $n >= 3$.
-  2. True for any $n >= 3$.
-  3. True for any $n >= 3$.
-  4. True for any even $n >= 4$.
+  - $K_n$: for none
+  - $P_n$: for all $n >= 3$.
+  - $C_n$: for all even $n >=4$.
 
 + $|V|_"min" = 5$.
 
@@ -666,6 +669,46 @@
 
   + $sup(Z) = C_3$ and $inf(Z) = C_1$.
 
++ $|V_n| = 2^(n-1)$, all have degree $d = binom(n, 2)$ so $|E_n| = 2^(n-2) binom(n, 2)$.
+
++ The base case corresponds to the trivial graph of $n$ vertices $G = (V, emptyset)$ (with $|V| = n >= 1$). Then, you apply induction on the number of edges $|E|$.
+
+
++
+  - $|V| = 8$ and $|E| = 19$.
+  - $d(emptyset) = d(X) = 7$. The other vertices have $d(v) = 4$. $G$ is not regular.
+  - $G$ is not bipartite.
+
++ Hint: Which is the simple graph with $n$ vertices and $binom(n, 2)$ edges?
+
++ Hint: The average degree of a graph $G = (V, E)$ is defined as follows:
+  $ overline(d) = 1/abs(V) sum_(v in V) d(v) . $
+  Use also the following result: Let $G$ be a connected graph containing a cycle. Then, if we remove any edge of that cycle, the resulting graph is also connected.
+
++
+  + $G$ is simple.
+  + $|V| = 8$ and $|E| = 12$.
+  + $G$ is regular with $d = 3$.
+  + $n_(i j) in {0, 6, 7}$.
+  + The length of the shortest cycle in $G$ is $ell_"min" = 4$.
+
++
+  1. It is not bipartite.
+  2. There are no spanning trees.
+
++ All graph models are weighted graphs whose vertices are the metro stops. Then edges are drawn between connected stops and their weights are:
+  + travel times,
+  + distances,
+  + fares.
+
++
+  1. The path is $(a, b, e, g)$ with length 78.
+  2. The same as above.
+
++ $d(a, h) = 16$, $d(a, e) = 17$, $d(d, a) = 19$, $d(d, g) = 11$, and $d(b, e) = 13$.
+
++ $0 < x <= 3$.
+
 +
   + Yes
   + No (cycle)
@@ -675,6 +718,13 @@
   + No (forest)
 
 + $999$.
+
+
++ Hint: Use that $V = V_1 union V_3$ where $V_1$ (resp. $V_3$) is the set of vertices of degree 1 (resp. 3).
+
++ 11 trees.
+
++ There is no spanning tree of weight $<= 12$.
 
 +
   + #figure(
@@ -735,63 +785,6 @@
       ),
     )
 
-
-+ Hint: Use that $V = V_1 union V_3$ where $V_1$ (resp. $V_3$) is the set of vertices of degree 1 (resp. 3).
-
-+
-  1. $C_(2n)$.
-  2. There is no such graph.
-  3. A graph with two connected components: $K_(n-1)$ and an isolated vertex.
-  4. Two vertices joined by four edges.
-  5. $P_4$.
-  6. $C_2$.
-
-+ 11 trees.
-
-+
-  - $|V| = 8$ and $|E| = 19$.
-  - $d(emptyset) = d(X) = 7$. The other vertices have $d(v) = 4$. $G$ is not regular.
-  - $G$ is not bipartite.
-
-+ Hint: Which is the simple graph with $n$ vertices and $binom(n, 2)$ edges?
-
-+ Hint: The average degree of a graph $G = (V, E)$ is defined as follows:
-  $ overline(d) = 1/abs(V) sum_(v in V) d(v) . $
-  Use also the following result: Let $G$ be a connected graph containing a cycle. Then, if we remove any edge of that cycle, the resulting graph is also connected.
-
-+
-  + $G$ is simple.
-  + $|V| = 8$ and $|E| = 12$.
-  + $G$ is regular with $d = 3$.
-  + $n_(i j) in {0, 6, 7}$.
-  + The length of the shortest cycle in $G$ is $ell_"min" = 4$.
-
-
-+
-  1. It is not bipartite.
-  2. There are no spanning trees.
-
-+ There is no spanning tree of weight $<= 12$.
-
-+ All graph models are weighted graphs whose vertices are the metro stops. Then edges are drawn between connected stops and their weights are:
-  + travel times,
-  + distances,
-  + fares.
-
-+
-  1. The path is $(a, b, e, g)$ with length 78.
-  2. The same as above.
-
-+ $d(a, h) = 16$, $d(a, e) = 17$, $d(d, a) = 19$, $d(d, g) = 11$, and $d(b, e) = 13$.
-
-+
-  1. One possible minimum-weight path is $(A, B, G, H, K, M)$ with weight $omega = 17$.
-  2. One possible minimum-weight spanning tree has the edge set
-    $ E = {{B, E}, {H, K}, {B, G}, {K, M}, {H, L}, {F, E}, {G, J}, {H, D}, {A, B}, {F, I}, {C, G}, {C, H}} . $
-    Its weight is $omega = 43$.
-
-+ $0 < x <= 3$.
-
 + This problem is about finding a spanning tree. A possible set of flights to discontinue are: Boston–New York, Detroit–Boston, Boston–Washington, New York–Washington, New York–Chicago, Atlanta–Washington, Atlanta–Dallas, Atlanta–Los Angeles, Atlanta–St. Louis, St. Louis–Dallas, St. Louis–Detroit, St. Louis–Denver, Dallas–San Diego, Dallas–Los Angeles, Dallas–San Francisco, San Diego–Los Angeles, Los Angeles–San Francisco, San Francisco–Seattle.
 
 +
@@ -808,8 +801,7 @@
 + There is no such spanning tree.
 
 +
-  + $|V_n| = 2^(n-1)$.
-  + $G_n$ is regular with degree $d = binom(n, 2)$.
-  + $|E_n| = 2^(n-2) binom(n, 2)$.
-
-+ The base case corresponds to the trivial graph of $n$ vertices $G = (V, emptyset)$ (with $|V| = n >= 1$). Then, you apply induction on the number of edges $|E|$.
+  1. One possible minimum-weight path is $(A, B, G, H, K, M)$ with weight $omega = 17$.
+  2. One possible minimum-weight spanning tree has the edge set
+    $ E = {{B, E}, {H, K}, {B, G}, {K, M}, {H, L}, {F, E}, {G, J}, {H, D}, {A, B}, {F, I}, {C, G}, {C, H}} . $
+    Its weight is $omega = 43$.
