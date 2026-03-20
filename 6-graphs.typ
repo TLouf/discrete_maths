@@ -76,7 +76,7 @@ For instance:
 ]
 
 #remark[
-  An undirected graph can be seen as a directed graph whose adjacency relation is symmetric ---meaning if $(u,v)$ is an edge, then $(v,u)$ as well---, but also crucially considering that these are not two distinct edges but a single one, which can be represented as a 2-set ${u,v}$.
+  An undirected graph can be seen as a directed graph whose adjacency relation is symmetric --meaning if $(u,v)$ is an edge, then $(v,u)$ as well--, but also crucially considering that these are not two distinct edges but a single one, which can be represented as a 2-set ${u,v}$.
 ]
 
 #definition[
@@ -223,6 +223,7 @@ Some simple tests based on aggregate measures can be used to discard isomorphism
 
 The whole point of a graph model is not to only look at binary relationships between pairs of entities represented by edges between pairs of vertices, but to investigate the interconnections over the whole set of vertices, thus including "long-distance relationships".
 That is why traversing graphs is crucial, as it can provide us with central information about a graph.
+// TODO: highlight it's something they experience themselves: experience of using public transport network gives them an intuitive sense of how well connected two areas are, which stations are the most important in the network, and others. Here translate this intuition into quantitative insights
 
 === Definitions
 
@@ -244,7 +245,8 @@ That is why traversing graphs is crucial, as it can provide us with central info
   A *trail* is a walk with no repeated edge.
   A closed trail is called a *circuit*.
 
-  A *path* is a trail with no repeated vertex, with the potential exception of the first which may also appear as the last in the sequence. A *cycle* is a closed path.
+  A *path* is a trail with no repeated vertex, with the potential exception of the first which may also appear as the last in the sequence.
+  A *cycle* is a closed path.
 ]
 
 #remark[
@@ -252,20 +254,21 @@ That is why traversing graphs is crucial, as it can provide us with central info
   In this case, we usually prefer to use the term "path".
 ]
 
-=== Graph connectivity
+=== Connectivity
 // TODO: move to describing graphs?
 
 These definitions allow us to give a basic yet fundamental characteristic of a graph, namely, it connectivity.
 
 #definition(title: [Graph connectedness], slide-break: false)[
   An undirected graph is said to be *connected* if every pair of vertices is connected by a path.
+  A disconnected graph can be partitioned into connected subgraphs, also known as *connected components*.
 ]
 
 #definition[
   A directed graph $G=(V,E)$ is
   - *strongly connected* if for every $u,v in V$, there is a path from $u$ to $v$ and from $v$ to $u$,
   - *weakly connected* if for every $u,v in V$, there is a path between $u$ and $v$ in the underlying undirected graph.
-  A strongly or weakly disconnected graph can then be partitioned into strongly and weakly connected components.
+  A strongly or weakly disconnected graph can then be partitioned into *strongly and weakly connected components*.
 ]
 
 #slidebreak()
@@ -462,8 +465,8 @@ A vertex' importance can first be quantified by its degree.
 
 #definition(title: [Vertex in/out-degree], slide-break: false)[
   Let $G$ be a directed graph $G = (V, E)$, and let $v in V$ be a vertex of $G$.
-  The *in-degree* $k^(("in")) (v)$ of $v$ is the number of edges whose head is $v$, that is which end at $v$.
-  The *out-degree* $k^(("out")) (v)$ of $v$ is the number of edges whose tail is $v$, that is which start from $v$.
+  - The *in-degree* $k^(("in")) (v)$ of $v$ is the number of edges whose head is $v$, that is which end at $v$, or in other words, $k^(("in")) (v) = abs(cal(N)^(("in")) (v))$.
+  - The *out-degree* $k^(("out")) (v)$ of $v$ is the number of edges whose tail is $v$, that is which start from $v$, or in other words, $k^(("out")) (v) = abs(cal(N)^(("out")) (v))$.
 ]
 
 #figure(
@@ -568,7 +571,7 @@ We can then get a similar result as @prop-handshaking-dir, which is known as the
 The notion of degree also allows us to define a very special kind of graph.
 
 #definition(title: [Regular graph], slide-break: false)[
-  A *regular graph* is an undirected graph whose vertices all have the same degree.
+  A *k-regular graph* is an undirected graph whose vertices all have the same degree $k$.
 ]
 
 #slidebreak()
@@ -620,7 +623,7 @@ And from the Perron-Frobenius theorem from linear algebra, we know that since $A
 #slidebreak()
 
 #remark[
-  - The point of centralities is to compare vertices, so the same eigenvector should be considered for all nodes!
+  - The point of centralities is to compare vertices, so the same eigenvector should be considered for all of them!
   - To generalise to directed networks, some small tweaks are needed: see Sections 7.1.2-3 in Newman.
 ]
 
@@ -699,7 +702,7 @@ A complementary, easier way to quantify that is to count how many edges the grap
 #proposition[
   For simple undirected graphs,
   $
-    rho = (2 m) / (n ( n-1)).
+    rho = (2 abs(E)) / (abs(V) (abs(V)-1)).
   $
 ]
 
@@ -719,12 +722,12 @@ A tree is a special kind of graph which is useful in many applications, especial
 #slidebreak()
 
 The natural way to represent a tree is to pick one of its vertices as its *root*, and place it at its top, with a branching structure going down.
-The vertices at the bottom are then called *leaves*, as they are the extremities of the tree represented thus.
+The vertices at the bottom are then called *leaves*, as they are the extremities of the tree.
 
 #slidebreak()
 
 #example[
-  Here is how the same tree can be represented when non-rooted (lefft) and when rooted on $1$ (right).
+  Here is how the same tree can be represented when non-rooted (left) and when rooted on $1$ (right).
   #figure(
     grid(
       columns: 2,
@@ -984,7 +987,7 @@ The idea here is to form the tree by forming the longest paths possible at each 
 A first path starting from an arbitrary root is formed, until no more vertices can be added.
 The vertices and edges composing this path are added to the tree.
 We then backtrack through the path until we find a vertex from which we can start a second path.
-The same procedure as before is repeated, and the backtracking as well until all vertices were added to the tree.
+The same procedure as before is repeated, and the backtracking as well until all vertices are added to the tree.
 
 #slidebreak()
 
