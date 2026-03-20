@@ -337,10 +337,8 @@ When looking at individual vertices instead, their connectivity can be measured 
 
 #slidebreak()
 
-// TODO: reconcile ordering of degree definition
 #corollary[
   Let $G$ be a simple graph with adjacency matrix $A$, then
-  - $A^2_(i i) = k(i)$ for every $1 <= i <= |V|$.
   - $"tr" A^2 = 2 |E|$.
   - $"tr" A^3 = 6 times$ number of unoriented triangles in $G$.
 ]
@@ -538,6 +536,17 @@ The definition of degree follows naturally for undirected graphs, by considering
     forall i in [| 1, abs(V) |], k (v_i) = A_(i i) + sum_j (A_(i j) + A_(j i)) / 2 = A_(i i) + sum_j A_(i j)
   $
 ] <prop-undir-deg-adj>
+
+#slidebreak()
+
+And, as a special case of @thm-walk-count-adj-power:
+
+#proposition[
+  Let's consider an undirected graph $G$ and its adjacency matrix $A$ associated to the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set $V$. Then
+  $
+    forall i in [| 1, abs(V) |], A^2_(i i) = k(v_i).
+  $
+]
 
 #slidebreak()
 
