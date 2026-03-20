@@ -344,7 +344,7 @@ When looking at individual vertices instead, their connectivity can be measured 
 
 #remark[
   Connectivity between two vertices is better characterised by computing the number of _paths_ joining them.
-  However, counting paths is a harder problem.
+  However, counting paths is a *much* harder problem, as illustrated in #link("https://www.youtube.com/watch?v=Q4gTV4r0zRs")[this life-changing video].
   // ref 8.7 of Newman
 ]
 
