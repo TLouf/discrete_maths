@@ -21,8 +21,21 @@ But for now, it's enough to say: _because they look nice_, whether they represen
   // TODO: only really a relation if directed graph! so start from directed? which is probably the most intuitive to understand?
   - $E subset.eq V times V$ is the graph's adjacency relation, which is a binary relation on $V$.
     Its elements are called *edges*, or links.
-    If $e = (u, v) in E$, we say that $e$ is *incident* on $u$ and $v$, that the two vertices are *adjacent*, that $u$ is $e$'s *tail* and $v$ its *head*, and also that $u$ is $v$'s *predecessor* and $v$ is $u$'s *successor*.
+    If $e = (u, v) in E$, we say that $e$ is *incident* on $u$ and $v$, that $u$ is $e$'s *tail* and $v$ its *head*.
 ]
+
+#definition[
+  In a directed graph $G=(V,E)$, for all $u in V$ we define:
+  - its set of predecessors or its *in-neighbourhood* as:
+    $
+      cal(N)^(("in")) (u) = {v in V | (v, u) in E},
+    $
+  - its set of successors or its *out-neighbourhood* as:
+    $
+      cal(N)^(("out")) (u) = {v in V | (u,v) in E}.
+    $
+]
+
 
 We actually already introduced directed graphs as a natural representation of a binary relation, in @sec-rels-sets!
 Directed graphs can then be represented in a similar way.
@@ -49,7 +62,7 @@ For instance:
 
 #definition(title: [Undirected graphs])[
   An *undirected graph* is an ordered pair $G = (V, E)$ of vertex and edge sets $V$ and $E$, where $E$ is a set of _unordered_ pairs of vertices, that is $E subset.eq { {u,v} | u,v in V}$.
-  If $e = {u, v} in E$, we say that $e$ is *incident* on $u$ and $v$, or equivalently, that the two vertices are *adjacent* or *neighbours*.
+  If $e = {u, v} in E$, we say that $e$ is *incident* on $u$ and $v$.
 ]
 
 #slidebreak()
@@ -66,8 +79,11 @@ For instance:
   An undirected graph can be seen as a directed graph whose adjacency relation is symmetric ---meaning if $(u,v)$ is an edge, then $(v,u)$ as well---, but also crucially considering that these are not two distinct edges but a single one, which can be represented as a 2-set ${u,v}$.
 ]
 
-#notation[
-  In an undirected graph $G=(V,E)$, the set of neighbours of $v in V$, also called its *neighbourhood*, is denoted $cal(N) (v)$.
+#definition[
+  In a directed graph $G=(V,E)$, for all $u in V$ we define its set of adjacent vertices, or its *neighbourhood* as:
+  $
+    cal(N) (u) = {v in V | {u,v} in E}.
+  $
 ]
 
 #slidebreak()
