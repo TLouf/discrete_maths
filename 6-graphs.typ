@@ -130,6 +130,14 @@ Again in a similar fashion to relations, graphs can be represented by an adjacen
 
 === Particular graphs
 
+#definition(title: [Complete graph])[
+  A graph $G = (V, E)$ is said to be complete if $E$ contains all edges which can be formed between vertices in $V$.
+]
+
+#question-box[
+  What is $E$ equal to if $G$ is undirected?
+]
+
 An interesting particular case of graphs is the one that represents relationships between two separate sets of entities.
 
 #definition(title: [Bipartite graphs], slide-break: false)[
