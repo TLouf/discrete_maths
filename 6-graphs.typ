@@ -7,6 +7,10 @@
 
 #slidebreak()
 
+Why study graphs?
+In general, because they help you understand the structure on which interactions play out.
+But for now, it's enough to say: _because they look nice_, whether they represent #link("https://www.flowmap.blue/1eZsRuRnUvJ8zU5VARuO5f5joQODvC-Fc8923GQRBrVI?d=0")[mobility flows], #link("https://twitterexplorer.org/try.html")[online social networks], #link("https://www.flowmap.blue/1Pqzc63fDdRVTrgi7u8MtGY1eAHFQjYTGXw_yHomb3DA?d=0")[trade networks] or #link("https://fairinternetreport.com/research/internet-speed-map-single-day")[the internet].
+
 == Defining graphs
 
 === Basic definitions
