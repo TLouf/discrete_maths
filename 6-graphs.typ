@@ -1169,3 +1169,10 @@ Again, an #link("https://upload.wikimedia.org/wikipedia/commons/b/bb/KruskalDemo
   - more than one edge may have the same weight,
   - which means that the minimum-weight spanning tree might not be unique.
 ]
+
+#slidebreak()
+
+#home[
+  There is much more to graph theory, and to its sister field of network science that we didn't cover in this course, such as (random) graph models, random walks, more generally processes on graphs, etc.
+  You can check out #link("https://www.complexity-explorables.org/fields/network-science/")[the Complexity Explorables website] for some visual introductions of these concepts.
+]
