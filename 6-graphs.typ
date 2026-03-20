@@ -18,7 +18,6 @@ But for now, it's enough to say: _because they look nice_, whether they represen
 #definition(title: [Directed graphs], slide-break: false)[
   A *directed graph* is an ordered pair $G = (V, E)$ where
   - $V$ is a nonempty set of *vertices*, also called nodes.
-  // TODO: only really a relation if directed graph! so start from directed? which is probably the most intuitive to understand?
   - $E subset.eq V times V$ is the graph's adjacency relation, which is a binary relation on $V$.
     Its elements are called *edges*, or links.
     If $e = (u, v) in E$, we say that $e$ is *incident* on $u$ and $v$, that $u$ is $e$'s *tail* and $v$ its *head*.
