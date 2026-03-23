@@ -79,7 +79,7 @@ For instance:
 ]
 
 #definition[
-  In a directed graph $G=(V,E)$, for all $u in V$ we define its set of adjacent vertices, or its *neighbourhood* as:
+  In an undirected graph $G=(V,E)$, for all $u in V$ we define its set of adjacent vertices, or its *neighbourhood* as:
   $
     cal(N) (u) = {v in V | {u,v} in E}.
   $
@@ -123,13 +123,15 @@ Again in a similar fashion to relations, graphs can be represented by an adjacen
   The adjacency matrix of an undirected graph is symmetric.
 ]
 
+#slidebreak()
+
 #notation[
   In the following, whenever we refer to a vertex as the vertex $i$ or $j$, we mean $v_i$ or $v_j$ in the ordering $v_1, v_2, ..., v_(|V|)$, from which the graph's adjacency matrix has been defined.
 ]
 
 === Particular graphs
 
-#definition(title: [Complete graph])[
+#definition(title: [Complete graph], slide-break: false)[
   A graph $G = (V, E)$ is said to be complete if $E$ contains all edges which can be formed between vertices in $V$.
 ]
 
@@ -146,8 +148,10 @@ An interesting particular case of graphs is the one that represents relationship
 #slidebreak()
 
 #remark[
-  A directed bipartite graph can actually represent a binary relations between two sets.
+  A directed bipartite graph can actually represent a binary relation between two sets.
 ]
+
+#slidebreak()
 
 We will now introduce some particular kinds of graphs which are not so common and that we will largely ignore in the following.
 
@@ -159,6 +163,8 @@ We will now introduce some particular kinds of graphs which are not so common an
   A graph can either allow or disallow self-loops, depending on what it models.
   Following the binary relation analogy, disallowing self-loops can be thought of as forcing the adjacency relation to be irreflexive.
 ]
+
+#slidebreak()
 
 The entries of the adjacency matrix defined in @def-adj-mat have been defined as edge _counts_, meaning it could take values in $NN$, while graph definitions above implied values in ${0,1}$, encoding the absence or presence of an edge.
 Actually, we defined adjacency matrices this way so it's general enough to account for multigraphs.
@@ -184,17 +190,21 @@ Multigraphs are actually very rare in practice, as they can often be equivalentl
 Most of the time in this course, we will ignore these generalisations and only consider simple graphs.
 
 #definition(title: [Simple graphs], slide-break: false)[
-  A simple graph is an unweighted graph without multi-edges or self-loops.
+  A simple graph is an unweighted graph without multiple edges or self-loops.
 ]
 
-#definition(title: [Subgraphs])[
+#slidebreak()
+
+Since graphs are defined from a pair of sets, the notion of subset also naturally exists in graphs, with subgraphs.
+
+#definition(title: [Subgraphs], slide-break: false)[
   The graph $H = (W, F)$ is a *subgraph* of $G = (V, E)$ if its vertex and edge sets are subsets of $G$'s, that is $W subset.eq V$ and $F subset.eq E$.
 ]
 
 
 === Isomorphism of graphs
 
-The same graph can be represented in a number of ways: graphically the vertices are placed arbitrarily on a plane, and in an adjacency matrix, the ordering of vertices is also arbitrary.
+The same graph can be represented in a number of ways: graphically the vertices are placed arbitrarily on a plane, and in an adjacency matrix, the ordering of vertices is arbitrary.
 Also, if the vertex labels do not carry any particular meaning --i.e. they are "dummy" labels--, the labels too are arbitrary.
 It is thus important to be able to recognize the same graph, however it was represented.
 
@@ -215,7 +225,9 @@ Some simple tests based on aggregate measures can be used to discard isomorphism
 #slidebreak()
 
 #remark[
-  $G_1$ and $G_2$ are isomorphic if there exists an invertible linear map (basically a permutation of the "basis vectors") $pi : V_1 -> V_2$ such that $A_2 = P^(-1) dot A_1 dot P$. There are $|V_1|! = |V_2|!$ maps of this type, hence the difficulty of testing for isomorphism if two graphs share many similarities at the aggregate level!
+  $G_1$ and $G_2$ are isomorphic if there exists an invertible linear map (basically a permutation of the "basis vectors") $pi : V_1 -> V_2$ such that $A_2 = P^(-1) dot A_1 dot P$.
+
+  There are $|V_1|! = |V_2|!$ maps of this type, hence the difficulty of testing for isomorphism if two graphs share many similarities at the aggregate level!
 ]
 
 == Traversing graphs
@@ -228,7 +240,7 @@ That is why traversing graphs is crucial, as it can provide us with central info
 
 #definition(title: [Walks on graphs], slide-break: false)[
   A *walk* on a graph $G = (V, E)$ is an alternating sequence of vertices and edges of the form $v_0, e_1, v_1, e_2, v_2, ..., v_(l-1), e_l, v_l$, such that $e_k$ is from $v_(k-1)$ to $v_(k)$ for all $k$.
-  It is said to be *closed* if it ends where it starts, so if $v_1 = v_l$, and open otherwise.
+  It is said to be *closed* if it ends where it starts, so if $v_0 = v_l$, and open otherwise.
   The *length* of the walk is equal to the number of edges in the walk $l$, and is at least one.
 ] <def-walk>
 
@@ -249,8 +261,7 @@ That is why traversing graphs is crucial, as it can provide us with central info
 ]
 
 #remark[
-  The definitions of trails and paths are equivalent on a simple graph.
-  In this case, we usually prefer to use the term "path".
+  If a walk has a repeated edge, then it has a repeated vertex, but the contrary is not necessarily true.
 ]
 
 === Connectivity
@@ -341,6 +352,8 @@ When looking at individual vertices instead, their connectivity can be measured 
   - $"tr" A^2 = 2 |E|$.
   - $"tr" A^3 = 6 times$ number of unoriented triangles in $G$.
 ]
+
+#slidebreak()
 
 #remark[
   Connectivity between two vertices is better characterised by computing the number of _paths_ joining them.
