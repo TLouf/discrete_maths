@@ -753,6 +753,242 @@ A complementary, easier way to quantify that is to count how many edges the grap
 ]
 
 
+=== Clustering
+
+What if we now wish to quantify the density of connections around a specific vertex?
+The simplest way, similar to the idea of density, would consist in computing the fraction of possible edges the vertex formed.
+This characterisation would be exactly equivalent to simply considering the vertex degree, though.
+More interesting would be to also quantify how well-connected the neighbours of a vertex neighbours are.
+In terms of social networks, this is saying how much the "the friend of my friend is my friend" rule holds.
+Let's start with a couple of definitions to help us think about this.
+
+#definition(title: [Triads and triangles])[
+  Given a simple undirected graph $G = (V, E)$
+  - a *triad* is a connected subgraph of $G$ which contains three vertices,
+  - a *triangle* is a triad which is complete.
+]
+// example: is this a triad? with an ill-defined subgraph.
+
+#proposition[
+  - Considering a vertex $u in V$ of degree at least 2, the subgraph comprising $u$ and two of its neighbours is by definition a triad.
+    It is a triangle only if these two neighbours are connected themselves.
+  - Three vertices of $G$ form a triad if and only if they are connected by a path of length $2$.
+    Triangles are thus cycles of length $3$, which we can also call _closed triads_.
+]
+
+#slidebreak()
+
+We thus wish to quantify the tendency for _triadic closure_ around each vertex.
+
+#question-box[
+  Which concept from binary relations is this related to?
+]
+
+#slidebreak()
+
+For a single vertex, this is quantified by the local clustering coefficient.
+
+#definition(title: [Local clustering coefficient], slide-break: false)[
+  Given a simple undirected graph $G = (V, E)$, the local clustering coefficient $C_u$ of a vertex $u in V$ is the proportion of triads it is a part of which are closed.
+]
+
+#proposition[
+  Given an adjacency matrix $A$ for $G$,
+  $
+    C_(v_i) = (display(sum_j sum_(l < j) A_(i j) A_(j l) A_(l i))) / display(binom(k(v_i), 2)).
+  $
+]
+// why l < j: because otherwise have to divide by 2, since would consider both (j,l) and (l,j), which are the same edge since graph is undirected.
+
+#remark[
+  A vertex with low clustering can be seen as central in its neighbourhood, since it means information flowing in this neighbourhood would need to pass through it to propagate.
+  Local clustering can thus be seen as a more local version of betweenness, as the latter measures the importance of a vertex for the flow of information over the whole connected graph.
+]
+
+#slidebreak()
+
+To quantify this tendency across the whole graph, one could first average local clustering coefficients.
+This is not always the best choice though, as it gives the same importance to all vertices, irrespective of their degree.
+An alternative is to compute the following:
+
+#definition(title: [Global clustering coefficient])[
+  Given a simple undirected graph $G = (V, E)$, the global clustering coefficient $C$ of $G$ is the fraction of triads which are closed in the whole graph.
+]
+
+
+#proposition[
+  Given an adjacency matrix $A$ for $G$,
+  $
+    C = (display(sum_i sum_j sum_l A_(i j) A_(j l) A_(l i))) / display(sum_i sum_j sum_(l != i) A_(i j) A_(j l)).
+  $
+]
+// here we are also double counting (j,l) and (l,j), but in both num and den, so it's fine.
+
+#slidebreak()
+
+=== Cliques and cores
+
+We might also go one step further, and wonder if the friend of two of my friends also tends to be my friend.
+Or, any number of steps further, using the following generalisation.
+
+#definition(title: [$k$-cliques])[
+  Given a simple undirected graph $G = (V, E)$, a $k$-clique ($k >= 2$) is a subgraph of $G$ which contains $k$ vertices and is complete.
+]
+
+Another useful generalisation resides not in the size of the subgraph, but in how densely connected it is.
+
+#definition(title: [$k$-cores])[
+  Given a simple undirected graph $G = (V, E)$, a $k$-core is a subgraph of $G$ whose vertices are all adjacent to at least $k$ others.
+]
+
+This decomposition is sometimes used to detect core–periphery structures in networks: nodes that lie within the highest-k-cores are "core" nodes within the network, while nodes outside those cores are "peripheral" nodes.
+
+#slidebreak()
+
+A graph can be decomposed into $k$-cores relatively easily, by iteratively removing vertices of increasing degrees, as shown below.
+
+#figure(
+  grid(
+    columns: 5,
+    column-gutter: 1em,
+    [
+      #raw-render(
+      ```dot
+      graph {
+        layout=neato
+        start=8
+        node[shape=circle fontsize=24 margin=0]
+        a -- {b, c, d, e, f};
+        d -- {c, e};
+        f -- {b, e, h, i, j, k};
+        k -- l;
+        b -- {h, c};
+        i -- {e, j};
+      }
+      ```,
+      width: 100%,
+    )
+    #pause
+    ],
+    [
+    #raw-render(
+      ```dot
+      graph {
+        layout=neato
+        start=8
+        node[shape=circle fontsize=24 margin=0 label=""]
+        a -- {b, c, d, e, f};
+        d -- {c, e};
+        f -- {b, e, h, i, j, k};
+        k -- l [color=none];
+        b -- {h, c};
+        i -- {e, j};
+        l [label=1];
+      }
+      ```,
+      width: 100%,
+    )
+    #pause
+    ],
+    [
+    #raw-render(
+      ```dot
+      graph {
+        layout=neato
+        start=8
+        node[shape=circle fontsize=24 margin=0 label=""]
+        a -- {b, c, d, e, f};
+        d -- {c, e};
+        f -- {b, e, h, i, j};
+        f -- k [color=none];
+        k -- l [color=none];
+        b -- {h, c};
+        i -- {e, j};
+        k [label=1];
+        l [label=1];
+      }
+      ```,
+      width: 100%,
+    )
+    #pause
+    ],
+    [
+      #raw-render(
+      ```dot
+      graph {
+        layout=neato
+        start=8
+        node[shape=circle fontsize=24 margin=0 label=""]
+        a -- {b, c, d, e, f};
+        d -- {c, e};
+        f -- {b, e};
+        f -- {h, i, j} [color=none];
+        f -- k [color=none];
+        k -- l [color=none];
+        b -- {h} [color=none];
+        b -- {c};
+        i -- {e, j} [color=none];
+        k [label=1];
+        l [label=1];
+        h [label=2];
+        j [label=2];
+        i [label=2];
+      }
+      ```,
+      width: 100%,
+    )
+    #pause
+    ],
+
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        start=8
+        node[shape=circle fontsize=24 margin=0 label=""]
+        a -- {b, c, d, e, f};
+        d -- {c, e};
+        f -- {b, e};
+        f -- {h, i, j} [color=none];
+        f -- k [color=none];
+        k -- l [color=none];
+        b -- {h} [color=none];
+        b -- {c};
+        i -- {e, j} [color=none];
+        k [label=1];
+        l [label=1];
+        h [label=2];
+        j [label=2];
+        i [label=2];
+        a [label=3];
+        b [label=3];
+        c [label=3];
+        d [label=3];
+        e [label=3];
+        f [label=3];
+      }
+      ```,
+      width: 100%,
+    ),
+  ),
+)
+
+#slidebreak()
+
+#algorithm(
+  pseudocode-list(numbered-title: [$k$-core decomposition], booktabs: true)[
+    + *procedure* $k$-core($G=(V,E)$: connected undirected graph)
+      + k = 1
+      + *while* $G$ is not empty
+        + $V_k = emptyset$ #comment[set of vertices in $k$-core]
+        + *while* $min_(u in V) (k(u)) = k$
+          + $V_k = V_k union {u in V | k(u) = k}$ #comment[identify vertices of degree $k$]
+          + $V = V without V_k$ #comment[remove these vertices and their edges from the graph]
+          + $E = E without {{u,v} in E | (u in V_k) or (v in V_k)}$
+        + $k = k + 1$
+      + *return* ${V_1, V_2, dots V_(k_"max")}$ #comment[$k$-core decomposition]
+  ],
+)
 
 == Trees
 
