@@ -487,11 +487,10 @@ Let's proceed on the following example.
 ]
 
 
-== Describing graphs
-// TODO: add clustering from discussion on transitivity of relation, as in Newman p.183?
+== Characterising graph elements
 // TODO: Mengers theorem p. 139?
 
-=== Degree
+=== Degree centrality
 
 A vertex' importance can first be quantified by its degree.
 
@@ -701,10 +700,13 @@ A strength of betweenness is that it not only characterises the importance of ve
   This edge centrality is linked to the #link("https://smg.media.mit.edu/library/Granovetter.WeakTies.pdf")["strength of weak ties" theory formulated by the sociologist Mark Granovetter], which suggests that weak social relationships are central for the diffusion of information in a network (in very rough terms).
 ]
 
+
+== Describing graph structure(s)
+
 === Graph size
 
 The size of a graph can be simply considered to be its number of vertices and edges, but this gives little information.
-Indeed, it does not say how far away vertices are from each other in the graph.
+Indeed, it does not say how far away vertices are from each other in the graph, or, in other words, how hard it is to traverse the graph.
 For that, we can look into the lengths of shortest paths, and for instance compute the average shortest path length.
 
 #slidebreak()
@@ -734,6 +736,7 @@ A complementary, easier way to quantify that is to count how many edges the grap
 
 #definition(title: [Graph density])[
   The density $rho$ of a graph is the fraction of possible edges which are actually present in the graph.
+  In other words, it is equal to the number of edges present in the graph divided by the number of edges of the corresponding complete graph.
 ]
 
 #remark[
@@ -743,7 +746,7 @@ A complementary, easier way to quantify that is to count how many edges the grap
 #slidebreak()
 
 #proposition[
-  For simple undirected graphs,
+  For a simple undirected graph $G = (V, E)$,
   $
     rho = (2 abs(E)) / (abs(V) (abs(V)-1)).
   $
