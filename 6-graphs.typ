@@ -8,7 +8,7 @@
 #slidebreak()
 
 Why study graphs?
-In general, because they help you understand the structure on which interactions play out.
+In general, because they help you understand the structure on which some interactions play out.
 But for now, it's enough to say: _because they look nice_, whether they represent #link("https://www.flowmap.blue/1eZsRuRnUvJ8zU5VARuO5f5joQODvC-Fc8923GQRBrVI?d=0")[mobility flows], #link("https://twitterexplorer.org/try.html")[online social networks], #link("https://www.flowmap.blue/1Pqzc63fDdRVTrgi7u8MtGY1eAHFQjYTGXw_yHomb3DA?d=0")[trade networks] or #link("https://fairinternetreport.com/research/internet-speed-map-single-day")[the internet].
 
 == Defining graphs
@@ -35,6 +35,7 @@ But for now, it's enough to say: _because they look nice_, whether they represen
     $
 ]
 
+// TODO: introduce in-out degrees here as cardinality of these sets
 
 We actually already introduced directed graphs as a natural representation of a binary relation, in @sec-rels-sets!
 Directed graphs can then be represented in a similar way.
@@ -84,6 +85,8 @@ For instance:
     cal(N) (u) = {v in V | {u,v} in E}.
   $
 ]
+
+// TODO: introduce degree here as cardinality of this set, except loops are counted twice.
 
 #slidebreak()
 
@@ -136,8 +139,10 @@ Again in a similar fashion to relations, graphs can be represented by an adjacen
 ]
 
 #question-box[
-  What is $E$ equal to if $G$ is undirected?
+  How many edges do complete (un)directed graphs have?
 ]
+
+// TODO: introduce regular graph here
 
 An interesting particular case of graphs is the one that represents relationships between two separate sets of entities.
 
@@ -370,9 +375,9 @@ When looking at individual vertices instead, their connectivity can be measured 
 #slidebreak()
 
 #corollary[
-  Let $G$ be a simple graph with adjacency matrix $A$, then
-  - $"tr" A^2 = 2 |E|$.
-  - $"tr" A^3 = 6 times$ number of unoriented triangles in $G$.
+  Let $G$ be a simple graph with adjacency matrix $A$, then $"tr" A^2 = 2 |E|$.
+  // - $"tr" A^3 = 6 times$ number of unoriented triangles in $G$.
+  // TODO
 ]
 
 #slidebreak()
@@ -419,10 +424,14 @@ If the path is long, this gets very costly, though.
 Also, if the graph is weighted, the shortest path in terms of number of traversed edges is not necessarily the shortest path in terms of edge weights.
 That's why we need another method to compute shortest paths, such as Dijkstra's algorithm.
 
+#slidebreak()
+
 The basic idea of the algorithm is to iteratively explore the graph from the point of view of the starting vertex $s$.
 Starting from $s$, in each step we find its next closest vertex, until we've reached $t$.
 Crucially though, since shortcuts can sometimes appear, we need to keep track of known or estimated distances throughout the exploration.
 Let's proceed on the following example.
+
+#slidebreak()
 
 #example[
   Find the shortest path from $s$ to $t$ in:
@@ -460,8 +469,8 @@ Let's proceed on the following example.
 
 #algorithm(
   pseudocode-list(numbered-title: [Dijkstra's], booktabs: true)[
-    + *procedure* Dijkstra($G=(V, E, omega)$ with $V={s=v_0, v_1, dots, v_n=t}$)
-      + for $i = 1$ to $n$
+    + *procedure* Dijkstra($G=(V, E, omega)$ with $V={s=v_1, dots, v_n=t}$)
+      + for $i = 2$ to $n$
         + $d(s, v_i) = infinity$ #comment[initialise unknown shortest lengths as infinity]
       + $S = emptyset$
       + *while* $t in.not S$ #comment[until we've reached $t$]
@@ -493,11 +502,14 @@ Let's proceed on the following example.
 === Degree centrality
 
 A vertex' importance can first be quantified by its degree.
+// TODO: remove following, just keep this sentence, but then say: also degree can be related to other graph quantities, hence why it's important to look at them.... to motivate handshaking, etc
 
 #definition(title: [Vertex in/out-degree], slide-break: false)[
-  Let $G$ be a directed graph $G = (V, E)$, and let $v in V$ be a vertex of $G$.
-  - The *in-degree* $k^(("in")) (v)$ of $v$ is the number of edges whose head is $v$, that is which end at $v$, or in other words, $k^(("in")) (v) = abs(cal(N)^(("in")) (v))$.
-  - The *out-degree* $k^(("out")) (v)$ of $v$ is the number of edges whose tail is $v$, that is which start from $v$, or in other words, $k^(("out")) (v) = abs(cal(N)^(("out")) (v))$.
+  Let $G$ be a directed graph $G = (V, E)$, and let $u in V$.
+  - The *in-degree* $k^(("in")) (u)$ of $u$ is the number of edges whose head is $u$, that is, which end at $u$.
+    In other words, $k^(("in")) (u) = abs(cal(N)^(("in")) (u))$.
+  - The *out-degree* $k^(("out")) (u)$ of $u$ is the number of edges whose tail is $u$, that is, which start from $u$.
+    In other words, $k^(("out")) (u) = abs(cal(N)^(("out")) (u))$.
 ]
 
 #figure(
@@ -557,9 +569,9 @@ It then follows that summing over degrees amounts to summing all entries of the 
 ] <prop-handshaking-dir>
 
 The definition of degree follows naturally for undirected graphs, by considering that two directed edges $(u,v)$ and $(v,u)$ correspond to a single undirected edge ${u,v}$.
-
+// TODO: same here
 #definition(title: [Vertex degree])[
-  The *degree* of a vertex $v in V$ in an undirected graph $G = (V, E)$ is the number of edges incident with it, except that a loop contributes twice to the degree of that vertex. The degree of a vertex $v$ is denoted by $k(v)$.
+  The *degree* of a vertex $u in V$ in an undirected graph $G = (V, E)$ is the number of edges incident with it, except that a loop contributes twice to the degree of that vertex. The degree of a vertex $u$ is denoted by $k(u)$.
 ]
 
 #proposition[
@@ -577,7 +589,7 @@ And, as a special case of @thm-walk-count-adj-power:
 #proposition[
   Let's consider an undirected graph $G$ and its adjacency matrix $A$ associated to the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set $V$. Then
   $
-    forall i in [| 1, abs(V) |], A^2_(i i) = k(v_i).
+    forall i in [| 1, abs(V) |], quad k(v_i) = (A^2)_(i i)
   $
 ]
 
@@ -596,6 +608,8 @@ We can then get a similar result as @prop-handshaking-dir, which is known as the
   This also holds for undirected graphs with loops, thanks to the convention we took to consider a self-loop as incident twice to its vertex.
 ]
 
+#slidebreak()
+
 #corollary[
   For any undirected graph, the sum of all vertex degrees is an even number.
 ]
@@ -612,6 +626,8 @@ We can then get a similar result as @prop-handshaking-dir, which is known as the
 
 The notion of degree also allows us to define a very special kind of graph.
 
+// TODO: remove
+
 #definition(title: [Regular graph], slide-break: false)[
   A *k-regular graph* is an undirected graph whose vertices all have the same degree $k$.
 ]
@@ -621,14 +637,14 @@ The notion of degree also allows us to define a very special kind of graph.
 The notion of degree also gets naturally generalised to the case of weighted graphs.
 
 #definition(title: [Vertex in/out-strength], slide-break: false)[
-  Let $G$ be a weighted directed graph $G = (V, E, omega)$, and let $v in V$ be a vertex of $G$.
-  The *in-strength* $s^(("in")) (v)$ of $v$ is the sum of the weights of edges whose head is $v$.
-  The *out-strength* $s^(("out")) (v)$ of $v$ is the sum of the weights of edges whose tail is $v$.
+  Let $G$ be a weighted directed graph $G = (V, E, omega)$, and let $u in V$.
+  The *in-strength* $s^(("in")) (u)$ of $u$ is the sum of the weights of edges whose head is $u$.
+  The *out-strength* $s^(("out")) (u)$ of $u$ is the sum of the weights of edges whose tail is $u$.
 ]
 
 #definition(title: [Vertex strength])[
-  Let $G$ be a weighted undirected graph $G = (V, E, omega)$, and let $v in V$ be a vertex of $G$.
-  The *strength* $s (v)$ of $v$ is the sum of the weights of edges adjacent to $v$, except that a loop contributes its weight twice.
+  Let $G$ be a weighted undirected graph $G = (V, E, omega)$, and let $u in V$.
+  The *strength* $s (u)$ of $u$ is the sum of the weights of edges adjacent to $u$, except that a loop contributes its weight twice.
 ]
 
 @prop-dir-deg-adj then also holds for strengths in weighted directed graphs, and @prop-undir-deg-adj for those in weighted undirected ones.
@@ -729,11 +745,6 @@ Alternatively, we can consider its longest shortest path.
 We already saw how to check how well connected a graph is, using cut edges and vertices (@def-cut-ev).
 A complementary, easier way to quantify that is to count how many edges the graph has, and compare it to the maximum it could have.
 
-#question-box[
-  How many edges can a simple undirected graph have at maximum?\ _Hint_: this is a combinatorics question!
-  // the number of ways you can choose two vertices from a set of $n$
-]
-
 #definition(title: [Graph density])[
   The density $rho$ of a graph is the fraction of possible edges which are actually present in the graph.
   In other words, it is equal to the number of edges present in the graph divided by the number of edges of the corresponding complete graph.
@@ -751,6 +762,8 @@ A complementary, easier way to quantify that is to count how many edges the grap
     rho = (2 abs(E)) / (abs(V) (abs(V)-1)).
   $
 ]
+
+#slidebreak()
 
 
 === Clustering
@@ -1240,9 +1253,12 @@ The reason it's called breadth-first can be directly understood from the figure 
   ),
 )
 It can be formally written as follows.
+
+#slidebreak()
+
 #algorithm(
   pseudocode-list(numbered-title: [Breadth-first search (BFS)], booktabs: true)[
-    + *procedure* BFS($G=(V,E)$: connected graph with $V={v_1, v_2, dots, v_n}$)
+    + *procedure* BFS($G=(V,E)$: connected graph with $V={v_1, dots, v_n}$)
       + $T = (V_T, E_T) = ({v_1}, emptyset)$ #comment[pick a root $v_1$ and initialise the tree]
       + $S_p = {v_1}$ #comment[set of vertices previously added to $T$]
       + *while* $abs(S_p)$ > 0 #comment[while we have vertices to consider]
@@ -1339,14 +1355,14 @@ The reason it's called depth-first can be directly understood from this figure: 
 
 #algorithm(
   pseudocode-list(numbered-title: [Depth-first search (DFS)], booktabs: true)[
-    + *procedure* DFS($G=(V,E)$: connected graph with $V={v_1, v_2, dots, v_n}$)
-      + $T = (V_T, E_T) = ({v_1}, emptyset)$ #comment[pick a root $v_1$ and initialise the tree]
-      + visit($v_1$)
-      + *return* $T$ #comment[spanning tree]
     + *procedure* visit($v: v in V$)
       + *for* each $w in cal(N) (v) without V_T$ #comment[for each neighbour of $v$ not already in $T$]
         + $T = (V_T union {w}, E_T union {{v,w}})$ #comment[add it to the tree]
         + visit($w$) #comment[visit its neighbours]
+    + *procedure* DFS($G=(V,E)$: connected graph with $V={v_1, dots, v_n}$)
+      + $T = (V_T, E_T) = ({v_1}, emptyset)$ #comment[pick a root $v_1$ and initialise the tree]
+      + visit($v_1$)
+      + *return* $T$ #comment[spanning tree]
   ],
 )
 
