@@ -848,6 +848,10 @@ Or, any number of steps further, using the following generalisation.
   Given a simple undirected graph $G = (V, E)$, a $k$-clique ($k >= 2$) is a subgraph of $G$ which contains $k$ vertices and is complete.
 ]
 
+Cliques in a graph thus define highly cohesive groups of vertices, which can be of any size.
+
+#slidebreak()
+
 Another useful generalisation resides not in the size of the subgraph, but in how densely connected it is.
 
 #definition(title: [$k$-cores])[
