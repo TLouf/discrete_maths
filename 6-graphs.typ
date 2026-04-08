@@ -341,9 +341,31 @@ When looking at individual vertices instead, their connectivity can be measured 
 
 #theorem[
   Let $G$ be a graph with adjacency matrix $A$ with respect to the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set.
-  The number of distinct oriented walks of length $n >= 1$ that start at $v_i$ and end at $v_j$ is given by the entry $(i, j)$ of the matrix $A^n$.
+  The number of distinct oriented walks of length $l >= 1$ that start at $v_i$ and end at $v_j$ is given by the entry $(i, j)$ of the matrix $A^l$.
 ] <thm-walk-count-adj-power>
-// beautiful proof by induction p 723
+
+#slidebreak()
+
+#proof[
+  This can be proven by induction on the walk length $l$.
+
+  / Basis step: the number of walks from $v_i$ to $v_j$ of length 1 is simply 1 if $(v_i, v_j) in E$, and 0 otherwise, so it is simply $a_(i j)$, for every $i$ and $j$.
+  / Inductive step: let's consider a fixed $l$, write $B = A^l$, and assume that $b_(i j)$ gives the number of distinct walks of length $l$ from $v_i$ to $v_j$.
+
+    A walk of length $l + 1$ from $v_i$ to $v_j$ is made up of a walk of length $l$ from $v_i$ to some intermediate vertex $v_k$, and an edge from $v_k$ to $v_j$.
+    By the product rule, the number of such walks is the product of the number of walks of length $l$ from $v_i$ to $v_k$, which is $b_(i k)$, and the number of edges from $v_k$ to $v_j$ which is $a_(k j)$.
+
+    By the sum rule over possible values of $k$, the number of such walks of length $l+1$ is thus
+    $
+      sum_(k=1)^(abs(V)) b_(i k) a_(k j)
+    $
+
+    Also, writing $C = A^(l + 1) = A^l A$:
+    $
+      c_(i j) = sum_(k=1)^(abs(V)) b_(i k) a_(k j)
+    $
+    The result is thus true for $l+1$ too, so by induction, it is for any length $l >= 1$.
+]
 
 #slidebreak()
 
