@@ -1447,6 +1447,12 @@ Again, an #link("https://upload.wikimedia.org/wikipedia/commons/b/bb/KruskalDemo
 #slidebreak()
 
 #home[
-  There is much more to graph theory, and to its sister field of network science that we didn't cover in this course, such as (random) graph models, random walks, more generally processes on graphs, etc.
+  There is much more to graph theory, and to its sister field of network science that we didn't cover in this course, such as: community detection, (random) graph models, random walks, more generally processes on graphs, etc.
+
   You can check out #link("https://www.complexity-explorables.org/fields/network-science/")[the Complexity Explorables website] for some visual introductions of these concepts.
+  To go further, you can also use the following resources:
+  - Mark Newman's _Networks_ book,
+  - #link("https://aaronclauset.github.io/courses/5352/")[Aaron Clauset's lectures notes],
+  - #link("https://www.networkatlas.eu/")[Michele Coscia's _Atlas for the aspiring network scientist_],
+  although many topics require knowledge in probability theory and statistics that we didn't require for this course.
 ]
