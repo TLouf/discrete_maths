@@ -692,10 +692,6 @@
   + $n_(i j) in {0, 6, 7}$.
   + The length of the shortest cycle in $G$ is $ell_"min" = 4$.
 
-+
-  1. It is not bipartite.
-  2. There are no spanning trees.
-
 + All graph models are weighted graphs whose vertices are the metro stops. Then edges are drawn between connected stops and their weights are:
   + travel times,
   + distances,
@@ -708,6 +704,10 @@
 + $d(a, h) = 16$, $d(a, e) = 17$, $d(d, a) = 19$, $d(d, g) = 11$, and $d(b, e) = 13$.
 
 + $0 < x <= 3$.
+
++ $a$ has the highest betweenness as it's a bridge, while $b$ has the highest degree and $c$ probably the highest eigenvector centrality since it has the second highest degree, and is connected to vertices of high degree themselves. So the answer is: it depends!
+
++ ${b,c,h}$ form a triangle, and ${a,b,c,d}$ a 4-clique. Also, the latter vertices form a 3-core, $h$ and $j$ are 2-core, and the rest are part of 1-cores.
 
 +
   + Yes

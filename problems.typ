@@ -529,6 +529,7 @@
 
 
 = Graph theory
+// TODO: basic exercise about translating from/to adj matrix to/from graph reprs?
 
 + For each example, define what the vertices and the edges are. Decide if the graph should be directed and/or weighted, if it contains self-loops, if it is bipartite and whether it's connected.
   + Metro network of a city.
@@ -558,7 +559,8 @@
   + Prove that $G$ is regular and compute its degree.
   + Determine whether $G$ is bipartite or not.
 
-+ Let $G$ be a graph with 20 edges, and such that its edge-complement $overline(G)$ has 25 edges. How many vertices does $G$ have?
++ The complementary graph $overline(G)$ of a simple graph $G$ has the same vertices as $G$, but two vertices are adjacent in $overline(G)$ if and only if they are not adjacent in $G$.
+  Let $G$ be a graph with 20 edges such that $overline(G)$ has 25 edges. How many vertices does $G$ have?
 
 + Compute the number of vertices of simple connected graphs $G$ if:
   + $G$ is a 2-regular graph with 9 edges.
@@ -732,7 +734,7 @@
         layout=sfdp
         start=6
         splines=true
-        edge [fontsize=10 labelfloat=true labeldistance=1]
+        edge [fontsize=10 labelfloat=true labeldistance=1 color="#00000055"]
         node[shape=circle margin=0 width=0.2]
         a -- b [taillabel="6"]
         a -- f [label="9"]
@@ -762,7 +764,7 @@
       graph {
         layout=neato
         start=9
-        edge[labeldistance=2]
+        edge[labeldistance=2 color="#00000055"]
         node[shape=circle margin=0 width=0.2]
         a -- b [label="1"];
         a -- d [label="3"];
@@ -782,6 +784,46 @@
       width: 6cm,
     ),
   )
+
++ Considering the following graph $G$, which vertex would you say is the most central?
+  You should reason about the different meanings the word "central" can take.
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=neato
+        start=12
+        node[shape=circle fontsize=16 margin=0.05 fontsize=18 width=0.2]
+        a -- {b, c} ;
+        c -- {e, f, g};
+        e -- {f, g};
+        g -- f;
+        b -- {h, i, j, k}
+      }
+      ```,
+      width: 6cm,
+    ),
+  )
+
++ Identify (sub)structures in the following graph $G$.
+  #figure(
+    raw-render(
+      ```dot
+      graph {
+        layout=circo
+        node[shape=circle fontsize=16 margin=0.05 fontsize=24 width=0.2]
+        a -- {b, c, d, e};
+        b -- {c, d, h};
+        c -- {d, h};
+        e -- {f, g};
+        h -- {i, j};
+        j -- {d, k, l};
+      }
+      ```,
+      width: 6cm,
+    ),
+  )
+
 
 + Which of these graphs are trees?
   #subpar.grid(
@@ -987,6 +1029,7 @@
         start=11;
         concentrate=true;
         splines=true;
+        edge [color="#00000055"]
         node[shape=point margin=0 width=0.2]
         sf[xlabel="San Francisco"];
         sea[xlabel="Seattle"];
