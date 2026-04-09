@@ -870,91 +870,91 @@ A graph can be decomposed into $k$-cores relatively easily, by iteratively remov
     column-gutter: 1em,
     [
       #raw-render(
-      ```dot
-      graph {
-        layout=neato
-        start=8
-        node[shape=circle fontsize=24 margin=0]
-        a -- {b, c, d, e, f};
-        d -- {c, e};
-        f -- {b, e, h, i, j, k};
-        k -- l;
-        b -- {h, c};
-        i -- {e, j};
-      }
-      ```,
-      width: 100%,
-    )
-    #pause
-    ],
-    [
-    #raw-render(
-      ```dot
-      graph {
-        layout=neato
-        start=8
-        node[shape=circle fontsize=24 margin=0 label=""]
-        a -- {b, c, d, e, f};
-        d -- {c, e};
-        f -- {b, e, h, i, j, k};
-        k -- l [color=none];
-        b -- {h, c};
-        i -- {e, j};
-        l [label=1];
-      }
-      ```,
-      width: 100%,
-    )
-    #pause
-    ],
-    [
-    #raw-render(
-      ```dot
-      graph {
-        layout=neato
-        start=8
-        node[shape=circle fontsize=24 margin=0 label=""]
-        a -- {b, c, d, e, f};
-        d -- {c, e};
-        f -- {b, e, h, i, j};
-        f -- k [color=none];
-        k -- l [color=none];
-        b -- {h, c};
-        i -- {e, j};
-        k [label=1];
-        l [label=1];
-      }
-      ```,
-      width: 100%,
-    )
-    #pause
+        ```dot
+        graph {
+          layout=neato
+          start=8
+          node[shape=circle fontsize=24 margin=0]
+          a -- {b, c, d, e, f};
+          d -- {c, e};
+          f -- {b, e, h, i, j, k};
+          k -- l;
+          b -- {h, c};
+          i -- {e, j};
+        }
+        ```,
+        width: 100%,
+      )
+      #pause
     ],
     [
       #raw-render(
-      ```dot
-      graph {
-        layout=neato
-        start=8
-        node[shape=circle fontsize=24 margin=0 label=""]
-        a -- {b, c, d, e, f};
-        d -- {c, e};
-        f -- {b, e};
-        f -- {h, i, j} [color=none];
-        f -- k [color=none];
-        k -- l [color=none];
-        b -- {h} [color=none];
-        b -- {c};
-        i -- {e, j} [color=none];
-        k [label=1];
-        l [label=1];
-        h [label=2];
-        j [label=2];
-        i [label=2];
-      }
-      ```,
-      width: 100%,
-    )
-    #pause
+        ```dot
+        graph {
+          layout=neato
+          start=8
+          node[shape=circle fontsize=24 margin=0 label=""]
+          a -- {b, c, d, e, f};
+          d -- {c, e};
+          f -- {b, e, h, i, j, k};
+          k -- l [color=none];
+          b -- {h, c};
+          i -- {e, j};
+          l [label=1];
+        }
+        ```,
+        width: 100%,
+      )
+      #pause
+    ],
+    [
+      #raw-render(
+        ```dot
+        graph {
+          layout=neato
+          start=8
+          node[shape=circle fontsize=24 margin=0 label=""]
+          a -- {b, c, d, e, f};
+          d -- {c, e};
+          f -- {b, e, h, i, j};
+          f -- k [color=none];
+          k -- l [color=none];
+          b -- {h, c};
+          i -- {e, j};
+          k [label=1];
+          l [label=1];
+        }
+        ```,
+        width: 100%,
+      )
+      #pause
+    ],
+    [
+      #raw-render(
+        ```dot
+        graph {
+          layout=neato
+          start=8
+          node[shape=circle fontsize=24 margin=0 label=""]
+          a -- {b, c, d, e, f};
+          d -- {c, e};
+          f -- {b, e};
+          f -- {h, i, j} [color=none];
+          f -- k [color=none];
+          k -- l [color=none];
+          b -- {h} [color=none];
+          b -- {c};
+          i -- {e, j} [color=none];
+          k [label=1];
+          l [label=1];
+          h [label=2];
+          j [label=2];
+          i [label=2];
+        }
+        ```,
+        width: 100%,
+      )
+      #pause
     ],
 
     raw-render(
