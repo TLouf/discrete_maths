@@ -1072,7 +1072,7 @@
     ),
   )
 
-+ A constructor is planning a new urban development formed by 9 family houses, and now he is designing the water supply. As he knows some graph theory, he defines a weighted graph $G = (V, E, omega)$, where the vertices $V = {a, b, c, d, e, f, g, h, i}$ correspond to the houses, two vertices are adjacent if the houses can be connected by a water pipe, and the weight of each edge is the cost (in thousands of euros) of placing the corresponding water pipe. The graph $G$ is given by
++ A constructor is planning a new urban development formed by 9 family houses, and now they are designing the water supply. As they know some graph theory, they define a weighted graph $G = (V, E, omega)$, where the vertices $V = {a, b, c, d, e, f, g, h, i}$ correspond to the houses, two vertices are adjacent if the houses can be connected by a water pipe, and the weight of each edge is the cost (in thousands of euros) of placing the corresponding water pipe. The graph $G$ is given by
   #figure(
     raw-render(
       ```dot
@@ -1097,7 +1097,7 @@
       width: 5cm,
     ),
   )
-  + If the constructor places the water supply on house a, compute using Dijsktra's algorithm the minimum-cost path to reach house i (where he will live). As a side result, compute the total cost of the rooted (at a) spanning tree that connects A to all the other vertices.
+  + If the constructor places the water supply on house a, compute using Dijsktra's algorithm the minimum-cost path to reach house i (where they will live). As a side result, compute the total cost of the rooted (at a) spanning tree that connects A to all the other vertices.
   + When they heard this idea, the other neighbors complained about the price. They preferred to place the pipes using a minimum-cost spanning tree. Find one of these subgraphs using Prim's algorithm, and compute the total cost of the pipes.
 
 
@@ -1128,21 +1128,6 @@
   + Is $H$ bipartite? If yes, give the partition of $V$ into two disjoint sets that provides a proof for bipartiteness.
 
 + In a film festival there are 6 films on the first day. Films 1, 3, and 5 are dramas; films 2, 4, and 6 are comedies; films 3 and 4 are indies, and films 5 and 6 are blockbusters. Each film lasts two hours. What is the minimum number of hours needed to show all films, in such a way that films of the same type do not overlap?
-
-+ Let $G = (V, E)$ be the graph defined by the following adjacency matrix:
-  $
-    A_G = mat(
-      0, 0, 1, 1, 0, 1, 0, 0;
-      0, 0, 0, 0, 1, 0, 1, 0;
-      1, 0, 0, 1, 0, 1, 0, 1;
-      1, 0, 1, 0, 0, 0, 0, 1;
-      0, 1, 0, 0, 0, 0, 1, 0;
-      1, 0, 1, 0, 0, 0, 0, 1;
-      0, 1, 0, 0, 1, 0, 0, 0;
-      0, 0, 1, 1, 0, 1, 0, 0;
-    ).
-  $
-  Find a spanning tree of $G$ (if any).
 
 + Let $V = {A, B, C, D, E, F, G, H, I, J, K, L, M}$ be the set of vertices of the weighted graph $G = (V, E)$. Its weight matrix is given below: e.g., for $(C, D) in E$, its weight is $w(C, D) = 10$.
   $

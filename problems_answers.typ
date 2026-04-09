@@ -804,8 +804,6 @@
 
 + 6 hours.
 
-+ There is no such spanning tree.
-
 +
   1. One possible minimum-weight path is $(A, B, G, H, K, M)$ with weight $omega = 17$.
   2. One possible minimum-weight spanning tree has the edge set
