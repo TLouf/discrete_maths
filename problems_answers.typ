@@ -675,15 +675,13 @@
 
 
 +
-  - $|V| = 8$ and $|E| = 19$.
-  - $d(emptyset) = d(X) = 7$. The other vertices have $d(v) = 4$. $G$ is not regular.
-  - $G$ is not bipartite.
+  + $|V| = 2^n$.
+  + Decompose $a_(n+1)$ as the sum of the number of existing edges, of edges between new subsets, and of edges between existing subsets and new ones.
+  + $a_n = 3^n - 2^n$.
+  + $k(emptyset) = k(X) = 7$. The other vertices have $k(v) = 4$. $G$ is not regular.
+  + $G$ is not bipartite.
 
 + Hint: Which is the simple graph with $n$ vertices and $binom(n, 2)$ edges?
-
-+ Hint: The average degree of a graph $G = (V, E)$ is defined as follows:
-  $ overline(d) = 1/abs(V) sum_(v in V) d(v) . $
-  Use also the following result: Let $G$ be a connected graph containing a cycle. Then, if we remove any edge of that cycle, the resulting graph is also connected.
 
 +
   + $G$ is simple.
@@ -717,12 +715,20 @@
   + No (cycle)
   + No (forest)
 
-+ $999$.
-
++
+  + $m dot i$ vertices which have internal vertex as parent, plus the only one which doesn't have such a parent, which is the root.
+  + $999$.
 
 + Hint: Use that $V = V_1 union V_3$ where $V_1$ (resp. $V_3$) is the set of vertices of degree 1 (resp. 3).
 
 + 11 trees.
+
++ Hint: what does the condition on the mean degree imply for the graph's number of edges?
+  Use also the following result: Let $G$ be a connected graph containing a cycle. Then, if we remove any edge of that cycle, the resulting graph is also connected.
+
++
+  + It is not bipartite.
+  + There are no spanning trees.
 
 + There is no spanning tree of weight $<= 12$.
 

@@ -662,16 +662,21 @@
 + Prove using induction that the number of odd-degree vertices in any graph $G$ is an even number.
 
 
-+ Let $X = {A, B, C}$. We define the simple graph $G = (V, E)$ in the following way: the set of vertices is given by the power set of $X$ ($V = cal(P)(X)$), and two vertices $R, S in V$ are adjacent if and only if $R subset S$ or $S subset R$.
-  + How many vertices and edges does $G$ contain?
-  + Determine the degree of each vertex in $V$. Is $G$ regular?
++ Let $X$ be a finite set of cardinality $n$. We define the simple graph $G = (V, E)$ in the following way: the set of vertices is given by the power set of $X$ ($V = cal(P)(X)$), and two vertices $R, S in V$ are adjacent if and only if $R subset S$ or $S subset R$.
+  + How many vertices does $G$ contain?
+  + Prove that the number of edges of $G$ satisfies the following recurrence relation:
+    $
+      forall n in NN, a_(n+1) = 2 a_n + 3^n
+    $
+  + How many edges does $G$ contain?
+  + Taking $X = {A, B, C}$, determine the degree of each vertex in $V$.
+    Is $G$ regular?
   + Is $G$ bipartite?
 
 + Show that if $G = (V, E)$ is a simple graph and
   $ |E| > binom(|V| - 1, 2), $
   then $G$ is connected.
 
-+ If the mean degree of a connected graph is greater than 2, then show that there exist at least two independent cycles.
 
 + Let $G = (V, E)$ be a graph whose adjacency matrix $A_G$ is given by
   $
@@ -732,11 +737,11 @@
       ```dot
       graph {
         layout=sfdp
-        start=6
+        start=2
         splines=true
         edge [fontsize=10 labelfloat=true labeldistance=1 color="#00000055"]
         node[shape=circle margin=0 width=0.2]
-        a -- b [taillabel="6"]
+        a -- b [label="6"]
         a -- f [label="9"]
         b -- c [label="7"]
         b -- g [label="8"]
@@ -744,7 +749,7 @@
         c -- h [headlabel="3"]
         c -- g [label="5"]
         c -- d [label="6"]
-        d -- e [taillabel="4"]
+        d -- e [label="4"]
         d -- h [label="10"]
         e -- f [label="8"]
         e -- h [label="9"]
@@ -935,12 +940,15 @@
     ),
   )
 
-+ Suppose 1000 players enter a chess tournament. Use a rooted tree model of the tournament to determine how many games must be played to determine a champion, if a player is eliminated after one loss and games are played until only one entrant has not lost. (Assume there are no ties.)
++
+  + Considering a rooted tree with $n$ vertices in which every internal vertex has $m$ children, prove that $n = m i + 1$, where $i$ is the number of internal vertices.
+  + Suppose 1000 players enter a chess tournament. Use a rooted tree model of the tournament to determine how many games must be played to determine a champion, if a player is eliminated after one loss and games are played until only one entrant has not lost. (Assume there are no ties.)
 
 + Prove that in a rooted tree such that all vertices that are not leaves have degree 3, then the tree has an even number of vertices.
 
 + How many trees does a forest of 62 vertices and 51 edges contain?
 
++ If the mean degree of a connected graph is greater than 2, then show that it admits at least two independent cycles.
 
 + Let $G = (V, E)$ be the graph defined by the following adjacency matrix:
   $
