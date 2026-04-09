@@ -1020,8 +1020,23 @@ A tree is a special kind of graph which is useful in many applications, especial
 
 #slidebreak()
 
-The natural way to represent a tree is to pick one of its vertices as its *root*, and place it at its top, with a branching structure going down.
-The vertices at the bottom are then called *leaves*, as they are the extremities of the tree.
+The natural way to represent a tree is to pick one of its vertices as its root, and place it at its top, with a branching structure going down.
+
+#definition(title: [Rooted tree], slide-break: false)[
+  A *rooted tree* is a tree $T$ in which one vertex has been designated as the *root* and every edge is directed away from this root.
+]
+
+#definition(title: [Rooted tree vertices])[
+  Let's consider a rooted tree $T$.
+  If $v$ is a vertex in $T$ other than the root, the *parent* of $v$ is the unique vertex $u$ such that there is a directed edge from $u$ to $v$. The vertex $v$ is then a *child* of $u$.
+
+  A vertex without children is called a *leaf*, and all others are called *internal vertices*.
+]
+
+#slidebreak()
+
+When drawing a rooted tree, its root is placed at the top, and children placed below their parents.
+Thus, the arrows indicating the edge directions all point down, and can be omitted.
 
 #slidebreak()
 
@@ -1108,7 +1123,7 @@ The vertices at the bottom are then called *leaves*, as they are the extremities
       width: 50%,
     ),
   )
-  What do leaves and non-leave vertices correspond to in this case?
+  What do leaves and internal vertices correspond to in this case?
 ]
 
 #slidebreak()
