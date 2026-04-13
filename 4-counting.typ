@@ -432,7 +432,7 @@ The processes behind the distribution and the combination with repetition can be
 #slidebreak()
 
 #proposition(title: [$r$-combinations with repetition])[
-  Given a set of cardinality $n$ and a natural number $r <= n$, the number of $r$-combinations with repetition that we can form from this set is:
+  Given a set of cardinality $n$ and a natural number $r$, the number of $r$-combinations with repetition that we can form from this set is:
   $
     binom(r+n-1, n-1)
   $
