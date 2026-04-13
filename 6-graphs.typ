@@ -187,7 +187,7 @@ Multigraphs are actually very rare in practice, as they can often be equivalentl
 #remark[
   Naturally then, the entries of the adjacency matrix of a weighted graph correspond to the edge weights, that is:
   $
-    A_(i j) = w( (v_i, v_j) ) = w_(i j)
+    A_(i j) = omega((v_i, v_j)) = omega(i j)
   $
   // TODO remark on weight meanings? as can be distance or similarity
 ]
@@ -269,10 +269,9 @@ That is why traversing graphs is crucial, as it can provide us with central info
   If a walk has a repeated edge, then it has a repeated vertex, but the contrary is not necessarily true.
 ]
 
-=== Connectivity
-// TODO: move to describing graphs?
+=== Graph connectedness
 
-These definitions allow us to give a basic yet fundamental characteristic of a graph, namely, it connectivity.
+These definitions allow us to give a basic yet fundamental characteristic of a graph, namely, it connectedness.
 
 #definition(title: [Graph connectedness], slide-break: false)[
   An undirected graph is said to be *connected* if every pair of vertices is connected by a path.
@@ -289,7 +288,7 @@ These definitions allow us to give a basic yet fundamental characteristic of a g
 #slidebreak()
 
 #question-box[
-  The connectivity only tells us whether a graph is connected, but not how strongly it is.
+  The connectedness only tells us whether a graph is connected, but not how strongly it is.
   But given the following two graphs, which would you say is more strongly connected?
   Why?
   #figure(
@@ -330,7 +329,7 @@ These definitions allow us to give a basic yet fundamental characteristic of a g
   )
 ]
 
-One way to quantify the connectivity is to check how easy it is to split a graph into separate components.
+One way to quantify the connectedness is to check how easy it is to split a graph into separate components.
 
 #definition[
   A *cut edge* or *bridge* of a graph $G$ is an edge whose removal produces a graph with more connected components than in $G$.
@@ -338,7 +337,7 @@ One way to quantify the connectivity is to check how easy it is to split a graph
   A *cut vertex* or *articulation point* of a graph $G$ is a vertex whose removal (together with those edges incident with it) produces a graph with more connected components than in $G$.
 ] <def-cut-ev>
 
-Counting the minimum number of cut edges/vertices necessary to create $k$ components thus allows a better characterisation of a graph's connectivity.
+Counting the minimum number of cut edges/vertices necessary to create $k$ components thus allows a better characterisation of a graph's connectedness.
 
 === Vertices connectivity
 
@@ -375,7 +374,7 @@ When looking at individual vertices instead, their connectivity can be measured 
 #slidebreak()
 
 #corollary[
-  Let $G$ be a simple graph with adjacency matrix $A$, then $"tr" A^2 = 2 |E|$.
+  Let $G$ be a simple undirected graph with adjacency matrix $A$, then $"tr" A^2 = 2 |E|$.
   // - $"tr" A^3 = 6 times$ number of unoriented triangles in $G$.
   // TODO
 ]
@@ -395,9 +394,9 @@ But first, what does "short" mean here?
 Let's generalise the notion of path length to weighted graphs.
 
 #definition(title: [Path length])[
-  Given a simple, undirected and weighted graph $G = (V, E, omega)$ with positive weights, the length $L(P)$ of a path $P = v_0, e_1, v_1, e_2, v_2 dots, v_(l-1), e_l, v_l$ is the sum of the weights of the edges that it traverses:
+  Given a simple weighted graph $G = (V, E, omega)$ with positive weights, the length $L(P)$ of a path $P = v_0, e_1, v_1, e_2, v_2 dots, v_(l-1), e_l, v_l$ is the sum of the weights of the edges that it traverses:
   $
-    L(P) = sum_(i=1)^l w(e_i).
+    L(P) = sum_(i=1)^l omega(e_i).
   $
 ]
 
@@ -406,11 +405,13 @@ This definition allows to recover the one of walk length for unweighted graphs (
 
 
 #definition(title: [Shortest path problem])[
-  Given a simple, undirected and weighted graph $G = (V, E, omega)$ with positive weights, and $s,t in V$, a shortest path problem consists in finding the shortest path that connects $s$ and $t$, that is:
+  Given a simple weighted graph $G = (V, E, omega)$ with positive weights, and $s,t in V$, a shortest path problem consists in finding the shortest path that connects $s$ and $t$, that is:
   $
     argmin_(P in cal(P)(s,t)) L(P),
   $
   where $cal(P)(s,t)$ is the set of paths that connect $s$ and $t$.
+
+  The shortest path length is then called the *distance* between $s$ and $t$ and is denoted $d(s,t)$.
 ]
 
 
@@ -470,17 +471,21 @@ Let's proceed on the following example.
 #algorithm(
   pseudocode-list(numbered-title: [Dijkstra's], booktabs: true)[
     + *procedure* Dijkstra($G=(V, E, omega)$ with $V={s=v_1, dots, v_n=t}$)
-      + for $i = 2$ to $n$
-        + $d(s, v_i) = infinity$ #comment[initialise unknown shortest lengths as infinity]
-      + $S = emptyset$
-      + *while* $t in.not S$ #comment[until we've reached $t$]
-        + $u = "a vertex not in" S "with" d(s, u) "minimal"$ #comment[consider the next closest vertex] #line-label(
+      + *for* all $v in cal(N)^(("out"))(s)$
+        + $d(s, v) = omega(s, v)$ #comment[initialise known distances: to neighbours]
+      + *for* all $v in V without cal(N)^(("out"))(s)$
+        + $d(s, v) = infinity$ #comment[initialise unknown distance as infinity]
+
+      + $D = emptyset$ #comment[set of vertices with known distance]
+      + *while* $t in.not D$ #comment[until we've reached $t$]
+        // + $u = "a vertex not in" D "with" d(s, u) "minimal"$ #comment[consider the next closest vertex] #line-label(
+        + $u = display(argmin_(v in V without D)) d(s, v)$ #comment[consider the next closest vertex] #line-label(
             <lalg-next-closest>,
           )
-        + $S = S union {u}$
-        + *for* all $v in cal(N)(u)$ #comment[for all neighbours $v$ of $u$]
-          + *if* $d(s, u) + w(u, v) < d(s, v)$ *then* #comment[if going through $u$ creates a shortcut to reach $v$]
-            + $d(s, v) = d(s, u) + w(u, v)$ #comment[update the shortest length to reach $v$] #line-label(
+        + $D = D union {u}$
+        + *for* all $v in cal(N)^(("out"))(u) without D$ #comment[for all neighbours $v$ of $u$]
+          + *if* $d(s, u) + omega(u, v) < d(s, v)$ *then* #comment[if going through $u$ creates a shortcut to reach $v$]
+            + $d(s, v) = d(s, u) + omega(u, v)$ #comment[update the estimated distance to $v$] #line-label(
                 <lalg-dist-update>,
               )
       + *return* $d(s,t)$ #comment[shortest path length from source $s$ to target $t$]
