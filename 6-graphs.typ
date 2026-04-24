@@ -474,7 +474,7 @@ Let's proceed on the following example.
       + *for* all $v in cal(N)^(("out"))(s)$
         + $d(s, v) = omega(s, v)$ #comment[initialise known distances: to neighbours]
       + *for* all $v in V without cal(N)^(("out"))(s)$
-        + $d(s, v) = infinity$ #comment[initialise unknown distance as infinity]
+        + $d(s, v) = infinity$ #comment[initialise unknown distances as infinity]
 
       + $D = emptyset$ #comment[set of vertices with known distance]
       + *while* $t in.not D$ #comment[until we've reached $t$]
@@ -704,7 +704,7 @@ However, as mentioned above, there may be more than one shortest path between a 
 #definition(title: [Vertex betweenness: full])[
   The betweenness centrality of a vertex is the number of shortest paths between pairs of other vertices which pass through it, where we weight each path by the number of shortest paths between each pair of vertices:
   $
-    forall u in V, b(u) = sum_(s, t in V without {u}) #h(.5em) sum_(P in cal(P)(s,t)) #h(.5em) sum_(u in P) 1 / abs(cal(P)(s,t)),
+    forall u in V, b(u) = sum_(s, t in V without {u}) #h(.5em) sum_(P in cal(P)(s,t)) #h(.5em) sum_(v in P) delta_(u v) / abs(cal(P)(s,t)),
   $
   where $cal(P)(s,t)$ is the set of shortest paths from $s$ to $t$.
 ]
@@ -811,7 +811,7 @@ For a single vertex, this is quantified by the local clustering coefficient.
 ]
 
 #proposition[
-  Given an adjacency matrix $A$ for $G$,
+  Given an adjacency matrix $A$ for $G$ and a vertex $v_i$ such that $k(v_i) >= 2$,
   $
     C_(v_i) = (display(sum_j sum_(l < j) A_(i j) A_(j l) A_(l i))) / display(binom(k(v_i), 2)).
   $
@@ -1003,8 +1003,8 @@ A graph can be decomposed into $k$-cores relatively easily, by iteratively remov
       + k = 1
       + *while* $G$ is not empty
         + $V_k = emptyset$ #comment[set of vertices in $k$-core]
-        + *while* $min_(u in V) (k(u)) = k$
-          + $V_k = V_k union {u in V | k(u) = k}$ #comment[identify vertices of degree $k$]
+        + *while* $min_(u in V) (k(u)) <= k$
+          + $V_k = V_k union {u in V | k(u) <= k}$ #comment[identify vertices of degree $k$ or less]
           + $V = V without V_k$ #comment[remove these vertices and their edges from the graph]
           + $E = E without {{u,v} in E | (u in V_k) or (v in V_k)}$
         + $k = k + 1$
@@ -1144,7 +1144,7 @@ It is central because it means many problems are very simple on trees, notably t
 
 #theorem[
   1. The simple graph $G$ is a tree if and only if it is connected and, if we remove any edge, we obtain a disconnected graph.
-  2. The simple graph $G$ is a tree if and only if it does not contain any cycles and, if we add any edge, we create a cycle.
+  2. The simple graph $G$ is a tree if and only if it does not contain any cycles and, if we add any edge without adding any vertex, we create a cycle.
 ]
 
 #slidebreak()
@@ -1173,6 +1173,7 @@ If we suppose a connected graph with $n$ vertices and $n-1$ edges is not a tree,
   2. $G$ is connected and has $n - 1$ edges.
   3. $G$ has $n - 1$ edges and does not contain any cycle.
 ]
+// this comes from procedure above that whenever we add a vertex, we add an edge connecting it to an existing one.
 
 // TODO: add decision tree as application, p. 796?
 
@@ -1194,7 +1195,7 @@ This idea is the basis on which we can prove the following.
 #slidebreak()
 
 Identifying cycles can be computationally hard, hence the need for other algorithms, such as breadth-first search.
-The idea of the algorithm is to explore the graph iteratively, starting from a root vertex
+The idea of the algorithm is to explore the graph iteratively, starting from a root vertex.
 At each step, we consider all the neighbours of the vertices added to the tree in the previous step.
 A neighbour and its associated edge are then added to the spanning tree only if the vertex is not already present.
 
@@ -1304,8 +1305,8 @@ It can be formally written as follows.
 
 #slidebreak()
 
-We can also produce a spanning tree of a simple graph by the use of depth-first search.
-The idea here is to form the tree by forming the longest paths possible at each step.
+We can also produce a spanning tree of a simple graph with depth-first search.
+The idea here is to form the tree by forming the longest path possible at each step.
 A first path starting from an arbitrary root is formed, until no more vertices can be added.
 The vertices and edges composing this path are added to the tree.
 We then backtrack through the path until we find a vertex from which we can start a second path.
@@ -1408,9 +1409,6 @@ However, for weighted graphs, some might be more optimal, in a certain sense.
 
 Thus, if the weights encode some form of cost to traverse edges, as in the shortest path problem, finding a minimum-weight spanning tree gives an optimal way to fully traverse a graph.
 
-// #example[
-//   TODO
-// ]
 
 #definition[
   A *greedy algorithm* to solve a given problem is an algorithm that when presented with a choice, always selects what seems to be the best option at this given moment.

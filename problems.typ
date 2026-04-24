@@ -659,7 +659,7 @@
   Compute $|V_n|$ and $|E_n|$.
 
 // 13.10
-+ Prove using induction that the number of odd-degree vertices in any graph $G$ is an even number.
++ Prove using induction that the number of odd-degree vertices in any simple undirected graph $G$ is an even number.
 
 
 + Let $X$ be a finite set of cardinality $n$. We define the simple graph $G = (V, E)$ in the following way: the set of vertices is given by the power set of $X$ ($V = cal(P)(X)$), and two vertices $R, S in V$ are adjacent if and only if $R subset S$ or $S subset R$.
