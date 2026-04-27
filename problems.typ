@@ -1127,8 +1127,6 @@
   + Find a minimum-weight spanning tree for $G$.
   + Is $H$ bipartite? If yes, give the partition of $V$ into two disjoint sets that provides a proof for bipartiteness.
 
-+ In a film festival there are 6 films on the first day. Films 1, 3, and 5 are dramas; films 2, 4, and 6 are comedies; films 3 and 4 are indies, and films 5 and 6 are blockbusters. Each film lasts two hours. What is the minimum number of hours needed to show all films, in such a way that films of the same type do not overlap?
-
 + Let $V = {A, B, C, D, E, F, G, H, I, J, K, L, M}$ be the set of vertices of the weighted graph $G = (V, E)$. Its weight matrix is given below: e.g., for $(C, D) in E$, its weight is $w(C, D) = 10$.
   $
     mat(
