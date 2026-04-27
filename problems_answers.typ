@@ -802,8 +802,6 @@
   1. Using Kruskal's algorithm, a spanning tree $T = (V, E)$ would be given by $E = {{a, b}, {e, g}, {b, e}, {e, c}, {f, g}, {f, d}}$ with weight $omega = 10$.
   2. It is not bipartite.
 
-+ 6 hours.
-
 +
   1. One possible minimum-weight path is $(A, B, G, H, K, M)$ with weight $omega = 17$.
   2. One possible minimum-weight spanning tree has the edge set
