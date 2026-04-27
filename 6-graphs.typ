@@ -1393,6 +1393,13 @@ The reason it's called depth-first can be directly understood from this figure: 
 
 #slidebreak()
 
+#remark[
+  This algorithm is a very basic recursive algorithm, whose output (a growing tree), also turns out to be #link("https://recursion.vercel.app/")[the way you can visualise _any_ recursive algorithm].
+  The reason is that every recursion depth level directly corresponds to a depth level of the rooted tree being grown.
+]
+
+#slidebreak()
+
 // TODO: show cut vertex application?
 Both algorithms can be used as the basis for algorithms that solve many different problems.
 For example, they can be used to find paths and circuits in a graph, to determine the connected components of a graph, or to find the cut vertices of a connected graph.
