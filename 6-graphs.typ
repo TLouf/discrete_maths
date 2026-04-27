@@ -239,7 +239,7 @@ Some simple tests based on aggregate measures can be used to discard isomorphism
 
 The whole point of a graph model is not to only look at binary relationships between pairs of entities represented by edges between pairs of vertices, but to investigate the interconnections over the whole set of vertices, thus including "long-distance relationships".
 That is why traversing graphs is crucial, as it can provide us with central information about a graph.
-// TODO: highlight it's something they experience themselves: experience of using public transport network gives them an intuitive sense of how well connected two areas are, which stations are the most important in the network, and others. Here translate this intuition into quantitative insights
+// highlight it's something they experience themselves: experience of using public transport network gives them an intuitive sense of how well connected two areas are, which stations are the most important in the network, and others. Here translate this intuition into quantitative insights
 
 === Definitions
 
@@ -247,6 +247,7 @@ That is why traversing graphs is crucial, as it can provide us with central info
   A *walk* on a graph $G = (V, E)$ is an alternating sequence of vertices and edges of the form $v_0, e_1, v_1, e_2, v_2, ..., v_(l-1), e_l, v_l$, such that $e_k$ is from $v_(k-1)$ to $v_(k)$ for all $k$.
   It is said to be *closed* if it ends where it starts, so if $v_0 = v_l$, and open otherwise.
   The *length* of the walk is equal to the number of edges in the walk $l$, and is at least one.
+  // TODO: at least 0, to conform with trivial graph (single vertex, no edge) being connected.
 ] <def-walk>
 
 #slidebreak()
