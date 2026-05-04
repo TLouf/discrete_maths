@@ -1,4 +1,4 @@
-#import "assets/theory_template.typ": *
+#import "../assets/theory_template.typ": *
 #show: theory
 
 
@@ -163,7 +163,7 @@ Most of the time, and in the following of this course, $x in U$ can be omitted f
 
 We can represent $B subset.eq A$, with a *Venn diagram*:
 #figure(
-  image("assets/A_sub_B.svg", height: 6em),
+  image("../assets/A_sub_B.svg", height: 6em),
 )
 
 #property[
@@ -250,7 +250,7 @@ You can represent these operations with a Venn diagram too. For instance:
   grid(
     columns: 2,
     gutter: 1em,
-    image("assets/A_union_B.svg", height: 6em), image("assets/A_inter_B.svg", height: 6em),
+    image("../assets/A_union_B.svg", height: 6em), image("../assets/A_inter_B.svg", height: 6em),
   ),
 )
 

@@ -1,4 +1,4 @@
-#import "assets/theory_template.typ": *
+#import "../assets/theory_template.typ": *
 #show: theory
 
 
