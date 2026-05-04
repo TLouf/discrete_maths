@@ -1097,7 +1097,7 @@
       width: 5cm,
     ),
   )
-  + If the constructor places the water supply on house $a$, compute using Dijsktra's algorithm the minimum-cost path to reach house $i$ (where they will live). As a side result, compute the total cost of the rooted (at $a$) spanning tree that connects A to all the other vertices.
+  + If the constructor places the water supply on house $a$, compute using Dijsktra's algorithm the minimum-cost path to reach house $i$ (where they will live). As a side result, compute the total cost of the rooted (at $a$) spanning tree that connects $a$ to all the other vertices.
   + When they heard this idea, the other neighbors complained about the price. They preferred to place the pipes using a minimum-cost spanning tree. Find one of these subgraphs using Prim's algorithm, and compute the total cost of the pipes.
 
 
