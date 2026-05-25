@@ -277,129 +277,30 @@ That is why traversing graphs is crucial, as it can provide us with central info
   If a walk has a repeated edge, then it has a repeated vertex, but the contrary is not necessarily true.
 ]
 
-=== Graph connectedness
-
-These definitions allow us to give a basic yet fundamental characteristic of a graph, namely, it connectedness.
-
-#definition(title: [Graph connectedness], slide-break: false)[
-  An undirected graph is said to be *connected* if every pair of vertices is connected by a path.
-  A disconnected graph can be partitioned into connected subgraphs, also known as *connected components*.
-]
-
-#definition[
-  A directed graph $G=(V,E)$ is
-  - *strongly connected* if for every $u,v in V$, there is a path from $u$ to $v$ and from $v$ to $u$,
-  - *weakly connected* if for every $u,v in V$, there is a path between $u$ and $v$ in the underlying undirected graph.
-  A strongly or weakly disconnected graph can then be partitioned into *strongly and weakly connected components*.
-]
-
 #slidebreak()
+
+Paths allow us to determine a binary relation between vertices: whether they're connected, or not.
+
+#definition(title: [Vertex pair connectedness], slide-break: false)[
+  Given a graph $G = (V, E)$ and two vertices $u,v in V$, we say that $u$ is *connected* to $v$ if $u=v$, or if there exists a path which starts at $u$ and ends at $v$.
+] <def-connected-vertices>
 
 #question-box[
-  The connectedness only tells us whether a graph is connected, but not how strongly it is.
-  But given the following two graphs, which would you say is more strongly connected?
-  Why?
-  #figure(
-    grid(
-      columns: 2,
-      column-gutter: 2em,
-      raw-render(
-        ```dot
-        graph {
-          layout=neato
-          start=10
-          node[shape=circle margin=0]
-          1 -- {2, 3, 4};
-          3 -- 2;
-          4 -- {5, 6};
-          5 -- 6;
-        }
-        ```,
-        width: 5cm,
-      ),
-      raw-render(
-        ```dot
-        graph {
-          layout=neato
-          start=10
-          node[shape=circle margin=0 fontsize=13]
-          1 -- {2, 3};
-          3 -- 2;
-          2 -- 5;
-          3 -- 6;
-          4 -- {5, 6};
-          5 -- 6;
-        }
-        ```,
-        width: 5cm,
-      ),
-    ),
-  )
-]
-
-One way to quantify the connectedness is to check how easy it is to split a graph into separate components.
-
-#definition[
-  A *cut edge* or *bridge* of a graph $G$ is an edge whose removal produces a graph with more connected components than in $G$.
-
-  A *cut vertex* or *articulation point* of a graph $G$ is a vertex whose removal (together with those edges incident with it) produces a graph with more connected components than in $G$.
-] <def-cut-ev>
-
-Counting the minimum number of cut edges/vertices necessary to create $k$ components thus allows a better characterisation of a graph's connectedness.
-
-=== Vertices connectivity
-
-When looking at individual vertices instead, their connectivity can be measured by counting the number of walks which connect them.
-
-#theorem[
-  Let $G$ be a graph with adjacency matrix $A$ with respect to the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set.
-  The number of distinct oriented walks of length $l >= 1$ that start at $v_i$ and end at $v_j$ is given by the entry $(i, j)$ of the matrix $A^l$.
-] <thm-walk-count-adj-power>
-
-#slidebreak()
-
-#proof[
-  This can be proven by induction on the walk length $l$.
-
-  / Basis step: the number of walks from $v_i$ to $v_j$ of length 1 is simply 1 if $(v_i, v_j) in E$, and 0 otherwise, so it is simply $a_(i j)$, for every $i$ and $j$.
-  / Inductive step: let's consider a fixed $l$, write $B = A^l$, and assume that $b_(i j)$ gives the number of distinct walks of length $l$ from $v_i$ to $v_j$.
-
-    A walk of length $l + 1$ from $v_i$ to $v_j$ is made up of a walk of length $l$ from $v_i$ to some intermediate vertex $v_k$, and an edge from $v_k$ to $v_j$.
-    By the product rule, the number of such walks is the product of the number of walks of length $l$ from $v_i$ to $v_k$, which is $b_(i k)$, and the number of edges from $v_k$ to $v_j$ which is $a_(k j)$.
-
-    By the sum rule over possible values of $k$, the number of such walks of length $l+1$ is thus
-    $
-      sum_(k=1)^(abs(V)) b_(i k) a_(k j)
-    $
-
-    Also, writing $C = A^(l + 1) = A^l A$:
-    $
-      c_(i j) = sum_(k=1)^(abs(V)) b_(i k) a_(k j)
-    $
-    The result is thus true for $l+1$ too, so by induction, it is for any length $l >= 1$.
+  In which cases is this relation an equivalence? A partial order?
+  $
+    forall u,v in V, u rel v <=> u "is connected to" v
+  $
+  // equivalence if undirected, partial order if undirected and no cycle
 ]
 
 #slidebreak()
-
-#corollary[
-  Let $G$ be a simple undirected graph with adjacency matrix $A$, then $"tr" A^2 = 2 |E|$.
-  // - $"tr" A^3 = 6 times$ number of unoriented triangles in $G$.
-  // TODO
-]
-
-#slidebreak()
-
-#remark[
-  Connectivity between two vertices is better characterised by computing the number of _paths_ joining them.
-  However, counting paths is a *much* harder problem, as illustrated in #link("https://www.youtube.com/watch?v=Q4gTV4r0zRs")[this life-changing video].
-  // ref 8.7 of Newman
-]
 
 === Shortest paths
 
-A very common problem related to paths is to find the shortest way to go from one vertex to another.
-But first, what does "short" mean here?
-Let's generalise the notion of path length to weighted graphs.
+A vertex can be connected to another, but this does not tell us how easy it is to go from one to the other, or, in other words, how distant the destination is from the origin.
+This distance could simply be linked to the lengths of the paths connecting them.
+But here we'll be a bit more general, and assume that some edges might be more costly to traverse than others.
+So let's generalise the notion of path length to weighted graphs.
 
 #definition(title: [Path length])[
   Given a simple weighted graph $G = (V, E, omega)$ with positive weights, the length $L(P)$ of a path $P = v_0, e_1, v_1, e_2, v_2 dots, v_(l-1), e_l, v_l$ is the sum of the weights of the edges that it traverses:
@@ -422,19 +323,9 @@ This definition allows to recover the one of walk length for unweighted graphs (
   The shortest path length is then called the *distance* between $s$ and $t$ and is denoted $d(s,t)$.
 ]
 
-
-#question-box[
-  In an unweighted graph, how can you get the shortest path length using the adjacency matrix?
-]
-
 #slidebreak()
 
-If the path is long, this gets very costly, though.
-Also, if the graph is weighted, the shortest path in terms of number of traversed edges is not necessarily the shortest path in terms of edge weights.
-That's why we need another method to compute shortest paths, such as Dijkstra's algorithm.
-
-#slidebreak()
-
+Solving this problem is not obvious and requires us to actually traverse the graph using an algorithm, such as Dijkstra's.
 The basic idea of the algorithm is to iteratively explore the graph from the point of view of the starting vertex $s$.
 Starting from $s$, in each step we find its next closest vertex, until we've reached $t$.
 Crucially though, since shortcuts can sometimes appear, we need to keep track of known or estimated distances throughout the exploration.
@@ -732,6 +623,149 @@ A strength of betweenness is that it not only characterises the importance of ve
 
 == Describing graph structure(s)
 
+=== Connectedness
+
+The binary relation between vertices we've seen in @def-connected-vertices can be used to perform a similar binary characterisation, but about the whole graph.
+
+#definition(title: [Graph connectedness], slide-break: false)[
+  An undirected graph is said to be *connected* if every one of its vertices is connected to every other.
+  A disconnected graph can be partitioned into connected subgraphs, also known as *connected components*.
+]
+
+#definition[
+  A directed graph $G=(V,E)$ is
+  - *strongly connected* if every one of its vertices is connected to every other.
+  - *weakly connected* if its underlying undirected graph is connected.
+  A strongly or weakly disconnected graph can then be partitioned into *strongly and weakly connected components*.
+]
+
+#slidebreak()
+
+
+=== Connectivity
+
+#question-box[
+  The connectedness only tells us whether a graph is connected, but not how strongly it is.
+  But given the following two graphs, which would you say is more strongly connected?
+  Why?
+  #figure(
+    grid(
+      columns: 2,
+      column-gutter: 2em,
+      raw-render(
+        ```dot
+        graph {
+          layout=neato
+          start=10
+          node[shape=circle margin=0]
+          1 -- {2, 3, 4};
+          3 -- 2;
+          4 -- {5, 6};
+          5 -- 6;
+        }
+        ```,
+        width: 5cm,
+      ),
+      raw-render(
+        ```dot
+        graph {
+          layout=neato
+          start=10
+          node[shape=circle margin=0 fontsize=13]
+          1 -- {2, 3};
+          3 -- 2;
+          2 -- 5;
+          3 -- 6;
+          4 -- {5, 6};
+          5 -- 6;
+        }
+        ```,
+        width: 5cm,
+      ),
+    ),
+  )
+]
+
+#slidebreak()
+
+One way to quantify a graph's connectivity is to check how easy it is to split a graph into separate components.
+
+#definition(title: [Graph cuts], slide-break: false)[
+  A *cut edge* or *bridge* of a graph $G$ is an edge whose removal produces a graph with more connected components than in $G$.
+
+  A *cut vertex* or *articulation point* of a graph $G$ is a vertex whose removal (together with those edges incident with it) produces a graph with more connected components than in $G$.
+] <def-cut-ev>
+
+#slidebreak()
+
+Counting the minimum number of cut edges/vertices necessary to create $k$ components thus allows a better characterisation of a graph's connectivity, as it is not only binary (= _is or is not_ connected) but quantified (= a number saying _how strongly_ it is connected).
+
+#slidebreak()
+
+When looking at individual vertices instead, their connectivity can be quantified by counting the number of walks which connect them.
+
+#theorem(slide-break: false)[
+  Let $G$ be a graph with adjacency matrix $A$ with respect to the ordering $v_1, v_2, ..., v_(|V|)$ of its vertex set.
+  The number of distinct oriented walks of length $l >= 1$ that start at $v_i$ and end at $v_j$ is given by the entry $(i, j)$ of the matrix $A^l$.
+] <thm-walk-count-adj-power>
+
+#slidebreak()
+
+#proof[
+  This can be proven by induction on the walk length $l$.
+
+  / Basis step: the number of walks from $v_i$ to $v_j$ of length 1 is simply 1 if $(v_i, v_j) in E$, and 0 otherwise, so it is simply $a_(i j)$, for every $i$ and $j$.
+  / Inductive step: let's consider a fixed $l$, write $B = A^l$, and assume that $b_(i j)$ gives the number of distinct walks of length $l$ from $v_i$ to $v_j$.
+
+    A walk of length $l + 1$ from $v_i$ to $v_j$ is made up of a walk of length $l$ from $v_i$ to some intermediate vertex $v_k$, and an edge from $v_k$ to $v_j$.
+    By the product rule, the number of such walks is the product of the number of walks of length $l$ from $v_i$ to $v_k$, which is $b_(i k)$, and the number of edges from $v_k$ to $v_j$ which is $a_(k j)$.
+
+    By the sum rule over possible values of $k$, the number of such walks of length $l+1$ is thus
+    $
+      sum_(k=1)^(abs(V)) b_(i k) a_(k j)
+    $
+
+    Also, writing $C = A^(l + 1) = A^l A$:
+    $
+      c_(i j) = sum_(k=1)^(abs(V)) b_(i k) a_(k j)
+    $
+    The result is thus true for $l+1$ too, so by induction, it is for any length $l >= 1$.
+]
+
+#slidebreak()
+
+#question-box[
+  How would this help us getting shortest path lengths in an unweighted graph?
+]
+
+#slidebreak()
+
+#remark[
+  Connectivity between two vertices is better characterised by computing the number of _paths_ joining them.
+  However, counting paths is a *much* harder problem, as illustrated in #link("https://www.youtube.com/watch?v=Q4gTV4r0zRs")[this life-changing video].
+  // ref 8.7 of Newman
+]
+
+
+=== Bipartiteness
+
+
+#theorem(slide-break: false)[
+  If a simple graph $G$ contains a cycle of odd length, then it is not bipartite.
+]
+
+#slidebreak()
+
+#proof[
+  Let's prove it by contraposition, meaning, let's prove that if a graph is bipartite, then it does not contain any cycle of odd length.
+  So let us take a bipartite graph $G = (V_1 union V_2, E)$ in which all edges contain a vertex from $V_1$ and another from $V_2$.
+  Any path $v_0, v_1, dots v_l$ on $G$ is then such that if $v_i in V_1$, then $v_(i+1) in V_2$, and vice versa.
+  So either the edges from $V_1$ correspond to odd values of $i$ and those from $V_2$ to even ones, or the opposite.
+  A cycle is such that $v_0 = v_l$, which can only happen by starting and ending in the same set $V_k$.
+  Given what we said above, this is only possible if $l$ is even.
+  Therefore, there is no cycle of odd length in $G$.
+]
+
 === Graph size
 
 The size of a graph can be simply considered to be its number of vertices and edges, but this gives little information.
@@ -851,6 +885,20 @@ An alternative is to compute the following:
 // here we are also double counting (j,l) and (l,j), but in both num and den, so it's fine.
 
 #slidebreak()
+
+#question-box[
+  What is the clustering coefficient of a bipartite graph?
+]
+
+// TODO: add whole thing about trace of A^k?
+// #slidebreak()
+
+// #corollary[
+//   Let $G$ be a simple undirected graph with adjacency matrix $A$, then $"tr" A^2 = 2 |E|$.
+//   // - $"tr" A^3 = 6 times$ number of unoriented triangles in $G$.
+//   // TODO
+// ]
+
 
 === Cliques and cores
 
