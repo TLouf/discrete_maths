@@ -1,4 +1,4 @@
-#import "../../../assets/exam_template.typ": *
+#import "../../../../assets/exam_template.typ": *
 
 #show: doc => exam(
   [Discrete Mathematics],
