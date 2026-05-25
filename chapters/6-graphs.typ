@@ -257,6 +257,13 @@ That is why traversing graphs is crucial, as it can provide us with central info
   - A walk on a graph without multi-edges can be described more simply by a sequence of vertices, as each edge is uniquely determined by a pair of vertices.
 ]
 
+#slidebreak()
+
+#question-box[
+  What is the smallest closed walk possible?
+  Under what condition on $G$ can it exist?
+]
+
 
 #definition[
   A *trail* is a walk with no repeated edge.
