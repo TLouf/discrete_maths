@@ -3,8 +3,28 @@
 // Example:
 [
   {
+    "label": "Typst: fixed export file",
+    "command": "typst",
+    "args": ["compile", "--root", "\"$ZED_WORKTREE_ROOT\"", "\"$ZED_FILE\""],
+    "allow_concurrent_runs": true,
+    "use_new_terminal": true,
+  },
+  {
+    "label": "Typst: fixed watch file",
+    "command": "typst",
+    "args": ["watch", "--root", "\"$ZED_WORKTREE_ROOT\"", "\"$ZED_FILE\""],
+    "allow_concurrent_runs": true,
+    "use_new_terminal": true,
+  },
+  {
     "label": "Build theory",
     "command": "typst compile --input format=notes notes.typ notes.pdf;typst compile --input format=slides notes.typ notes_slides.pdf",
+    "reveal": "always",
+    "hide": "never",
+  },
+  {
+    "label": "Watch theory",
+    "command": "typst watch --input format=notes notes.typ notes.pdf;typst watch --input format=slides notes.typ notes_slides.pdf",
     "reveal": "always",
     "hide": "never",
   },
