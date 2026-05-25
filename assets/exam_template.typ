@@ -35,6 +35,7 @@
 
   v(-40pt)
   figure(image("uc3m_Denom_Matematicas.svg", height: 64pt))
+  v(-10pt)
   text(13pt)[
     #align(center)[
       *#smallcaps[#programme] #h(1fr) #course*
