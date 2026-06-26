@@ -411,6 +411,9 @@
       binom(n, floor(n/2)) >= 2^n / n.
     $
 
+// + Let p be a prime number and a,b be integers. Prove that:(a+b)p≡ap+bp(modp)
+//   (Hint: Expand using the Binomial Theorem and consider the divisibility of the binomial coefficients (kp​) by p.)
+
 
 = Sequences
 
@@ -513,6 +516,47 @@
 
 = Graph theory
 // TODO: basic exercise about translating from/to adj matrix to/from graph reprs?
+//
+
+// + We define the following recursive algorithm.
+//   #algorithm(
+//     pseudocode-list(booktabs: true)[
+//       + *procedure* `size`($T=(V, E)$ tree at $r$)
+//         + *if* $V = emptyset$ *then*
+//           + *return* $0$
+//         + $c = 1$
+//         + *for* all children $u$ of $r$
+//           + $T_u =$ subtree rooted at $u$ which only contains $u$ and its descendants
+//           + $c = c + #`size` (T_u)$
+//     ],
+//   )
+//   + Run the algorithm on the given rooted tree, indicating the value returned for each subtree.
+//   + Prove by induction on the height of the input tree that the algorithm returns its number of vertices.
+//   + With a given number of vertices $n$, which tree can you form to maximise the number of times `size` calls itself before reaching a `return` for the first time (which is also known as its _recursion depth_)?
+
+
+
+// leaves(T):
+//     if T has no children then
+//         return 1
+
+//     total ← 0
+//     for each child C of T do
+//         total ← total + Leaves(C)
+
+//     return total
+// Questions
+// Tracing
+// Execute the algorithm on the rooted tree provided.
+// Show the intermediate values returned by each recursive call.
+// Complexity
+// Let n be the number of nodes.
+// Determine the running time of the algorithm.
+// Induction Proof
+// Prove by induction on the number of nodes (or structural induction) that the algorithm returns the exact number of leaves.
+// Application
+// Explain how the algorithm could be modified to count internal nodes instead.
+
 
 + For each example, define what the vertices and the edges are. Decide if the graph should be directed and/or weighted, if it contains self-loops, if it is bipartite and whether it's connected.
   + Metro network of a city.
@@ -711,8 +755,8 @@
       width: 5cm,
     ),
   )
-  + Find the shortest path to go from a to g.
-  + Find the shortest path to go from a to g, assuming that the edges cb and ef are not directed (i.e., you can use both directions).
+  + Find the shortest path to go from $a$ to $g$.
+  + Find the shortest path to go from $a$ to $g$, assuming that the edges cb and ef are not directed (i.e., you can use both directions).
 
 + In the weighted graph shown in the figure below, compute the distances $d(a, h)$, $d(a, e)$, $d(d, a)$, $d(d, g)$, and $d(b, e)$.
   #figure(
@@ -948,6 +992,7 @@
   $
   + Is it bipartite?
   + Find a spanning tree (if any).
+// TODO: corr, add ones in diagonal of A_G so it's enough to look at $A_G^7$
 
 + Tell whether the following weighted graph has a spanning tree of weight equal or smaller than 12.
   #figure(
@@ -1130,3 +1175,28 @@
   $
   + Compute the minimum weight (or shortest) path from vertex A to vertex M. Compute the total weight of such path.
   + Find a minimum-weight spanning tree and give its weight.
+
+
+// ### **Exercise: From Bipartite Interactions to Similarity Networks**
+
+// A streaming service models its data using a **bipartite graph** $G = (V, E)$, where the vertex set $V$ is partitioned into two disjoint sets:
+// *   **$V_U$**: A set of $n$ **Users**.
+// *   **$V_M$**: A set of $m$ **Movies**.
+// An edge $\{u, m\}$ exists if and only if User $u$ has watched Movie $m$.
+
+// #### **Part 1: Defining a Derived Relation**
+// We wish to understand the relationships between users based on their shared interests. We define a new binary relation $R_S$ on the set $V_U$ (the set of users) as follows:
+// > Two users $u_1$ and $u_2$ are **"similar"** ($u_1 R_S u_2$) if and only if there exists at least one movie $m \in V_M$ that both users have watched.
+
+// 1.  **Relation Properties:** Show that this similarity relation $R_S$ is **reflexive** and **symmetric**, but not necessarily **transitive**.
+// 2.  **Composition Logic:** Let $R$ be the binary relation from $V_U$ to $V_M$ representing the edges of the bipartite graph. Explain why the similarity relation $R_S$ can be viewed as the **composition** of $R$ and its **inverse relation** $R^{-1}$.
+
+// #### **Part 2: The Adjacency Matrix and Counting**
+// Let $M$ be the **adjacency matrix** of the bipartite relation $R$, where the rows correspond to users and columns correspond to movies.
+// 1.  **Matrix Multiplication:** If we compute the matrix product $P = M \cdot M^T$ (where $M^T$ is the transpose), explain what the entry $P_{ij}$ represents in terms of "common neighbors" in the movie set.
+// 2.  **Graph Construction:** We now create a new, simple undirected graph $G'$ where the vertices are only the Users ($V_U$), and an edge exists between $u_i$ and $u_j$ if they are "similar" (excluding self-loops). This graph $G'$ is known as a **projection**.
+// 3.  **Complete Bipartite Case:** If the original bipartite graph was a **complete bipartite graph** $K_{n,m}$, describe the resulting projection $G'$. What is the **degree** of every vertex in $G'$?.
+
+// #### **Part 3: Structural Reasoning**
+// 1.  **Density Comparison:** If the original bipartite graph has a very low **density** $\rho$, would you expect the projection $G'$ to have a high or low number of edges? Justify your answer using the **pigeonhole principle**.
+// 2.  **Clustering:** If three users $u_1, u_2,$ and $u_3$ all watched the same single movie $m$, what structural feature (triad, triangle, or clique) will appear in the projection $G'$?.

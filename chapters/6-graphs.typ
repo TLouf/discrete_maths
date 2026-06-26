@@ -247,7 +247,8 @@ That is why traversing graphs is crucial, as it can provide us with central info
   A *walk* on a graph $G = (V, E)$ is an alternating sequence of vertices and edges of the form $v_0, e_1, v_1, e_2, v_2, ..., v_(l-1), e_l, v_l$, such that $e_k$ is from $v_(k-1)$ to $v_(k)$ for all $k$.
   It is said to be *closed* if it ends where it starts, so if $v_0 = v_l$, and open otherwise.
   The *length* of the walk is equal to the number of edges in the walk $l$, and is at least one.
-  // TODO: at least 0, to conform with trivial graph (single vertex, no edge) being connected.
+  // The *length* of the walk is equal to the number of edges in the walk $l$.
+  // If $l >= 1$, the walk is said to be *closed* if it ends where it starts, so if $v_0 = v_l$, and open otherwise.
 ] <def-walk>
 
 #slidebreak()
@@ -255,6 +256,8 @@ That is why traversing graphs is crucial, as it can provide us with central info
 #remark[
   - In an undirected graph, the condition on each edge is $e_k = {v_(k-1), v_k}$, meaning that edges can be traversed in both directions.
   - A walk on a graph without multi-edges can be described more simply by a sequence of vertices, as each edge is uniquely determined by a pair of vertices.
+  // - Walks of length $0$ are allowed just for consistency in results we will see further.
+  //   These walks are called _trivial_, and are neither closed nor open.
 ]
 
 #slidebreak()

@@ -712,7 +712,7 @@
 
 +
   + It is not bipartite.
-  + There are no spanning trees.
+  + There are no spanning trees because the graph is disconnected: $A_G$ is $8 times 8$ so $abs(V) = 8$. If the graph were connected, there would be a path of maximum length $abs(V)-1 = 7$ connecting every pair of vertices, so some walk of length $7$ should exist. We can compute powers of $A_G$ until the seventh, and check that some entries are always $0$.
 
 + There is no spanning tree of weight $<= 12$.
 
