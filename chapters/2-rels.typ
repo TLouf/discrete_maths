@@ -46,8 +46,16 @@ Let's now see some properties which will allow us to define two particular kinds
 
   A relation $R$ is antisymmetric if
   $
-    forall (a,b) in A^2 "such that" a!=b, a rel b => b cancel(rel) a
+    forall (a,b) in A^2 "such that" a != b, a rel b => b cancel(rel) a
   $
+  which is equivalent to
+  $
+    forall (a,b) in A^2, (a rel b) and (b rel a) => a = b
+  $
+]
+
+#remark[
+  The absence of symmetry is called _asymmetry_, which is not antisymmetry!
 ]
 
 
