@@ -1,29 +1,13 @@
-#import "assets/base_template.typ": *
-#show: base
+#import "assets/exercises_template.typ": *
+#show: exercises
 #set document(title: "Discrete Mathematics @ UC3M - Answers to exercises")
-#show: el.config.ref.with(supplement: "Question")
 
 #set page(
-  margin: 1.5cm,
   footer: [
     #set text(gray)
     Discrete Mathematics @ UC3M - Answers to exercises
   ],
 )
-
-#set enum(full: true, numbering: (..nums) => {
-  let level = nums.pos().len() - 1
-  if level == 0 {
-    text(weight: "bold")[#context { counter(heading).display() }.#numbering("1", ..nums)]
-  } else {
-    numbering("(i)", nums.pos().last())
-  }
-})
-#show heading.where(level: 1): h => {
-  pagebreak(weak: true)
-  h
-}
-#set heading(numbering: "1")
 
 = Set theory
 
