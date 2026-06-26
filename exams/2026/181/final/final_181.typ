@@ -21,10 +21,6 @@ Suppose we build a sequence $(G_n)_(n >= k+1)$ of undirected simple graphs, star
 #q(10)[
   How many edges does $G_(k+1)$ have?
   Provide two distinct proofs for your answer, one based on a counting argument, and the other on a result from graph theory.
-  // Explain how to get this expression from two different perspectives.
-  // Explain the answer using two different arguments.
-  // Use a counting argument to provide a simple expression for the number of edges of $G_(k+1)$.
-  // Express the number of edges of a simple $k$-regular graph with $n$ vertices in terms of $n$ and $k$. What condition does this impose on the values of $n$ and $k$, for such a graph to exist?
 ]
 
 #q(10)[
@@ -38,56 +34,6 @@ Suppose we build a sequence $(G_n)_(n >= k+1)$ of undirected simple graphs, star
   For which values of $n$ is $G_n$ regular?
 ]
 
-
-// #q(5)[
-//   Use this inequality to prove that the average of the local clustering coefficients of a graph $G$ with $n$ vertices and $m$ edges satisfies
-//   (_note_: here and in the following, use the convention that $k(v) < 2 => t(v) = 0$) //simply do not enter into the computation of the average clustering).
-//   $
-//     C_"avg" (G) <= (2 m) / (n (n-1) ).
-//   $
-// ]
-
-// #q(10)[
-//   In which of the two graphs shown below would you then say that the tendency for "the friend of my friend to be my friend" is the strongest?
-// ]
-
-// #figure(
-//   grid(
-//     columns: 2,
-//     column-gutter: 2em,
-//     raw-render(
-//       ```dot
-//       graph {
-//         layout=neato
-//         start=3
-//         node[shape=circle margin=0 fontsize=20]
-//         1 -- {2,3};
-//         2 -- 3;
-//         3 -- 4;
-//         }
-//       ```,
-//       width: 3cm,
-//     ),
-//     raw-render(
-//       ```dot
-//       graph {
-//         layout=neato
-//         start=3
-//         node[shape=circle margin=0 fontsize=20]
-//         1 -- {2,3};
-//         2 -- 3;
-//         3 -- 4;
-//         4 -- 5;
-//         5 -- 6;
-//         }
-//       ```,
-//       width: 5.5cm,
-//     ),
-
-//     [$G_1$], [$G_2$],
-//   ),
-// )
-
 =
 
 We define the algorithm `algo` as:
@@ -100,16 +46,6 @@ We define the algorithm `algo` as:
       + *for* all $v in V without cal(N) (v_1)$
         + $d(v_1, v) = oo$
       + $T = (V_T, E_T)$ with $V_T = {v_1}, E_T = emptyset$
-      // + $
-      //     d(v_1, v) = cases(
-      //       omega(v_1, v) "if" v in cal(N)(v_1),
-      //       infinity "otherwise",
-      //     ), quad "pred"(v) = cases(
-      //       v_1 "if" v in cal(N)(v_1),
-      //       "undefined otherwise"
-      //     )
-      //   $
-      // + $"pred"(v) = v_1 "for" v in cal(N)(v_1)$
       + *while* $abs(V_T) != abs(V)$
         + $u = display(argmin_(v in V without V_T)) d(v_1, v)$
         + $V_T = V_T union {u}, E_T = E_T union {{"pred"(u), u}}$
